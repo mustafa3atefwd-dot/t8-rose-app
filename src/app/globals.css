@@ -2,25 +2,73 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --primary: #cd2e33;
+  --primary-hover: #a6252a;
+  --primary-light: #fbeaea;
+  --secondary: #ff668b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #d4d4d8;
+  --input: #e4e4e7;
+  --danger: #ef4444;
+  --success: #00bc7d;
+  --warning: #facc15;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --font-sans: var(--font-sarabun);
+  --font-arabic: var(--font-tajawal);
+  --text-display-2xl: 72px;
+  --text-display-xl: 60px;
+  --text-display-lg: 48px;
+  --text-display-md: 36px;
+  --text-display-sm: 30px;
+  --text-heading-lg: 24px;
+  --text-heading-md: 20px;
+  --text-body-lg: 18px;
+  --text-body: 16px;
+  --text-body-sm: 14px;
+  --text-caption: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #27272a;
+  --foreground: #fafafa;
+  --card: #3f3f46;
+  --card-foreground: #fafafa;
+  --primary: #ff668b;
+  --primary-hover: #ff85a2;
+  --primary-light: #590414;
+  --secondary: #ff82a9;
+  --muted: #52525b;
+  --muted-foreground: #a1a1aa;
+  --border: #52525b;
+  --input: #3f3f46;
+  --danger: #ef4444;
+  --success: #00bc7d;
+  --warning: #facc15;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sarabun), Arial, Helvetica, sans-serif;
 }
