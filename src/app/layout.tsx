@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Sarabun, Tajawal } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const sarabun = Sarabun({
@@ -28,8 +29,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${sarabun.variable} ${tajawal.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
