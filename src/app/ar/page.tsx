@@ -1,4 +1,4 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/shared/components/ThemeToggle";
 
 export default function ArabicPage() {
   return (

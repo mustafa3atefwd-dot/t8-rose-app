@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { Sarabun, Tajawal } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Sarabun, Tajawal, Geist } from "next/font/google";
+import { ThemeProvider } from "@/shared/context/global/providers/theme-provider";
 import "./globals.css";
+import { cn } from "@/shared/lib/utils";
+import Providers from "@/shared/context/global/providers";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const sarabun = Sarabun({
   variable: "--font-sarabun",
@@ -28,11 +32,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sarabun.variable} ${tajawal.variable} h-full antialiased`}
+      className={cn(
+        "h-full",
+        "antialiased",
+        sarabun.variable,
+        tajawal.variable,
+        "font-sans",
+        geist.variable,
+      )}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -1,14 +1,15 @@
-import React from 'react'
-import ReactQueryProvider from './providers/react-query-provider'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import React from "react";
+import ReactQueryProvider from "./providers/react-query-provider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ThemeProvider } from "./providers/theme-provider";
 
-
-
-export default function providers({ children }: { children: React.ReactNode }) {
+export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ReactQueryProvider>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false}/> 
+      <ThemeProvider>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </ThemeProvider>
     </ReactQueryProvider>
-  )
+  );
 }

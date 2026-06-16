@@ -1,5 +1,5 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { colorPalettes, typographyScale } from "@/lib/design-tokens";
+import { ThemeToggle } from "@/shared/components/ThemeToggle";
+import { colorPalettes, typographyScale } from "@/shared/lib/design-tokens";
 
 const usageExamples = [
   ["Maroon token", "bg-maroon-500 text-white"],
