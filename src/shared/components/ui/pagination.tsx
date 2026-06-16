@@ -2,7 +2,13 @@ import * as React from "react"
 
 import { cn } from "@/shared/lib/utils"
 import { Button } from "@/shared/components/ui/button"
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+  MoreHorizontalIcon,
+} from "lucide-react"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -33,6 +39,11 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
   return <li data-slot="pagination-item" {...props} />
 }
 
+// Maroon fill for the current page, with the soft-pink dark-mode counterpart
+// used elsewhere in the design system.
+const activePageClasses =
+  "border-transparent bg-maroon-600 text-white hover:bg-maroon-700 hover:text-white dark:bg-soft-pink-500 dark:text-maroon-950 dark:hover:bg-soft-pink-400 dark:hover:text-maroon-950"
+
 type PaginationLinkProps = {
   isActive?: boolean
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
@@ -49,7 +60,7 @@ function PaginationLink({
       asChild
       variant={isActive ? "outline" : "ghost"}
       size={size}
-      className={cn(className)}
+      className={cn(isActive && activePageClasses, className)}
     >
       <a
         aria-current={isActive ? "page" : undefined}
@@ -118,12 +129,188 @@ function PaginationEllipsis({
   )
 }
 
+/**
+ * Builds the list of page numbers to render, inserting "ellipsis" markers when
+ * there are gaps. Always shows the first and last page plus a window of
+ * `siblingCount` pages around the current page.
+ */
+function getPaginationRange(
+  currentPage: number,
+  totalPages: number,
+  siblingCount = 1,
+): (number | "ellipsis")[] {
+  // Pages we always render explicitly: first, last, current +/- siblings, and
+  // the two boundary-adjacent pages that ellipses would otherwise replace.
+  const totalToShow = siblingCount * 2 + 5
+  if (totalPages <= totalToShow) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1)
+  }
+
+  const leftSibling = Math.max(currentPage - siblingCount, 1)
+  const rightSibling = Math.min(currentPage + siblingCount, totalPages)
+
+  const showLeftEllipsis = leftSibling > 2
+  const showRightEllipsis = rightSibling < totalPages - 1
+
+  const range: (number | "ellipsis")[] = [1]
+
+  if (showLeftEllipsis) {
+    range.push("ellipsis")
+  } else {
+    for (let i = 2; i < leftSibling; i++) range.push(i)
+  }
+
+  for (let i = leftSibling; i <= rightSibling; i++) {
+    if (i !== 1 && i !== totalPages) range.push(i)
+  }
+
+  if (showRightEllipsis) {
+    range.push("ellipsis")
+  } else {
+    for (let i = rightSibling + 1; i < totalPages; i++) range.push(i)
+  }
+
+  range.push(totalPages)
+  return range
+}
+
+type PaginationControlLabels = {
+  first?: string
+  previous?: string
+  next?: string
+  last?: string
+  /** Receives the page number, e.g. `(p) => `Go to page ${p}``. */
+  page?: (page: number) => string
+}
+
+type PaginationControlProps = {
+  /** Current page (1-based). */
+  page: number
+  /** Total number of pages. */
+  totalPages: number
+  onPageChange: (page: number) => void
+  siblingCount?: number
+  /** Show the first/last jump buttons (default: true). */
+  showFirstLast?: boolean
+  labels?: PaginationControlLabels
+  className?: string
+}
+
+/**
+ * Controlled pagination widget. The current page is highlighted; First/Previous
+ * are disabled on the first page and Next/Last on the last page (so with a
+ * single page every control is disabled). Chevrons flip automatically in RTL.
+ */
+function PaginationControl({
+  page,
+  totalPages,
+  onPageChange,
+  siblingCount = 1,
+  showFirstLast = true,
+  labels,
+  className,
+}: PaginationControlProps) {
+  const pages = getPaginationRange(page, totalPages, siblingCount)
+  const isFirst = page <= 1
+  const isLast = page >= totalPages
+
+  const go = (target: number) => {
+    const next = Math.min(Math.max(target, 1), totalPages)
+    if (next !== page) onPageChange(next)
+  }
+
+  return (
+    <Pagination className={className}>
+      <PaginationContent>
+        {showFirstLast && (
+          <PaginationItem>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label={labels?.first ?? "First page"}
+              disabled={isFirst}
+              onClick={() => go(1)}
+            >
+              <ChevronsLeftIcon className="rtl:rotate-180" />
+            </Button>
+          </PaginationItem>
+        )}
+        <PaginationItem>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label={labels?.previous ?? "Previous page"}
+            disabled={isFirst}
+            onClick={() => go(page - 1)}
+          >
+            <ChevronLeftIcon className="rtl:rotate-180" />
+          </Button>
+        </PaginationItem>
+
+        {pages.map((item, index) =>
+          item === "ellipsis" ? (
+            <PaginationItem key={`ellipsis-${index}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
+          ) : (
+            <PaginationItem key={item}>
+              <Button
+                type="button"
+                variant={item === page ? "outline" : "ghost"}
+                size="icon"
+                aria-label={labels?.page?.(item) ?? `Go to page ${item}`}
+                aria-current={item === page ? "page" : undefined}
+                data-active={item === page}
+                className={cn(item === page && activePageClasses)}
+                onClick={() => go(item)}
+              >
+                {item}
+              </Button>
+            </PaginationItem>
+          ),
+        )}
+
+        <PaginationItem>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label={labels?.next ?? "Next page"}
+            disabled={isLast}
+            onClick={() => go(page + 1)}
+          >
+            <ChevronRightIcon className="rtl:rotate-180" />
+          </Button>
+        </PaginationItem>
+        {showFirstLast && (
+          <PaginationItem>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label={labels?.last ?? "Last page"}
+              disabled={isLast}
+              onClick={() => go(totalPages)}
+            >
+              <ChevronsRightIcon className="rtl:rotate-180" />
+            </Button>
+          </PaginationItem>
+        )}
+      </PaginationContent>
+    </Pagination>
+  )
+}
+
 export {
   Pagination,
   PaginationContent,
+  PaginationControl,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  getPaginationRange,
 }

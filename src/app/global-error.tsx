@@ -1,11 +1,22 @@
 "use client";
 
-const error = () => {
+export default function GlobalError({
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   return (
-    <div className="flex h-screen items-center justify-center text-4xl text-red-500">
-      error
-    </div>
+    <html lang="en">
+      <body className="flex min-h-screen flex-col items-center justify-center gap-4 text-center">
+        <h1 className="text-2xl font-bold">Something went wrong</h1>
+        <button
+          onClick={() => reset()}
+          className="rounded-md bg-primary px-4 py-2 text-white"
+        >
+          Try again
+        </button>
+      </body>
+    </html>
   );
-};
-
-export default error;
+}

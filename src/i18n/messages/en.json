@@ -1,0 +1,62 @@
+{
+  "common": {
+    "appName": "Rose App Design System",
+    "close": "Close",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info",
+    "accountCreated": "Account created successfully",
+    "savedChanges": "Your changes have been saved",
+    "somethingWrong": "Something went wrong. Please try again",
+    "checkInput": "Please review the highlighted fields",
+    "infoMessage": "Here is some information you might find useful"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "first": "First page",
+    "last": "Last page",
+    "morePages": "More pages",
+    "page": "Page {page}",
+    "goToPage": "Go to page {page}"
+  },
+  "breadcrumb": {
+    "label": "Breadcrumb",
+    "home": "Home",
+    "projects": "Projects",
+    "taskOne": "Task 1",
+    "taskTwo": "Task 2",
+    "more": "Show more"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "activity": "Activity",
+    "settings": "Settings",
+    "active": "Active",
+    "inactive": "Inactive",
+    "segmented": "Segmented",
+    "disabled": "Disabled",
+    "overviewBody": "A high-level summary of the workspace.",
+    "activityBody": "Recent activity across your projects.",
+    "settingsBody": "Manage preferences for this workspace."
+  },
+  "demo": {
+    "title": "Feedback & Navigation Components",
+    "subtitle": "Toast, Tabs, Pagination, and Breadcrumbs — each wired for light/dark mode and full RTL support.",
+    "toastHeading": "Toast",
+    "toastDesc": "Triggers a toast that auto-dismisses after 3 seconds and can be closed manually. Multiple toasts stack vertically.",
+    "tabsHeading": "Tabs",
+    "tabsDesc": "Horizontal tabs with an active indicator and an optional badge count.",
+    "paginationHeading": "Pagination",
+    "paginationDesc": "First / Previous / Next / Last controls disable on boundaries; the current page is highlighted.",
+    "breadcrumbHeading": "Breadcrumbs",
+    "breadcrumbDesc": "Separators between items; the last item is non-interactive and the trail collapses on small screens."
+  }
+}

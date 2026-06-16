@@ -1,4 +1,6 @@
 import { ThemeToggle } from "@/shared/components/ThemeToggle";
+import { LanguageSwitcher } from "@/shared/components/LanguageSwitcher";
+import { ComponentsShowcase } from "@/shared/components/ComponentsShowcase";
 import { colorPalettes, typographyScale } from "@/shared/lib/design-tokens";
 
 const usageExamples = [
@@ -61,8 +63,13 @@ export function DesignSystemPreview() {
             </p>
           </div>
 
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
+
+        <ComponentsShowcase />
 
         <section className="flex flex-col gap-4">
           <div>
