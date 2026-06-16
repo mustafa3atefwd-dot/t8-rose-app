@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 
 import { Button } from "@/shared/components/ui/button";
 import { toast } from "@/shared/components/ui/toast";
@@ -36,85 +35,90 @@ function ShowcaseCard({
 }
 
 export function ComponentsShowcase() {
-  const t = useTranslations("demo");
-  const tToast = useTranslations("toast");
-  const tTabs = useTranslations("tabs");
-  const tPag = useTranslations("pagination");
-  const tCrumb = useTranslations("breadcrumb");
-
   const [page, setPage] = useState(1);
   const totalPages = 10;
 
   const paginationLabels = {
-    first: tPag("first"),
-    previous: tPag("previous"),
-    next: tPag("next"),
-    last: tPag("last"),
-    page: (p: number) => tPag("goToPage", { page: p }),
+    first: "First page",
+    previous: "Previous",
+    next: "Next",
+    last: "Last page",
+    page: (p: number) => `Go to page ${p}`,
   };
 
   return (
     <section className="flex flex-col gap-6">
       <div>
-        <h2 className="text-heading-lg font-bold">{t("title")}</h2>
+        <h2 className="text-heading-lg font-bold">
+          Feedback &amp; Navigation Components
+        </h2>
         <p className="max-w-2xl text-body-sm text-muted-foreground">
-          {t("subtitle")}
+          Toast, Tabs, Pagination, and Breadcrumbs — each wired for light/dark
+          mode and full RTL support.
         </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Toast */}
-        <ShowcaseCard title={t("toastHeading")} description={t("toastDesc")}>
+        <ShowcaseCard
+          title="Toast"
+          description="Triggers a toast that auto-dismisses after 3 seconds and can be closed manually. Multiple toasts stack vertically."
+        >
           <div className="flex flex-wrap gap-2">
             <Button
               variant="outline"
-              onClick={() => toast.success(tToast("accountCreated"))}
+              onClick={() => toast.success("Account created successfully")}
             >
-              {tToast("success")}
+              Success
             </Button>
             <Button
               variant="outline"
-              onClick={() => toast.error(tToast("somethingWrong"))}
+              onClick={() =>
+                toast.error("Something went wrong. Please try again")
+              }
             >
-              {tToast("error")}
+              Error
             </Button>
             <Button
               variant="outline"
-              onClick={() => toast.warning(tToast("checkInput"))}
+              onClick={() => toast.warning("Please review the highlighted fields")}
             >
-              {tToast("warning")}
+              Warning
             </Button>
             <Button
               variant="outline"
-              onClick={() => toast.info(tToast("infoMessage"))}
+              onClick={() =>
+                toast.info("Here is some information you might find useful")
+              }
             >
-              {tToast("info")}
+              Info
             </Button>
           </div>
         </ShowcaseCard>
 
         {/* Tabs */}
-        <ShowcaseCard title={t("tabsHeading")} description={t("tabsDesc")}>
-        
-
+        <ShowcaseCard
+          title="Tabs"
+          description="Horizontal tabs with an active indicator and an optional badge count."
+        >
           {/* Segmented (Active / Inactive) variant. */}
           <div className="flex flex-col gap-3 pt-2">
             <span className="text-caption font-semibold uppercase text-muted-foreground">
-              {tTabs("segmented")}
+              Segmented
             </span>
             <Tabs defaultValue="active">
               <TabsList variant="segmented" className="w-full max-w-xs">
-                <TabsTrigger value="active">{tTabs("active")}</TabsTrigger>
-                <TabsTrigger value="inactive">{tTabs("inactive")}</TabsTrigger>
+                <TabsTrigger value="active">Active</TabsTrigger>
+                <TabsTrigger value="inactive">Inactive</TabsTrigger>
               </TabsList>
             </Tabs>
             <Tabs defaultValue="active">
               <TabsList variant="segmented" className="w-full max-w-xs">
                 <TabsTrigger value="active" disabled>
-                  {tTabs("active")}
+                  Active
                 </TabsTrigger>
                 <TabsTrigger value="inactive" disabled>
-                  {tTabs("inactive")}
+                  Inactive
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -123,8 +127,8 @@ export function ComponentsShowcase() {
 
         {/* Pagination */}
         <ShowcaseCard
-          title={t("paginationHeading")}
-          description={t("paginationDesc")}
+          title="Pagination"
+          description="First / Previous / Next / Last controls disable on boundaries; the current page is highlighted."
         >
           <div className="flex flex-col gap-4">
             <PaginationControl
@@ -134,7 +138,7 @@ export function ComponentsShowcase() {
               labels={paginationLabels}
             />
             <p className="text-caption text-muted-foreground">
-              {tPag("page", { page })} / {totalPages}
+              {`Page ${page}`} / {totalPages}
             </p>
             {/* Edge case: a single page disables every control. */}
             <PaginationControl
@@ -148,16 +152,16 @@ export function ComponentsShowcase() {
 
         {/* Breadcrumbs */}
         <ShowcaseCard
-          title={t("breadcrumbHeading")}
-          description={t("breadcrumbDesc")}
+          title="Breadcrumbs"
+          description="Separators between items; the last item is non-interactive and the trail collapses on small screens."
         >
           <Breadcrumbs
-            ariaLabel={tCrumb("label")}
+            ariaLabel="Breadcrumb"
             items={[
-              { label: tCrumb("home"), href: "/" },
-              { label: tCrumb("projects"), href: "/" },
-              { label: tCrumb("taskOne"), href: "/" },
-              { label: tCrumb("taskTwo") },
+              { label: "Home", href: "/" },
+              { label: "Projects", href: "/" },
+              { label: "Task 1", href: "/" },
+              { label: "Task 2" },
             ]}
           />
         </ShowcaseCard>

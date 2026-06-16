@@ -5,8 +5,8 @@ import { toast as sonnerToast, type ExternalToast } from "sonner"
 export type ToastVariant = "success" | "error" | "warning" | "info"
 
 /**
- * Thin, typed wrapper around sonner. Pass already-translated strings (resolve
- * them with `useTranslations` in the calling component). Styling, the 3s
+ * Thin, typed wrapper around sonner. Pass the message string to display.
+ * Styling, the 3s
  * auto-dismiss, the close button and vertical stacking are handled globally by
  * the `<Toaster />` mounted in the app providers.
  */
