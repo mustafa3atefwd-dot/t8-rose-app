@@ -1,5 +1,7 @@
 {
   "IndexPage": {
-    "title": "Hello world!"
+    "title": "Hello world!",
+    "button":"Click Here ",
+    "badge":"Badge"
   }
 }
