@@ -125,7 +125,8 @@ export const Checkbox = ({
       {error && (
         <p
           id={errorId}
-          className="text-[14px] text-[#DC2626] dark:text-red-400 pl-7"
+          className="mt-1 text-[14px] text-[#DC2626] dark:text-red-400 pl-7"
+     
           role="alert"
         >
           {error}

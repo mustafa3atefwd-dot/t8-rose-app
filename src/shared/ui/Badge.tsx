@@ -61,7 +61,8 @@ export const Badge = ({
       className={[
         "inline-flex items-center gap-1.5 w-fit",
         "rounded-full px-3 py-1",
-        "text-[12px] font-medium leading-none whitespace-nowrap",
+        "text-xs font-medium leading-none whitespace-nowrap",
+   
         "transition-colors",
         variantStyles[variant],
         className,
