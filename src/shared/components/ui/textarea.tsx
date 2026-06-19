@@ -1,6 +1,5 @@
 import * as React from "react"
 import { cn } from "@/shared/lib/utils"
-import { useField } from "./field"
 
 function Textarea({
   className,
@@ -10,8 +9,6 @@ function Textarea({
   onChange,
   ...props
 }: React.ComponentProps<"textarea">) {
-  const field = useField?.()
-
   const [internalValue, setInternalValue] = React.useState(
     (value ?? defaultValue ?? "").toString()
   )
@@ -34,9 +31,6 @@ function Textarea({
   return (
     <div className="w-full">
       <textarea
-        id={field?.controlId}
-        aria-invalid={field?.invalid}
-        aria-describedby={field?.invalid ? field.errorId : field?.hintId}
         data-slot="textarea"
         maxLength={maxLength}
         value={value ?? internalValue}
@@ -48,7 +42,7 @@ function Textarea({
         {...props}
       />
 
-      <div className="mt-1 text-xs text-zinc-500 text-right">
+      <div className="mt-1 text-xs text-zinc-500 text-right" >
         {currentLength}/{maxLength} characters
       </div>
     </div>
