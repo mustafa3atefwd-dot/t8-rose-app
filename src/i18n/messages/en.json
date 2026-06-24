@@ -1,4 +1,8 @@
 {
-    "title": "Welcome to our application",
-    "app-title": "Rose App"
+  "title": "Welcome to our application",
+  "app-title": "Rose App",
+  "NotFoundPage": {
+    "Go Back home": "Go Back home",
+    "Not Found page ": "Not Found Page"
+  }
 }
