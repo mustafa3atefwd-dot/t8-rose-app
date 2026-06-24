@@ -1,6 +1,7 @@
 {
-  
+  "IndexPage": {
     "title": "Hello world!",
-      "app-title": "Rose App"
-  
+    "button":"Click Here ",
+    "badge":"Badge"
+  }
 }
