@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Sarabun, Tajawal } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import Providers from "@/shared/context/global/providers";
+import { getLocaleConfig } from "@/shared/i18n/config";
 import "./globals.css";
 
 const sarabun = Sarabun({
@@ -20,19 +22,24 @@ export const metadata: Metadata = {
   description: "Color tokens, typography, and light/dark mode for Rose App.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const requestHeaders = await headers();
+  const locale = requestHeaders.get("x-locale") === "ar" ? "ar" : "en";
+  const { direction } = getLocaleConfig(locale);
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={direction}
       className={`${sarabun.variable} ${tajawal.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

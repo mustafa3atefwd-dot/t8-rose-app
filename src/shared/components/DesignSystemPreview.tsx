@@ -1,12 +1,13 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/shared/components/ThemeToggle";
+import type { Locale } from "@/shared/i18n/config";
+import { messages } from "@/shared/i18n/messages";
 import {
   colorPalettes,
+  colorShades,
   effectTokens,
-  semanticDark,
   semanticGroups,
-  semanticLight,
   typographyScale,
-} from "@/lib/design-tokens";
+} from "@/shared/lib/design-tokens";
 
 const usageExamples = [
   ["Primitive color", "bg-maroon-500 text-white"],
@@ -18,30 +19,40 @@ const usageExamples = [
   ["Radius", "rounded-base"],
 ];
 
+function cssVar(name: string) {
+  return `var(--${name})`;
+}
+
 function PaletteGrid() {
   return (
     <div className="space-y-8">
-      {Object.entries(colorPalettes).map(([paletteName, shades]) => (
+      {colorPalettes.map((paletteName) => (
         <div key={paletteName} className="space-y-3">
           <h3 className="text-heading-md font-bold capitalize">
             {paletteName.replace("-", " ")}
           </h3>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-            {Object.entries(shades).map(([shade, value]) => (
-              <div
-                key={`${paletteName}-${shade}`}
-                className="rounded-lg border border-border-subtle bg-card p-3 text-card-foreground"
-              >
+            {colorShades.map((shade) => {
+              const tokenName = `color-${paletteName}-${shade}`;
+
+              return (
                 <div
-                  className="mb-3 h-12 rounded-base border border-border-subtle"
-                  style={{ backgroundColor: value }}
-                />
-                <p className="text-body-sm font-semibold">
-                  {paletteName}-{shade}
-                </p>
-                <p className="text-caption text-text-muted">{value}</p>
-              </div>
-            ))}
+                  key={tokenName}
+                  className="rounded-lg border border-border-subtle bg-card p-3 text-card-foreground"
+                >
+                  <div
+                    className="mb-3 h-12 rounded-base border border-border-subtle"
+                    style={{ background: cssVar(tokenName) }}
+                  />
+                  <p className="text-body-sm font-semibold">
+                    {paletteName}-{shade}
+                  </p>
+                  <p className="text-caption text-text-muted">
+                    --{tokenName}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       ))}
@@ -49,19 +60,13 @@ function PaletteGrid() {
   );
 }
 
-function SemanticGrid({
-  title,
-  values,
-}: {
-  title: string;
-  values: typeof semanticLight | typeof semanticDark;
-}) {
+function SemanticGrid({ title }: { title: string }) {
   return (
     <section className="space-y-6">
       <div>
         <h2 className="text-heading-lg font-bold">{title}</h2>
         <p className="text-body-sm text-text-muted">
-          Semantic tokens map raw palette colors to real UI decisions.
+          Semantic tokens map the primitive palette to real UI decisions.
         </p>
       </div>
 
@@ -72,23 +77,21 @@ function SemanticGrid({
           </h3>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
             {group.tokens.map((token) => {
-              const groupValues = values[group.name] as Record<string, string>;
-              const value = groupValues[token];
-              const cssVar = `var(--${group.name}-${token})`;
+              const tokenName = `${group.name}-${token}`;
 
               return (
                 <div
-                  key={`${group.name}-${token}`}
+                  key={tokenName}
                   className="rounded-lg border border-border-subtle bg-card p-3 text-card-foreground"
                 >
                   <div
                     className="mb-3 h-12 rounded-base border border-border-subtle"
-                    style={{ background: cssVar }}
+                    style={{ background: cssVar(tokenName) }}
                   />
-                  <p className="text-body-sm font-semibold">
-                    {group.name}-{token}
+                  <p className="text-body-sm font-semibold">{tokenName}</p>
+                  <p className="text-caption text-text-muted">
+                    --{tokenName}
                   </p>
-                  <p className="text-caption text-text-muted">{value}</p>
                 </div>
               );
             })}
@@ -105,13 +108,15 @@ function EffectsGrid() {
       <div className="rounded-lg border border-border-subtle bg-card p-6">
         <h2 className="mb-5 text-heading-lg font-bold">Shadows</h2>
         <div className="grid gap-4 sm:grid-cols-2">
-          {effectTokens.shadows.map(([name, value]) => (
+          {effectTokens.shadows.map((name) => (
             <div
               key={name}
               className={`${name} rounded-base border border-border-subtle bg-background-plain p-4`}
             >
               <p className="text-body-sm font-semibold">{name}</p>
-              <p className="text-caption text-text-muted">{value}</p>
+              <p className="text-caption text-text-muted">
+                --{name.replace("shadow-", "shadow-")}
+              </p>
             </div>
           ))}
         </div>
@@ -120,7 +125,7 @@ function EffectsGrid() {
       <div className="rounded-lg border border-border-subtle bg-card p-6">
         <h2 className="mb-5 text-heading-lg font-bold">Ring</h2>
         <div className="flex flex-wrap gap-4">
-          {effectTokens.rings.map(([name, size]) => (
+          {effectTokens.rings.map((name) => (
             <div
               key={name}
               className={`grid h-24 w-24 place-items-center rounded-full bg-background-plain text-center ring-3 ${
@@ -129,7 +134,7 @@ function EffectsGrid() {
             >
               <div>
                 <p className="text-body-sm font-semibold">{name}</p>
-                <p className="text-caption text-text-muted">{size}</p>
+                <p className="text-caption text-text-muted">3px</p>
               </div>
             </div>
           ))}
@@ -139,13 +144,15 @@ function EffectsGrid() {
       <div className="rounded-lg border border-border-subtle bg-card p-6">
         <h2 className="mb-5 text-heading-lg font-bold">Radius</h2>
         <div className="grid grid-cols-2 gap-4">
-          {effectTokens.radius.map(([name, value]) => (
+          {effectTokens.radius.map((name) => (
             <div
               key={name}
               className={`${name} border border-border-subtle bg-background-plain p-4 text-center`}
             >
               <p className="text-body-sm font-semibold">{name}</p>
-              <p className="text-caption text-text-muted">{value}</p>
+              <p className="text-caption text-text-muted">
+                --radius-{name.replace("rounded-", "")}
+              </p>
             </div>
           ))}
         </div>
@@ -154,40 +161,40 @@ function EffectsGrid() {
   );
 }
 
-export function DesignSystemPreview() {
+export function DesignSystemPreview({ locale = "en" }: { locale?: Locale }) {
+  const copy = messages[locale].designSystem;
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex max-w-3xl flex-col gap-3">
             <p className="text-body-sm font-semibold uppercase text-primary">
-              Rose App Design System
+              {copy.eyebrow}
             </p>
             <h1 className="text-display-md font-bold leading-tight">
-              Design Tokens Foundation
+              {copy.title}
             </h1>
             <p className="max-w-2xl text-body-lg text-text-muted">
-              Primitive colors, semantic colors, typography, rings, shadows,
-              radius, and switchable light/dark theme tokens.
+              {copy.description}
             </p>
           </div>
 
-          <ThemeToggle />
+          <ThemeToggle locale={locale} />
         </div>
 
         <section className="flex flex-col gap-4">
           <div>
             <h2 className="text-heading-lg font-bold">Primitive Colors</h2>
             <p className="text-body-sm text-text-muted">
-              Raw palettes for Maroon, Red, Pink, Soft Pink, Blue, Emerald,
-              Yellow, and Zinc. Each palette supports shades 50-950.
+              Maroon, Red, Pink, Soft Pink, Blue, Emerald, Yellow, and Zinc.
+              Each palette supports shades 50-950.
             </p>
           </div>
           <PaletteGrid />
         </section>
 
-        <SemanticGrid title="Semantic Colors - Light" values={semanticLight} />
-        <SemanticGrid title="Semantic Colors - Dark" values={semanticDark} />
+        <SemanticGrid title="Semantic Colors" />
 
         <section className="grid gap-6 lg:grid-cols-2">
           <div className="rounded-lg border border-border-subtle bg-card p-6">
@@ -229,7 +236,8 @@ export function DesignSystemPreview() {
                   هدايا مميزة لكل لحظة جميلة
                 </p>
                 <p className="text-body text-text-muted" dir="rtl">
-                  الخط العربي المستخدم في مسار /ar مع اتجاه من اليمين لليسار.
+                  الخط العربي المستخدم في الصفحات العربية مع اتجاه من اليمين
+                  لليسار.
                 </p>
               </div>
             </div>
