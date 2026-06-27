@@ -77,9 +77,11 @@ function TabsTrigger({
         "group-data-[variant=segmented]/tabs-list:first:rounded-s-md group-data-[variant=segmented]/tabs-list:last:rounded-e-md",
         // Focus: outline-style ring with a gap (offset) around the segment.
         "group-data-[variant=segmented]/tabs-list:focus-visible:ring-2 group-data-[variant=segmented]/tabs-list:focus-visible:ring-ring/50 group-data-[variant=segmented]/tabs-list:focus-visible:ring-offset-2 group-data-[variant=segmented]/tabs-list:focus-visible:ring-offset-card group-data-[variant=segmented]/tabs-list:focus-visible:border-transparent group-data-[variant=segmented]/tabs-list:focus-visible:outline-none",
-        "group-data-[variant=segmented]/tabs-list:data-active:bg-maroon-600 group-data-[variant=segmented]/tabs-list:data-active:text-white group-data-[variant=segmented]/tabs-list:data-active:shadow-sm group-data-[variant=segmented]/tabs-list:data-active:hover:bg-maroon-700",
-        "dark:group-data-[variant=segmented]/tabs-list:data-active:border-transparent dark:group-data-[variant=segmented]/tabs-list:data-active:bg-soft-pink-500 dark:group-data-[variant=segmented]/tabs-list:data-active:text-maroon-950 dark:group-data-[variant=segmented]/tabs-list:data-active:hover:bg-soft-pink-400",
-        "group-data-[variant=segmented]/tabs-list:disabled:opacity-100 group-data-[variant=segmented]/tabs-list:disabled:text-zinc-500 group-data-[variant=segmented]/tabs-list:data-active:disabled:bg-zinc-300 group-data-[variant=segmented]/tabs-list:data-active:disabled:text-zinc-600 dark:group-data-[variant=segmented]/tabs-list:data-active:disabled:bg-zinc-700 dark:group-data-[variant=segmented]/tabs-list:data-active:disabled:text-zinc-300",
+        // Active segment uses the solid primary fill; the primary / primary-hover
+        // / text-inverse tokens already flip for dark mode automatically.
+        "group-data-[variant=segmented]/tabs-list:data-active:bg-primary group-data-[variant=segmented]/tabs-list:data-active:text-text-inverse group-data-[variant=segmented]/tabs-list:data-active:shadow-sm group-data-[variant=segmented]/tabs-list:data-active:hover:bg-primary-hover",
+        // Disabled segment falls back to the neutral surface/text tokens.
+        "group-data-[variant=segmented]/tabs-list:disabled:opacity-100 group-data-[variant=segmented]/tabs-list:disabled:text-text-soft group-data-[variant=segmented]/tabs-list:data-active:disabled:bg-background-soft group-data-[variant=segmented]/tabs-list:data-active:disabled:text-text-default",
         "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
         className
       )}
@@ -110,7 +112,7 @@ function TabsBadge({
     <span
       data-slot="tabs-badge"
       className={cn(
-        "ms-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-muted px-1.5 text-caption font-semibold text-muted-foreground transition-colors group-data-active/tabs-trigger:bg-primary group-data-active/tabs-trigger:text-primary-foreground",
+        "ms-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-muted px-1.5 text-caption font-semibold text-muted-foreground transition-colors group-data-active/tabs-trigger:bg-primary group-data-active/tabs-trigger:text-text-inverse",
         className
       )}
       {...props}

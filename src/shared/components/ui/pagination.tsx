@@ -39,10 +39,11 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
   return <li data-slot="pagination-item" {...props} />
 }
 
-// Maroon fill for the current page, with the soft-pink dark-mode counterpart
-// used elsewhere in the design system.
+// Solid primary fill for the current page. The `primary` / `primary-hover`
+// tokens already flip to the soft-pink dark-mode counterpart automatically, so
+// no explicit `dark:` overrides are needed.
 const activePageClasses =
-  "border-transparent bg-maroon-600 text-white hover:bg-maroon-700 hover:text-white dark:bg-soft-pink-500 dark:text-maroon-950 dark:hover:bg-soft-pink-400 dark:hover:text-maroon-950"
+  "border-transparent bg-primary text-text-inverse hover:bg-primary-hover hover:text-text-inverse"
 
 type PaginationLinkProps = {
   isActive?: boolean
