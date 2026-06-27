@@ -137,10 +137,11 @@ function PaginationEllipsis({
 function getPaginationRange(
   currentPage: number,
   totalPages: number,
-  siblingCount = 1,
+  siblingCount = 2,
 ): (number | "ellipsis")[] {
-  // Pages we always render explicitly: first, last, current +/- siblings, and
-  // the two boundary-adjacent pages that ellipses would otherwise replace.
+  // Pages we always render explicitly: first, last, and a window of
+  // `siblingCount` pages on each side of the current page (e.g. with the
+  // default of 2: 1 ... 3 4 5 6 7 ... 10 when on page 5 of 10).
   const totalToShow = siblingCount * 2 + 5
   if (totalPages <= totalToShow) {
     return Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -149,26 +150,21 @@ function getPaginationRange(
   const leftSibling = Math.max(currentPage - siblingCount, 1)
   const rightSibling = Math.min(currentPage + siblingCount, totalPages)
 
+  // An ellipsis stands in for the gap between page 1 / `totalPages` and the
+  // sibling window; when the window already touches the boundary the adjacent
+  // page is rendered by the loop below instead.
   const showLeftEllipsis = leftSibling > 2
   const showRightEllipsis = rightSibling < totalPages - 1
 
   const range: (number | "ellipsis")[] = [1]
 
-  if (showLeftEllipsis) {
-    range.push("ellipsis")
-  } else {
-    for (let i = 2; i < leftSibling; i++) range.push(i)
-  }
+  if (showLeftEllipsis) range.push("ellipsis")
 
   for (let i = leftSibling; i <= rightSibling; i++) {
     if (i !== 1 && i !== totalPages) range.push(i)
   }
 
-  if (showRightEllipsis) {
-    range.push("ellipsis")
-  } else {
-    for (let i = rightSibling + 1; i < totalPages; i++) range.push(i)
-  }
+  if (showRightEllipsis) range.push("ellipsis")
 
   range.push(totalPages)
   return range
@@ -205,7 +201,7 @@ function PaginationControl({
   page,
   totalPages,
   onPageChange,
-  siblingCount = 1,
+  siblingCount = 2,
   showFirstLast = true,
   labels,
   className,
