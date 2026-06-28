@@ -4,6 +4,7 @@ import { Sarabun, Tajawal } from "next/font/google";
 import Providers from "@/shared/context/global/providers";
 import { getLocaleConfig } from "@/shared/i18n/config";
 import "./globals.css";
+import Providers from "@/shared/context/global/providers";
 
 const sarabun = Sarabun({
   variable: "--font-sarabun",
