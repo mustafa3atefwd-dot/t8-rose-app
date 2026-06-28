@@ -4,7 +4,7 @@ import { Sarabun, Tajawal } from "next/font/google";
 import Providers from "@/shared/context/global/providers";
 import { getLocaleConfig } from "@/shared/i18n/config";
 import "./globals.css";
-import Providers from "@/shared/context/global/providers";
+
 
 const sarabun = Sarabun({
   variable: "--font-sarabun",
@@ -40,8 +40,10 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <Providers>{children}</Providers>
-      </body>
+        <Providers>
+        {children}
+        </Providers>
+        </body>
     </html>
   );
 }
