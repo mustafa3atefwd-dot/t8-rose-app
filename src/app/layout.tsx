@@ -5,6 +5,7 @@ import Providers from '@/shared/context/global/providers';
 import { getLocaleConfig } from '@/shared/i18n/config';
 import './globals.css';
 
+
 const sarabun = Sarabun({
   variable: '--font-sarabun',
   subsets: ['latin'],
