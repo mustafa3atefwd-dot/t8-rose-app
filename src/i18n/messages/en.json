@@ -17,5 +17,17 @@
     "next": "Next",
     "last": "Last page",
     "page": "Go to page {page}"
+  },
+  "auth": {
+    "switchLang": "العربية",
+    "langLabel": "Switch to Arabic",
+    "pageTitle": "Authentication"
+  },
+  "validation": {
+    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
+    "passwordMatch": "Passwords do not match"
+  },
+  "error": {
+    "networkError": "Something went wrong. Please try again."
   }
 }
