@@ -36,7 +36,38 @@ function Textarea({
         value={value ?? internalValue}
         onChange={handleChange}
         className={cn(
-          "flex field-sizing-content min-h-37.5 w-full rounded-lg border not-disabled:border-zinc-300 hover:not-disabled:not-focus:border-zinc-400 bg-transparent px-2.5 py-2 text-base transition-colors outline-none text-zinc-800 placeholder:text-zinc-400 focus:border-maroon-600 disabled:cursor-not-allowed disabled:bg-zinc-100 aria-invalid:border-red-600 md:text-sm dark:bg-zinc-700 dark:text-zinc-50 dark:placeholder:text-zinc-400 dark:not-disabled:border-zinc-600 dark:disabled:border-zinc-700 dark:disabled:bg-transparent dark:focus:border-pink-500 dark:aria-invalid:border-red-500",
+          // Layout & Sizing
+          "flex field-sizing-content w-full min-h-37.5 px-2.5 py-2 md:text-sm",
+
+          // Border & Background
+          "rounded-lg bg-background-plain outline-none",
+          "not-disabled:border not-disabled:border-border-soft",
+
+          // Placeholder
+          "placeholder:text-text-muted",
+
+          // Hover State
+          "hover:not-disabled:not-focus:border-border-default",
+
+          // Focus Ring
+          "focus:border-border-primary",
+          "focus-visible:ring-3 focus-visible:ring-ring-default",
+
+          // Disabled State
+          "disabled:cursor-not-allowed",
+          "disabled:bg-background-muted",
+          "disabled:text-text-muted",
+
+          // Validation States
+          "aria-invalid:border-border-danger",
+          "aria-invalid:ring-ring-danger",
+
+          // Typography
+          "text-base text-text-plain",
+
+          // Animation
+          "transition-colors",
+
           className
         )}
         {...props}
