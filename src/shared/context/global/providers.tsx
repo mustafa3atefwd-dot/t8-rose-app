@@ -16,7 +16,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
       </NextIntlClientProvider>
-     
     </ReactQueryProvider>
   );
 }
