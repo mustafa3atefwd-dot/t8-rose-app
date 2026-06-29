@@ -4,5 +4,18 @@
   "NotFoundPage": {
     "Not Found page ": "الصفحه غير موجودة",
     "Go Back home": "الرجوع للصفحه الرئيسيه"
+  },
+  "toast": {
+    "success": "نجاح",
+    "error": "خطأ",
+    "warning": "تحذير",
+    "info": "معلومة"
+  },
+  "pagination": {
+    "first": "الصفحة الأولى",
+    "previous": "السابق",
+    "next": "التالي",
+    "last": "الصفحة الأخيرة",
+    "page": "الذهاب إلى الصفحة {page}"
   }
 }

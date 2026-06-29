@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/shared/components/ui/button";
 import { toast } from "@/shared/components/ui/toast";
@@ -35,15 +36,17 @@ function ShowcaseCard({
 }
 
 export function ComponentsShowcase() {
+  const tToast = useTranslations("toast");
+  const tPagination = useTranslations("pagination");
   const [page, setPage] = useState(1);
   const totalPages = 10;
 
   const paginationLabels = {
-    first: "First page",
-    previous: "Previous",
-    next: "Next",
-    last: "Last page",
-    page: (p: number) => `Go to page ${p}`,
+    first: tPagination("first"),
+    previous: tPagination("previous"),
+    next: tPagination("next"),
+    last: tPagination("last"),
+    page: (p: number) => tPagination("page", { page: p }),
   };
 
   return (
@@ -67,29 +70,25 @@ export function ComponentsShowcase() {
           <div className="flex flex-wrap gap-2">
             <Button
               variant="outline"
-              onClick={() => toast.success("Account created successfully")}
+              onClick={() => toast.success(tToast("success"))}
             >
               Success
             </Button>
             <Button
               variant="outline"
-              onClick={() =>
-                toast.error("Something went wrong. Please try again")
-              }
+              onClick={() => toast.error(tToast("error"))}
             >
               Error
             </Button>
             <Button
               variant="outline"
-              onClick={() => toast.warning("Please review the highlighted fields")}
+              onClick={() => toast.warning(tToast("warning"))}
             >
               Warning
             </Button>
             <Button
               variant="outline"
-              onClick={() =>
-                toast.info("Here is some information you might find useful")
-              }
+              onClick={() => toast.info(tToast("info"))}
             >
               Info
             </Button>

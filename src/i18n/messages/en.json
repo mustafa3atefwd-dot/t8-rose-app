@@ -4,5 +4,18 @@
   "NotFoundPage": {
     "Go Back home": "Go Back home",
     "Not Found page ": "Not Found Page"
+  },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "pagination": {
+    "first": "First page",
+    "previous": "Previous",
+    "next": "Next",
+    "last": "Last page",
+    "page": "Go to page {page}"
   }
 }
