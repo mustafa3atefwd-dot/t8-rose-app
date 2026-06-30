@@ -4,5 +4,98 @@
   "NotFoundPage": {
     "Go Back home": "Go Back home",
     "Not Found page ": "Not Found Page"
+  },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "pagination": {
+    "first": "First page",
+    "previous": "Previous",
+    "next": "Next",
+    "last": "Last page",
+    "page": "Go to page {page}"
+  },
+  "input": {
+    "heading": "Input",
+    "subheading": "Every input variant — wired for light/dark mode and full RTL support.",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Enter a valid phone number",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "fileSelected": "File selected",
+    "fileTooLarge": "File is too large (max {size})",
+    "fileWrongType": "File type is not allowed",
+    "uploadFile": "Upload file",
+    "noFileSelected": "No file selected",
+    "increment": "Increment",
+    "decrement": "Decrement",
+    "selectCountry": "Select country",
+    "digit": "Digit",
+    "valid": "Looks good",
+    "labels": {
+      "default": "Label",
+      "email": "Email",
+      "search": "Search",
+      "number": "Quantity",
+      "password": "Password",
+      "otp": "One-time code",
+      "file": "Attachment",
+      "phone": "Phone number"
+    },
+    "placeholders": {
+      "default": "Placeholder",
+      "email": "you@example.com",
+      "search": "Search…",
+      "password": "Enter your password",
+      "phone": "Phone number"
+    },
+    "states": {
+      "title": "States",
+      "error": "Error",
+      "success": "Success",
+      "disabled": "Disabled"
+    }
+  },
+  "button": {
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "login": "Log in",
+    "heading": "Buttons, Checkboxes & Badges",
+    "subheading": "Interactive controls and status indicators — wired for light/dark mode and RTL.",
+    "variants": "Variants",
+    "states": "States",
+    "withIcons": "With icons",
+    "iconOnly": "Icon only",
+    "loadingDemo": "Click to see the loading state"
+  },
+  "checkbox": {
+    "title": "Checkbox",
+    "default": "Default",
+    "checked": "Checked",
+    "indeterminate": "Indeterminate",
+    "disabled": "Disabled",
+    "selectAll": "Select all",
+    "options": {
+      "one": "Notifications",
+      "two": "Marketing emails",
+      "three": "Product updates"
+    }
+  },
+  "badge": {
+    "title": "Badge",
+    "default": "Default",
+    "success": "Success",
+    "warning": "Warning",
+    "error": "Error",
+    "info": "Info",
+    "outline": "Outline"
   }
 }

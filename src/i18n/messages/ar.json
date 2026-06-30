@@ -4,5 +4,98 @@
   "NotFoundPage": {
     "Not Found page ": "الصفحه غير موجودة",
     "Go Back home": "الرجوع للصفحه الرئيسيه"
+  },
+  "toast": {
+    "success": "نجاح",
+    "error": "خطأ",
+    "warning": "تحذير",
+    "info": "معلومة"
+  },
+  "pagination": {
+    "first": "الصفحة الأولى",
+    "previous": "السابق",
+    "next": "التالي",
+    "last": "الصفحة الأخيرة",
+    "page": "الذهاب إلى الصفحة {page}"
+  },
+  "input": {
+    "heading": "حقول الإدخال",
+    "subheading": "جميع أنواع حقول الإدخال — مع دعم الوضع الفاتح والداكن واتجاه RTL بالكامل.",
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "invalidPhone": "أدخل رقم هاتف صالح",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "fileSelected": "تم اختيار الملف",
+    "fileTooLarge": "حجم الملف كبير جدًا (الحد الأقصى {size})",
+    "fileWrongType": "نوع الملف غير مسموح به",
+    "uploadFile": "رفع ملف",
+    "noFileSelected": "لم يتم اختيار ملف",
+    "increment": "زيادة",
+    "decrement": "إنقاص",
+    "selectCountry": "اختر الدولة",
+    "digit": "خانة",
+    "valid": "كل شيء على ما يرام",
+    "labels": {
+      "default": "التسمية",
+      "email": "البريد الإلكتروني",
+      "search": "بحث",
+      "number": "الكمية",
+      "password": "كلمة المرور",
+      "otp": "رمز التحقق",
+      "file": "مرفق",
+      "phone": "رقم الهاتف"
+    },
+    "placeholders": {
+      "default": "نص توضيحي",
+      "email": "you@example.com",
+      "search": "بحث…",
+      "password": "أدخل كلمة المرور",
+      "phone": "رقم الهاتف"
+    },
+    "states": {
+      "title": "الحالات",
+      "error": "خطأ",
+      "success": "نجاح",
+      "disabled": "معطّل"
+    }
+  },
+  "button": {
+    "loading": "جاري التحميل...",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "login": "تسجيل الدخول",
+    "heading": "الأزرار ومربعات الاختيار والشارات",
+    "subheading": "عناصر تفاعلية ومؤشرات حالة — مع دعم الوضع الفاتح والداكن واتجاه RTL.",
+    "variants": "الأنواع",
+    "states": "الحالات",
+    "withIcons": "مع الأيقونات",
+    "iconOnly": "أيقونة فقط",
+    "loadingDemo": "اضغط لرؤية حالة التحميل"
+  },
+  "checkbox": {
+    "title": "مربع الاختيار",
+    "default": "افتراضي",
+    "checked": "محدد",
+    "indeterminate": "غير محدد بالكامل",
+    "disabled": "معطّل",
+    "selectAll": "تحديد الكل",
+    "options": {
+      "one": "الإشعارات",
+      "two": "رسائل التسويق",
+      "three": "تحديثات المنتج"
+    }
+  },
+  "badge": {
+    "title": "الشارة",
+    "default": "افتراضي",
+    "success": "نجاح",
+    "warning": "تحذير",
+    "error": "خطأ",
+    "info": "معلومة",
+    "outline": "محدد"
   }
 }
