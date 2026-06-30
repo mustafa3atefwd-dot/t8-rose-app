@@ -1,5 +1,7 @@
+"use client"
+
 import * as React from "react"
-import { Slot } from "radix-ui"
+import { useRender } from "@base-ui/react/use-render"
 
 import { cn } from "@/shared/lib/utils"
 import Link from "next/link"
@@ -42,19 +44,20 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
 function BreadcrumbLink({
   asChild,
   className,
+  children,
   ...props
 }: React.ComponentProps<"a"> & {
   asChild?: boolean
 }) {
-  const Comp = asChild ? Slot.Root : "a"
-
-  return (
-    <Comp
-      data-slot="breadcrumb-link"
-      className={cn("transition-colors hover:text-foreground", className)}
-      {...props}
-    />
-  )
+  // `useRender` is Base UI's headless replacement for Radix's `Slot`.
+  return useRender({
+    render: asChild ? (children as React.ReactElement) : <a>{children}</a>,
+    props: {
+      "data-slot": "breadcrumb-link",
+      className: cn("transition-colors hover:text-foreground", className),
+      ...props,
+    },
+  })
 }
 
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
