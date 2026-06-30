@@ -59,5 +59,43 @@
       "success": "Success",
       "disabled": "Disabled"
     }
+  },
+  "button": {
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "login": "Log in",
+    "heading": "Buttons, Checkboxes & Badges",
+    "subheading": "Interactive controls and status indicators — wired for light/dark mode and RTL.",
+    "variants": "Variants",
+    "states": "States",
+    "withIcons": "With icons",
+    "iconOnly": "Icon only",
+    "loadingDemo": "Click to see the loading state"
+  },
+  "checkbox": {
+    "title": "Checkbox",
+    "default": "Default",
+    "checked": "Checked",
+    "indeterminate": "Indeterminate",
+    "disabled": "Disabled",
+    "selectAll": "Select all",
+    "options": {
+      "one": "Notifications",
+      "two": "Marketing emails",
+      "three": "Product updates"
+    }
+  },
+  "badge": {
+    "title": "Badge",
+    "default": "Default",
+    "success": "Success",
+    "warning": "Warning",
+    "error": "Error",
+    "info": "Info",
+    "outline": "Outline"
   }
 }
