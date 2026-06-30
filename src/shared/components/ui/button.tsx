@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Slot } from "radix-ui";
+import { useRender } from "@base-ui/react/use-render";
 
 import { cn } from "@/shared/lib/utils";
 import { Spinner } from "@/shared/components/ui/spinner";
@@ -69,33 +71,36 @@ function Button({
   children,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot.Root : "button";
   const isDisabled = disabled || loading;
 
-  return (
-    <Comp
-      data-slot="button"
-      data-variant={variant}
-      data-size={size}
-      data-loading={loading || undefined}
-      aria-busy={loading || undefined}
+  // Base UI's `useRender` replaces Radix's `Slot` for the `asChild` pattern.
+  return useRender({
+    render: asChild ? (children as React.ReactElement) : <button />,
+    props: {
+      "data-slot": "button",
+      "data-variant": variant,
+      "data-size": size,
+      "data-loading": loading || undefined,
+      "aria-busy": loading || undefined,
       // Native <button> gets `disabled`; an asChild element (e.g. <a>) can't, so
       // it relies on `aria-disabled` + the `aria-disabled:*` utilities above.
-      disabled={asChild ? undefined : isDisabled}
-      aria-disabled={asChild && isDisabled ? true : undefined}
-      className={cn(buttonVariants({ variant, size }), className)}
-      {...props}
-    >
-      {asChild ? (
-        children
-      ) : (
-        <>
-          {loading ? <Spinner className="size-4" /> : null}
-          {loading && loadingText != null ? loadingText : children}
-        </>
-      )}
-    </Comp>
-  );
+      disabled: asChild ? undefined : isDisabled,
+      "aria-disabled": asChild && isDisabled ? true : undefined,
+      className: cn(buttonVariants({ variant, size }), className),
+      // An asChild element keeps its own children; otherwise inject the spinner.
+      ...(asChild
+        ? {}
+        : {
+            children: (
+              <>
+                {loading ? <Spinner className="size-4" /> : null}
+                {loading && loadingText != null ? loadingText : children}
+              </>
+            ),
+          }),
+      ...props,
+    },
+  });
 }
 
 export { Button, buttonVariants };

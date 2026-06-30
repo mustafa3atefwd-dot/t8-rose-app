@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Slot } from "radix-ui";
+import { useRender } from "@base-ui/react/use-render";
 
 import { cn } from "@/shared/lib/utils";
 
@@ -30,19 +32,21 @@ function Badge({
   className,
   variant = "default",
   asChild = false,
+  children,
   ...props
 }: React.ComponentProps<"span"> &
   VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : "span";
-
-  return (
-    <Comp
-      data-slot="badge"
-      data-variant={variant}
-      className={cn(badgeVariants({ variant }), className)}
-      {...props}
-    />
-  );
+  // Base UI's `useRender` is the headless replacement for Radix's `Slot`: when
+  // `asChild` is set we render onto the provided child element, merging props.
+  return useRender({
+    render: asChild ? (children as React.ReactElement) : <span>{children}</span>,
+    props: {
+      "data-slot": "badge",
+      "data-variant": variant,
+      className: cn(badgeVariants({ variant }), className),
+      ...props,
+    },
+  });
 }
 
 export { Badge, badgeVariants };
