@@ -1,0 +1,14 @@
+# Next.js build and cache
+.next
+out
+build
+
+# Dependencies
+node_modules
+
+# Production/Lock files
+package-lock.json
+.env*
+
+# Testing
+coverage
