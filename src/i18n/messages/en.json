@@ -17,5 +17,47 @@
     "next": "Next",
     "last": "Last page",
     "page": "Go to page {page}"
+  },
+  "input": {
+    "heading": "Input",
+    "subheading": "Every input variant — wired for light/dark mode and full RTL support.",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Enter a valid phone number",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "fileSelected": "File selected",
+    "fileTooLarge": "File is too large (max {size})",
+    "fileWrongType": "File type is not allowed",
+    "uploadFile": "Upload file",
+    "noFileSelected": "No file selected",
+    "increment": "Increment",
+    "decrement": "Decrement",
+    "selectCountry": "Select country",
+    "digit": "Digit",
+    "valid": "Looks good",
+    "labels": {
+      "default": "Label",
+      "email": "Email",
+      "search": "Search",
+      "number": "Quantity",
+      "password": "Password",
+      "otp": "One-time code",
+      "file": "Attachment",
+      "phone": "Phone number"
+    },
+    "placeholders": {
+      "default": "Placeholder",
+      "email": "you@example.com",
+      "search": "Search…",
+      "password": "Enter your password",
+      "phone": "Phone number"
+    },
+    "states": {
+      "title": "States",
+      "error": "Error",
+      "success": "Success",
+      "disabled": "Disabled"
+    }
   }
 }
