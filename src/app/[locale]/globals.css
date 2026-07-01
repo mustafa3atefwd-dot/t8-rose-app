@@ -186,7 +186,8 @@
   --color-soft-pink-950: rgb(89 4 20);
 
   --font-sarabun: var(--font-sarabun);
-  --font-tajawal: var(--font-tajawal)
+  --font-tajawal: var(--font-tajawal);
+  --font-script: var(--font-script), cursive;
 };
 
 :root {

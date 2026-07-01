@@ -19,7 +19,7 @@ export function ThemeToggle() {
   return (
     <button 
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 border rounded-md"
+      className="p-2 border rounded-md cursor-pointer"
     >
       {theme === "dark" ? "☀️ Dark" : "🌙 Light"}
     </button>

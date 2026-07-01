@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Sarabun, Tajawal } from "next/font/google";
+import { Geist, Geist_Mono, Great_Vibes, Sarabun, Tajawal } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from '@/shared/theme/theme-provider';
 import { hasLocale } from "next-intl";
@@ -17,6 +17,12 @@ const sarabun = Sarabun({
   weight: ['400', '500' , '600', '700'],
   variable: '--font-sarabun'
 });
+
+const greatVibes = Great_Vibes({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-script'
+})
 
 const tajawal = Tajawal({
   subsets: ['arabic'],
@@ -47,14 +53,14 @@ export default async function LocaleLayout({children, params}: Props) {
    notFound();
  }
 
- const fontClassSwitches = locale === 'ar' ? tajawal.variable : sarabun.variable ;
-
+ const fontClassSwitches = locale === 'ar' ? tajawal.variable : sarabun.variable ;4
+  
   return (
     <html
       suppressHydrationWarning
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
-      className={`${geistSans.variable} ${geistMono.variable} ${fontClassSwitches} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fontClassSwitches} ${greatVibes.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning
         className="min-h-full flex flex-col">
