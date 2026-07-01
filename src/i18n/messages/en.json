@@ -21,7 +21,9 @@
   "auth": {
     "switchLang": "العربية",
     "langLabel": "Switch to Arabic",
-    "pageTitle": "Authentication"
+    "pageTitle": "Authentication",
+    "welcomeBack": "Welcome back!",
+    "joinFamily": "Become part of our family!"
   },
   "validation": {
     "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
