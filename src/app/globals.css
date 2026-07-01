@@ -403,7 +403,7 @@ html[data-theme="dark"] {
   --radius-xl: 10px;
   --font-sans: var(--font-sarabun);
   --font-arabic: var(--font-tajawal);
-  --text-display-2xl: 72px;
+  /* --text-display-2xl: 72px;
   --text-display-xl: 60px;
   --text-display-lg: 48px;
   --text-display-md: 36px;
@@ -413,7 +413,7 @@ html[data-theme="dark"] {
   --text-body-lg: 18px;
   --text-body: 16px;
   --text-body-sm: 14px;
-  --text-caption: 12px;
+  --text-caption: 12px; */
 }
 
 html {

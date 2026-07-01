@@ -13,9 +13,9 @@ export async function AuthLayout({ children }: AuthLayoutProps) {
     <div className="bg-background text-foreground flex min-h-screen">
       {/* Form column — start side (left in LTR, right in RTL) */}
       <div className="flex w-full flex-col px-6 py-10 sm:px-10 lg:w-1/2">
-        <div className="flex items-center justify-end gap-5">
-          <LanguageToggle />
+        <div className="flex items-center justify-between">
           <ThemeToggle />
+          <LanguageToggle />
         </div>
         <div className="flex flex-1 items-center justify-center">{children}</div>
       </div>
