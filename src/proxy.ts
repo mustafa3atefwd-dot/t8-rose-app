@@ -13,7 +13,6 @@ const authMiddleware = withAuth(
   function onSuccess(req) {
     const { pathname } = req.nextUrl;
     const pathWithoutLocale = pathname.replace(/^\/(en|ar)/, "") || "/";
-
   
     if (AUTH_PAGES.some((page) => pathWithoutLocale.startsWith(page))) {
       const locale = pathname.startsWith("/ar") ? "ar" : "en";

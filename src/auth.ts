@@ -5,6 +5,9 @@ import { LoginPayload } from "./shared/lib/types/auth";
 
 
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login", 
+  },
   providers: [
     Credentials({
       name: 'Credentials',
