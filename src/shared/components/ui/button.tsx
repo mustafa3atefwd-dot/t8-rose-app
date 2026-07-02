@@ -10,7 +10,7 @@ import { Spinner } from "@/shared/components/ui/spinner";
 const buttonVariants = cva(
   [
     "group/button inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg border border-transparent text-sm font-medium whitespace-nowrap transition-colors outline-none select-none",
-    "focus-visible:ring-3 focus-visible:ring-ring-default",
+    "focus-visible:ring-3 focus-visible:ring-ds-ring",
     "disabled:pointer-events-none disabled:opacity-50",
     "aria-disabled:pointer-events-none aria-disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -20,17 +20,17 @@ const buttonVariants = cva(
       variant: {
         // Solid brand fill. primary / primary-hover / text-inverse flip for dark
         // mode automatically — no `dark:` overrides needed.
-        default: "bg-primary text-text-inverse hover:bg-primary-hover",
+        default: "bg-ds-bg-primary text-ds-text-inverse hover:bg-ds-bg-primary-saturated",
         // Soft primary-tinted fill for a lower-emphasis action.
         secondary:
-          "bg-background-primary-fade text-text-primary hover:bg-background-primary-faint",
+          "bg-ds-bg-primary-fade text-ds-text-primary hover:bg-ds-bg-primary-faint",
         outline:
-          "border-border bg-background text-foreground hover:bg-background-muted dark:bg-input/30 dark:hover:bg-input/50",
-        ghost: "text-foreground hover:bg-background-muted dark:hover:bg-input/50",
+          "border-ds-border-soft bg-ds-bg-plain text-ds-text-plain hover:bg-ds-bg-muted dark:bg-ds-bg-soft/30 dark:hover:bg-ds-bg-soft/50",
+        ghost: "text-ds-text-plain hover:bg-ds-bg-muted dark:hover:bg-ds-bg-soft/50",
         // Red scheme for irreversible / dangerous actions.
         destructive:
-          "bg-danger text-text-inverse hover:bg-background-danger-saturated focus-visible:ring-ring-danger",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-ds-bg-danger text-ds-text-inverse hover:bg-ds-bg-danger-saturated focus-visible:ring-ds-ring-danger",
+        link: "text-ds-text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-8 px-3",

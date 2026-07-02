@@ -95,7 +95,7 @@ function FileInput({
       disabled={disabled}
       data-drag-over={dragOver || undefined}
       className={cn(
-        "cursor-pointer data-[drag-over=true]:border-primary data-[drag-over=true]:bg-background-primary-fade",
+        "cursor-pointer data-[drag-over=true]:border-ds-border-primary data-[drag-over=true]:bg-ds-bg-primary-fade",
         className,
       )}
       onClick={open}
@@ -124,12 +124,12 @@ function FileInput({
       <span
         className={cn(
           "grow truncate text-start",
-          files.length === 0 ? "text-text-muted" : "text-foreground",
+          files.length === 0 ? "text-ds-text-muted" : "text-ds-text-plain",
         )}
       >
         {label}
       </span>
-      <span className="flex shrink-0 items-center gap-1.5 text-body-sm font-medium text-primary">
+      <span className="flex shrink-0 items-center gap-1.5 text-body-sm font-medium text-ds-text-primary">
         <UploadIcon className="size-4" aria-hidden />
         {uploadLabel}
       </span>

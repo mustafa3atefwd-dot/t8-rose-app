@@ -32,10 +32,10 @@ const Toaster = ({ ...props }: ToasterProps) => {
         {
           // Map sonner's internals onto the design-system surface tokens. The
           // toast is an elevated surface, so it uses the `card` tokens.
-          "--normal-bg": "var(--card)",
-          "--normal-text": "var(--card-foreground)",
-          "--normal-border": "var(--border)",
-          "--border-radius": "var(--radius-lg)",
+          "--normal-bg": "var(--ds-bg-plain)",
+          "--normal-text": "var(--ds-text-plain)",
+          "--normal-border": "var(--ds-border-soft)",
+          "--border-radius": "var(--radius-ds-lg)",
         } as React.CSSProperties
       }
       toastOptions={{
@@ -43,19 +43,19 @@ const Toaster = ({ ...props }: ToasterProps) => {
           toast:
             "group cn-toast w-full items-center gap-3 rounded-lg border p-4 shadow-sm",
           title: "text-body-sm font-semibold",
-          description: "text-caption text-muted-foreground",
+          description: "text-caption text-ds-text-muted",
           // Logical insets keep the button on the trailing edge and mirror it
           // to the leading edge automatically in RTL (Arabic).
           closeButton:
-            "!start-auto !end-3 !top-1/2 !bottom-auto !-translate-y-1/2 !bg-transparent !border-0 !text-muted-foreground hover:!text-foreground",
+            "!start-auto !end-3 !top-1/2 !bottom-auto !-translate-y-1/2 !bg-transparent !border-0 !text-ds-text-muted hover:!text-ds-text-plain",
           // Variant colours are driven by design tokens so they adapt to
           // light/dark mode automatically.
           success:
-            "!bg-success/10 !border-success/40 [&_[data-icon]]:!text-success",
-          error: "!bg-danger/10 !border-danger/40 [&_[data-icon]]:!text-danger",
+            "!bg-ds-bg-success/10 !border-ds-border-success/40 [&_[data-icon]]:!text-ds-text-success",
+          error: "!bg-ds-bg-danger/10 !border-ds-border-danger/40 [&_[data-icon]]:!text-ds-text-danger",
           warning:
-            "!bg-warning/10 !border-warning/50 [&_[data-icon]]:!text-warning",
-          info: "!bg-muted !border-border [&_[data-icon]]:!text-foreground",
+            "!bg-ds-bg-warning/10 !border-ds-border-warning/50 [&_[data-icon]]:!text-ds-text-warning",
+          info: "!bg-ds-bg-muted !border-ds-border-soft [&_[data-icon]]:!text-ds-text-plain",
         },
       }}
       {...props}

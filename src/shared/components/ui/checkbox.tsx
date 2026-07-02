@@ -46,13 +46,13 @@ function Checkbox({
         onCheckedChange ? (value) => onCheckedChange(value) : undefined
       }
       className={cn(
-        "group/checkbox peer relative flex size-4 shrink-0 items-center justify-center rounded-[4px] border border-border bg-transparent text-text-inverse transition-colors outline-none",
-        "dark:bg-input/30",
-        "focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring-default",
+        "group/checkbox peer relative flex size-4 shrink-0 items-center justify-center rounded-[4px] border border-ds-border-soft bg-transparent text-ds-text-inverse transition-colors outline-none",
+        "dark:bg-ds-bg-soft/30",
+        "focus-visible:border-ds-border-primary focus-visible:ring-3 focus-visible:ring-ds-ring",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "data-checked:border-primary data-checked:bg-primary",
-        "data-indeterminate:border-primary data-indeterminate:bg-primary",
-        "aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+        "data-checked:border-ds-border-primary data-checked:bg-ds-bg-primary",
+        "data-indeterminate:border-ds-border-primary data-indeterminate:bg-ds-bg-primary",
+        "aria-invalid:border-ds-border-danger aria-invalid:ring-3 aria-invalid:ring-ds-ring-danger",
         className,
       )}
       {...props}

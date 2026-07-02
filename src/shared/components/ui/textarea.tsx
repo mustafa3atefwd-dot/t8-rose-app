@@ -40,30 +40,30 @@ function Textarea({
           "flex field-sizing-content w-full min-h-37.5 px-2.5 py-2 md:text-sm",
 
           // Border & Background
-          "rounded-lg bg-background-plain outline-none",
-          "not-disabled:border not-disabled:border-border-soft",
+          "rounded-lg bg-ds-bg-plain outline-none",
+          "not-disabled:border not-disabled:border-ds-border-soft",
 
           // Placeholder
-          "placeholder:text-text-muted",
+          "placeholder:text-ds-text-muted",
 
           // Hover State
-          "hover:not-disabled:not-focus:border-border-default",
+          "hover:not-disabled:not-focus:border-ds-border-default",
 
           // Focus Ring
-          "focus:border-border-primary",
-          "focus-visible:ring-3 focus-visible:ring-ring-default",
+          "focus:border-ds-border-primary",
+          "focus-visible:ring-3 focus-visible:ring-ds-ring",
 
           // Disabled State
           "disabled:cursor-not-allowed",
-          "disabled:bg-background-muted",
-          "disabled:text-text-muted",
+          "disabled:bg-ds-bg-muted",
+          "disabled:text-ds-text-muted",
 
           // Validation States
-          "aria-invalid:border-border-danger",
-          "aria-invalid:ring-ring-danger",
+          "aria-invalid:border-ds-border-danger",
+          "aria-invalid:ring-ds-ring-danger",
 
           // Typography
-          "text-base text-text-plain",
+          "text-base text-ds-text-plain",
 
           // Animation
           "transition-colors",
@@ -73,7 +73,7 @@ function Textarea({
         {...props}
       />
 
-      <div className="mt-1 text-xs text-zinc-500 text-right" >
+      <div className="mt-1 text-xs text-ds-text-soft text-right" >
         {currentLength}/{maxLength} characters
       </div>
     </div>

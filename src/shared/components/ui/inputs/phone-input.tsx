@@ -70,7 +70,7 @@ function PhoneInput({
         <Menu.Trigger
           disabled={disabled}
           aria-label={countryLabel}
-          className="flex shrink-0 items-center gap-1 rounded-base text-body-sm font-medium text-foreground outline-none disabled:pointer-events-none"
+          className="flex shrink-0 items-center gap-1 rounded-base text-body-sm font-medium text-ds-text-plain outline-none disabled:pointer-events-none"
         >
           <span className="text-base leading-none" aria-hidden>
             {country.flag}
@@ -78,11 +78,11 @@ function PhoneInput({
           <span className="tabular-nums">
             {country.code} ({country.dial})
           </span>
-          <ChevronDownIcon className="size-3.5 text-text-muted" aria-hidden />
+          <ChevronDownIcon className="size-3.5 text-ds-text-muted" aria-hidden />
         </Menu.Trigger>
         <Menu.Portal>
           <Menu.Positioner align="start" sideOffset={8} className="z-50">
-            <Menu.Popup className="max-h-64 min-w-56 overflow-x-hidden overflow-y-auto rounded-lg border border-border bg-card p-1 text-card-foreground shadow-soft-lg outline-none">
+            <Menu.Popup className="max-h-64 min-w-56 overflow-x-hidden overflow-y-auto rounded-lg border border-ds-border-soft bg-ds-bg-plain p-1 text-ds-text-plain shadow-soft-lg outline-none">
               {countries.map((c) => (
                 <Menu.Item
                   key={c.code}
@@ -90,13 +90,13 @@ function PhoneInput({
                     setCountry(c);
                     emit(c, national);
                   }}
-                  className="flex cursor-pointer items-center gap-2 rounded-base px-2 py-1.5 text-body-sm outline-none data-[highlighted]:bg-background-muted"
+                  className="flex cursor-pointer items-center gap-2 rounded-base px-2 py-1.5 text-body-sm outline-none data-[highlighted]:bg-ds-bg-muted"
                 >
                   <span className="text-base leading-none" aria-hidden>
                     {c.flag}
                   </span>
                   <span className="grow truncate">{c.name}</span>
-                  <span className="text-text-muted tabular-nums">{c.dial}</span>
+                  <span className="text-ds-text-muted tabular-nums">{c.dial}</span>
                 </Menu.Item>
               ))}
             </Menu.Popup>
@@ -104,7 +104,7 @@ function PhoneInput({
         </Menu.Portal>
       </Menu.Root>
 
-      <span className="h-5 w-px shrink-0 bg-border" aria-hidden />
+      <span className="h-5 w-px shrink-0 bg-ds-border-soft" aria-hidden />
 
       <input
         id={id}
