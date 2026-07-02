@@ -5,7 +5,7 @@ import { routing } from "./i18n/routing";
 
 
 const AUTH_PAGES = ["/login", "/register", "/forgot-password"];
-const PUBLIC_PAGES = ["/", "/login"]; 
+const PUBLIC_PAGES = ["/", "/login", "/forgot-password"]; 
 
 const handleI18nRouting = createMiddleware(routing);
 
