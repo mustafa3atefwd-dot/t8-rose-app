@@ -21,7 +21,9 @@
   "auth": {
     "switchLang": "English",
     "langLabel": "التحويل إلى الإنجليزية",
-    "pageTitle": "المصادقة"
+    "pageTitle": "المصادقة",
+    "welcomeBack": "مرحباً بعودتك!",
+    "joinFamily": "كن جزءاً من عائلتنا!"
   },
   "validation": {
     "passwordWeak": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل وتشمل: حرف كبير وصغير ورقم ورمز خاص",

@@ -1,11 +1,25 @@
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Cover from '@/assets/images/Cover.svg';
+import SeparatorLight from '@/assets/images/separator-light.png';
+import SeparatorDark from '@/assets/images/separator-dark.png';
+import { AuthHeading } from '../components/AuthHeading';
 import { LanguageToggle } from '../components/LanguageToggle';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 
 interface AuthLayoutProps {
   children: ReactNode;
+}
+
+/** Decorative ornament — maroon in light mode, soft-pink in dark mode. */
+function FormSeparator({ flip = false }: { flip?: boolean }) {
+  const flipClass = flip ? '-scale-y-100' : '';
+  return (
+    <>
+      <Image src={SeparatorLight} alt="" aria-hidden className={`h-auto w-70 select-none dark:hidden ${flipClass}`} />
+      <Image src={SeparatorDark} alt="" aria-hidden className={`hidden h-auto w-70 select-none dark:block ${flipClass}`} />
+    </>
+  );
 }
 
 export async function AuthLayout({ children }: AuthLayoutProps) {
@@ -17,7 +31,12 @@ export async function AuthLayout({ children }: AuthLayoutProps) {
           <ThemeToggle />
           <LanguageToggle />
         </div>
-        <div className="flex flex-1 items-center justify-center">{children}</div>
+        <div className="flex flex-1 flex-col items-center justify-center gap-8">
+          <FormSeparator />
+          <AuthHeading />
+          {children}
+          <FormSeparator flip />
+        </div>
       </div>
 
       {/* Decorative image column — hidden on mobile, end side */}
