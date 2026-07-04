@@ -56,13 +56,14 @@
       "search": "Search",
       "number": "Quantity",
       "password": "Password",
+      "confirmPassword": "Confirm Password",
       "otp": "One-time code",
       "file": "Attachment",
       "phone": "Phone number"
     },
     "placeholders": {
       "default": "Placeholder",
-      "email": "you@example.com",
+      "email": "user@example.com",
       "search": "Search…",
       "password": "Enter your password",
       "phone": "Phone number"
@@ -88,7 +89,8 @@
     "states": "States",
     "withIcons": "With icons",
     "iconOnly": "Icon only",
-    "loadingDemo": "Click to see the loading state"
+    "loadingDemo": "Click to see the loading state",
+    "next": "Next"
   },
   "checkbox": {
     "title": "Checkbox",
@@ -111,5 +113,21 @@
     "error": "Error",
     "info": "Info",
     "outline": "Outline"
+  },
+  "forgotPw": {
+    "step1": {
+      "title": "Forgot Password?",
+      "subtitle": "Worry not, we’ll send you instructions to help you reset it.",
+      "notHaveAccount": "Don’t have an account yet?",
+      "toRegister": "Create one now!"
+    },
+    "step3": {
+      "title": "Create New Password",
+      "subtitle": "Set a strong password to secure your account.",
+      "reset": "Reset Password",
+      "success": "Password reset successfully",
+      "contact": "Need help?",
+      "toContact": "Contact us"
+    }
   }
 }

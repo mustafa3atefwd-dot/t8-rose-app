@@ -1,5 +1,4 @@
 import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import ForgotPasswordForm from "@/features/auth/components/forgot-password-form";
@@ -17,12 +16,6 @@ export default async function ForgotPasswordPage({ params }: ForgotPasswordPageP
     notFound();
   }
 
-  setRequestLocale(locale);
-  const t = await getTranslations("auth");
 
-  return (
-    <>
-      <ForgotPasswordForm/>
-    </>
-  );
+  return <ForgotPasswordForm />;
 }
