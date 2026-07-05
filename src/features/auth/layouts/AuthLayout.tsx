@@ -22,15 +22,19 @@ function FormSeparator({ flip = false }: { flip?: boolean }) {
   );
 }
 
+/** Two-column auth shell — branded form on the start side, cover image on the end side. */
 export function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="bg-background text-foreground flex min-h-screen">
       {/* Form column — start side (left in LTR, right in RTL) */}
       <div className="flex w-full flex-col px-6 py-10 sm:px-10 lg:w-1/2">
+        {/* Top bar — theme & language toggles */}
         <div className="flex items-center justify-between">
           <ThemeToggle />
           <LanguageToggle />
         </div>
+
+        {/* Centered content — ornament, heading, form fields, ornament */}
         <div className="flex flex-1 flex-col items-center justify-center gap-8">
           <FormSeparator />
           <AuthHeading />
