@@ -1,27 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { cn } from "@/shared/lib/utils";
+import { cn } from '@/shared/lib/utils';
 
-/**
- * Standalone styled input. Carries its own border/focus ring so it can be used
- * on its own for the Default, Email and plain Number text variants. Set
- * `aria-invalid` (the `InputField` wrapper does this for you) for the error
- * treatment.
- */
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   return (
     <input
       type={type}
       data-slot="input"
       className={cn(
-        "flex h-10 w-full min-w-0 rounded-lg border border-ds-border-soft bg-transparent px-3 py-1 text-base text-ds-text-plain transition-colors outline-none md:text-sm",
-        "placeholder:text-ds-text-muted",
-        "dark:bg-ds-bg-soft/30",
-        "focus-visible:border-ds-border-primary focus-visible:ring-3 focus-visible:ring-ds-ring",
-        "disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-ds-bg-muted disabled:opacity-50",
-        "aria-invalid:border-ds-border-danger aria-invalid:focus-visible:ring-ds-ring-danger",
-        "data-[success=true]:border-ds-border-success",
-        className,
+        'border-ds-border-muted file:text-ds-text-plain placeholder:text-ds-text-muted focus-visible:border-ds-border-primary focus-visible:ring-ds-ring/50 disabled:bg-ds-bg-soft/50 aria-invalid:border-ds-border-danger aria-invalid:ring-ds-ring-danger/20 dark:bg-ds-bg-soft/30 dark:disabled:bg-ds-bg-soft/80 dark:aria-invalid:border-ds-border-danger/50 dark:aria-invalid:ring-ds-ring-danger/40 h-8 w-full min-w-0 rounded-lg border bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3 md:text-sm',
+        className
       )}
       {...props}
     />
