@@ -22,7 +22,7 @@ function FormSeparator({ flip = false }: { flip?: boolean }) {
   );
 }
 
-export async function AuthLayout({ children }: AuthLayoutProps) {
+export function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="bg-background text-foreground flex min-h-screen">
       {/* Form column — start side (left in LTR, right in RTL) */}
