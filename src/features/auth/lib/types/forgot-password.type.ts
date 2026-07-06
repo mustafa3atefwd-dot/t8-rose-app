@@ -5,13 +5,18 @@ export interface ForgotPasswordStep1Response {
 }
 
 export interface ForgotPasswordStep1Props {
+  email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   onNext: () => void;
 }
 
 export interface ForgotPasswordStep2Props {
   email: string;
-  onNext: () => void;
+  onBack: () => void;
+}
+
+export interface ForgotPasswordStep3Props{
+  token: string;
 }
 
 export interface ForgotPasswordStep3Response {
@@ -19,4 +24,8 @@ export interface ForgotPasswordStep3Response {
   code: number;
   message: string;
   payload: string;
+}
+
+export interface ForgotPasswordFormProps {
+  token: string;
 }

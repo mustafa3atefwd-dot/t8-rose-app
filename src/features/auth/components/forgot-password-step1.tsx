@@ -1,36 +1,23 @@
 'use client';
+
 import { Button } from '@/shared/components/ui/button';
 import { Field, FieldError } from '@/shared/components/ui/field';
 import { Input, InputField } from '@/shared/components/ui/inputs';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from "@hookform/resolvers/zod";
-import { forgotPasswordStep1Schema, TForgotPasswordStep1Schema } from '../lib/schemas/forgot-password.schema';
 import { MoveRight } from 'lucide-react';
 import { useTranslations } from "next-intl";
 import { Link } from '@/i18n/navigation';
 import { ForgotPasswordStep1Props } from '../lib/types/forgot-password.type';
-import { forgetPasswordStep1 } from '../lib/actions/forgot-password.action';
-import { toast } from '@/shared/components/ui/toast';
-export default function ForgotPasswordStep1({onNext, setEmail}: ForgotPasswordStep1Props) {
+import { useForgotPasswordStep1 } from '../lib/hooks/use-forgot-password-step1';
+export default function ForgotPasswordStep1({onNext, setEmail, email}: ForgotPasswordStep1Props) {
   const t = useTranslations();
-  const form = useForm<TForgotPasswordStep1Schema>({
-    defaultValues: {
-      email: '',
-    },
-    resolver: zodResolver(forgotPasswordStep1Schema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-  });
-  const {handleSubmit, register, formState: {isSubmitting, isValid, errors}} = form;
-  async function handleForgotPassword(values:TForgotPasswordStep1Schema){
-    try {
-        await forgetPasswordStep1(values);
-        setEmail(values.email);
-    onNext();
-    } catch (error) {
-        toast.error(t('toast.error'));
-    }
-  }
+  const { form, handleForgotPassword } =
+  useForgotPasswordStep1(email, setEmail, onNext);
+
+const {
+  handleSubmit,
+  register,
+  formState: { isSubmitting, isValid, errors },
+} = form;
   return (
     <>
     {/* forgot password form */}
@@ -47,6 +34,7 @@ export default function ForgotPasswordStep1({onNext, setEmail}: ForgotPasswordSt
     htmlFor="email"
   >
     <Input
+      autoFocus
       id="email"
       type="email"
       inputMode="email"
@@ -70,7 +58,6 @@ export default function ForgotPasswordStep1({onNext, setEmail}: ForgotPasswordSt
         <Link href={'/login'} className='font-bold text-maroon-700 dark:text-soft-pink-300'> {t('forgotPw.step1.toRegister')}</Link>
       </div>
     </div>
-
     </>
   );
 }

@@ -1,32 +1,44 @@
 'use client';
-import { useState } from "react";
-import ForgotPasswordStep1 from "./forgot-password-step1";
-import ForgotPasswordStep2 from "./forgot-password-step2";
-import ForgotPasswordStep3 from "./forgot-password-step3";
 
-export default function ForgotPasswordForm() {
-  const [step, setStep] = useState<1 | 2 | 3>(3);
-  const [email, setEmail] = useState<string>('');
-return (
-  <>
-    {step === 1 && (
-      <ForgotPasswordStep1
-        setEmail={setEmail}
-        onNext={() => setStep(2)}
-      />
-    )}
+import ForgotPasswordStep1 from './forgot-password-step1';
+import ForgotPasswordStep2 from './forgot-password-step2';
+import ForgotPasswordStep3 from './forgot-password-step3';
+import { ForgotPasswordFormProps } from '../lib/types/forgot-password.type';
+import { useForgotPassword } from '../lib/hooks/use-forgot-password';
 
-    {step === 2 && (
-      <ForgotPasswordStep2
-        email={email}
-        onNext={() => setStep(3)}
-      />
-    )}
+export default function ForgotPasswordForm({
+  token,
+}: ForgotPasswordFormProps) {
+  const {
+    step,
+    email,
+    setEmail,
+    goToStep1,
+    goToStep2,
+  } = useForgotPassword(token);
 
-    {step === 3 && (
-      <ForgotPasswordStep3
-      />
-    )}
-  </>
-);
+  return (
+    <>
+      {step === 1 && (
+        <ForgotPasswordStep1
+          email={email}
+          setEmail={setEmail}
+          onNext={goToStep2}
+        />
+      )}
+
+      {step === 2 && (
+        <ForgotPasswordStep2
+          email={email}
+          onBack={goToStep1}
+        />
+      )}
+
+      {step === 3 && (
+        <ForgotPasswordStep3
+          token={token}
+        />
+      )}
+    </>
+  );
 }

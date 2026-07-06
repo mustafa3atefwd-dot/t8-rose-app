@@ -1,0 +1,45 @@
+'use client';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from '@/shared/components/ui/toast';
+import {
+  forgotPasswordStep1Schema,
+  TForgotPasswordStep1Schema,
+} from '../schemas/forgot-password.schema';
+import { forgetPasswordStep1 } from '../actions/forgot-password.action';
+import { useTranslations } from 'next-intl';
+
+export function useForgotPasswordStep1(
+  email: string,
+  setEmail: (email: string) => void,
+  onNext: () => void
+) {
+  const t = useTranslations();
+
+  const form = useForm<TForgotPasswordStep1Schema>({
+    defaultValues: {
+      email,
+    },
+    resolver: zodResolver(forgotPasswordStep1Schema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+  });
+
+  const handleForgotPassword = async (
+    values: TForgotPasswordStep1Schema
+  ) => {
+    try {
+      await forgetPasswordStep1(values);
+      setEmail(values.email);
+      onNext();
+    } catch {
+      toast.error(t('toast.error'));
+    }
+  };
+
+  return {
+    form,
+    handleForgotPassword,
+  };
+}

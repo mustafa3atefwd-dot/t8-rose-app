@@ -121,6 +121,12 @@
       "notHaveAccount": "Don’t have an account yet?",
       "toRegister": "Create one now!"
     },
+    "step2": {
+      "title": "Password Reset Sent",
+      "subtitle": "We have sent a password reset link to:",
+      "paragraph1": "Please check your inbox and follow the instructions to reset your password.",
+      "paragraph2": "If you don’t see the email within a few minutes, check your spam or junk folder."
+    },
     "step3": {
       "title": "Create New Password",
       "subtitle": "Set a strong password to secure your account.",

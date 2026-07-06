@@ -1,46 +1,19 @@
-'use client';
 import { Button } from '@/shared/components/ui/button';
 import { Field, FieldError } from '@/shared/components/ui/field';
 import { InputField, PasswordInput } from '@/shared/components/ui/inputs';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { forgotPasswordStep3Schema, TForgotPasswordStep3Schema } from '../lib/schemas/forgot-password.schema';
-import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { ForgotPasswordStep3Response } from '../lib/types/forgot-password.type';
-import { forgetPasswordStep3 } from '../lib/actions/forgot-password.action';
-import { useRouter } from '@/i18n/navigation';
-import { toast } from '@/shared/components/ui/toast';
+import { ForgotPasswordStep3Props } from '../lib/types/forgot-password.type';
+import { useForgotPasswordStep3 } from '../lib/hooks/use-forgot-password-step3';
 
-export default function ForgotPasswordStep3() {
-  const router = useRouter();
-  const t = useTranslations();
-  const form = useForm<TForgotPasswordStep3Schema>({
-    defaultValues: {
-      token: 'dfgg',
-      newPassword: '',
-      confirmPassword: '',
-    },
-    resolver: zodResolver(forgotPasswordStep3Schema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-  });
-  const {
-    handleSubmit,
-    register,
-    formState: { isSubmitting, isValid, errors },
-  } = form;
-  async function handleForgotPasswordStep3(values: TForgotPasswordStep3Schema) {
-    try {
-      const payload: ForgotPasswordStep3Response = await forgetPasswordStep3(values);
-      if (payload?.status) {
-        toast.success(t('forgotPw.step3.success'));
-        router.push('/login');
-      }
-    } catch (error) {
-      toast.error(t('toast.error'));
-    }
-  }
+export default function ForgotPasswordStep3({token}: ForgotPasswordStep3Props) {
+  const { t, form, handleForgotPasswordStep3 } =
+  useForgotPasswordStep3(token);
+
+const {
+  handleSubmit,
+  register,
+  formState: { isSubmitting, isValid, errors },
+} = form;
   return (
     <>
       {/* forgot password form */}
@@ -88,7 +61,7 @@ export default function ForgotPasswordStep3() {
             {t('forgotPw.step3.reset')}
           </Button>
         </form>
-        {/* create account */}
+        {/* go to contact */}
         <div className="border-ds-border-muted border-t pt-5 text-center text-sm">
           <span className="text-ds-text-plain font-medium">{t('forgotPw.step3.contact')}</span>
           <Link href={'/'} className="text-maroon-700 dark:text-soft-pink-300 font-bold">
