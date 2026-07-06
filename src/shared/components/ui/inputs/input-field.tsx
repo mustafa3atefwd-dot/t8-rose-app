@@ -38,11 +38,11 @@ function InputField({
       {label ? (
         <label
           htmlFor={htmlFor}
-          className="text-body-sm font-medium text-text-default"
+          className="text-body-sm font-medium text-ds-text-default"
         >
           {label}
           {required ? (
-            <span className="ms-0.5 text-danger" aria-hidden>
+            <span className="ms-0.5 text-ds-text-danger" aria-hidden>
               *
             </span>
           ) : null}
@@ -54,18 +54,18 @@ function InputField({
       {error ? (
         <p
           role="alert"
-          className="flex items-center gap-1 text-caption text-danger rtl:flex-row-reverse"
+          className="flex items-center gap-1 text-caption text-ds-text-danger rtl:flex-row-reverse"
         >
           <CircleAlertIcon className="size-3.5 shrink-0" aria-hidden />
           <span>{error}</span>
         </p>
       ) : success ? (
-        <p className="flex items-center gap-1 text-caption text-success rtl:flex-row-reverse">
+        <p className="flex items-center gap-1 text-caption text-ds-text-success rtl:flex-row-reverse">
           <CircleCheckIcon className="size-3.5 shrink-0" aria-hidden />
           <span>{success}</span>
         </p>
       ) : description ? (
-        <p className="text-caption text-text-muted">{description}</p>
+        <p className="text-caption text-ds-text-muted">{description}</p>
       ) : null}
     </div>
   );

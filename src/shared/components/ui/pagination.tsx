@@ -43,7 +43,7 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
 // tokens already flip to the soft-pink dark-mode counterpart automatically, so
 // no explicit `dark:` overrides are needed.
 const activePageClasses =
-  "border-transparent bg-primary text-text-inverse hover:bg-primary-hover hover:text-text-inverse"
+  "border-transparent bg-ds-bg-primary text-ds-text-inverse hover:bg-ds-bg-primary-saturated hover:text-ds-text-inverse"
 
 function PaginationEllipsis({
   className,

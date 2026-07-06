@@ -3,9 +3,7 @@
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 import type { Locale } from "@/shared/i18n/config";
-import { messages } from "@/shared/i18n/messages";
 import { Monitor, Moon, SunMedium } from "lucide-react";
-
 function subscribe() {
   return () => {};
 }
@@ -17,17 +15,16 @@ export function ThemeToggle({ locale = "en" }: { locale?: Locale }) {
     () => false,
   );
   const { theme, setTheme } = useTheme();
-  const labels = messages[locale].theme;
 
   if (!mounted) {
     return (
       <>
       {/* Mode Toggle */}
-      <div className="bg-background-plain flex items-center border border-border-soft p-0.75 rounded-full">
+      <div className="bg-ds-bg-plain flex items-center border border-ds-border-soft p-0.75 rounded-full">
         {/* light */}
         <button
           onClick={() => setTheme('light')}
-          className="size-8.5 bg-background-soft rounded-full flex items-center justify-center cursor-pointer"
+          className="size-8.5 bg-ds-bg-soft rounded-full flex items-center justify-center cursor-pointer"
         >
           <SunMedium className="size-6 text-text-plain" />
         </button>
@@ -41,7 +38,7 @@ export function ThemeToggle({ locale = "en" }: { locale?: Locale }) {
         {/* dark */}
         <button
           onClick={() => setTheme('dark')}
-          className="size-8.5 rounded-full flex items-center justify-center cursor-pointer dark:bg-background-muted"
+          className="size-8.5 rounded-full flex items-center justify-center cursor-pointer dark:bg-ds-bg-muted"
         >
           <Moon className="size-6 text-ds-text-plain" />
         </button>
@@ -52,13 +49,13 @@ export function ThemeToggle({ locale = "en" }: { locale?: Locale }) {
   return (
      <>
       {/* Mode Toggle */}
-      <div className="bg-background-plain flex items-center border border-border-soft p-0.75 rounded-full">
+      <div className="bg-ds-bg-plain flex items-center border border-ds-border-soft p-0.75 rounded-full">
         {/* light */}
         <button
           onClick={() => setTheme('light')}
-          className="size-8.5 bg-background-soft rounded-full flex items-center justify-center cursor-pointer"
+          className="size-8.5 bg-ds-bg-soft rounded-full flex items-center justify-center cursor-pointer"
         >
-          <SunMedium className="size-6 text-text-plain" />
+          <SunMedium className="size-6 text-ds-text-plain" />
         </button>
         {/* system */}
         <button
@@ -70,7 +67,7 @@ export function ThemeToggle({ locale = "en" }: { locale?: Locale }) {
         {/* dark */}
         <button
           onClick={() => setTheme('dark')}
-          className="size-8.5 rounded-full flex items-center justify-center cursor-pointer dark:bg-background-muted"
+          className="size-8.5 rounded-full flex items-center justify-center cursor-pointer dark:bg-ds-bg-muted"
         >
           <Moon className="size-6 text-ds-text-plain" />
         </button>

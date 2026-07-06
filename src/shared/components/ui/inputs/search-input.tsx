@@ -23,7 +23,7 @@ function SearchInput({
       disabled={disabled}
       className={className}
     >
-      <SearchIcon className="size-4 shrink-0 text-text-muted" aria-hidden />
+      <SearchIcon className="size-4 shrink-0 text-ds-text-muted" aria-hidden />
       <input
         type="search"
         data-slot="input"

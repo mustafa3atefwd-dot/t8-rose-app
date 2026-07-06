@@ -7,12 +7,12 @@ import { cn } from "@/shared/lib/utils";
 import type { FieldStateProps } from "./field-shell";
 
 const otpBoxClass = cva([
-  "size-12 rounded-lg border border-border bg-transparent text-center text-heading-md font-semibold text-foreground transition-colors outline-none md:size-11",
-  "dark:bg-input/30",
-  "focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring-default",
-  "disabled:pointer-events-none disabled:bg-background-muted disabled:opacity-50",
-  "data-[invalid=true]:border-danger data-[invalid=true]:focus-visible:ring-ring-danger",
-  "data-[success=true]:border-success",
+  "size-12 rounded-lg border border-ds-border-soft bg-transparent text-center text-heading-md font-semibold text-ds-text-plain transition-colors outline-none md:size-11",
+  "dark:bg-ds-bg-soft/30",
+  "focus-visible:border-ds-border-primary focus-visible:ring-3 focus-visible:ring-ds-ring",
+  "disabled:pointer-events-none disabled:bg-ds-bg-muted disabled:opacity-50",
+  "data-[invalid=true]:border-ds-border-danger data-[invalid=true]:focus-visible:ring-ds-ring-danger",
+  "data-[success=true]:border-ds-border-success",
 ]);
 
 type OtpInputProps = FieldStateProps & {
