@@ -5,6 +5,7 @@ import { UploadIcon } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
 import { FieldShell, type FieldStateProps } from "./field-shell";
+import { Input } from "./input";
 
 /** Does `file` satisfy an `accept` string (".png,image/*,application/pdf")? */
 function fileMatchesAccept(file: File, accept?: string) {
@@ -110,7 +111,7 @@ function FileInput({
         if (!disabled) ingest(e.dataTransfer.files);
       }}
     >
-      <input
+      <Input
         ref={inputRef}
         id={id}
         name={name}
@@ -118,7 +119,7 @@ function FileInput({
         accept={accept}
         multiple={multiple}
         disabled={disabled}
-        className="sr-only"
+        className="sr-only h-px w-px border-0 p-0"
         onChange={(e) => ingest(e.target.files)}
       />
       <span

@@ -2,6 +2,7 @@ import * as React from "react";
 import { SearchIcon } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
+import { Input } from "./input";
 import {
   FieldShell,
   innerInputClass,
@@ -24,9 +25,8 @@ function SearchInput({
       className={className}
     >
       <SearchIcon className="size-4 shrink-0 text-ds-text-muted" aria-hidden />
-      <input
+      <Input
         type="search"
-        data-slot="input"
         disabled={disabled}
         aria-invalid={invalid || undefined}
         className={cn(

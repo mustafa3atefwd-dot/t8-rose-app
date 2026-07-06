@@ -5,6 +5,7 @@ import { Menu } from "@base-ui/react";
 import { ChevronDownIcon } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
+import { Input } from "./input";
 import {
   FieldShell,
   innerInputClass,
@@ -28,6 +29,35 @@ type PhoneInputProps = FieldStateProps & {
   name?: string;
   countryLabel?: string;
 };
+
+function getFlagUrl(country: Country) {
+  return (
+    country.flagUrl ??
+    (country.code.length === 2
+      ? `https://flagcdn.com/${country.code.toLowerCase()}.svg`
+      : undefined)
+  );
+}
+
+function CountryFlag({ country }: { country: Country }) {
+  const flagUrl = getFlagUrl(country);
+
+  if (flagUrl) {
+    return (
+      <span
+        aria-hidden
+        className="block h-4 w-6 shrink-0 rounded-[2px] bg-cover bg-center shadow-[inset_0_0_0_1px_rgb(0_0_0/0.12)]"
+        style={{ backgroundImage: `url(${flagUrl})` }}
+      />
+    );
+  }
+
+  return country.flag ? (
+    <span className="text-base leading-none" aria-hidden>
+      {country.flag}
+    </span>
+  ) : null;
+}
 
 /** Phone input with a country flag + dial-code dropdown and E.164 validation. */
 function PhoneInput({
@@ -72,9 +102,7 @@ function PhoneInput({
           aria-label={countryLabel}
           className="flex shrink-0 items-center gap-1 rounded-base text-body-sm font-medium text-ds-text-plain outline-none disabled:pointer-events-none"
         >
-          <span className="text-base leading-none" aria-hidden>
-            {country.flag}
-          </span>
+          <CountryFlag country={country} />
           <span className="tabular-nums">
             {country.code} ({country.dial})
           </span>
@@ -92,9 +120,7 @@ function PhoneInput({
                   }}
                   className="flex cursor-pointer items-center gap-2 rounded-base px-2 py-1.5 text-body-sm outline-none data-[highlighted]:bg-ds-bg-muted"
                 >
-                  <span className="text-base leading-none" aria-hidden>
-                    {c.flag}
-                  </span>
+                  <CountryFlag country={c} />
                   <span className="grow truncate">{c.name}</span>
                   <span className="text-ds-text-muted tabular-nums">{c.dial}</span>
                 </Menu.Item>
@@ -106,7 +132,7 @@ function PhoneInput({
 
       <span className="h-5 w-px shrink-0 bg-ds-border-soft" aria-hidden />
 
-      <input
+      <Input
         id={id}
         name={name}
         type="tel"
