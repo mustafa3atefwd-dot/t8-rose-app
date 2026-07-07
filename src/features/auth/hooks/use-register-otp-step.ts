@@ -2,15 +2,19 @@
 
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-import { useCountdownTimer } from "@/shared/hooks";
+import { useCountdownTimer } from "@/shared/hooks/use-countdown-timer";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { otpStepSchema } from "@/features/auth/lib/schemas";
-import { IOtpStepSchema, registerStep } from "@/features/auth/lib/types/auth";
+import { RegisterStep } from "../lib/types/auth";
+import { IOtpStepSchema } from "../lib/types/schemas";
+import { otpStepSchema } from "../lib/schemas/otp-step.schema";
+import { REGISTER_STEPS } from "../lib/constants/user.constant";
+
+
 
 interface IUseRegisterOtpStepProps {
   email: string;
-  setStep: Dispatch<SetStateAction<registerStep>>;
+  setStep: Dispatch<SetStateAction<RegisterStep>>;
 }
 
 export function useRegisterOtpStep({
@@ -51,7 +55,7 @@ export function useRegisterOtpStep({
 
     // Move to next step after success
     onSuccess: () => {
-      setStep("userInfo");
+      setStep(REGISTER_STEPS.userInfo);
     },
   });
 

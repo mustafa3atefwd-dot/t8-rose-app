@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userInfoStepSchema } from "@/features/auth/lib/schemas";
-import { IUserInfoStepSchema } from "@/features/auth/lib/types/auth";
+import { IUserInfoStepSchema } from "../lib/types/schemas";
+import { userInfoStepSchema } from "../lib/schemas/user-info-step.schema";
+
+
 
 interface IUseRegisterUserInfoStepProps {
   email: string;
@@ -25,18 +27,25 @@ export function useRegisterUserInfoStep({
       firstName: "",
       lastName: "",
       username: "",
-      phone: "",
+      phone: {
+        country: "",
+        phone: "",
+      },
       password: "",
       confirmPassword: "",
     },
   });
 
+  
+
   // Submit user registration
   const mutation = useMutation({
     mutationFn: async (values: IUserInfoStepSchema) => {
+      console.log(values);
+
       const res = await fetch("/api/auth/register/user-info-step", {
         method: "POST",
-        body: JSON.stringify(values),
+        body: JSON.stringify({...values, phone: values.phone.phone}),
         headers: {
           "Content-Type": "application/json",
         },
@@ -57,17 +66,22 @@ export function useRegisterUserInfoStep({
     },
   });
 
-  // Step 1 -> Step 2 validation (no submit yet)
-  async function handleNextStep() {
-    const valid = await form.trigger([
-      "firstName",
-      "lastName",
-      "username",
-      "phone",
-    ]);
 
-    if (valid) setShowPasswordStep(true);
-  }
+
+  // Step 1 -> Step 2 validation (no submit yet)
+async function handleNextStep() {
+  const valid = await form.trigger([
+    "firstName",
+    "lastName",
+    "username",
+    "phone",
+  ]);
+
+  console.log("valid:", valid);
+  console.log("errors:", form.formState.errors);
+
+  if (valid) setShowPasswordStep(true);
+}
 
   // Final submit (Step 2 only)
   function onSubmit(values: IUserInfoStepSchema) {

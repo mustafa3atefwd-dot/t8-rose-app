@@ -1,10 +1,13 @@
 import "server-only";
 
 import { emailStepSchema } from "../schemas/email-step.schema";
-import { apiRequest } from "@/src/shared/lib/utils/request.util";
-import { BACKEND_URL } from "@/src/shared/lib/constants/api.constant";
-import { IApiResponse } from "@/src/shared/lib/types/api";
+// import { apiRequest } from "@/src/shared/lib/utils/request.util";
+// import { BACKEND_URL } from "@/src/shared/lib/constants/api.constant";
+// import { IApiResponse } from "@/src/shared/lib/types/api";
 import { IOtpStepSchema, IUserInfoStepSchema } from "../types/schemas";
+import { apiRequest } from "@/shared/lib/utils/request.util";
+import { IApiResponse } from "@/shared/lib/types/api";
+import { BACKEND_URL } from "@/shared/lib/constants/api.constant";
 
 /**
  * Sends email verification for signup flow.

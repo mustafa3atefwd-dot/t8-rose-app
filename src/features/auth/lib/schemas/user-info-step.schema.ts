@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { USER_GENDERS } from "../constants/user.constant";
+import { isValidPhoneNumber, parsePhoneNumberFromString } from "libphonenumber-js/max";
 
 /**
  * Validation schema for user registration info step
@@ -19,17 +20,23 @@ export const userInfoStepSchema = z
 
     // ===== Phone validation =====
 
-    phone: z
-      .string()
-      .min(1, "Phone number is required")
-      .refine((val) => /^\+20(10|11|12|15)\d{8}$/.test(val), {
+phone: z
+  .object({
+    phone: z.string().trim(),
+    country: z.string(),
+  })
+      .refine((val) => isValidPhoneNumber(val.phone), {
         message: "Invalid phone number format",
+      })      
+      .refine((val) => /^\+20(10|11|12|15)\d{8}$/.test(val.phone), {
+        message: "Invalid Egyptian mobile number",
       }),
 
-    gender: z.enum(USER_GENDERS, {
-      error: () => "Please select a valid gender",
-    }),
-      
+    gender: z
+      .enum(USER_GENDERS, {
+        error: () => "Please select a valid gender",
+      })
+      .optional(),
 
     // ===== Password rules =====
     password: z

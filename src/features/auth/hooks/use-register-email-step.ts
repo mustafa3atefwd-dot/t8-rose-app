@@ -5,9 +5,11 @@ import { Dispatch, SetStateAction } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterStep } from "@/features/auth/lib/types/auth";
-import { emailStepSchema } from "../auth/lib/schemas/email-step.schema";
-import { IEmailStepSchema } from "../auth/lib/types/schemas";
-import { REGISTER_STEPS } from "../auth/lib/constants/user.constant";
+import { IEmailStepSchema } from "../lib/types/schemas";
+import { emailStepSchema } from "../lib/schemas/email-step.schema";
+import { REGISTER_STEPS } from "../lib/constants/user.constant";
+
+
 
 interface IUseRegisterEmailStepProps {
   setStep: Dispatch<SetStateAction<RegisterStep>>;
