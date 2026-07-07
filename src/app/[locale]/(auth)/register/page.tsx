@@ -4,6 +4,8 @@ import { REGISTER_STEPS } from "@/features/auth/lib/constants/user.constant";
 import { RegisterStep } from "@/features/auth/lib/types/auth";
 import ProgressSteps from "@/shared/components/progress-steps";
 import RegisterEmailStep from "@/features/auth/components/register-email-step";
+import RegisterOtpStep from "@/features/auth/components/register-otp-step";
+import RegisterUserInfoStep from "@/features/auth/components/register-user-info-step";
 
 export default function RegisterPage() {
   const [currentStep, setCurrentStep] = useState<RegisterStep>(REGISTER_STEPS.email);
@@ -28,7 +30,14 @@ export default function RegisterPage() {
           setStep={setCurrentStep}
         />
       )}
-      
+
+      {currentStep === REGISTER_STEPS.otp && (
+        <RegisterOtpStep email={email} setStep={setCurrentStep} />
+      )}  
+
+      {currentStep === REGISTER_STEPS.userInfo && (
+        <RegisterUserInfoStep email={email} />
+      )}      
     </>
   );
 }
