@@ -445,6 +445,7 @@ html[data-theme='dark'] {
   --radius-ds-xl: 0.625rem;
   --font-sans: var(--font-sarabun);
   --font-arabic: var(--font-tajawal);
+  --font-script: var(--font-great-vibes);
 }
 
 html[lang="ar"] body {

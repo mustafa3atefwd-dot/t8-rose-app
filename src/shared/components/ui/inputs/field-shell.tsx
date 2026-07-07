@@ -31,7 +31,7 @@ const fieldShellVariants = cva(
 
 // The bare <input> rendered inside a shell — it has no border/ring of its own.
 const innerInputClass =
-  "h-full w-full grow bg-transparent p-0 text-ds-text-plain outline-none placeholder:text-ds-text-muted disabled:cursor-not-allowed";
+  "h-full w-full grow rounded-none border-0 bg-transparent p-0 text-ds-text-plain shadow-none outline-none placeholder:text-ds-text-muted focus-visible:border-transparent focus-visible:ring-0 disabled:cursor-not-allowed disabled:bg-transparent disabled:opacity-100 aria-invalid:border-transparent aria-invalid:ring-0";
 
 // A small icon-button adornment (eye toggle, steppers, …).
 const adornmentButtonClass =
