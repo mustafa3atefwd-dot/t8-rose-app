@@ -23,9 +23,7 @@ export const apiRequest = async <TResponse>(
 
   // HTTP + business logic failure fallback
   if (!response.ok || !data.status) {
-    if (data.code === 404) {
-      notFound();
-    }
+    console.log({ data });
 
     throw new ApiError(
       data.message || "Request failed",

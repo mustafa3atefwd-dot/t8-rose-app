@@ -4,14 +4,8 @@ import React, { useState } from "react";
 import { Path, Control, Controller, FieldValues } from "react-hook-form";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/shared/components/ui";
+import { Field, FieldError, FieldLabel } from "./ui/field";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 interface IPasswordFormFieldProps<T extends FieldValues>
   extends React.InputHTMLAttributes<HTMLInputElement> {

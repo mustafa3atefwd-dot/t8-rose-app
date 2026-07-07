@@ -94,7 +94,7 @@ function PhoneInput({
       invalid={invalid}
       success={success}
       disabled={disabled}
-      className={className}
+      className={cn("h-11.5", className)}
     >
       <Menu.Root>
         <Menu.Trigger

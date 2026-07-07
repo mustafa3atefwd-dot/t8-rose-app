@@ -7,13 +7,14 @@ import {
   FieldError,
   FieldLabel,
 } from "@/shared/components/ui/field";
-import { Input } from "./ui/input";
+import { Input } from "./ui/inputs";
 import { Textarea } from "./ui/textarea";
 
 type IBaseProps<T extends FieldValues> = {
   control: Control<T>;
   name: Path<T>;
   label: string | React.ReactNode;
+  required?: boolean;
 };
 
 type IInputProps = React.ComponentPropsWithoutRef<"input"> & {
@@ -28,7 +29,7 @@ type IFormFieldProps<T extends FieldValues> = IBaseProps<T> &
   (IInputProps | ITextareaProps);
 
 function FormField<T extends FieldValues>(props: IFormFieldProps<T>) {
-  const { name, control, label, variant = "input", ...rest } = props;
+  const { name, control, label, variant = "input", required, ...rest } = props;
 
   return (
     <Controller
@@ -39,7 +40,10 @@ function FormField<T extends FieldValues>(props: IFormFieldProps<T>) {
           {/* ===== Field Wrapper ===== */}
           <Field data-invalid={fieldState.invalid}>
             {/* ===== Label ===== */}
-            <FieldLabel htmlFor={String(name)}>{label}</FieldLabel>
+            <FieldLabel htmlFor={String(name)}>
+              {label}
+              {required && <span className="text-ds-text-danger">*</span>}
+            </FieldLabel>
 
             {/* Render Input or Textarea based on variant prop */}
             {variant === "input" ? (
