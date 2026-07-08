@@ -6,9 +6,9 @@ import { toast } from '@/shared/components/ui/toast';
 import {
   forgotPasswordStep1Schema,
   TForgotPasswordStep1Schema,
-} from '../schemas/forgot-password.schema';
-import { forgetPasswordStep1 } from '../actions/forgot-password.action';
+} from '../lib/schemas/forgot-password.schema';
 import { useTranslations } from 'next-intl';
+import { forgetPasswordStep1 } from '../lib/actions/forgot-password.action';
 
 export function useForgotPasswordStep1(
   email: string,

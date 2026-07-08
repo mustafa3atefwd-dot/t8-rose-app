@@ -7,7 +7,7 @@ import { MoveRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { ForgotPasswordStep1Props } from '../lib/types/forgot-password';
-import { useForgotPasswordStep1 } from '../lib/hooks/use-forgot-password-step1';
+import { useForgotPasswordStep1 } from '../hooks/use-forgot-password-step1';
 export default function ForgotPasswordStep1({ onNext, setEmail, email }: ForgotPasswordStep1Props) {
   const t = useTranslations();
   const { form, handleForgotPassword } = useForgotPasswordStep1(email, setEmail, onNext);

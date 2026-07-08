@@ -3,9 +3,8 @@ import createMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 
-
-const AUTH_PAGES = ["/login", "/register", "/forgot-password"];
-const PUBLIC_PAGES = ["/", "/login", "/forgot-password"]; 
+const AUTH_PAGES = ["/login", "/register", "/reset-password"];
+const PUBLIC_PAGES = ["/"];
 
 const handleI18nRouting = createMiddleware(routing);
 

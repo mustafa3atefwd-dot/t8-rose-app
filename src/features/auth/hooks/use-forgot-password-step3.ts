@@ -5,9 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { toast } from '@/shared/components/ui/toast';
-import { forgotPasswordStep3Schema, TForgotPasswordStep3Schema } from '../schemas/forgot-password.schema';
-import { ForgotPasswordStep3Response } from '../types/forgot-password';
-import { forgetPasswordStep3 } from '../actions/forgot-password.action';
+import { forgotPasswordStep3Schema, TForgotPasswordStep3Schema } from '../lib/schemas/forgot-password.schema';
+import { ForgotPasswordStep3Response } from '../lib/types/forgot-password';
+import { forgetPasswordStep3 } from '../lib/actions/forgot-password.action';
 
 export function useForgotPasswordStep3(token: string) {
   const router = useRouter();

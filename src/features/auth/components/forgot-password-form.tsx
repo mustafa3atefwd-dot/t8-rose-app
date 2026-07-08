@@ -1,9 +1,9 @@
 'use client';
 
+import { useForgotPassword } from '../hooks/use-forgot-password';
 import ForgotPasswordStep1 from './forgot-password-step1';
 import ForgotPasswordStep2 from './forgot-password-step2';
 import ForgotPasswordStep3 from './forgot-password-step3';
-import { useForgotPassword } from '../lib/hooks/use-forgot-password';
 
 interface ForgotPasswordFormProps {
   token: string;
