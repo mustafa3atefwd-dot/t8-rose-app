@@ -23,10 +23,50 @@
     "langLabel": "Switch to Arabic",
     "pageTitle": "Authentication",
     "welcomeBack": "Welcome back!",
-    "joinFamily": "Become part of our family!"
+    "joinFamily": "Become part of our family!",
+    "forgotPassword": "Forgot your password?",
+
+    "registerEmail": "Register with Email",
+    "emailLabel": "Email",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+
+    "createAccount": "Create Account",
+    "enterOtpCode": "Enter the OTP Code",
+    "otpSentTo": "We have sent a 6-digit code to:",
+    "edit": "Edit",
+    "requestCodeIn": "You can request another code in: {timer}s",
+    "resending": "Resending...",
+    "sendNewCode": "Send a new code",
+    "verifying": "Verifying...",
+    "verifyCode": "Verify Code",
+    "needHelp": "Need help?",
+    "contactUs": "Contact Us",
+
+    "createStrongPassword": "Create a strong password",
+    "tellUsMore": "Tell us more about you",
+    "securePassword": "Choose a secure password to protect your account",
+    "detailsToStart": "A few details to get started",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "username": "Username",
+    "phoneNumber": "Phone Number",
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
   },
   "validation": {
-    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "otpLength": "OTP must be 6 digits",
+    "otpDigits": "OTP must contain only numbers",
+    "firstName": "First name must be at least 2 characters",
+    "lastName": "Last name must be at least 2 characters",
+    "username": "Username must be at least 2 characters",
+    "invalidPhone": "Invalid phone number format",
+    "invalidEgyptPhone": "Invalid Egyptian mobile number",
+    "invalidGender": "Please select a valid gender",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordWeak": "Password must contain uppercase, lowercase, number and special character",
     "passwordMatch": "Passwords do not match"
   },
   "error": {
@@ -66,7 +106,12 @@
       "email": "user@example.com",
       "search": "Search…",
       "password": "Enter your password",
-      "phone": "Phone number"
+      "phone": "Phone number",
+      "passwordPlaceholder": "********",
+
+      "firstName": "Zoe",
+      "lastName": "Jonathan",
+      "username": "zoe123"
     },
     "states": {
       "title": "States",
@@ -90,7 +135,8 @@
     "withIcons": "With icons",
     "iconOnly": "Icon only",
     "loadingDemo": "Click to see the loading state",
-    "next": "Next"
+    "next": "Next",
+    "creating": "Creating..."
   },
   "checkbox": {
     "title": "Checkbox",
