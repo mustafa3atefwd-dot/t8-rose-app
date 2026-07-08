@@ -1,92 +1,84 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { Dispatch, SetStateAction } from "react";
-import { useCountdownTimer } from "@/shared/hooks/use-countdown-timer";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterStep } from "../lib/types/auth";
-import { IOtpStepSchema } from "../lib/types/schemas";
-import { otpStepSchema } from "../lib/schemas/otp-step.schema";
-import { REGISTER_STEPS } from "../lib/constants/user.constant";
-
-
+import { Dispatch, SetStateAction, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { RegisterStep } from '@/features/auth/lib/types/auth';
+import { REGISTER_STEPS } from '@/features/auth/lib/constants';
+import { otpStepSchema } from '@/features/auth/lib/schemas';
+import { IOtpStepSchema } from '@/features/auth/lib/types/schemas';
+import { useCountdownTimer } from '@/shared/hooks';
 
 interface IUseRegisterOtpStepProps {
   email: string;
   setStep: Dispatch<SetStateAction<RegisterStep>>;
 }
 
-export function useRegisterOtpStep({
-  email,
-  setStep,
-}: IUseRegisterOtpStepProps) {
+export function useRegisterOtpStep({ email, setStep }: IUseRegisterOtpStepProps) {
+  const t = useTranslations('validation');
+
   const { timer, resetTimer } = useCountdownTimer();
 
-  // Initialize form
+  const schema = useMemo(() => otpStepSchema(t), [t]);
+
   const form = useForm<IOtpStepSchema>({
-    resolver: zodResolver(otpStepSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       email,
-      code: "",
+      code: '',
     },
   });
 
-  // Verify OTP code
   const verifyOtpMutation = useMutation({
     mutationFn: async (values: IOtpStepSchema) => {
-      const res = await fetch("/api/auth/register/confirm-otp-step", {
-        method: "POST",
+      const response = await fetch('/api/auth/register/confirm-otp-step', {
+        method: 'POST',
         body: JSON.stringify(values),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
-      const data = await res.json();
+      const data = await response.json();
 
-      // Normalize API errors
-      if (!res.ok || !data.status) {
-        throw new Error(data.message || "Invalid OTP");
+      if (!response.ok || !data.status) {
+        throw new Error(data.message || 'Invalid OTP');
       }
 
       return data;
     },
 
-    // Move to next step after success
     onSuccess: () => {
       setStep(REGISTER_STEPS.userInfo);
     },
   });
 
-  // Resend OTP code
   const resendOtpMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/auth/register/send-email-step", {
-        method: "POST",
+      const response = await fetch('/api/auth/register/send-email-step', {
+        method: 'POST',
         body: JSON.stringify({ email }),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
-      const data = await res.json();
+      const data = await response.json();
 
-      // Normalize API errors
-      if (!res.ok || !data.status) {
-        throw new Error(data.message || "Failed to resend OTP");
+      if (!response.ok || !data.status) {
+        throw new Error(data.message || 'Failed to resend OTP');
       }
 
       return data;
     },
 
-    // Restart timer after resend success
     onSuccess: () => {
       resetTimer();
     },
   });
 
-  // Handle form submit
   function onSubmit(values: IOtpStepSchema) {
     verifyOtpMutation.mutate({
       email,
@@ -94,12 +86,8 @@ export function useRegisterOtpStep({
     });
   }
 
-  // Merge form validation + server error
   const errorMessage =
-    form.formState.errors.code?.message ||
-    (verifyOtpMutation.isError
-      ? (verifyOtpMutation.error as Error).message
-      : undefined);
+    form.formState.errors.code?.message || (verifyOtpMutation.isError ? verifyOtpMutation.error.message : undefined);
 
   return {
     form,

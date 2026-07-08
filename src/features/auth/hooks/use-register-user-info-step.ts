@@ -1,92 +1,79 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { IUserInfoStepSchema } from "../lib/types/schemas";
-import { userInfoStepSchema } from "../lib/schemas/user-info-step.schema";
-
-
+import { useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { RegisterStep } from '@/features/auth/lib/types/auth';
+import { REGISTER_STEPS } from '@/features/auth/lib/constants';
+import { userInfoStepSchema } from '@/features/auth/lib/schemas';
+import { IUserInfoStepSchema } from '@/features/auth/lib/types/schemas';
 
 interface IUseRegisterUserInfoStepProps {
   email: string;
 }
 
-export function useRegisterUserInfoStep({
-  email,
-}: IUseRegisterUserInfoStepProps) {
-  // Controls step navigation (basic info -> password)
-  const [showPasswordStep, setShowPasswordStep] = useState(false);
+export function useRegisterUserInfoStep({ email }: IUseRegisterUserInfoStepProps) {
+  const t = useTranslations('validation');
 
-  // Form setup with validation schema
+  const [currentStep, setCurrentStep] = useState<RegisterStep>(REGISTER_STEPS.userInfo);
+
+  const schema = useMemo(() => userInfoStepSchema(t), [t]);
+
   const form = useForm<IUserInfoStepSchema>({
-    resolver: zodResolver(userInfoStepSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       email,
-      firstName: "",
-      lastName: "",
-      username: "",
+      firstName: '',
+      lastName: '',
+      username: '',
       phone: {
-        country: "",
-        phone: "",
+        country: '',
+        phone: '',
       },
-      password: "",
-      confirmPassword: "",
+      password: '',
+      confirmPassword: '',
     },
   });
 
-  
-
-  // Submit user registration
   const mutation = useMutation({
     mutationFn: async (values: IUserInfoStepSchema) => {
-      console.log(values);
-
-      const res = await fetch("/api/auth/register/user-info-step", {
-        method: "POST",
-        body: JSON.stringify({...values, phone: values.phone.phone}),
+      const response = await fetch('/api/auth/register/user-info-step', {
+        method: 'POST',
+        body: JSON.stringify(values),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
-      const data = await res.json();
+      const data = await response.json();
 
-      if (!res.ok || !data.status) {
-        throw new Error(data.message || "Request failed");
+      if (!response.ok || !data.status) {
+        throw new Error(data.message || 'Request failed');
       }
 
       return data;
     },
 
-    // Redirect after success
     onSuccess: () => {
-      window.location.href = "/login";
+      window.location.href = '/login';
     },
   });
 
+  async function handleNextStep() {
+    const isValid = await form.trigger(['firstName', 'lastName', 'username', 'phone']);
 
+    if (isValid) {
+      setCurrentStep(REGISTER_STEPS.password);
+    }
+  }
 
-  // Step 1 -> Step 2 validation (no submit yet)
-async function handleNextStep() {
-  const valid = await form.trigger([
-    "firstName",
-    "lastName",
-    "username",
-    "phone",
-  ]);
+  function handlePreviousStep() {
+    setCurrentStep(REGISTER_STEPS.userInfo);
+  }
 
-  console.log("valid:", valid);
-  console.log("errors:", form.formState.errors);
-
-  if (valid) setShowPasswordStep(true);
-}
-
-  // Final submit (Step 2 only)
   function onSubmit(values: IUserInfoStepSchema) {
-    if (!showPasswordStep) return;
-
     mutation.mutate({
       ...values,
       email,
@@ -96,9 +83,9 @@ async function handleNextStep() {
   return {
     form,
     mutation,
-    showPasswordStep,
-    setShowPasswordStep,
+    currentStep,
     handleNextStep,
+    handlePreviousStep,
     onSubmit,
   };
 }
