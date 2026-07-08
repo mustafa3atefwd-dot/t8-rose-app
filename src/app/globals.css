@@ -457,3 +457,73 @@ html[lang="en"] body {
 }
 
 
+/* Progress Bar */
+.progress {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* STEP (circle) */
+.step {
+  width: 25px;
+  height: 25px;
+  background: #FBEAEA;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #501419;
+}
+
+/* LINE */
+.line {
+  flex: 1;
+  height: 2px;
+  border-top: 2px solid #FBEAEA;
+}
+
+/* STATES */
+.step.completed,
+.line.completed {
+  background: #501419;
+  border-color: #501419;
+  color: #fff;
+}
+
+.step.active {
+  background: #501419;
+  box-shadow: 0 0 0 3px #FBEAEA;
+  color: #fff;
+}
+
+/* Dark Theme */
+html[data-theme='dark'] {
+  .step {
+    background: color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+    color: var(--color-soft-pink-300);
+  }
+
+  .line {
+    border-top: 2px solid color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+  }
+
+  .step.completed,
+  .line.completed {
+    background: var(--color-soft-pink-300);
+    border-color: var(--color-soft-pink-300);
+    color: var(--color-zinc-700);
+  }
+
+  .step.active {
+    background: var(--color-soft-pink-300);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+    color: var(--color-zinc-700);
+  }
+}

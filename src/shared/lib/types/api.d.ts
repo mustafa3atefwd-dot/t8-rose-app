@@ -1,21 +1,18 @@
-// The base structural fields shared across all your API responses
-interface BaseResponse {
-  status: boolean;
+// Core API response types for backend interactions
+export interface IErrorResponse {
+  status: false;
   code: number;
   message: string;
+  errors?: Array<{ path: string; message: string }>;
 }
 
-// 1. Exact match for Success schema from api response for type.PNG
-interface SuccessResponse<T> extends BaseResponse {
+// Successful API response with optional payload
+export interface ISuccessResponse<T = unknown> {
   status: true;
-  payload: T;
+  code: number;
+  message?: string;
+  payload?: T;
 }
 
-// 2. Exact match for Error schema from api response for type.PNG
-interface ErrorResponse extends BaseResponse {
-  status: false;
-  errors?: Record<string, string[] | string> | null; 
-}
-
-// 3. The Clean Universal Union Type
-export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
+// Combined API response type (error or success)
+export type IApiResponse<T = unknown> = IErrorResponse | ISuccessResponse<T>;

@@ -23,9 +23,52 @@
     "langLabel": "التحويل إلى الإنجليزية",
     "pageTitle": "المصادقة",
     "welcomeBack": "مرحباً بعودتك!",
-    "joinFamily": "كن جزءاً من عائلتنا!"
+    "joinFamily": "كن جزءاً من عائلتنا!",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+
+    "registerEmail": "التسجيل باستخدام البريد الإلكتروني",
+    "emailLabel": "البريد الإلكتروني",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "login": "تسجيل الدخول",
+
+    "createAccount": "إنشاء حساب",
+    "enterOtpCode": "أدخل رمز التحقق",
+    "otpSentTo": "لقد أرسلنا رمزًا مكونًا من 6 أرقام إلى:",
+    "edit": "تعديل",
+    "requestCodeIn": "يمكنك طلب رمز آخر خلال: {timer}ث",
+    "resending": "جاري إعادة الإرسال...",
+    "sendNewCode": "إرسال رمز جديد",
+    "verifying": "جاري التحقق...",
+    "verifyCode": "التحقق من الرمز",
+    "needHelp": "هل تحتاج إلى مساعدة؟",
+    "contactUs": "تواصل معنا",
+
+    "createStrongPassword": "إنشاء كلمة مرور قوية",
+    "tellUsMore": "أخبرنا المزيد عنك",
+    "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
+    "detailsToStart": "بعض التفاصيل للبدء",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "username": "اسم المستخدم",
+    "phoneNumber": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "next": "التالي",
+    "creating": "جاري الإنشاء..."
   },
   "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "otpLength": "يجب أن يتكون رمز التحقق من 6 أرقام",
+    "otpDigits": "يجب أن يحتوي رمز التحقق على أرقام فقط",
+    "firstName": "يجب أن يكون الاسم الأول 2 حرف على الأقل",
+    "lastName": "يجب أن يكون اسم العائلة 2 حرف على الأقل",
+    "username": "يجب أن يكون اسم المستخدم 2 حرف على الأقل",
+    "invalidPhone": "صيغة رقم الهاتف غير صحيحة",
+    "invalidEgyptPhone": "صيغة رقم الهاتف المصري غير صحيحة",
+    "invalidGender": "يرجى اختيار جنس صحيح",
+    "passwordMin": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    "passwordWeak": "يجب أن تحتوي كلمة المرور على حرف كبير وصغير ورقم ورمز خاص",
      "emailRequired": "يجب أن يكون لديك بريد إلكتروني",
      "invalidEmail": "يجب أن يكون لديك بريد إلكتروني صالح",
      "newPasswordRequired": "يجب أن يكون لديك كلمة مرور جديدة",
@@ -76,7 +119,12 @@
       "email": "user@example.com",
       "search": "بحث…",
       "password": "أدخل كلمة المرور",
-      "phone": "رقم الهاتف"
+      "phone": "رقم الهاتف",
+      "passwordPlaceholder": "********",
+
+      "firstName": "محمد",
+      "lastName": "محمود",
+      "username": "mohamed123"
     },
     "states": {
       "title": "الحالات",
@@ -84,6 +132,9 @@
       "success": "نجاح",
       "disabled": "معطّل"
     }
+  },
+  "textarea": {
+    "charCount": "{current}/{max} حرف"
   },
   "button": {
     "loading": "جاري التحميل...",
@@ -100,7 +151,8 @@
     "withIcons": "مع الأيقونات",
     "iconOnly": "أيقونة فقط",
     "loadingDemo": "اضغط لرؤية حالة التحميل",
-    "next": "التالي"
+    "next": "التالي",
+    "creating": "جاري الإنشاء…"
   },
   "checkbox": {
     "title": "مربع الاختيار",
