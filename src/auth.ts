@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { ApiResponse } from "./shared/lib/types/api";
+import { IApiResponse } from "./shared/lib/types/api";
 import { LoginPayload } from "./shared/lib/types/auth";
 
 
@@ -25,15 +25,15 @@ export const authOptions: NextAuthOptions = {
           headers: { "Content-Type": "application/json" },
         });
 
-        const payload: ApiResponse<LoginPayload> = await response.json();
+        const payload: IApiResponse<LoginPayload> = await response.json();
         
         if (!payload.status) {
           throw new Error(payload.message);
         }
         return {
-          id: payload.payload.user.id,
-          accessToken: payload.payload.token,
-          user: payload.payload.user
+          id: payload.payload?.user.id,
+          accessToken: payload.payload?.token,
+          user: payload.payload?.user
         };
       }
     }),

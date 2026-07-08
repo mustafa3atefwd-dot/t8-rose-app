@@ -64,7 +64,7 @@ export default function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.redirect(loginUrl);
   }
 
-  const response = authMiddleware(req as any, event as any);
+ const response = authMiddleware(req as any, event);
 
   if (response instanceof NextResponse && response.headers.get("location")) {
     const redirectUrl = new URL(response.headers.get("location")!, req.url);
