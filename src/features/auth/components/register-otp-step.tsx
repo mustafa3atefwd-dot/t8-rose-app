@@ -1,13 +1,13 @@
-import { Button } from "@/shared/components/ui/button";
-import { Loader2, MoveRight } from "lucide-react";
-import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
-import { RegisterStep } from "../lib/types/auth";
-import { REGISTER_STEPS } from "../lib/constants/user.constant";
-import { Controller } from "react-hook-form";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/shared/components/ui/input-otp";
-import FormError from "@/shared/components/form-error";
-import { useRegisterOtpStep } from "../hooks/use-register-otp-step";
+import Link from 'next/link';
+import { Controller } from 'react-hook-form';
+import { Dispatch, SetStateAction } from 'react';
+import { useTranslations } from 'next-intl';
+import { FormError, SubmitButton } from '@/shared/components';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/components/ui/input-otp';
+import { RegisterStep } from '@/features/auth/lib/types/auth';
+import { useRegisterOtpStep } from '@/features/auth/hooks';
+import { RegisterStepLayout } from '@/features/auth/layouts';
+import { REGISTER_STEPS } from '@/features/auth/lib/constants';
 
 interface IRegisterOtpStepProps {
   setStep: Dispatch<SetStateAction<RegisterStep>>;
@@ -15,58 +15,45 @@ interface IRegisterOtpStepProps {
 }
 
 function RegisterOtpStep({ setStep, email }: IRegisterOtpStepProps) {
-  // Custom hook handles form, API calls, timer & retry logic
-  const {
-    form,
-    timer,
-    onSubmit,
-    errorMessage,
-    verifyOtpMutation,
-    resendOtpMutation,
-  } = useRegisterOtpStep({
+  const t = useTranslations('auth');
+
+  const { form, timer, onSubmit, errorMessage, verifyOtpMutation, resendOtpMutation } = useRegisterOtpStep({
     email,
     setStep,
   });
 
-  
-  return (
-    <section aria-labelledby="register-otp-heading" className="w-full max-w-101.5">
-      <h2 id="register-otp-heading" className="text-2xl lg:text-3xl text-zinc-800 dark:text-zinc-50 font-bold">
-        Create Account
-      </h2>
-      
-      <h3 className="mt-4 text-xl text-ds-text-primary font-semibold">Enter the OTP Code</h3>
+  const isResendAvailable = timer === 0;
 
-      {/* ===== Instructions + Edit Email ===== */}
-      <p className="mt-1 mb-4 text-ds-text-plain">
-        We have sent a 6-digit code to: {email}
+  return (
+    <RegisterStepLayout headingId="register-otp-heading">
+      {/* ===== Header ===== */}
+      <RegisterStepLayout.Title id="register-otp-heading">{t('createAccount')}</RegisterStepLayout.Title>
+
+      {/* ===== Subtitle ===== */}
+      <RegisterStepLayout.Subtitle>{t('enterOtpCode')}</RegisterStepLayout.Subtitle>
+
+      {/* ===== Description ===== */}
+      <RegisterStepLayout.Description>
+        {t('otpSentTo')} {email}{' '}
         <button
           type="button"
-          className="text-blue-600 hover:underline cursor-pointer font-medium"
-          onClick={() => setStep(REGISTER_STEPS.email)} // go back to edit email step
+          className="cursor-pointer font-medium text-blue-600 hover:underline"
+          onClick={() => setStep(REGISTER_STEPS.email)}
         >
-          Edit
+          {t('edit')}
         </button>
-      </p>
+      </RegisterStepLayout.Description>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="border-y border-ds-border-muted">
-        {/* OTP Input (controlled by react-hook-form) */}
+      {/* ===== Form ===== */}
+      <form onSubmit={form.handleSubmit(onSubmit)} className="border-ds-border-muted border-y">
         <Controller
           control={form.control}
           name="code"
           render={({ field }) => (
-            <InputOTP
-              maxLength={6}
-              value={field.value}
-              onChange={field.onChange}
-            >
-              {/* Render 6 OTP slots */}
-              {[...Array(6)].map((_, i) => (
-                <InputOTPGroup key={i} className="mt-11 mb-7.5">
-                  <InputOTPSlot
-                    index={i}
-                    aria-invalid={!!errorMessage}
-                  />
+            <InputOTP maxLength={6} value={field.value} onChange={field.onChange}>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <InputOTPGroup key={index} className="mt-11 mb-7.5">
+                  <InputOTPSlot index={index} aria-invalid={!!errorMessage} />
                 </InputOTPGroup>
               ))}
             </InputOTP>
@@ -74,55 +61,41 @@ function RegisterOtpStep({ setStep, email }: IRegisterOtpStepProps) {
         />
 
         {/* ===== Timer / Resend Section ===== */}
-        {timer > 0 ? (
-          <p className="ms-auto w-fit text-gray-500">
-            You can request another code in: {timer}s
-          </p>
-        ) : (
+        {isResendAvailable ? (
           <p className="ms-auto w-fit text-gray-500">
             <button
               type="button"
-              className="cursor-pointer text-ds-text-plain font-medium"
+              className="text-ds-text-plain cursor-pointer font-medium"
               onClick={() => resendOtpMutation.mutate()}
               disabled={resendOtpMutation.isPending}
             >
-              {resendOtpMutation.isPending ? "Resending..." : "Send a new code"}
+              {resendOtpMutation.isPending ? t('resending') : t('sendNewCode')}
             </button>
           </p>
+        ) : (
+          <p className="ms-auto w-fit text-gray-500">{t('requestCodeIn', { timer })}</p>
         )}
 
-        {/* ===== Error Feedback ===== */}
+        {/* ===== Error Message ===== */}
         <FormError message={errorMessage} />
 
-        {/* Submit Button */}
-        <Button
-          type="submit"
-          variant="secondary"
-          disabled={verifyOtpMutation.isPending}
-          className="my-9 w-full bg-maroon-600 hover:bg-maroon-600/90 text-white text-base dark:bg-soft-pink-300 dark:hover:bg-soft-pink-400 dark:text-zinc-800 gap-2.5"
-        >
-          {verifyOtpMutation.isPending ? 
-          <>
-            Verifying...
-            <Loader2 className="size-4.5 rtl:rotate-180 animate-spin" />
-          </>
-           : 
-           "Verify Code"
-          }
-        </Button>
+        {/* ===== Submit Button ===== */}
+        <SubmitButton isLoading={verifyOtpMutation.isPending} loadingText={t('verifying')}>
+          {t('verifyCode')}
+        </SubmitButton>
       </form>
 
-      {/* Secondary Action (Login Redirect) */}
-      <div className="mt-5 w-fit mx-auto text-sm text-zinc-800 dark:text-zinc-50 font-medium">
-        Need help?{" "}
+      {/* ===== Footer ===== */}
+      <RegisterStepLayout.Footer>
+        {t('needHelp')}{' '}
         <Link
           href="/contact"
           className="text-maroon-700 hover:text-maroon-700/90 dark:text-soft-pink-300 dark:hover:text-soft-pink-300/90 font-medium"
         >
-          Contact Us
+          {t('contactUs')}
         </Link>
-      </div>
-    </section>
+      </RegisterStepLayout.Footer>
+    </RegisterStepLayout>
   );
 }
 

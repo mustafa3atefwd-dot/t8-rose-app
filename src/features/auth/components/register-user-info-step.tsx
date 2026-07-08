@@ -1,156 +1,142 @@
-"use client";
+'use client';
 
-import { memo } from "react";
-import { useRegisterUserInfoStep } from "../hooks/use-register-user-info-step";
-import { FieldGroup } from "@/shared/components/ui/field";
-import FormField from "@/shared/components/form-field";
-import FormError from "@/shared/components/form-error";
-import { ChevronRight, Loader2, MoveRight } from "lucide-react";
-import PasswordFormField from "@/shared/components/password-form-field";
-import { Button } from "@/shared/components/ui/button";
-import PhoneFormField from "@/shared/components/phone-form-field";
+import { MoveRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { Button } from '@/shared/components/ui/button';
+import { FieldGroup } from '@/shared/components/ui/field';
+import { REGISTER_STEPS } from '@/features/auth/lib/constants';
+import { RegisterStepLayout } from '@/features/auth/layouts';
+import { useRegisterUserInfoStep, useRegisterStepDirection } from '@/features/auth/hooks';
+import { FormError, FormField, PasswordFormField, PhoneFormField, SubmitButton } from '@/shared/components';
+import { RegisterStepTransition } from '@/features/auth/components';
 
+interface IRegisterUserInfoStepProps {
+  email: string;
+}
 
-function RegisterUserInfoStep({ email }: { email: string }) {
-  const {
-    form,
-    mutation,
-    showPasswordStep,
-    handleNextStep,
-    onSubmit,
-  } = useRegisterUserInfoStep({ email });
+function RegisterUserInfoStep({ email }: IRegisterUserInfoStepProps) {
+  // Translations
+  const t = useTranslations('auth');
+  const tInput = useTranslations('input.placeholders');
+  const tButton = useTranslations('button');
 
-  console.log(form.watch("phone"));
+  const { form, mutation, currentStep, handleNextStep, handlePreviousStep, onSubmit } = useRegisterUserInfoStep({
+    email,
+  });
 
+  const direction = useRegisterStepDirection(currentStep);
+  const isPasswordStep = currentStep === REGISTER_STEPS.password;
+  const subtitle = isPasswordStep ? t('createStrongPassword') : t('tellUsMore');
+  const description = isPasswordStep ? t('securePassword') : t('detailsToStart');
 
   return (
-    <>
-    <section aria-labelledby="register-user-info-heading" className="w-full max-w-101.5">
-      <h2 id="register-user-info-heading" className="text-2xl lg:text-3xl text-zinc-800 dark:text-zinc-50 font-bold">
-        Create Account
-      </h2>
-      
-      <h3 className="mt-4 text-xl text-ds-text-primary font-semibold">        
-        {showPasswordStep
-          ? "Create a strong password"
-          : "Tell us more about you"}</h3>
+    <RegisterStepLayout headingId="register-user-info-heading">
+      {/* ===== Header ===== */}
+      <RegisterStepLayout.Header>
+        <RegisterStepLayout.Title id="register-user-info-heading">{t('createAccount')}</RegisterStepLayout.Title>
 
-      <p className="mt-1 mb-4 text-ds-text-plain">
-        {showPasswordStep
-        ? "Choose a secure password to protect your account"
-        : "A few details to get started"}
-      </p>
+        {isPasswordStep && (
+          <Button type="button" variant="outline" onClick={handlePreviousStep} className="my-3 w-fit gap-2.5">
+            <MoveRight className="size-4.5 rotate-180 rtl:rotate-0" />
+          </Button>
+        )}
+      </RegisterStepLayout.Header>
 
+      {/* ===== Subtitle ===== */}
+      <RegisterStepLayout.Subtitle>{subtitle}</RegisterStepLayout.Subtitle>
+
+      {/* ===== Description ===== */}
+      <RegisterStepLayout.Description>{description}</RegisterStepLayout.Description>
+
+      {/* ===== Form ===== */}
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6">
-        {/* ================= STEP 1: User Basic Info ================= */}
-        {!showPasswordStep && (
-          <>
-            <FieldGroup className="gap-4 grid grid-cols-2">
-              {/* First Name Field */}
-              <FormField
-                name="firstName"
-                control={form.control}
-                label="First Name"
-                placeholder="Zoe"
-                required
-              />
+        <RegisterStepTransition step={currentStep} direction={direction}>
+          {/* First Step - User Info (FirstName, LastName, Username, Phone) */}
+          {currentStep === REGISTER_STEPS.userInfo && (
+            <>
+              {/* First Name & Last Name Wrapper */}
+              <FieldGroup className="grid grid-cols-2 gap-4">
+                <FormField
+                  name="firstName"
+                  control={form.control}
+                  label={t('firstName')}
+                  placeholder={tInput('firstName')}
+                  required
+                />
 
-              {/* Last Name Field */}
-              <FormField
-                name="lastName"
-                control={form.control}
-                label="Last Name"
-                placeholder="Jonathan"
-                required
-              />
-            </FieldGroup>
+                <FormField
+                  name="lastName"
+                  control={form.control}
+                  label={t('lastName')}
+                  placeholder={tInput('lastName')}
+                  required
+                />
+              </FieldGroup>
 
-            <FieldGroup className="mt-4">
-              {/* Username Field */}
-              <FormField
-                name="username"
-                control={form.control}
-                label="Username"
-                placeholder="zoe123"
-                required
-              />
+              {/* Username & Phone Wrapper */}
+              <FieldGroup className="mt-4">
+                <FormField
+                  name="username"
+                  control={form.control}
+                  label={t('username')}
+                  placeholder={tInput('username')}
+                  required
+                />
 
-              {/* Phone Field */}
-              <PhoneFormField
-                name="phone"
-                control={form.control}
-                label="Phone Number"
-              />
-            </FieldGroup>
+                <PhoneFormField name="phone" control={form.control} label={t('phoneNumber')} />
+              </FieldGroup>
 
-            {/* API Error (Step 1 context) */}
-            {mutation.isError && (
-              <FormError message={(mutation.error as Error).message} />
-            )}
+              {/* Error Message */}
+              {mutation.isError && <FormError message={(mutation.error as Error).message} />}
 
-            {/* Go to Step 2 */}
-            <Button
-              type="button"
-              variant="secondary"
-              className="my-9 w-full bg-maroon-600 hover:bg-maroon-600/90 text-white dark:bg-soft-pink-300 dark:hover:bg-soft-pink-400 dark:text-zinc-800 gap-2.5"
-              disabled={mutation.isPending}
-              onClick={handleNextStep} 
-            >
-              Next
-              <MoveRight className="size-4.5 rtl:rotate-180" />
-            </Button>
-          </>
-        )}
+              {/* Next Button */}
+              <SubmitButton
+                isLoading={false}
+                loadingText={tButton('loading')}
+                disabled={mutation.isPending}
+                onClick={handleNextStep}
+                type="button"
+              >
+                {tButton('next')}
+                <MoveRight className="size-4.5 rtl:rotate-180" />
+              </SubmitButton>
+            </>
+          )}
 
-        {/* ================= STEP 2: Password Setup ================= */}
-        {showPasswordStep && (
-          <>
-            <FieldGroup className="mt-4">
-              {/* Password Field */}
-              <PasswordFormField
-                name="password"
-                control={form.control}
-                label="Password"
-                placeholder="********"
-              />
+          {/* Second Step - Password */}
+          {currentStep === REGISTER_STEPS.password && (
+            <>
+              {/* Password & Confirm Password Wrapper */}
+              <FieldGroup className="mt-4">
+                <PasswordFormField
+                  name="password"
+                  control={form.control}
+                  label={t('password')}
+                  placeholder={tInput('passwordPlaceholder')}
+                />
 
-              {/* Confirm Password Field */}
-              <PasswordFormField
-                name="confirmPassword"
-                control={form.control}
-                label="Confirm Password"
-                placeholder="********"
-              />
-            </FieldGroup>
+                <PasswordFormField
+                  name="confirmPassword"
+                  control={form.control}
+                  label={t('confirmPassword')}
+                  placeholder={tInput('passwordPlaceholder')}
+                />
+              </FieldGroup>
 
-            {/* API Error (Step 2 context) */}
-            {mutation.isError && (
-              <FormError message={(mutation.error as Error).message} />
-            )}
+              {/* Error Message */}
+              {mutation.isError && <FormError message={(mutation.error as Error).message} />}
 
-            {/* Final Submit */}
-            <Button type="submit" disabled={mutation.isPending}
-              className="my-9 w-full bg-maroon-600 hover:bg-maroon-600/90 text-white dark:bg-soft-pink-300 dark:hover:bg-soft-pink-400 dark:text-zinc-800 gap-2.5"
-            >
-                { 
-                mutation.isPending ? (
-                  <>
-                    Creating...
-                    <Loader2 className="size-4.5 rtl:rotate-180 animate-spin" />
-                </>
-                ) : 
-                <>
-                    Create Account
-                    <MoveRight className="size-4.5 rtl:rotate-180" />
-                </>
-                }
-            </Button>
-          </>
-        )}
+              {/* Create Account Button */}
+              <SubmitButton isLoading={mutation.isPending} loadingText={tButton('creating')}>
+                {t('createAccount')}
+                <MoveRight className="size-4.5 rtl:rotate-180" />
+              </SubmitButton>
+            </>
+          )}
+        </RegisterStepTransition>
       </form>
-      </section>
-    </>
+    </RegisterStepLayout>
   );
 }
 
-export default memo(RegisterUserInfoStep);
+export default RegisterUserInfoStep;
