@@ -21,7 +21,7 @@ export function useForgotPasswordStep1(
     defaultValues: {
       email,
     },
-    resolver: zodResolver(forgotPasswordStep1Schema),
+    resolver: zodResolver(forgotPasswordStep1Schema(t)),
     mode: 'onChange',
     reValidateMode: 'onChange',
   });

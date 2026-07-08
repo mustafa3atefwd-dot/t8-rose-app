@@ -25,7 +25,3 @@ export interface ForgotPasswordStep3Response {
   message: string;
   payload: string;
 }
-
-export interface ForgotPasswordFormProps {
-  token: string;
-}
