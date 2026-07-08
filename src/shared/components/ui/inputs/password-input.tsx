@@ -4,6 +4,7 @@ import * as React from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
+import { Input } from "./input";
 import {
   FieldShell,
   adornmentButtonClass,
@@ -38,9 +39,8 @@ function PasswordInput({
       disabled={disabled}
       className={className}
     >
-      <input
+      <Input
         type={visible ? "text" : "password"}
-        data-slot="input"
         disabled={disabled}
         aria-invalid={invalid || undefined}
         className={innerInputClass}

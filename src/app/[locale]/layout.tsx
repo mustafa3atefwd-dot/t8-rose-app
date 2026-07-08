@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Sarabun, Tajawal } from 'next/font/google';
+import { Great_Vibes, Sarabun, Tajawal } from 'next/font/google';
 import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -17,6 +17,15 @@ const tajawal = Tajawal({
   variable: '--font-tajawal',
   subsets: ['arabic', 'latin'],
   weight: ['400', '500', '700', '800'],
+});
+
+// Decorative script for Latin auth headings. Great Vibes is a self-hosted,
+// OFL-licensed stand-in for the proprietary "Edwardian Script ITC" — it has no
+// Arabic glyphs, so it is only applied to Latin locales (see AuthHeading).
+const greatVibes = Great_Vibes({
+  variable: '--font-great-vibes',
+  subsets: ['latin'],
+  weight: '400',
 });
 
 interface LocaleLayoutProps {
@@ -52,7 +61,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <html
       lang={locale}
       dir={direction}
-      className={`${sarabun.variable} ${tajawal.variable} h-full antialiased`}
+      className={`${sarabun.variable} ${tajawal.variable} ${greatVibes.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">

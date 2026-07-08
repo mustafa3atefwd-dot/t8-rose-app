@@ -1,18 +1,18 @@
-interface BaseResponse {
-  status: boolean;
+// Core API response types for backend interactions
+export interface IErrorResponse {
+  status: false;
   code: number;
   message: string;
+  errors?: Array<{ path: string; message: string }>;
 }
 
-interface SuccessResponse<T> extends BaseResponse {
+// Successful API response with optional payload
+export interface ISuccessResponse<T = unknown> {
   status: true;
-  payload: T;
+  code: number;
+  message?: string;
+  payload?: T;
 }
 
-
-interface ErrorResponse extends BaseResponse {
-  status: false;
-  errors?: Record<string, string[] | string> | null; 
-}
-
-export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
+// Combined API response type (error or success)
+export type IApiResponse<T = unknown> = IErrorResponse | ISuccessResponse<T>;

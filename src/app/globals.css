@@ -1,306 +1,344 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #18181b;
-  --card: #ffffff;
-  --card-foreground: #18181b;
-  --primary: #501419;
-  --primary-hover: #741c21;
-  --primary-light: #f3c5c7;
-  --secondary: #ff85a2;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --border: #d4d4d8;
-  --input: #e4e4e7;
-  --danger: #dc2626;
-  --success: #00bc7d;
-  --warning: #facc15;
+   /** Backgrounds */
+  --ds-bg-plain: var(--color-white);
+  --ds-bg-subtle: var(--color-zinc-50);
+  --ds-bg-muted: var(--color-zinc-100);
+  --ds-bg-soft: var(--color-zinc-200);
+  --ds-bg-default: var(--color-zinc-500);
+  --ds-bg-inverse: var(--color-zinc-800);
+  --ds-bg-elevated: color-mix(in srgb, var(--color-black) 20%, transparent);
+  --ds-bg-overlay: color-mix(in srgb, var(--color-black) 50%, transparent);
 
-  --background-plain: #ffffff;
-  --background-subtle: #fafafa;
-  --background-muted: #f4f4f5;
-  --background-soft: #e4e4e7;
-  --background-default: #71717a;
-  --background-inverse: #27272a;
-  --background-elevated: rgb(0 0 0 / 20%);
-  --background-overlay: rgb(0 0 0 / 50%);
-  --background-primary: #501419;
-  --background-primary-saturated: #741c21;
-  --background-primary-faint: #f3c5c7;
-  --background-primary-fade: #fbeaea;
-  --background-info: #155dfc;
-  --background-info-faint: #dbeafe;
-  --background-info-fade: #eff6ff;
-  --background-secondary: #ff85a2;
-  --background-secondary-faint: #ffe0e7;
-  --background-secondary-fade: #fff1f5;
-  --background-success: #00bc7d;
-  --background-success-faint: #d0fae5;
-  --background-success-fade: #ecfdf5;
-  --background-warning: #facc15;
-  --background-warning-faint: #fef9c3;
-  --background-warning-fade: #fefce8;
-  --background-danger: #dc2626;
-  --background-danger-saturated: #dc2626;
-  --background-danger-faint: #fee2e2;
-  --background-danger-fade: #fef2f2;
+  /* Primary */
+  --ds-bg-primary: var(--color-maroon-800);
+  --ds-bg-primary-saturated: var(--color-maroon-700);
+  --ds-bg-primary-faint: var(--color-maroon-100);
+  --ds-bg-primary-fade: var(--color-maroon-50);
 
-  --text-plain: #27272a;
-  --text-subtle: #d4d4d8;
-  --text-muted: #a1a1aa;
-  --text-soft: #71717a;
-  --text-default: #52525b;
-  --text-inverse: #ffffff;
-  --text-primary: #501419;
-  --text-primary-faint: #f3c5c7;
-  --text-primary-fade: #fbeaea;
-  --text-info: #155dfc;
-  --text-info-faint: #dbeafe;
-  --text-info-fade: #eff6ff;
-  --text-secondary: #ff85a2;
-  --text-secondary-faint: #ffe0e7;
-  --text-secondary-fade: #fff1f5;
-  --text-success: #00bc7d;
-  --text-success-faint: #d0fae5;
-  --text-success-fade: #ecfdf5;
-  --text-warning: #facc15;
-  --text-warning-faint: #fef9c3;
-  --text-warning-fade: #fefce8;
-  --text-danger: #dc2626;
-  --text-danger-faint: #fee2e2;
-  --text-danger-fade: #fef2f2;
+  /* Info */
+  --ds-bg-info: var(--color-blue-600);
+  --ds-bg-info-faint: var(--color-blue-100);
+  --ds-bg-info-fade: var(--color-blue-50);
 
-  --border-plain: #27272a;
-  --border-subtle: #f4f4f5;
-  --border-muted: #e4e4e7;
-  --border-soft: #d4d4d8;
-  --border-default: #a1a1aa;
-  --border-inverse: #ffffff;
-  --border-primary: #501419;
-  --border-primary-faint: #f3c5c7;
-  --border-primary-fade: #fbeaea;
-  --border-info: #155dfc;
-  --border-info-faint: #dbeafe;
-  --border-info-fade: #eff6ff;
-  --border-secondary: #ff85a2;
-  --border-secondary-faint: #ffe0e7;
-  --border-secondary-fade: #fff1f5;
-  --border-success: #00bc7d;
-  --border-success-faint: #d0fae5;
-  --border-success-fade: #ecfdf5;
-  --border-warning: #facc15;
-  --border-warning-faint: #fef9c3;
-  --border-warning-fade: #fefce8;
-  --border-danger: #dc2626;
-  --border-danger-faint: #fee2e2;
-  --border-danger-fade: #fef2f2;
+  /* Secondary */
+  --ds-bg-secondary: var(--color-soft-pink-400);
+  --ds-bg-secondary-faint: var(--color-soft-pink-100);
+  --ds-bg-secondary-fade: var(--color-soft-pink-50);
 
-  --ring-default: #fbeaea;
-  --ring-danger: #fee2e2;
+  /* Success */
+  --ds-bg-success: var(--color-emerald-500);
+  --ds-bg-success-faint: var(--color-emerald-100);
+  --ds-bg-success-fade: var(--color-emerald-50);
+
+  /* Warning */
+  --ds-bg-warning: var(--color-yellow-400);
+  --ds-bg-warning-faint: var(--color-yellow-100);
+  --ds-bg-warning-fade: var(--color-yellow-50);
+
+  /* Danger */
+  --ds-bg-danger: var(--color-red-600);
+  --ds-bg-danger-saturated: var(--color-red-700);
+  --ds-bg-danger-faint: var(--color-red-100);
+  --ds-bg-danger-fade: var(--color-red-50);
+
+    /** Text */
+  --ds-text-plain: var(--color-zinc-800);
+  --ds-text-subtle: var(--color-zinc-300);
+  --ds-text-muted: var(--color-zinc-400);
+  --ds-text-soft: var(--color-zinc-500);
+  --ds-text-default: var(--color-zinc-600);
+  --ds-text-inverse: var(--color-white);
+
+  /* Primary */
+  --ds-text-primary: var(--color-maroon-800);
+  --ds-text-primary-faint: var(--color-maroon-100);
+  --ds-text-primary-fade: var(--color-maroon-50);
+
+  /* Info */
+  --ds-text-info: var(--color-blue-600);
+  --ds-text-info-faint: var(--color-blue-100);
+  --ds-text-info-fade: var(--color-blue-50);
+
+  /* Secondary */
+  --ds-text-secondary: var(--color-soft-pink-400);
+  --ds-text-secondary-faint: var(--color-soft-pink-100);
+  --ds-text-secondary-fade: var(--color-soft-pink-50);
+
+  /* Success */
+  --ds-text-success: var(--color-emerald-500);
+  --ds-text-success-faint: var(--color-emerald-100);
+  --ds-text-success-fade: var(--color-emerald-50);
+
+  /* Warning */
+  --ds-text-warning: var(--color-yellow-400);
+  --ds-text-warning-faint: var(--color-yellow-100);
+  --ds-text-warning-fade:  var(--color-yellow-50);
+
+  /* Danger */
+  --ds-text-danger: var(--color-red-600);
+  --ds-text-danger-faint: var(--color-red-100);
+  --ds-text-danger-fade: var(--color-red-50);
+
+  /** Border */
+  --ds-border-plain: var(--color-zinc-800);
+  --ds-border-subtle: var(--color-zinc-100);
+  --ds-border-muted: var(--color-zinc-200);
+  --ds-border-soft: var(--color-zinc-300);
+  --ds-border-default: var(--color-zinc-400);
+  --ds-border-inverse: var(--color-white);
+
+  /* Primary */
+--ds-border-primary: var(--color-maroon-800);
+--ds-border-primary-faint: var(--color-maroon-100);
+--ds-border-primary-fade: var(--color-maroon-50);
+
+/* Info */
+--ds-border-info: var(--color-blue-600);
+--ds-border-info-faint: var(--color-blue-100);
+--ds-border-info-fade: var(--color-blue-50);
+
+/* Secondary */
+--ds-border-secondary: var(--color-soft-pink-400);
+--ds-border-secondary-faint: var(--color-soft-pink-100);
+--ds-border-secondary-fade: var(--color-soft-pink-50);
+
+/* Success */
+--ds-border-success: var(--color-emerald-500);
+--ds-border-success-faint: var(--color-emerald-100);
+--ds-border-success-fade: var(--color-emerald-50);
+
+/* Warning */
+--ds-border-warning: var(--color-yellow-400);
+--ds-border-warning-faint: var(--color-yellow-100);
+--ds-border-warning-fade: var(--color-yellow-50);
+
+/* Danger */
+--ds-border-danger: var(--color-red-600);
+--ds-border-danger-faint: var(--color-red-100);
+--ds-border-danger-fade: var(--color-red-50);
+
+/** Ring */
+--ds-ring: var(--color-maroon-50);
+--ds-ring-danger: var(--color-red-100);
 }
 
-html[data-theme="dark"] {
-  --background: #3f3f46;
-  --foreground: #fafafa;
-  --card: #27272a;
-  --card-foreground: #fafafa;
-  --primary: #ffa3b9;
-  --primary-hover: #ffc2d0;
-  --primary-light: #ffa3b940;
-  --secondary: #a6252a;
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
-  --border: #52525b;
-  --input: #27272a;
-  --danger: #ef4444;
-  --success: #00bc7d;
-  --warning: #eab308;
+html[data-theme='dark'] {
 
-  --background-plain: #3f3f46;
-  --background-subtle: #27272a;
-  --background-muted: #18181b;
-  --background-soft: #3f3f46;
-  --background-default: #52525b;
-  --background-inverse: #fafafa;
-  --background-elevated: rgb(0 0 0 / 20%);
-  --background-overlay: rgb(0 0 0 / 50%);
-  --background-primary: #ffa3b9;
-  --background-primary-saturated: #ffc2d0;
-  --background-primary-faint: #ffa3b9bf;
-  --background-primary-fade: #ffa3b940;
-  --background-info: #2b7fff;
-  --background-info-faint: #1c398e;
-  --background-info-fade: #2b7fff40;
-  --background-secondary: #a6252a;
-  --background-secondary-faint: #a6252a80;
-  --background-secondary-fade: #a6252a40;
-  --background-success: #00bc7d;
-  --background-success-faint: #00bc7d80;
-  --background-success-fade: #00bc7d40;
-  --background-warning: #eab308;
-  --background-warning-faint: #eab30880;
-  --background-warning-fade: #fefce8;
-  --background-danger: #ef4444;
-  --background-danger-saturated: #f87171;
-  --background-danger-faint: #ef444480;
-  --background-danger-fade: #fef2f2;
+ /** Backgrounds */
+  --ds-bg-plain: var(--color-zinc-700);
+  --ds-bg-subtle: var(--color-zinc-800);
+  --ds-bg-muted: var(--color-zinc-900);
+  --ds-bg-soft: var(--color-zinc-700);
+  --ds-bg-default: var(--color-zinc-600);
+  --ds-bg-inverse: var(--color-zinc-50);
+  --ds-bg-elevated: color-mix(in srgb, var(--color-black) 50%, transparent);
+  --ds-bg-overlay: color-mix(in srgb, var(--color-black) 50%, transparent);
 
-  --text-plain: #fafafa;
-  --text-subtle: #71717a;
-  --text-muted: #a1a1aa;
-  --text-soft: #d4d4d8;
-  --text-default: #e4e4e7;
-  --text-inverse: #27272a;
-  --text-primary: #ffa3b9;
-  --text-primary-faint: #ffa3b9bf;
-  --text-primary-fade: #ffa3b940;
-  --text-info: #2b7fff;
-  --text-info-faint: #1c398e;
-  --text-info-fade: #2b7fff40;
-  --text-secondary: #a6252a;
-  --text-secondary-faint: #a6252a80;
-  --text-secondary-fade: #a6252a40;
-  --text-success: #00bc7d;
-  --text-success-faint: #00bc7d80;
-  --text-success-fade: #00bc7d40;
-  --text-warning: #eab308;
-  --text-warning-faint: #eab30880;
-  --text-warning-fade: #fefce8;
-  --text-danger: #ef4444;
-  --text-danger-faint: #ef4444;
-  --text-danger-fade: #fef2f2;
+  /* Primary */
+  --ds-bg-primary: var(--color-soft-pink-300);
+  --ds-bg-primary-saturated: var(--color-soft-pink-200);
+  --ds-bg-primary-faint: color-mix(in srgb, var(--color-soft-pink-300) 75%, transparent);
+  --ds-bg-primary-fade: color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
 
-  --border-plain: #fafafa;
-  --border-subtle: #3f3f46;
-  --border-muted: #27272a;
-  --border-soft: #52525b;
-  --border-default: #71717a;
-  --border-inverse: #27272a;
-  --border-primary: #ffa3b9;
-  --border-primary-faint: #ffa3b9bf;
-  --border-primary-fade: #ffa3b940;
-  --border-info: #2b7fff;
-  --border-info-faint: #1c398e;
-  --border-info-fade: #2b7fff40;
-  --border-secondary: #a6252a;
-  --border-secondary-faint: #a6252a80;
-  --border-secondary-fade: #a6252a40;
-  --border-success: #00bc7d;
-  --border-success-faint: #00bc7d80;
-  --border-success-fade: #00bc7d40;
-  --border-warning: #eab308;
-  --border-warning-faint: #eab30880;
-  --border-warning-fade: #fefce8;
-  --border-danger: #ef4444;
-  --border-danger-faint: #ef4444;
-  --border-danger-fade: #fef2f2;
+  /* Info */
+  --ds-bg-info: var(--color-blue-500);
+  --ds-bg-info-faint: var(--color-blue-900);
+  --ds-bg-info-fade: color-mix(in srgb, var(--color-blue-500) 25%, transparent);
 
-  --ring-default: #473036;
-  --ring-danger: #45282c;
+  /* Secondary */
+  --ds-bg-secondary: var(--color-maroon-600);
+  --ds-bg-secondary-faint: color-mix(in srgb, var(--color-maroon-600) 50%, transparent);
+  --ds-bg-secondary-fade: color-mix(in srgb, var(--color-maroon-600) 25%, transparent);
+
+  /* Success */
+  --ds-bg-success: var(--color-emerald-500);
+  --ds-bg-success-faint: color-mix(in srgb, var(--color-emerald-500) 50%, transparent);
+  --ds-bg-success-fade: color-mix(in srgb, var(--color-emerald-500) 25%, transparent);
+
+  /* Warning */
+  --ds-bg-warning: var(--color-yellow-500);
+  --ds-bg-warning-faint: color-mix(in srgb, var(--color-yellow-500) 50%, transparent);
+  --ds-bg-warning-fade: color-mix(in srgb, var(--color-yellow-50) 25%, transparent);
+
+  /* Danger */
+  --ds-bg-danger: var(--color-red-500);
+  --ds-bg-danger-saturated: var(--color-red-400);
+  --ds-bg-danger-faint: color-mix(in srgb, var(--color-red-500) 50%, transparent);
+  --ds-bg-danger-fade: color-mix(in srgb, var(--color-red-50) 25%, transparent);
+
+    /** Text */
+  --ds-text-plain: var(--color-zinc-50);
+  --ds-text-subtle: var(--color-zinc-500);
+  --ds-text-muted: var(--color-zinc-400);
+  --ds-text-soft: var(--color-zinc-300);
+  --ds-text-default: var(--color-zinc-200);
+  --ds-text-inverse: var(--color-zinc-800);
+
+  /* Primary */
+  --ds-text-primary: var(--color-soft-pink-300);
+  --ds-text-primary-faint: color-mix(in srgb, var(--color-soft-pink-300) 75%, transparent);
+  --ds-text-primary-fade: color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+
+  /* Info */
+  --ds-text-info: var(--color-blue-500);
+  --ds-text-info-faint: color-mix(in srgb, var(--color-blue-500) 50%, transparent);
+  --ds-text-info-fade: color-mix(in srgb, var(--color-blue-500) 25%, transparent);
+
+  /* Secondary */
+  --ds-text-secondary: var(--color-maroon-600);
+  --ds-text-secondary-faint: color-mix(in srgb, var(--color-maroon-600) 50%, transparent);
+  --ds-text-secondary-fade: color-mix(in srgb, var(--color-maroon-600) 25%, transparent);
+
+  /* Success */
+  --ds-text-success: var(--color-emerald-500);
+  --ds-text-success-faint: color-mix(in srgb, var(--color-emerald-500) 50%, transparent);
+  --ds-text-success-fade: color-mix(in srgb, var(--color-emerald-500) 25%, transparent);
+
+  /* Warning */
+  --ds-text-warning: var(--color-yellow-500);
+  --ds-text-warning-faint: color-mix(in srgb, var(--color-yellow-500) 50%, transparent);
+  --ds-text-warning-fade:  color-mix(in srgb, var(--color-yellow-500) 25%, transparent);
+
+  /* Danger */
+  --ds-text-danger: var(--color-red-500);
+  --ds-text-danger-faint: color-mix(in srgb, var(--color-red-500) 50%, transparent);
+  --ds-text-danger-fade: color-mix(in srgb, var(--color-red-500) 25%, transparent);
+
+  /** Border */
+  --ds-border-plain: var(--color-zinc-50);
+  --ds-border-subtle: var(--color-zinc-700);
+  --ds-border-muted: var(--color-zinc-800);
+  --ds-border-soft: var(--color-zinc-600);
+  --ds-border-default: var(--color-zinc-500);
+  --ds-border-inverse: var(--color-zinc-800);
+
+  /* Primary */
+--ds-border-primary: var(--color-soft-pink-300);
+--ds-border-primary-faint: color-mix(in srgb, var(--color-soft-pink-300) 75%, transparent);
+--ds-border-primary-fade: color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+
+/* Info */
+--ds-border-info: var(--color-blue-500);
+--ds-border-info-faint: color-mix(in srgb, var(--color-blue-500) 50%, transparent);
+--ds-border-info-fade: color-mix(in srgb, var(--color-blue-500) 25%, transparent);
+
+/* Secondary */
+--ds-border-secondary: var(--color-maroon-600);
+--ds-border-secondary-faint: color-mix(in srgb, var(--color-maroon-600) 50%, transparent);
+--ds-border-secondary-fade: color-mix(in srgb, var(--color-maroon-600) 25%, transparent);
+
+/* Success */
+--ds-border-success: var(--color-emerald-500);
+--ds-border-success-faint: color-mix(in srgb, var(--color-emerald-500) 50%, transparent);
+--ds-border-success-fade: color-mix(in srgb, var(--color-emerald-500) 25%, transparent);
+
+/* Warning */
+--ds-border-warning: var(--color-yellow-500);
+--ds-border-warning-faint: color-mix(in srgb, var(--color-yellow-500) 50%, transparent);
+--ds-border-warning-fade: color-mix(in srgb, var(--color-yellow-500) 25%, transparent);
+
+/* Danger */
+--ds-border-danger: var(--color-red-500);
+--ds-border-danger-faint: color-mix(in srgb, var(--color-red-500) 50%, transparent);
+--ds-border-danger-fade: color-mix(in srgb, var(--color-red-500) 25%, transparent);
+
+  /** Ring */
+ --ds-ring: #473036;
+ --ds-ring-danger:  #452B2C;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-primary-light: var(--primary-light);
-  --color-secondary: var(--secondary);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-danger: var(--danger);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
+   /** Backgrounds */
+--color-ds-bg-plain: var(--ds-bg-plain);
+--color-ds-bg-subtle: var(--ds-bg-subtle);
+--color-ds-bg-muted: var(--ds-bg-muted);
+--color-ds-bg-soft: var(--ds-bg-soft);
+--color-ds-bg-default: var(--ds-bg-default);
+--color-ds-bg-inverse: var(--ds-bg-inverse);
+--color-ds-bg-elevated: var(--ds-bg-elevated);
+--color-ds-bg-overlay: var(--ds-bg-overlay);
+--color-ds-bg-primary: var(--ds-bg-primary);
+--color-ds-bg-primary-saturated: var(--ds-bg-primary-saturated);
+--color-ds-bg-primary-faint: var(--ds-bg-primary-faint);
+--color-ds-bg-primary-fade: var(--ds-bg-primary-fade);
+--color-ds-bg-info: var(--ds-bg-info);
+--color-ds-bg-info-faint: var(--ds-bg-info-faint);
+--color-ds-bg-info-fade: var(--ds-bg-info-fade);
+--color-ds-bg-secondary: var(--ds-bg-secondary);
+--color-ds-bg-secondary-faint: var(--ds-bg-secondary-faint);
+--color-ds-bg-secondary-fade: var(--ds-bg-secondary-fade);
+--color-ds-bg-success: var(--ds-bg-success);
+--color-ds-bg-success-faint: var(--ds-bg-success-faint);
+--color-ds-bg-success-fade: var(--ds-bg-success-fade);
+--color-ds-bg-warning: var(--ds-bg-warning);
+--color-ds-bg-warning-faint: var(--ds-bg-warning-faint);
+--color-ds-bg-warning-fade: var(--ds-bg-warning-fade);
+--color-ds-bg-danger: var(--ds-bg-danger);
+--color-ds-bg-danger-saturated: var(--ds-bg-danger-saturated);
+--color-ds-bg-danger-faint: var(--ds-bg-danger-faint);
+--color-ds-bg-danger-fade: var(--ds-bg-danger-fade);
 
-  --color-background-plain: var(--background-plain);
-  --color-background-subtle: var(--background-subtle);
-  --color-background-muted: var(--background-muted);
-  --color-background-soft: var(--background-soft);
-  --color-background-default: var(--background-default);
-  --color-background-inverse: var(--background-inverse);
-  --color-background-elevated: var(--background-elevated);
-  --color-background-overlay: var(--background-overlay);
-  --color-background-primary: var(--background-primary);
-  --color-background-primary-saturated: var(--background-primary-saturated);
-  --color-background-primary-faint: var(--background-primary-faint);
-  --color-background-primary-fade: var(--background-primary-fade);
-  --color-background-info: var(--background-info);
-  --color-background-info-faint: var(--background-info-faint);
-  --color-background-info-fade: var(--background-info-fade);
-  --color-background-secondary: var(--background-secondary);
-  --color-background-secondary-faint: var(--background-secondary-faint);
-  --color-background-secondary-fade: var(--background-secondary-fade);
-  --color-background-success: var(--background-success);
-  --color-background-success-faint: var(--background-success-faint);
-  --color-background-success-fade: var(--background-success-fade);
-  --color-background-warning: var(--background-warning);
-  --color-background-warning-faint: var(--background-warning-faint);
-  --color-background-warning-fade: var(--background-warning-fade);
-  --color-background-danger: var(--background-danger);
-  --color-background-danger-saturated: var(--background-danger-saturated);
-  --color-background-danger-faint: var(--background-danger-faint);
-  --color-background-danger-fade: var(--background-danger-fade);
+/** Text */
+--color-ds-text-plain: var(--ds-text-plain);
+--color-ds-text-subtle: var(--ds-text-subtle);
+--color-ds-text-muted: var(--ds-text-muted);
+--color-ds-text-soft: var(--ds-text-soft);
+--color-ds-text-default: var(--ds-text-default);
+--color-ds-text-inverse: var(--ds-text-inverse);
+--color-ds-text-primary: var(--ds-text-primary);
+--color-ds-text-primary-faint: var(--ds-text-primary-faint);
+--color-ds-text-primary-fade: var(--ds-text-primary-fade);
+--color-ds-text-info: var(--ds-text-info);
+--color-ds-text-info-faint: var(--ds-text-info-faint);
+--color-ds-text-info-fade: var(--ds-text-info-fade);
+--color-ds-text-secondary: var(--ds-text-secondary);
+--color-ds-text-secondary-faint: var(--ds-text-secondary-faint);
+--color-ds-text-secondary-fade: var(--ds-text-secondary-fade);
+--color-ds-text-success: var(--ds-text-success);
+--color-ds-text-success-faint: var(--ds-text-success-faint);
+--color-ds-text-success-fade: var(--ds-text-success-fade);
+--color-ds-text-warning: var(--ds-text-warning);
+--color-ds-text-warning-faint: var(--ds-text-warning-faint);
+--color-ds-text-warning-fade: var(--ds-text-warning-fade);
+--color-ds-text-danger: var(--ds-text-danger);
+--color-ds-text-danger-faint: var(--ds-text-danger-faint);
+--color-ds-text-danger-fade: var(--ds-text-danger-fade);
 
-  --color-text-plain: var(--text-plain);
-  --color-text-subtle: var(--text-subtle);
-  --color-text-muted: var(--text-muted);
-  --color-text-soft: var(--text-soft);
-  --color-text-default: var(--text-default);
-  --color-text-inverse: var(--text-inverse);
-  --color-text-primary: var(--text-primary);
-  --color-text-primary-faint: var(--text-primary-faint);
-  --color-text-primary-fade: var(--text-primary-fade);
-  --color-text-info: var(--text-info);
-  --color-text-info-faint: var(--text-info-faint);
-  --color-text-info-fade: var(--text-info-fade);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-secondary-faint: var(--text-secondary-faint);
-  --color-text-secondary-fade: var(--text-secondary-fade);
-  --color-text-success: var(--text-success);
-  --color-text-success-faint: var(--text-success-faint);
-  --color-text-success-fade: var(--text-success-fade);
-  --color-text-warning: var(--text-warning);
-  --color-text-warning-faint: var(--text-warning-faint);
-  --color-text-warning-fade: var(--text-warning-fade);
-  --color-text-danger: var(--text-danger);
-  --color-text-danger-faint: var(--text-danger-faint);
-  --color-text-danger-fade: var(--text-danger-fade);
+/** Border */
+--color-ds-border-plain: var(--ds-border-plain);
+--color-ds-border-subtle: var(--ds-border-subtle);
+--color-ds-border-muted: var(--ds-border-muted);
+--color-ds-border-soft: var(--ds-border-soft);
+--color-ds-border-default: var(--ds-border-default);
+--color-ds-border-inverse: var(--ds-border-inverse);
+--color-ds-border-primary: var(--ds-border-primary);
+--color-ds-border-primary-faint: var(--ds-border-primary-faint);
+--color-ds-border-primary-fade: var(--ds-border-primary-fade);
+--color-ds-border-info: var(--ds-border-info);
+--color-ds-border-info-faint: var(--ds-border-info-faint);
+--color-ds-border-info-fade: var(--ds-border-info-fade);
+--color-ds-border-secondary: var(--ds-border-secondary);
+--color-ds-border-secondary-faint: var(--ds-border-secondary-faint);
+--color-ds-border-secondary-fade: var(--ds-border-secondary-fade);
+--color-ds-border-success: var(--ds-border-success);
+--color-ds-border-success-faint: var(--ds-border-success-faint);
+--color-ds-border-success-fade: var(--ds-border-success-fade);
+--color-ds-border-warning: var(--ds-border-warning);
+--color-ds-border-warning-faint: var(--ds-border-warning-faint);
+--color-ds-border-warning-fade: var(--ds-border-warning-fade);
+--color-ds-border-danger: var(--ds-border-danger);
+--color-ds-border-danger-faint: var(--ds-border-danger-faint);
+--color-ds-border-danger-fade: var(--ds-border-danger-fade);
 
-  --color-border-plain: var(--border-plain);
-  --color-border-subtle: var(--border-subtle);
-  --color-border-muted: var(--border-muted);
-  --color-border-soft: var(--border-soft);
-  --color-border-default: var(--border-default);
-  --color-border-inverse: var(--border-inverse);
-  --color-border-primary: var(--border-primary);
-  --color-border-primary-faint: var(--border-primary-faint);
-  --color-border-primary-fade: var(--border-primary-fade);
-  --color-border-info: var(--border-info);
-  --color-border-info-faint: var(--border-info-faint);
-  --color-border-info-fade: var(--border-info-fade);
-  --color-border-secondary: var(--border-secondary);
-  --color-border-secondary-faint: var(--border-secondary-faint);
-  --color-border-secondary-fade: var(--border-secondary-fade);
-  --color-border-success: var(--border-success);
-  --color-border-success-faint: var(--border-success-faint);
-  --color-border-success-fade: var(--border-success-fade);
-  --color-border-warning: var(--border-warning);
-  --color-border-warning-faint: var(--border-warning-faint);
-  --color-border-warning-fade: var(--border-warning-fade);
-  --color-border-danger: var(--border-danger);
-  --color-border-danger-faint: var(--border-danger-faint);
-  --color-border-danger-fade: var(--border-danger-fade);
-  --color-ring-default: var(--ring-default);
-  --color-ring-danger: var(--ring-danger);
+/** Ring */
+--color-ds-ring: var(--ds-ring);
+--color-ds-ring-danger: var(--ds-ring-danger);
 
   --color-maroon-50: #fbeaea;
   --color-maroon-100: #f3c5c7;
@@ -391,60 +429,101 @@ html[data-theme="dark"] {
   --color-zinc-900: #18181b;
   --color-zinc-950: #09090b;
 
-  --shadow-subtle-sm: 0 2px 5px rgb(0 0 0 / 7%);
-  --shadow-subtle: 0 4px 10px rgb(0 0 0 / 7%);
-  --shadow-subtle-lg: 0 4px 18px rgb(0 0 0 / 7%);
-  --shadow-soft-sm: 0 2px 5px rgb(0 0 0 / 10%);
-  --shadow-soft: 0 4px 10px rgb(0 0 0 / 10%);
-  --shadow-soft-lg: 0 4px 18px rgb(0 0 0 / 10%);
-  --radius-sm: 4px;
-  --radius-base: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 10px;
+  /** Shadow */
+  --shadow-ds-subtle-sm: 0 2px 5px rgb(0 0 0 / 0.07);
+  --shadow-ds-subtle: 0 4px 10px rgb(0 0 0 / 0.07);
+  --shadow-ds-subtle-lg: 0 4px 18px rgb(0 0 0 / 0.07);
+
+  --shadow-ds-soft-sm: 0 2px 5px rgb(0 0 0 / 0.1);
+  --shadow-ds-soft: 0 4px 10px rgb(0 0 0 / 0.1);
+  --shadow-ds-soft-lg: 0 4px 18px rgb(0 0 0 / 0.1);
+
+  /** Radius */
+  --radius-ds-sm: 0.25rem;
+  --radius-ds-base: 0.375rem;
+  --radius-ds-lg: 0.5rem;
+  --radius-ds-xl: 0.625rem;
   --font-sans: var(--font-sarabun);
   --font-arabic: var(--font-tajawal);
-  --text-display-2xl: 72px;
-  --text-display-xl: 60px;
-  --text-display-lg: 48px;
-  --text-display-md: 36px;
-  --text-display-sm: 30px;
-  --text-heading-lg: 24px;
-  --text-heading-md: 20px;
-  --text-body-lg: 18px;
-  --text-body: 16px;
-  --text-body-sm: 14px;
-  --text-caption: 12px;
+  --font-script: var(--font-great-vibes);
 }
 
-html {
-  background: var(--background);
+html[lang="ar"] body {
+  font-family: var(--font-tajawal);
 }
 
-body {
-  min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sarabun), Arial, Helvetica, sans-serif;
+html[lang="en"] body {
+  font-family: var(--font-sarabun);
 }
 
-html[lang="ar"] body,
-html[dir="rtl"] body {
-  font-family: var(--font-tajawal), Arial, Helvetica, sans-serif;
+
+/* Progress Bar */
+.progress {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
-html[lang="ar"],
-html[dir="rtl"] body {
-  font-family: var(--font-tajawal), Arial, Helvetica, sans-serif;
+/* STEP (circle) */
+.step {
+  width: 25px;
+  height: 25px;
+  background: #FBEAEA;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #501419;
 }
 
-@layer base {
-  * {
-    @apply border-border;
+/* LINE */
+.line {
+  flex: 1;
+  height: 2px;
+  border-top: 2px solid #FBEAEA;
+}
+
+/* STATES */
+.step.completed,
+.line.completed {
+  background: #501419;
+  border-color: #501419;
+  color: #fff;
+}
+
+.step.active {
+  background: #501419;
+  box-shadow: 0 0 0 3px #FBEAEA;
+  color: #fff;
+}
+
+/* Dark Theme */
+html[data-theme='dark'] {
+  .step {
+    background: color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+    color: var(--color-soft-pink-300);
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .line {
+    border-top: 2px solid color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
   }
-  html {
-    @apply font-sans;
+
+  .step.completed,
+  .line.completed {
+    background: var(--color-soft-pink-300);
+    border-color: var(--color-soft-pink-300);
+    color: var(--color-zinc-700);
+  }
+
+  .step.active {
+    background: var(--color-soft-pink-300);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+    color: var(--color-zinc-700);
   }
 }
