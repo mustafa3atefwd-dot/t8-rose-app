@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { confirmOtpStepAction } from "@/features/auth/lib/actions/register.action";
+import { NextRequest, NextResponse } from 'next/server';
+import { confirmOtpStepAction } from '@/features/auth/lib/actions';
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,10 +16,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         status: false,
-        message:
-          error instanceof Error ? error.message : "Something went wrong",
+        message: error instanceof Error ? error.message : 'Something went wrong',
       },
-      { status: 400 },
+      { status: 400 }
     );
   }
 }

@@ -1,43 +1,42 @@
-"use client";
-import { useState } from "react";
-import { REGISTER_STEPS } from "@/features/auth/lib/constants/user.constant";
-import { RegisterStep } from "@/features/auth/lib/types/auth";
-import ProgressSteps from "@/shared/components/progress-steps";
-import RegisterEmailStep from "@/features/auth/components/register-email-step";
-import RegisterOtpStep from "@/features/auth/components/register-otp-step";
-import RegisterUserInfoStep from "@/features/auth/components/register-user-info-step";
+'use client';
+import { useState } from 'react';
+import { REGISTER_STEPS } from '@/features/auth/lib/constants';
+import { RegisterStep } from '@/features/auth/lib/types/auth';
+import { useRegisterStepDirection } from '@/features/auth/hooks';
+import { ProgressSteps } from '@/shared/components';
+import {
+  RegisterEmailStep,
+  RegisterOtpStep,
+  RegisterStepTransition,
+  RegisterUserInfoStep,
+} from '@/features/auth/components';
+
+const registerSteps = Object.values(REGISTER_STEPS);
 
 export default function RegisterPage() {
+  // State
   const [currentStep, setCurrentStep] = useState<RegisterStep>(REGISTER_STEPS.email);
+  const [emailAddress, setEmailAddress] = useState('');
 
-  const [email, setEmail] = useState<string>("");
-
+  // Variables
+  const shouldShowProgressSteps = currentStep !== REGISTER_STEPS.email;
+  const direction = useRegisterStepDirection(currentStep);
 
   return (
     <>
-      {/* ===== Progress Steps ===== */}
-      {currentStep !== REGISTER_STEPS.email && (
-        <ProgressSteps
-          steps={Object.values(REGISTER_STEPS)}
-          currentStep={currentStep}
-          className="px-20 xl:px-38"
-        />
+      {shouldShowProgressSteps && (
+        <ProgressSteps steps={registerSteps} currentStep={currentStep} className="px-20 xl:px-38" />
       )}
 
-      {currentStep === REGISTER_STEPS.email && (
-        <RegisterEmailStep
-          setEmail={setEmail}
-          setStep={setCurrentStep}
-        />
+      {currentStep === REGISTER_STEPS.email ? (
+        <RegisterEmailStep setEmail={setEmailAddress} setStep={setCurrentStep} />
+      ) : (
+        <RegisterStepTransition step={currentStep} direction={direction}>
+          {currentStep === REGISTER_STEPS.otp && <RegisterOtpStep email={emailAddress} setStep={setCurrentStep} />}
+
+          {currentStep === REGISTER_STEPS.userInfo && <RegisterUserInfoStep email={emailAddress} />}
+        </RegisterStepTransition>
       )}
-
-      {currentStep === REGISTER_STEPS.otp && (
-        <RegisterOtpStep email={email} setStep={setCurrentStep} />
-      )}  
-
-      {currentStep === REGISTER_STEPS.userInfo && (
-        <RegisterUserInfoStep email={email} />
-      )}      
     </>
   );
 }

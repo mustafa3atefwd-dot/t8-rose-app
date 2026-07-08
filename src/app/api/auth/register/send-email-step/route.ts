@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { sendEmailStepAction } from "@/features/auth/lib/actions/register.action";
+import { NextRequest, NextResponse } from 'next/server';
+import { sendEmailStepAction } from '@/features/auth/lib/actions';
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,10 +19,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         status: false,
-        message:
-          error instanceof Error ? error.message : "Internal Server Error",
+        message: error instanceof Error ? error.message : 'Internal Server Error',
       },
-      { status: 400 },
+      { status: 400 }
     );
   }
 }
