@@ -2,18 +2,17 @@ import { Button } from '@/shared/components/ui/button';
 import { Field, FieldError } from '@/shared/components/ui/field';
 import { InputField, PasswordInput } from '@/shared/components/ui/inputs';
 import { Link } from '@/i18n/navigation';
-import { ForgotPasswordStep3Props } from '../lib/types/forgot-password.type';
+import { ForgotPasswordStep3Props } from '../lib/types/forgot-password';
 import { useForgotPasswordStep3 } from '../lib/hooks/use-forgot-password-step3';
 
-export default function ForgotPasswordStep3({token}: ForgotPasswordStep3Props) {
-  const { t, form, handleForgotPasswordStep3 } =
-  useForgotPasswordStep3(token);
+export default function ForgotPasswordStep3({ token }: ForgotPasswordStep3Props) {
+  const { t, form, handleForgotPasswordStep3 } = useForgotPasswordStep3(token);
 
-const {
-  handleSubmit,
-  register,
-  formState: { isSubmitting, isValid, errors },
-} = form;
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting, isValid, errors },
+  } = form;
   return (
     <>
       {/* forgot password form */}
