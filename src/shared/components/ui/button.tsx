@@ -9,7 +9,7 @@ import { Spinner } from "@/shared/components/ui/spinner";
 
 const buttonVariants = cva(
   [
-    "group/button inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg border border-transparent text-sm font-medium whitespace-nowrap transition-colors outline-none select-none",
+    "group/button inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg border border-transparent text-sm font-medium whitespace-nowrap transition-colors outline-none select-none hover:cursor-pointer",
     "focus-visible:ring-3 focus-visible:ring-ds-ring",
     "disabled:pointer-events-none disabled:opacity-50",
     "aria-disabled:pointer-events-none aria-disabled:opacity-50",

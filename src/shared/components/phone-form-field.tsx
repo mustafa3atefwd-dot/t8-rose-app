@@ -1,21 +1,18 @@
-"use client";
+'use client';
 
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
-
-import { Field, FieldError, FieldLabel } from "./ui/field";
-import { PhoneInput } from "./ui/inputs";
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import { Field, FieldError, FieldLabel } from './ui/field';
+import { PhoneInput } from './ui/inputs';
 
 interface IPhoneFormFieldProps<T extends FieldValues> {
+  value?: string;
+  countryCode?: string;
   name: Path<T>;
   control: Control<T>;
   label: string;
 }
 
-export default function PhoneFormField<T extends FieldValues>({
-  name,
-  control,
-  label,
-}: IPhoneFormFieldProps<T>) {
+export default function PhoneFormField<T extends FieldValues>({ name, control, label }: IPhoneFormFieldProps<T>) {
   return (
     <Controller
       name={name}
@@ -25,7 +22,8 @@ export default function PhoneFormField<T extends FieldValues>({
           <FieldLabel>{label}</FieldLabel>
 
           <PhoneInput
-            defaultValue=""
+            value={field.value?.phone ?? ''}
+            countryCode={field.value?.country}
             onValueChange={(value, meta) => {
               field.onChange({
                 phone: value,
@@ -35,12 +33,7 @@ export default function PhoneFormField<T extends FieldValues>({
             invalid={fieldState.invalid}
           />
 
-          {fieldState.error && (
-            <FieldError
-              id={`${String(name)}-error`}
-              errors={[fieldState.error]}
-            />
-          )}
+          {fieldState.error && <FieldError id={`${String(name)}-error`} errors={[fieldState.error]} />}
         </Field>
       )}
     />

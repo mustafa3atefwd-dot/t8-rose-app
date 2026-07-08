@@ -1,14 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-} from "@/shared/components/ui/field";
-import { Input } from "./ui/inputs";
-import { Textarea } from "./ui/textarea";
+import React from 'react';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import { Field, FieldError, FieldLabel } from '@/shared/components/ui/field';
+import { Input } from './ui/inputs';
+import { Textarea } from './ui/textarea';
 
 type IBaseProps<T extends FieldValues> = {
   control: Control<T>;
@@ -17,19 +13,18 @@ type IBaseProps<T extends FieldValues> = {
   required?: boolean;
 };
 
-type IInputProps = React.ComponentPropsWithoutRef<"input"> & {
-  variant?: "input";
+type IInputProps = React.ComponentPropsWithoutRef<'input'> & {
+  variant?: 'input';
 };
 
-type ITextareaProps = React.ComponentPropsWithoutRef<"textarea"> & {
-  variant: "textarea";
+type ITextareaProps = React.ComponentPropsWithoutRef<'textarea'> & {
+  variant: 'textarea';
 };
 
-type IFormFieldProps<T extends FieldValues> = IBaseProps<T> &
-  (IInputProps | ITextareaProps);
+type IFormFieldProps<T extends FieldValues> = IBaseProps<T> & (IInputProps | ITextareaProps);
 
 function FormField<T extends FieldValues>(props: IFormFieldProps<T>) {
-  const { name, control, label, variant = "input", required, ...rest } = props;
+  const { name, control, label, variant = 'input', required, ...rest } = props;
 
   return (
     <Controller
@@ -42,16 +37,20 @@ function FormField<T extends FieldValues>(props: IFormFieldProps<T>) {
             {/* ===== Label ===== */}
             <FieldLabel htmlFor={String(name)}>
               {label}
-              {required && <span className="text-ds-text-danger">*</span>}
+              {required && (
+                <span className="text-ds-text-danger" aria-label="required">
+                  *
+                </span>
+              )}
             </FieldLabel>
 
             {/* Render Input or Textarea based on variant prop */}
-            {variant === "input" ? (
+            {variant === 'input' ? (
               <Input
                 id={String(name)}
                 aria-invalid={fieldState.invalid}
                 aria-describedby={`${name}-error`}
-                {...(rest as React.ComponentPropsWithoutRef<"input">)}
+                {...(rest as React.ComponentPropsWithoutRef<'input'>)}
                 {...field}
               />
             ) : (
@@ -60,15 +59,13 @@ function FormField<T extends FieldValues>(props: IFormFieldProps<T>) {
                 aria-invalid={fieldState.invalid}
                 aria-describedby={`${name}-error`}
                 rows={5}
-                {...(rest as React.ComponentPropsWithoutRef<"textarea">)}
+                {...(rest as React.ComponentPropsWithoutRef<'textarea'>)}
                 {...field}
               />
             )}
 
             {/* ===== Error Message ===== */}
-            {fieldState.invalid && (
-              <FieldError id={`${name}-error`} errors={[fieldState.error]} />
-            )}
+            {fieldState.invalid && <FieldError id={`${name}-error`} errors={[fieldState.error]} />}
           </Field>
         </>
       )}
