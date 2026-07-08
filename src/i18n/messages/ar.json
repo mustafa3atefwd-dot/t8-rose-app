@@ -122,6 +122,9 @@
       "disabled": "معطّل"
     }
   },
+  "textarea": {
+    "charCount": "{current}/{max} حرف"
+  },
   "button": {
     "loading": "جاري التحميل...",
     "submit": "إرسال",

@@ -18,7 +18,7 @@ function FormError({ message, className = '' }: FormErrorProps) {
         {message}
 
         {/* Error Icon */}
-        <CircleX className="absolute -top-2.5 right-1/2 h-5 w-5 -translate-x-1/2 bg-white" />
+        <CircleX className="absolute inset-e-1/2 -top-2.5 h-5 w-5 -translate-x-1/2 bg-white" />
       </p>
     </div>
   );

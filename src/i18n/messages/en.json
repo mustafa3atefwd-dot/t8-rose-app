@@ -120,6 +120,9 @@
       "disabled": "Disabled"
     }
   },
+  "textarea": {
+    "charCount": "{current}/{max} characters"
+  },
   "button": {
     "loading": "Loading...",
     "submit": "Submit",
