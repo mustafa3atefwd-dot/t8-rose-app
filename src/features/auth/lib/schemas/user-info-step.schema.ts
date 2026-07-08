@@ -1,57 +1,48 @@
-import { z } from "zod";
-import { USER_GENDERS } from "../constants/user.constant";
-import { isValidPhoneNumber, parsePhoneNumberFromString } from "libphonenumber-js/max";
+import { z } from 'zod';
+import { USER_GENDERS } from '../constants/user.constant';
+import { isValidPhoneNumber, parsePhoneNumberFromString } from 'libphonenumber-js/max';
 
 /**
  * Validation schema for user registration info step
  * Includes personal data + authentication credentials
  */
-export const userInfoStepSchema = z
-  .object({
-    // ===== Basic identity fields =====
+export const userInfoStepSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      email: z.email(t('invalidEmail')),
 
-    email: z.email("Invalid email"),
+      firstName: z.string().min(2, t('firstName')),
 
-    firstName: z.string().min(2, "First name must be at least 2 characters"),
+      lastName: z.string().min(2, t('lastName')),
 
-    lastName: z.string().min(2, "Last name must be at least 2 characters"),
+      username: z.string().min(2, t('username')),
 
-    username: z.string().min(2, "Username must be at least 2 characters"),
+      phone: z
+        .object({
+          phone: z.string().trim(),
+          country: z.string(),
+        })
+        .refine((val) => isValidPhoneNumber(val.phone), {
+          message: t('invalidPhone'),
+        })
+        .refine((val) => /^\+20(10|11|12|15)\d{8}$/.test(val.phone), {
+          message: t('invalidEgyptPhone'),
+        }),
 
-    // ===== Phone validation =====
+      gender: z
+        .enum(USER_GENDERS, {
+          error: () => t('invalidGender'),
+        })
+        .optional(),
 
-phone: z
-  .object({
-    phone: z.string().trim(),
-    country: z.string(),
-  })
-      .refine((val) => isValidPhoneNumber(val.phone), {
-        message: "Invalid phone number format",
-      })      
-      .refine((val) => /^\+20(10|11|12|15)\d{8}$/.test(val.phone), {
-        message: "Invalid Egyptian mobile number",
-      }),
+      password: z
+        .string()
+        .min(8, t('passwordMin'))
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).*$/, t('passwordWeak')),
 
-    gender: z
-      .enum(USER_GENDERS, {
-        error: () => "Please select a valid gender",
-      })
-      .optional(),
-
-    // ===== Password rules =====
-    password: z
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).*$/,
-        "Password must contain uppercase, lowercase, number and special character",
-      ),
-
-    confirmPassword: z.string(),
-  })
-
-  // ===== Cross-field validation =====
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t('passwordMatch'),
+      path: ['confirmPassword'],
+    });
