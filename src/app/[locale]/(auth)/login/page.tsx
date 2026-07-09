@@ -8,8 +8,6 @@ interface LoginPageProps {
   params: Promise<{ locale: string }>;
 }
 
-// Placeholder so `/[locale]/login` resolves inside the auth shell.
-// The login form is delivered in its own story; this only proves the layout.
 export default async function LoginPage({ params }: LoginPageProps) {
   const { locale } = await params;
 
