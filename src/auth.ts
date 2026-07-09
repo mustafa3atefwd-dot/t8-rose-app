@@ -14,6 +14,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         username: {},
         password: {},
+        rememberMe: {},
       },
       authorize: async (credentials) => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
