@@ -1,0 +1,25 @@
+{
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your account",
+      "username": "Username",
+      "usernamePlaceholder": "username",
+      "password": "Password",
+      "passwordPlaceholder": "********",
+      "forgotPassword": "Forgot password?",
+      "rememberMe": "Remember me",
+      "button": "Login",
+      "loading": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "invalidCredentials": "Invalid username or password",
+      "networkError": "Something went wrong. Please try again.",
+      "validation": {
+        "required": "This field is required"
+      }
+    }
+  }
+}

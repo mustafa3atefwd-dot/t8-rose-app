@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
 import { LoginForm } from "../../../../features/auth/components/LoginForm";
-import type { LoginLocale } from "../../../../features/auth/lib/login-messages";
 
 type LoginPageProps = {
   params: Promise<{
@@ -8,14 +8,23 @@ type LoginPageProps = {
   }>;
 };
 
-const supportedLocales: LoginLocale[] = ["en", "ar"];
+const supportedLocales = ["en", "ar"] as const;
+type SupportedLocale = (typeof supportedLocales)[number];
 
 export default async function LoginPage({ params }: LoginPageProps) {
   const { locale } = await params;
 
-  if (!supportedLocales.includes(locale as LoginLocale)) {
+  if (!supportedLocales.includes(locale as SupportedLocale)) {
     notFound();
   }
 
-  return <LoginForm locale={locale as LoginLocale} />;
+  const messages = (
+    await import(`../../../../i18n/messages/${locale}.json`)
+  ).default;
+
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <LoginForm />
+    </NextIntlClientProvider>
+  );
 }

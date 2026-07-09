@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
 import { EyeIcon, EyeOffIcon, Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,28 +12,26 @@ import {
   createLoginSchema,
   type LoginFormValues,
 } from "../lib/login-schema";
-import {
-  loginMessages,
-  type LoginLocale,
-} from "../lib/login-messages";
-import {
-  getRememberMeSessionMaxAge,
-  markBrowserSessionActive,
-} from "../lib/session-policy";
+import { getRememberMeSessionMaxAge } from "../lib/session-policy";
 
-type LoginFormProps = {
-  locale: LoginLocale;
-};
+export function LoginForm() {
+  // Translation
+  const t = useTranslations("auth.login");
+  const locale = useLocale();
+  const loginSchema = createLoginSchema({
+    required: t("validation.required"),
+  });
 
-export function LoginForm({ locale }: LoginFormProps) {
+  // Navigation
   const router = useRouter();
   const searchParams = useSearchParams();
-  const messages = loginMessages[locale].auth.login;
-  const loginSchema = createLoginSchema(messages);
+  const returnUrl = searchParams.get("returnUrl") || `/${locale}`;
 
+  // State
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
+  // Form
   const {
     formState: { errors, isSubmitting },
     handleSubmit,
@@ -40,21 +39,20 @@ export function LoginForm({ locale }: LoginFormProps) {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
       rememberMe: false,
     },
   });
 
-  const callbackUrl = searchParams.get("callbackUrl") || `/${locale}`;
-
+  // Functions
   async function handleLogin(values: LoginFormValues) {
     setFormError(null);
     const sessionMaxAge = getRememberMeSessionMaxAge(values.rememberMe);
 
     try {
       const result = await signIn("credentials", {
-        username: values.email,
+        username: values.username,
         password: values.password,
         rememberMe: String(values.rememberMe),
         maxAge: sessionMaxAge ? String(sessionMaxAge) : "",
@@ -62,21 +60,20 @@ export function LoginForm({ locale }: LoginFormProps) {
       });
 
       if (result?.error) {
-        setFormError(messages.invalidCredentials);
+        setFormError(t("invalidCredentials"));
         return;
       }
 
-      markBrowserSessionActive();
-      router.push(callbackUrl);
+      router.push(returnUrl);
       router.refresh();
     } catch {
-      setFormError(messages.networkError);
+      setFormError(t("networkError"));
     }
   }
 
   return (
     <form
-      className="mx-auto flex w-full max-w-[406px] flex-col gap-5"
+      className="mx-auto flex w-full max-w-md flex-col gap-5"
       dir={locale === "ar" ? "rtl" : "ltr"}
       noValidate
       onSubmit={handleSubmit(handleLogin)}
@@ -86,30 +83,33 @@ export function LoginForm({ locale }: LoginFormProps) {
           className="text-5xl font-normal leading-none text-primary"
           style={{ fontFamily: '"Edwardian Script ITC", cursive' }}
         >
-          {messages.title}
+          {t("title")}
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          {messages.subtitle}
+          {t("subtitle")}
         </p>
       </header>
 
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-medium text-foreground" htmlFor="email">
-          {messages.email}
+        <label
+          className="text-sm font-medium text-foreground"
+          htmlFor="username"
+        >
+          {t("username")}
         </label>
         <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          aria-invalid={errors.email ? true : undefined}
-          aria-describedby={errors.email ? "email-error" : undefined}
-          placeholder={messages.emailPlaceholder}
+          id="username"
+          type="text"
+          autoComplete="username"
+          aria-invalid={errors.username ? true : undefined}
+          aria-describedby={errors.username ? "username-error" : undefined}
+          placeholder={t("usernamePlaceholder")}
           className="h-12 rounded-lg border border-border bg-background px-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-3 focus:ring-primary/20"
-          {...register("email")}
+          {...register("username")}
         />
-        {errors.email ? (
-          <p id="email-error" className="text-sm text-danger" role="alert">
-            {errors.email.message}
+        {errors.username ? (
+          <p id="username-error" className="text-sm text-danger" role="alert">
+            {errors.username.message}
           </p>
         ) : null}
       </div>
@@ -119,7 +119,7 @@ export function LoginForm({ locale }: LoginFormProps) {
           className="text-sm font-medium text-foreground"
           htmlFor="password"
         >
-          {messages.password}
+          {t("password")}
         </label>
         <div className="flex h-12 items-center rounded-lg border border-border bg-background px-4 transition focus-within:border-primary focus-within:ring-3 focus-within:ring-primary/20">
           <input
@@ -128,7 +128,7 @@ export function LoginForm({ locale }: LoginFormProps) {
             autoComplete="current-password"
             aria-invalid={errors.password ? true : undefined}
             aria-describedby={errors.password ? "password-error" : undefined}
-            placeholder={messages.passwordPlaceholder}
+            placeholder={t("passwordPlaceholder")}
             className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none"
             {...register("password")}
           />
@@ -136,7 +136,7 @@ export function LoginForm({ locale }: LoginFormProps) {
             type="button"
             className="text-muted-foreground transition hover:text-primary"
             aria-label={
-              isPasswordVisible ? messages.hidePassword : messages.showPassword
+              isPasswordVisible ? t("hidePassword") : t("showPassword")
             }
             aria-pressed={isPasswordVisible}
             onClick={() => setIsPasswordVisible((currentValue) => !currentValue)}
@@ -159,7 +159,7 @@ export function LoginForm({ locale }: LoginFormProps) {
         className="self-end text-sm font-semibold text-primary hover:underline"
         href={`/${locale}/forgot-password`}
       >
-        {messages.forgotPassword}
+        {t("forgotPassword")}
       </Link>
 
       <label className="flex items-center gap-3 text-sm text-foreground">
@@ -168,7 +168,7 @@ export function LoginForm({ locale }: LoginFormProps) {
           className="size-5 rounded border border-primary accent-primary"
           {...register("rememberMe")}
         />
-        {messages.rememberMe}
+        {t("rememberMe")}
       </label>
 
       {formError ? (
@@ -185,16 +185,16 @@ export function LoginForm({ locale }: LoginFormProps) {
         {isSubmitting ? (
           <Loader2Icon className="size-4 animate-spin" aria-hidden />
         ) : null}
-        {isSubmitting ? messages.loading : messages.button}
+        {isSubmitting ? t("loading") : t("button")}
       </button>
 
       <footer className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
-        {messages.noAccount}{" "}
+        {t("noAccount")}{" "}
         <Link
           className="font-semibold text-primary hover:underline"
           href={`/${locale}/register`}
         >
-          {messages.register}
+          {t("register")}
         </Link>
       </footer>
     </form>

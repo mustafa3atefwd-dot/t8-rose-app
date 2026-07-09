@@ -1,11 +1,8 @@
 import { z } from "zod";
 
-export function createLoginSchema(messages: {
-  required: string;
-  invalidEmail: string;
-}) {
+export function createLoginSchema(messages: { required: string }) {
   return z.object({
-    email: z.string().min(1, messages.required).email(messages.invalidEmail),
+    username: z.string().min(1, messages.required),
     password: z.string().min(1, messages.required),
     rememberMe: z.boolean(),
   });
