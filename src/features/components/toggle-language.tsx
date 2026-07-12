@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";import { useState } from "react";
 ;
 
 
-export default function ToggleSwitched(){
+export default function LanguageSwitch(){
     const [switched, setSwitched] = useState()
     const pathName = usePathname()
     const router = useRouter()

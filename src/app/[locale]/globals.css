@@ -201,6 +201,7 @@
    --bg-primary: var(--color-maroon-800);
    --bg-elevated: rgb(7, 7, 9);
    --bg-overlay: rgb(127, 127, 127);
+   --bg-maroon-login: var(--color-maroon-600);
  
    /* Primary Background */
    --bg-primary-faint: var(--color-maroon-100);
@@ -326,7 +327,7 @@
    --radius-sm: 4px;
    --radius-base: 6px;
    --radius-lg: 8px;
-   --radius-xl: 12px;
+   --radius-xl: 10px;
    
    
    --background: oklch(1 0 0);
@@ -373,6 +374,7 @@
    --bg-inverse: var(--color-zinc-50);
    --bg-elevated: rgb(7,7,9);
    --bg-overlay: rgb(4,4,5);
+   --bg-maroon-login: var(--color-soft-pink-300);
    
    --bg-primary: var(--color-soft-pink-300);
    --bg-primary-saturated: var(--color-soft-pink-200);
@@ -514,6 +516,7 @@
    --color-ds-default: var(--bg-default);
    --color-ds-inverse: var(--bg-inverse);
    --color-ds-elevated: var(--bg-elevated);
+   --color-ds-maroon-login: var(--bg-maroon-login);
  
    --color-ds-primary: var(--bg-primary);
    --color-ds-primary-saturated: var(--bg-primary-saturated);
