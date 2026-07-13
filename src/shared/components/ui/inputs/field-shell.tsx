@@ -11,12 +11,12 @@ import { cn } from "@/shared/lib/utils";
 // semantic tokens, so light/dark flip automatically.
 const fieldShellVariants = cva(
   [
-    "group/field flex w-full min-w-0 items-center gap-2 rounded-lg border border-border bg-transparent px-3 text-base transition-colors outline-none md:text-sm",
-    "dark:bg-input/30",
-    "focus-within:border-primary focus-within:ring-3 focus-within:ring-ring-default",
-    "data-[success=true]:border-success",
-    "data-[invalid=true]:border-danger data-[invalid=true]:focus-within:border-danger data-[invalid=true]:focus-within:ring-ring-danger",
-    "data-[disabled=true]:pointer-events-none data-[disabled=true]:bg-background-muted data-[disabled=true]:opacity-50",
+    "group/field flex w-full min-w-0 items-center gap-2 rounded-lg border border-ds-border-soft bg-transparent px-3 text-base transition-colors outline-none md:text-sm",
+    "dark:bg-ds-bg-soft/30",
+    "focus-within:border-ds-border-primary focus-within:ring-3 focus-within:ring-ds-ring",
+    "data-[success=true]:border-ds-border-success",
+    "data-[invalid=true]:border-ds-border-danger data-[invalid=true]:focus-within:border-ds-border-danger data-[invalid=true]:focus-within:ring-ds-ring-danger",
+    "data-[disabled=true]:pointer-events-none data-[disabled=true]:bg-ds-bg-muted data-[disabled=true]:opacity-50",
   ],
   {
     variants: {
@@ -31,11 +31,11 @@ const fieldShellVariants = cva(
 
 // The bare <input> rendered inside a shell — it has no border/ring of its own.
 const innerInputClass =
-  "h-full w-full grow bg-transparent p-0 text-foreground outline-none placeholder:text-text-muted disabled:cursor-not-allowed";
+  "h-full w-full grow rounded-none border-0 bg-transparent p-0 text-ds-text-plain shadow-none outline-none placeholder:text-ds-text-muted focus-visible:border-transparent focus-visible:ring-0 disabled:cursor-not-allowed disabled:bg-transparent disabled:opacity-100 aria-invalid:border-transparent aria-invalid:ring-0";
 
 // A small icon-button adornment (eye toggle, steppers, …).
 const adornmentButtonClass =
-  "grid shrink-0 place-items-center rounded-base text-text-muted outline-none transition-colors hover:text-foreground focus-visible:text-foreground disabled:pointer-events-none";
+  "grid shrink-0 place-items-center rounded-base text-ds-text-muted outline-none transition-colors hover:text-ds-text-plain focus-visible:text-ds-text-plain disabled:pointer-events-none";
 
 type FieldStateProps = {
   /** Render the error (red border + danger ring) treatment. */

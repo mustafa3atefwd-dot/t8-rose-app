@@ -5,14 +5,15 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/shared/lib/utils";
 import type { FieldStateProps } from "./field-shell";
+import { Input } from "./input";
 
 const otpBoxClass = cva([
-  "size-12 rounded-lg border border-border bg-transparent text-center text-heading-md font-semibold text-foreground transition-colors outline-none md:size-11",
-  "dark:bg-input/30",
-  "focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring-default",
-  "disabled:pointer-events-none disabled:bg-background-muted disabled:opacity-50",
-  "data-[invalid=true]:border-danger data-[invalid=true]:focus-visible:ring-ring-danger",
-  "data-[success=true]:border-success",
+  "h-12 w-12 min-w-12 rounded-lg border border-ds-border-soft bg-transparent p-0 text-center text-heading-md font-semibold text-ds-text-plain transition-colors outline-none md:h-11 md:w-11 md:min-w-11",
+  "dark:bg-ds-bg-soft/30",
+  "focus-visible:border-ds-border-primary focus-visible:ring-3 focus-visible:ring-ds-ring",
+  "disabled:pointer-events-none disabled:bg-ds-bg-muted disabled:opacity-50",
+  "data-[invalid=true]:border-ds-border-danger data-[invalid=true]:focus-visible:ring-ds-ring-danger",
+  "data-[success=true]:border-ds-border-success",
 ]);
 
 type OtpInputProps = FieldStateProps & {
@@ -125,7 +126,7 @@ function OtpInput({
     // pinned to LTR — box 1 is always on the left.
     <div dir="ltr" className={cn("flex items-center gap-2", className)}>
       {digits.map((digit, i) => (
-        <input
+        <Input
           key={i}
           ref={(el) => {
             refs.current[i] = el;

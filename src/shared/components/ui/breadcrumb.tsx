@@ -23,7 +23,7 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
     <ol
       data-slot="breadcrumb-list"
       className={cn(
-        "flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground",
+        "flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-ds-text-muted",
         className
       )}
       {...props}
@@ -54,7 +54,7 @@ function BreadcrumbLink({
     render: asChild ? (children as React.ReactElement) : <a>{children}</a>,
     props: {
       "data-slot": "breadcrumb-link",
-      className: cn("transition-colors hover:text-foreground", className),
+      className: cn("transition-colors hover:text-ds-text-plain", className),
       ...props,
     },
   })
@@ -68,7 +68,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
       aria-disabled="true"
       aria-current="page"
       className={cn(
-        "font-medium text-primary",
+        "font-medium text-ds-text-primary",
         className
       )}
       {...props}

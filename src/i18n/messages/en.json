@@ -18,6 +18,91 @@
     "last": "Last page",
     "page": "Go to page {page}"
   },
+  "auth": {
+    "switchLang": "العربية",
+    "langLabel": "Switch to Arabic",
+    "pageTitle": "Authentication",
+    "welcomeBack": "Welcome back!",
+    "joinFamily": "Become part of our family!",
+    "forgotPassword": "Forgot your password?",
+
+    "registerEmail": "Register with Email",
+    "emailLabel": "Email",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+
+    "createAccount": "Create Account",
+    "enterOtpCode": "Enter the OTP Code",
+    "otpSentTo": "We have sent a 6-digit code to:",
+    "edit": "Edit",
+    "requestCodeIn": "You can request another code in: {timer}s",
+    "resending": "Resending...",
+    "sendNewCode": "Send a new code",
+    "verifying": "Verifying...",
+    "verifyCode": "Verify Code",
+    "needHelp": "Need help?",
+    "contactUs": "Contact Us",
+
+    "createStrongPassword": "Create a strong password",
+    "tellUsMore": "Tell us more about you",
+    "securePassword": "Choose a secure password to protect your account",
+    "detailsToStart": "A few details to get started",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "username": "Username",
+    "phoneNumber": "Phone Number",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "loginForm": {
+      "subtitle": "Sign in to your account",
+      "username": "Username",
+      "usernamePlaceholder": "username",
+      "password": "Password",
+      "passwordPlaceholder": "********",
+      "forgotPassword": "Forgot password?",
+      "rememberMe": "Remember me",
+      "button": "Login",
+      "loading": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "invalidCredentials": "Invalid username or password",
+      "networkError": "Something went wrong. Please try again.",
+      "validation": {
+        "required": "This field is required"
+      }
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "otpLength": "OTP must be 6 digits",
+    "otpDigits": "OTP must contain only numbers",
+    "firstName": "First name must be at least 2 characters",
+    "lastName": "Last name must be at least 2 characters",
+    "username": "Username must be at least 2 characters",
+    "invalidPhone": "Invalid phone number format",
+    "invalidEgyptPhone": "Invalid Egyptian mobile number",
+    "invalidGender": "Please select a valid gender",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordWeak": "Password must contain uppercase, lowercase, number and special character",
+    "emailRequired": "Your email is required",
+    "invalidEmail": "Please enter a valid email address",
+    "newPasswordRequired": "New password is required",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordUppercase": "Password must contain at least one uppercase letter",
+    "passwordLowercase": "Password must contain at least one lowercase letter",
+    "passwordNumber": "Password must contain at least one number",
+    "passwordSpecialCharacter": "Password must contain at least one special character",
+    "confirmPasswordRequired": "Your confirm password is required",
+    "passwordsDoNotMatch": "Confirm Password must match New Password",
+    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
+    "passwordMatch": "Passwords do not match"
+  },
+  "error": {
+    "networkError": "Something went wrong. Please try again."
+  },
   "input": {
     "heading": "Input",
     "subheading": "Every input variant — wired for light/dark mode and full RTL support.",
@@ -42,16 +127,22 @@
       "search": "Search",
       "number": "Quantity",
       "password": "Password",
+      "confirmPassword": "Confirm Password",
       "otp": "One-time code",
       "file": "Attachment",
       "phone": "Phone number"
     },
     "placeholders": {
       "default": "Placeholder",
-      "email": "you@example.com",
+      "email": "user@example.com",
       "search": "Search…",
       "password": "Enter your password",
-      "phone": "Phone number"
+      "phone": "Phone number",
+      "passwordPlaceholder": "********",
+
+      "firstName": "Zoe",
+      "lastName": "Jonathan",
+      "username": "zoe123"
     },
     "states": {
       "title": "States",
@@ -59,6 +150,9 @@
       "success": "Success",
       "disabled": "Disabled"
     }
+  },
+  "textarea": {
+    "charCount": "{current}/{max} characters"
   },
   "button": {
     "loading": "Loading...",
@@ -74,7 +168,9 @@
     "states": "States",
     "withIcons": "With icons",
     "iconOnly": "Icon only",
-    "loadingDemo": "Click to see the loading state"
+    "loadingDemo": "Click to see the loading state",
+    "next": "Next",
+    "creating": "Creating..."
   },
   "checkbox": {
     "title": "Checkbox",
@@ -97,5 +193,28 @@
     "error": "Error",
     "info": "Info",
     "outline": "Outline"
+  },
+  "forgotPw": {
+    "step1": {
+      "title": "Forgot Password?",
+      "subtitle": "Worry not, we’ll send you instructions to help you reset it.",
+      "notHaveAccount": "Don’t have an account yet?",
+      "toRegister": "Create one now!"
+    },
+    "step2": {
+      "title": "Password Reset Sent",
+      "subtitle": "We have sent a password reset link to:",
+      "paragraph1": "Please check your inbox and follow the instructions to reset your password.",
+      "paragraph2": "If you don’t see the email within a few minutes, check your spam or junk folder.",
+      "back": "Go back"
+    },
+    "step3": {
+      "title": "Create New Password",
+      "subtitle": "Set a strong password to secure your account.",
+      "reset": "Reset Password",
+      "success": "Password reset successfully",
+      "contact": "Need help?",
+      "toContact": "Contact us"
+    }
   }
 }

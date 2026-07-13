@@ -4,6 +4,7 @@ import * as React from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
+import { Input } from "./input";
 import {
   FieldShell,
   adornmentButtonClass,
@@ -72,10 +73,9 @@ function NumberInput({
       disabled={disabled}
       className={className}
     >
-      <input
+      <Input
         type="number"
         inputMode="numeric"
-        data-slot="input"
         disabled={disabled}
         value={current}
         min={min}

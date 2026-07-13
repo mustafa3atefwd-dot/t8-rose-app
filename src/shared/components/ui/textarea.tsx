@@ -1,83 +1,64 @@
-import * as React from "react"
-import { cn } from "@/shared/lib/utils"
+'use client';
 
-function Textarea({
-  className,
-  maxLength = 150,
-  value,
-  defaultValue,
-  onChange,
-  ...props
-}: React.ComponentProps<"textarea">) {
-  const [internalValue, setInternalValue] = React.useState(
-    (value ?? defaultValue ?? "").toString()
-  )
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { cn } from '@/shared/lib/utils';
 
-  const currentLength = internalValue.length
+function Textarea({ className, maxLength, value, defaultValue, onChange, ...props }: React.ComponentProps<'textarea'>) {
+  const t = useTranslations();
 
+  // State
+  const [internalValue, setInternalValue] = React.useState(String(defaultValue ?? ''));
+
+  const currentValue = value ?? internalValue;
+  const currentLength = String(currentValue).length;
+
+  // Functions
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const val = e.target.value
-
-    setInternalValue(val)
-    onChange?.(e)
-  }
-
-  React.useEffect(() => {
-    if (typeof value === "string") {
-      setInternalValue(value)
+    if (value === undefined) {
+      setInternalValue(e.target.value);
     }
-  }, [value])
+
+    onChange?.(e);
+  };
 
   return (
     <div className="w-full">
       <textarea
         data-slot="textarea"
-        maxLength={maxLength}
-        value={value ?? internalValue}
+        {...(maxLength ? { maxLength } : {})}
+        value={currentValue}
         onChange={handleChange}
         className={cn(
-          // Layout & Sizing
-          "flex field-sizing-content w-full min-h-37.5 px-2.5 py-2 md:text-sm",
-
-          // Border & Background
-          "rounded-lg bg-background-plain outline-none",
-          "not-disabled:border not-disabled:border-border-soft",
-
-          // Placeholder
-          "placeholder:text-text-muted",
-
-          // Hover State
-          "hover:not-disabled:not-focus:border-border-default",
-
-          // Focus Ring
-          "focus:border-border-primary",
-          "focus-visible:ring-3 focus-visible:ring-ring-default",
-
-          // Disabled State
-          "disabled:cursor-not-allowed",
-          "disabled:bg-background-muted",
-          "disabled:text-text-muted",
-
-          // Validation States
-          "aria-invalid:border-border-danger",
-          "aria-invalid:ring-ring-danger",
-
-          // Typography
-          "text-base text-text-plain",
-
-          // Animation
-          "transition-colors",
-
+          'flex field-sizing-content min-h-37.5 w-full px-2.5 py-2 md:text-sm',
+          'bg-ds-bg-plain rounded-lg outline-none',
+          'not-disabled:border-ds-border-soft not-disabled:border',
+          'placeholder:text-ds-text-muted',
+          'hover:not-disabled:not-focus:border-ds-border-default',
+          'focus:border-ds-border-primary',
+          'focus-visible:ring-ds-ring focus-visible:ring-3',
+          'disabled:cursor-not-allowed',
+          'disabled:bg-ds-bg-muted',
+          'disabled:text-ds-text-muted',
+          'aria-invalid:border-border-danger',
+          'aria-invalid:ring-ring-danger',
+          'text-ds-text-plain text-base',
+          'transition-colors',
           className
         )}
         {...props}
       />
 
-      <div className="mt-1 text-xs text-zinc-500 text-right" >
-        {currentLength}/{maxLength} characters
-      </div>
+      {maxLength !== undefined && (
+        <div className="text-ds-text-soft mt-1 text-end text-xs">
+          {t('textarea.charCount', {
+            current: currentLength,
+            max: maxLength,
+          })}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export { Textarea }
+export { Textarea };
