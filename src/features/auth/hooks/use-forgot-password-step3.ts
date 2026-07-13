@@ -5,10 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { toast } from '@/shared/components/ui/toast';
-import { forgotPasswordStep3Schema, TForgotPasswordStep3Schema } from '../schemas/forgot-password.schema';
-import { ForgotPasswordStep3Response } from '../types/forgot-password.type';
-import { forgetPasswordStep3 } from '../actions/forgot-password.action';
-
+import { forgotPasswordStep3Schema, TForgotPasswordStep3Schema } from '../lib/schemas/forgot-password.schema';
+import { ForgotPasswordStep3Response } from '../lib/types/forgot-password';
+import { forgetPasswordStep3 } from '../lib/actions/forgot-password.action';
 
 export function useForgotPasswordStep3(token: string) {
   const router = useRouter();
@@ -20,17 +19,14 @@ export function useForgotPasswordStep3(token: string) {
       newPassword: '',
       confirmPassword: '',
     },
-    resolver: zodResolver(forgotPasswordStep3Schema),
+    resolver: zodResolver(forgotPasswordStep3Schema(t)),
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
 
-  async function handleForgotPasswordStep3(
-    values: TForgotPasswordStep3Schema
-  ) {
+  async function handleForgotPasswordStep3(values: TForgotPasswordStep3Schema) {
     try {
-      const payload: ForgotPasswordStep3Response =
-        await forgetPasswordStep3(values);
+      const payload: ForgotPasswordStep3Response = await forgetPasswordStep3(values);
 
       if (payload?.status) {
         toast.success(t('forgotPw.step3.success'));

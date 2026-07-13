@@ -87,6 +87,17 @@
     "invalidGender": "Please select a valid gender",
     "passwordMin": "Password must be at least 8 characters",
     "passwordWeak": "Password must contain uppercase, lowercase, number and special character",
+    "emailRequired": "Your email is required",
+    "invalidEmail": "Please enter a valid email address",
+    "newPasswordRequired": "New password is required",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordUppercase": "Password must contain at least one uppercase letter",
+    "passwordLowercase": "Password must contain at least one lowercase letter",
+    "passwordNumber": "Password must contain at least one number",
+    "passwordSpecialCharacter": "Password must contain at least one special character",
+    "confirmPasswordRequired": "Your confirm password is required",
+    "passwordsDoNotMatch": "Confirm Password must match New Password",
+    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
     "passwordMatch": "Passwords do not match"
   },
   "error": {
@@ -194,7 +205,8 @@
       "title": "Password Reset Sent",
       "subtitle": "We have sent a password reset link to:",
       "paragraph1": "Please check your inbox and follow the instructions to reset your password.",
-      "paragraph2": "If you don’t see the email within a few minutes, check your spam or junk folder."
+      "paragraph2": "If you don’t see the email within a few minutes, check your spam or junk folder.",
+      "back": "Go back"
     },
     "step3": {
       "title": "Create New Password",

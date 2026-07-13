@@ -1,10 +1,13 @@
 'use client';
 
+import { useForgotPassword } from '../hooks/use-forgot-password';
 import ForgotPasswordStep1 from './forgot-password-step1';
 import ForgotPasswordStep2 from './forgot-password-step2';
 import ForgotPasswordStep3 from './forgot-password-step3';
-import { ForgotPasswordFormProps } from '../lib/types/forgot-password.type';
-import { useForgotPassword } from '../lib/hooks/use-forgot-password';
+
+interface ForgotPasswordFormProps {
+  token: string;
+}
 
 export default function ForgotPasswordForm({
   token,
@@ -16,7 +19,7 @@ export default function ForgotPasswordForm({
     goToStep1,
     goToStep2,
   } = useForgotPassword(token);
-
+  
   return (
     <>
       {step === 1 && (
