@@ -55,7 +55,9 @@ export async function POST(request: Request) {
     return response;
   }
 
-  const rememberMe = formData.get("rememberMe") === "true";
+  const rememberMe = formData?.get("rememberMe") === "true";
+  const maxAge = formData?.get("maxAge");
+  const shouldPersistSession = rememberMe && typeof maxAge === "string" && maxAge.trim() !== "";
 
-  return rememberMe ? response : makeCookiesBrowserSessionOnly(response);
+  return shouldPersistSession ? response : makeCookiesBrowserSessionOnly(response);
 }

@@ -5,20 +5,18 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Button } from '@/shared/components/ui/button';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Field, FieldError, FieldLabel } from '@/shared/components/ui/field';
-import { Input } from '@/shared/components/ui/inputs';
+import { Input, PasswordInput } from '@/shared/components/ui/inputs';
 import { loginSchema, type LoginSchema } from '@/features/auth/lib/schemas';
 import { REMEMBER_ME_SESSION_MAX_AGE_SECONDS } from '@/features/auth/lib/constants';
 
 export function LoginForm() {
   // Translation
-  const t = useTranslations('authLogin');
+  const t = useTranslations('auth.loginForm');
   const locale = useLocale();
   const schema = loginSchema({
     required: t('validation.required'),
@@ -28,9 +26,6 @@ export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnUrl = searchParams.get('returnUrl') || `/${locale}`;
-
-  // State
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   // Form
   const {
@@ -54,8 +49,10 @@ export function LoginForm() {
       const result = await signIn('credentials', {
         username: values.username,
         password: values.password,
-        rememberMe: String(values.rememberMe),
-        maxAge: values.rememberMe ? String(REMEMBER_ME_SESSION_MAX_AGE_SECONDS) : '',
+        rememberMe: values.rememberMe ? 'true' : 'false',
+        ...(values.rememberMe
+          ? { maxAge: String(REMEMBER_ME_SESSION_MAX_AGE_SECONDS) }
+          : {}),
         redirect: false,
       });
 
@@ -89,27 +86,17 @@ export function LoginForm() {
 
       <Field data-invalid={Boolean(errors.password)}>
         <FieldLabel htmlFor="password">{t('password')}</FieldLabel>
-        <div className="border-ds-border-muted focus-within:border-ds-border-primary focus-within:ring-ds-ring/50 flex h-12.5 items-center rounded-lg border px-2.5 transition-colors focus-within:ring-3">
-          <input
-            id="password"
-            type={isPasswordVisible ? 'text' : 'password'}
-            autoComplete="current-password"
-            placeholder={t('passwordPlaceholder')}
-            aria-invalid={Boolean(errors.password)}
-            aria-describedby={errors.password ? 'password-error' : undefined}
-            className="min-w-0 flex-1 bg-transparent text-sm outline-none"
-            {...register('password')}
-          />
-          <button
-            type="button"
-            className="text-ds-text-muted hover:text-ds-text-primary p-1 transition-colors"
-            aria-label={isPasswordVisible ? t('hidePassword') : t('showPassword')}
-            aria-pressed={isPasswordVisible}
-            onClick={() => setIsPasswordVisible((currentValue) => !currentValue)}
-          >
-            {isPasswordVisible ? <EyeOffIcon className="size-4.5" /> : <EyeIcon className="size-4.5" />}
-          </button>
-        </div>
+        <PasswordInput
+          id="password"
+          autoComplete="current-password"
+          placeholder={t('passwordPlaceholder')}
+          aria-invalid={Boolean(errors.password)}
+          aria-describedby={errors.password ? 'password-error' : undefined}
+          invalid={Boolean(errors.password)}
+          showLabel={t('showPassword')}
+          hideLabel={t('hidePassword')}
+          {...register('password')}
+        />
         <FieldError id="password-error" errors={[errors.password]} />
         <Link
           className="ms-auto text-sm font-medium text-ds-text-primary transition-colors hover:underline"
@@ -124,7 +111,7 @@ export function LoginForm() {
         name="rememberMe"
         render={({ field }) => (
           <label className="flex w-fit items-center gap-3 text-sm text-ds-text-plain">
-            <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+            <Checkbox checked={Boolean(field.value)} onCheckedChange={(checked) => field.onChange(checked === true)} />
             {t('rememberMe')}
           </label>
         )}

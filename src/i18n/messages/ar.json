@@ -54,25 +54,26 @@
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
     "next": "التالي",
-    "creating": "جاري الإنشاء..."
-  },
-  "authLogin": {
-    "username": "اسم المستخدم",
-    "usernamePlaceholder": "اسم المستخدم",
-    "password": "كلمة المرور",
-    "passwordPlaceholder": "********",
-    "forgotPassword": "نسيت كلمة المرور؟",
-    "rememberMe": "تذكرني",
-    "button": "تسجيل الدخول",
-    "loading": "جاري تسجيل الدخول...",
-    "noAccount": "ليس لديك حساب؟",
-    "register": "إنشاء حساب",
-    "showPassword": "إظهار كلمة المرور",
-    "hidePassword": "إخفاء كلمة المرور",
-    "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة",
-    "networkError": "حدث خطأ ما. يرجى المحاولة مجدداً.",
-    "validation": {
-      "required": "هذا الحقل مطلوب"
+    "creating": "جاري الإنشاء...",
+    "loginForm": {
+      "subtitle": "تسجيل الدخول إلى حسابك",
+      "username": "اسم المستخدم",
+      "usernamePlaceholder": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "********",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "rememberMe": "تذكرني",
+      "button": "تسجيل الدخول",
+      "loading": "جاري تسجيل الدخول...",
+      "noAccount": "ليس لديك حساب؟",
+      "register": "إنشاء حساب",
+      "showPassword": "إظهار كلمة المرور",
+      "hidePassword": "إخفاء كلمة المرور",
+      "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة",
+      "networkError": "حدث خطأ ما. يرجى المحاولة مجدداً.",
+      "validation": {
+        "required": "هذا الحقل مطلوب"
+      }
     }
   },
   "validation": {

@@ -14,6 +14,7 @@ const HEADING_BY_PATH: Record<string, "welcomeBack" | "joinFamily"> = {
 
 export function AuthHeading() {
   const t = useTranslations("auth");
+  const tLogin = useTranslations("auth.loginForm");
   const locale = useLocale();
   const pathname = usePathname();
   const key = HEADING_BY_PATH[pathname];
@@ -23,15 +24,21 @@ export function AuthHeading() {
   // The decorative script font (Great Vibes) has no Arabic glyphs, so apply it
   // only to Latin locales. Arabic headings render with Tajawal (`font-arabic`).
   const isArabic = locale === "ar";
+  const showLoginSubtitle = pathname === "/login";
 
   return (
-    <h1
-      className={cn(
-        "text-ds-bg-primary text-4xl text-center align-middle leading-none font-normal tracking-normal not-italic",
-        isArabic ? "font-arabic" : "font-script",
-      )}
-    >
-      {t(key)}
-    </h1>
+    <div className="flex flex-col items-center gap-2">
+      <h1
+        className={cn(
+          "text-ds-bg-primary text-4xl text-center align-middle leading-none font-normal tracking-normal not-italic",
+          isArabic ? "font-arabic" : "font-script",
+        )}
+      >
+        {t(key)}
+      </h1>
+      {showLoginSubtitle ? (
+        <p className="text-center text-sm text-ds-text-muted">{tLogin("subtitle")}</p>
+      ) : null}
+    </div>
   );
 }
