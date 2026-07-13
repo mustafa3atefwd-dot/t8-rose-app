@@ -45,17 +45,23 @@ function makeCookiesBrowserSessionOnly(response: Response) {
   });
 }
 
-export async function POST(request: Request) {
-  const formData = request.url.includes("/callback/credentials")
+
+export async function POST(
+  request: Request, 
+  context: { params: { nextauth: string[] } }
+) {
+
+  const formData = request.headers.get("content-type")?.includes("form-data")
     ? await request.clone().formData()
     : null;
-  const response = await handler(request);
+
+  const response = await handler(request, context);
 
   if (!formData) {
     return response;
   }
-
-  const rememberMe = formData?.get("rememberMe") === "true";
+  
+   const rememberMe = formData?.get("rememberMe") === "true";
   const maxAge = formData?.get("maxAge");
   const shouldPersistSession = rememberMe && typeof maxAge === "string" && maxAge.trim() !== "";
 
