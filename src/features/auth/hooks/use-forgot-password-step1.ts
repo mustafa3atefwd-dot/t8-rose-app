@@ -31,6 +31,8 @@ export function useForgotPasswordStep1(
     values: TForgotPasswordStep1Schema
   ) => {
     try {
+      console.log(values);
+      console.log(process.env.NEXT_PUBLIC_APP_URL);
       await forgetPasswordStep1(values);
       setEmail(values.email);
       onNext();
