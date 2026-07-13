@@ -46,24 +46,32 @@ function makeCookiesBrowserSessionOnly(response: Response) {
 }
 
 
+import { NextRequest } from 'next/server';
+
+
 export async function POST(
-  request: Request, 
-  context: { params: { nextauth: string[] } }
+  request: NextRequest, 
+  context: { params: Promise<{ nextauth: string[] }> }
 ) {
+
+  const resolvedParams = await context.params;
+
 
   const formData = request.headers.get("content-type")?.includes("form-data")
     ? await request.clone().formData()
     : null;
 
-  const response = await handler(request, context);
+
+  const response = await handler(request, { params: resolvedParams });
 
   if (!formData) {
     return response;
   }
-  
-   const rememberMe = formData?.get("rememberMe") === "true";
+  const rememberMe = formData?.get("rememberMe") === "true";
   const maxAge = formData?.get("maxAge");
   const shouldPersistSession = rememberMe && typeof maxAge === "string" && maxAge.trim() !== "";
 
   return shouldPersistSession ? response : makeCookiesBrowserSessionOnly(response);
+
 }
+
