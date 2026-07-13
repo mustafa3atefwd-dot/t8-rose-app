@@ -20,6 +20,7 @@ export function useForgotPasswordStep1(
   const form = useForm<TForgotPasswordStep1Schema>({
     defaultValues: {
       email,
+      redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/forgot-password`
     },
     resolver: zodResolver(forgotPasswordStep1Schema(t)),
     mode: 'onChange',

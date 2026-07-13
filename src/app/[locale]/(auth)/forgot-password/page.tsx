@@ -16,5 +16,5 @@ export default async function ForgotPasswordPage({ params, searchParams }: Forgo
     notFound();
   }
 
-  return <ForgotPasswordForm token={token ?? ''}/>;
+ return <ForgotPasswordForm token={token ?? ''}/>;
 }
