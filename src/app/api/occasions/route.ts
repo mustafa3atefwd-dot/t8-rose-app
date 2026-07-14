@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProductsAction } from '@/features/products/lib/actions';
+import { getOccasionsAction } from '@/features/products/lib/actions';
 import { ApiError } from '@/shared/lib/utils/error.util';
 
 export async function GET(request: NextRequest) {
@@ -7,12 +7,10 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const page = searchParams.get('page');
     const limit = searchParams.get('limit');
-    const occasionId = searchParams.get('occasionId');
 
-    const data = await getProductsAction({
+    const data = await getOccasionsAction({
       page: page ? Number(page) : undefined,
       limit: limit ? Number(limit) : undefined,
-      occasionId: occasionId ?? undefined,
     });
 
     return NextResponse.json(data);

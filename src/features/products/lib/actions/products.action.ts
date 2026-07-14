@@ -9,6 +9,7 @@ export const getProductsAction = async (params?: IProductsQueryParams) => {
   const query = new URLSearchParams();
   if (params?.page) query.set('page', String(params.page));
   if (params?.limit) query.set('limit', String(params.limit));
+  if (params?.occasionId) query.set('occasionId', params.occasionId);
 
   const queryString = query.toString();
 
