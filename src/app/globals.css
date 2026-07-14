@@ -20,6 +20,7 @@
   --ds-bg-primary-saturated: var(--color-maroon-700);
   --ds-bg-primary-faint: var(--color-maroon-100);
   --ds-bg-primary-fade: var(--color-maroon-50);
+  --ds-bg-primary-overlay: color-mix(in srgb, var(--color-soft-pink-600) 50%, transparent);
 
   /* Info */
   --ds-bg-info: var(--color-blue-600);
@@ -145,6 +146,7 @@ html[data-theme='dark'] {
   --ds-bg-primary-saturated: var(--color-soft-pink-200);
   --ds-bg-primary-faint: color-mix(in srgb, var(--color-soft-pink-300) 75%, transparent);
   --ds-bg-primary-fade: color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+  --ds-bg-primary-overlay: color-mix(in srgb, var(--color-soft-pink-600) 50%, transparent);
 
   /* Info */
   --ds-bg-info: var(--color-blue-500);
@@ -267,6 +269,7 @@ html[data-theme='dark'] {
 --color-ds-bg-primary-saturated: var(--ds-bg-primary-saturated);
 --color-ds-bg-primary-faint: var(--ds-bg-primary-faint);
 --color-ds-bg-primary-fade: var(--ds-bg-primary-fade);
+--color-ds-bg-primary-overlay: var(--ds-bg-primary-overlay);
 --color-ds-bg-info: var(--ds-bg-info);
 --color-ds-bg-info-faint: var(--ds-bg-info-faint);
 --color-ds-bg-info-fade: var(--ds-bg-info-fade);

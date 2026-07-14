@@ -196,6 +196,18 @@
     "info": "معلومة",
     "outline": "محدد"
   },
+  "products": {
+    "card": {
+      "new": "جديد",
+      "hot": "رائج",
+      "outOfStock": "نفدت الكمية",
+      "noImage": "لا توجد صورة",
+      "addToCart": "أضف إلى السلة",
+      "wishlist": "أضف إلى المفضلة",
+      "quickView": "عرض سريع",
+      "rating": "{rating} من 5"
+    }
+  },
   "forgotPw": {
     "step1": {
       "title": "نسيت كلمة المرور؟",
