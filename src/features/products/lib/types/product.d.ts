@@ -70,6 +70,7 @@ export interface IProductDetail extends IProduct {
 export interface IProductsQueryParams {
   page?: number;
   limit?: number;
+  occasionId?: string;
 }
 
 export interface IPaginationMeta {
