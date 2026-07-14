@@ -20,6 +20,7 @@
   --ds-bg-primary-saturated: var(--color-maroon-700);
   --ds-bg-primary-faint: var(--color-maroon-100);
   --ds-bg-primary-fade: var(--color-maroon-50);
+  --ds-bg-primary-overlay: color-mix(in srgb, var(--color-soft-pink-600) 50%, transparent);
 
   /* Info */
   --ds-bg-info: var(--color-blue-600);
@@ -144,6 +145,7 @@ html[data-theme='dark'] {
   --ds-bg-primary-saturated: var(--color-soft-pink-200);
   --ds-bg-primary-faint: color-mix(in srgb, var(--color-soft-pink-300) 75%, transparent);
   --ds-bg-primary-fade: color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
+  --ds-bg-primary-overlay: color-mix(in srgb, var(--color-soft-pink-600) 50%, transparent);
 
   /* Info */
   --ds-bg-info: var(--color-blue-500);
@@ -570,23 +572,5 @@ html[data-theme='dark'] {
     background: var(--color-soft-pink-300);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
     color: var(--color-zinc-700);
-  }
-}
-
-.marquee {
-  animation: marquee 20s linear infinite;
-}
-
-.group:hover .marquee {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
   }
 }
