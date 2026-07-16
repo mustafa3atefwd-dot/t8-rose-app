@@ -196,6 +196,30 @@
     "info": "معلومة",
     "outline": "محدد"
   },
+  "footer": {
+    "logoAlt": "شعار متجر روز الإلكتروني",
+    "appName": "Rose E-Commerce App",
+    "tagline": "جميع الحقوق محفوظة",
+    "year": "٢٠٢٥",
+    "navigationTitle": "اكتشف موقعنا",
+    "navigation": {
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "contact": "اتصل بنا",
+      "about": "من نحن",
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية",
+      "faqs": "الأسئلة الشائعة"
+    },
+    "discountTitle": "احصل على كوبون خصم 20%",
+    "discountSubtitle": "عند الاشتراك في نشرتنا البريدية",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "subscribe": "اشترك",
+    "subscribeSuccess": "تم الاشتراك بنجاح!",
+    "alreadySubscribed": "مشترك بالفعل"
+  },
   "forgotPw": {
     "step1": {
       "title": "نسيت كلمة المرور؟",

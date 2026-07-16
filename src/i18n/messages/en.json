@@ -194,6 +194,30 @@
     "info": "Info",
     "outline": "Outline"
   },
+  "footer": {
+    "logoAlt": "Rose E-Commerce App logo",
+    "appName": "Rose E-Commerce App",
+    "tagline": "All rights reserved",
+    "year": "2025",
+    "navigationTitle": "Discover our website",
+    "navigation": {
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "faqs": "FAQs"
+    },
+    "discountTitle": "Get 20% Off Discount Coupon",
+    "discountSubtitle": "By subscribing to our newsletter",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "subscribeSuccess": "Subscribed successfully!",
+    "alreadySubscribed": "Already subscribed"
+  },
   "forgotPw": {
     "step1": {
       "title": "Forgot Password?",
