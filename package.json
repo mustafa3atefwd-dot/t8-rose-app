@@ -1,5 +1,5 @@
 {
-  "name": "roseapp",
+  "name": "t8-rose-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,47 +7,55 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "echo \"No tests yet\" && exit 0",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss,html}": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
-    "@base-ui/react": "^1.5.0",
+    "@base-ui/react": "^1.6.0",
     "@hookform/resolvers": "^5.4.0",
-    "@phosphor-icons/react": "^2.1.10",
     "@tanstack/react-query": "^5.101.0",
     "@tanstack/react-query-devtools": "^5.101.0",
-    "@tanstack/react-query-next-experimental": "^5.101.0",
-    "axios": "^1.18.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide": "^1.3.0",
-    "lucide-react": "^1.3.0",
+    "framer-motion": "^12.42.2",
+    "input-otp": "^1.4.2",
+    "libphonenumber-js": "^1.13.8",
+    "lucide-react": "^1.18.0",
     "next": "16.2.9",
     "next-auth": "^4.24.14",
     "next-intl": "^4.13.0",
     "next-themes": "^0.4.6",
+    "postcss": "^8.5.15",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-hook-form": "^7.80.0",
-    "react-infinite-scroll-component": "^7.2.1",
+    "react-hook-form": "^7.79.0",
     "shadcn": "^4.11.0",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0",
     "tw-animate-css": "^1.4.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@tanstack/react-devtools": "^0.10.7",
+    "@tailwindcss/postcss": "^4.3.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
+    "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "prettier": "^3.8.4",
-    "tailwindcss": "^4",
+    "lint-staged": "^17.0.7",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5"
   }
 }

@@ -1,9 +1,9 @@
-"use client"
-
 import * as React from "react"
 
-import { cn } from "@/shared/lib/utils/tailwind-cn"
+import { cn } from "@/shared/lib/utils"
 
+// Base UI has no Label primitive (unlike Radix), so this renders a native
+// <label>. The styling and `data-slot` contract are unchanged.
 function Label({ className, ...props }: React.ComponentProps<"label">) {
   return (
     <label

@@ -1,7 +1,222 @@
 {
-  "IndexPage": {
-    "title": "مرحبا بالعالم!",
-    "button":"اضغط هنا ",
-    "badge":"شارة"
+  "title": "مرحبا بك في تطبيقنا",
+  "app-title": "تطبيق روز",
+  "NotFoundPage": {
+    "Not Found page ": "الصفحه غير موجودة",
+    "Go Back home": "الرجوع للصفحه الرئيسيه"
+  },
+  "toast": {
+    "success": "نجاح",
+    "error": "خطأ",
+    "warning": "تحذير",
+    "info": "معلومة"
+  },
+  "pagination": {
+    "first": "الصفحة الأولى",
+    "previous": "السابق",
+    "next": "التالي",
+    "last": "الصفحة الأخيرة",
+    "page": "الذهاب إلى الصفحة {page}"
+  },
+  "auth": {
+    "switchLang": "English",
+    "langLabel": "التحويل إلى الإنجليزية",
+    "pageTitle": "المصادقة",
+    "welcomeBack": "مرحباً بعودتك!",
+    "joinFamily": "كن جزءاً من عائلتنا!",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+
+    "registerEmail": "التسجيل باستخدام البريد الإلكتروني",
+    "emailLabel": "البريد الإلكتروني",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "login": "تسجيل الدخول",
+
+    "createAccount": "إنشاء حساب",
+    "enterOtpCode": "أدخل رمز التحقق",
+    "otpSentTo": "لقد أرسلنا رمزًا مكونًا من 6 أرقام إلى:",
+    "edit": "تعديل",
+    "requestCodeIn": "يمكنك طلب رمز آخر خلال: {timer}ث",
+    "resending": "جاري إعادة الإرسال...",
+    "sendNewCode": "إرسال رمز جديد",
+    "verifying": "جاري التحقق...",
+    "verifyCode": "التحقق من الرمز",
+    "needHelp": "هل تحتاج إلى مساعدة؟",
+    "contactUs": "تواصل معنا",
+
+    "createStrongPassword": "إنشاء كلمة مرور قوية",
+    "tellUsMore": "أخبرنا المزيد عنك",
+    "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
+    "detailsToStart": "بعض التفاصيل للبدء",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "username": "اسم المستخدم",
+    "phoneNumber": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "next": "التالي",
+    "creating": "جاري الإنشاء...",
+    "loginForm": {
+      "subtitle": "تسجيل الدخول إلى حسابك",
+      "username": "اسم المستخدم",
+      "usernamePlaceholder": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "********",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "rememberMe": "تذكرني",
+      "button": "تسجيل الدخول",
+      "loading": "جاري تسجيل الدخول...",
+      "noAccount": "ليس لديك حساب؟",
+      "register": "إنشاء حساب",
+      "showPassword": "إظهار كلمة المرور",
+      "hidePassword": "إخفاء كلمة المرور",
+      "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة",
+      "networkError": "حدث خطأ ما. يرجى المحاولة مجدداً.",
+      "validation": {
+        "required": "هذا الحقل مطلوب"
+      }
+    }
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "otpLength": "يجب أن يتكون رمز التحقق من 6 أرقام",
+    "otpDigits": "يجب أن يحتوي رمز التحقق على أرقام فقط",
+    "firstName": "يجب أن يكون الاسم الأول 2 حرف على الأقل",
+    "lastName": "يجب أن يكون اسم العائلة 2 حرف على الأقل",
+    "username": "يجب أن يكون اسم المستخدم 2 حرف على الأقل",
+    "invalidPhone": "صيغة رقم الهاتف غير صحيحة",
+    "invalidEgyptPhone": "صيغة رقم الهاتف المصري غير صحيحة",
+    "invalidGender": "يرجى اختيار جنس صحيح",
+    "passwordMin": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    "passwordWeak": "يجب أن تحتوي كلمة المرور على حرف كبير وصغير ورقم ورمز خاص",
+     "emailRequired": "يجب أن يكون لديك بريد إلكتروني",
+     "invalidEmail": "يجب أن يكون لديك بريد إلكتروني صالح",
+     "newPasswordRequired": "يجب أن يكون لديك كلمة مرور جديدة",
+     "passwordMin": "يجب أن تكون كلمة المرور على الأقل 8 أحرف",
+     "passwordUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+     "passwordLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+     "passwordNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+     "passwordSpecialCharacter": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
+     "confirmPasswordRequired": "يجب أن يكون لديك تأكيد كلمة المرور",
+     "passwordsDoNotMatch": "يجب أن تكون كلمة المرور المؤكدة مطابقة لكلمة المرور الجديدة",
+    "passwordWeak": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل وتشمل: حرف كبير وصغير ورقم ورمز خاص",
+    "passwordMatch": "كلمتا المرور غير متطابقتين"
+  },
+  "error": {
+    "networkError": "حدث خطأ ما. يرجى المحاولة مجدداً."
+  },
+  "input": {
+    "heading": "حقول الإدخال",
+    "subheading": "جميع أنواع حقول الإدخال — مع دعم الوضع الفاتح والداكن واتجاه RTL بالكامل.",
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "invalidPhone": "أدخل رقم هاتف صالح",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "fileSelected": "تم اختيار الملف",
+    "fileTooLarge": "حجم الملف كبير جدًا (الحد الأقصى {size})",
+    "fileWrongType": "نوع الملف غير مسموح به",
+    "uploadFile": "رفع ملف",
+    "noFileSelected": "لم يتم اختيار ملف",
+    "increment": "زيادة",
+    "decrement": "إنقاص",
+    "selectCountry": "اختر الدولة",
+    "digit": "خانة",
+    "valid": "كل شيء على ما يرام",
+    "labels": {
+      "default": "التسمية",
+      "email": "البريد الإلكتروني",
+      "search": "بحث",
+      "number": "الكمية",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "otp": "رمز التحقق",
+      "file": "مرفق",
+      "phone": "رقم الهاتف"
+    },
+    "placeholders": {
+      "default": "نص توضيحي",
+      "email": "user@example.com",
+      "search": "بحث…",
+      "password": "أدخل كلمة المرور",
+      "phone": "رقم الهاتف",
+      "passwordPlaceholder": "********",
+
+      "firstName": "محمد",
+      "lastName": "محمود",
+      "username": "mohamed123"
+    },
+    "states": {
+      "title": "الحالات",
+      "error": "خطأ",
+      "success": "نجاح",
+      "disabled": "معطّل"
+    }
+  },
+  "textarea": {
+    "charCount": "{current}/{max} حرف"
+  },
+  "button": {
+    "loading": "جاري التحميل...",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "login": "تسجيل الدخول",
+    "heading": "الأزرار ومربعات الاختيار والشارات",
+    "subheading": "عناصر تفاعلية ومؤشرات حالة — مع دعم الوضع الفاتح والداكن واتجاه RTL.",
+    "variants": "الأنواع",
+    "states": "الحالات",
+    "withIcons": "مع الأيقونات",
+    "iconOnly": "أيقونة فقط",
+    "loadingDemo": "اضغط لرؤية حالة التحميل",
+    "next": "التالي",
+    "creating": "جاري الإنشاء…"
+  },
+  "checkbox": {
+    "title": "مربع الاختيار",
+    "default": "افتراضي",
+    "checked": "محدد",
+    "indeterminate": "غير محدد بالكامل",
+    "disabled": "معطّل",
+    "selectAll": "تحديد الكل",
+    "options": {
+      "one": "الإشعارات",
+      "two": "رسائل التسويق",
+      "three": "تحديثات المنتج"
+    }
+  },
+  "badge": {
+    "title": "الشارة",
+    "default": "افتراضي",
+    "success": "نجاح",
+    "warning": "تحذير",
+    "error": "خطأ",
+    "info": "معلومة",
+    "outline": "محدد"
+  },
+  "forgotPw": {
+    "step1": {
+      "title": "نسيت كلمة المرور؟",
+      "subtitle": "لا تقلق، سنرسل لك تعليمات لمساعدتك في إعادة تعيينها.",
+      "notHaveAccount": "ليس لديك حساب؟",
+      "toRegister": "انشئ حسابك الآن!"
+    },
+    "step2": {
+      "title": "تم إرسال رابط إعادة تعيين كلمة المرور",
+      "subtitle": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى:",
+      "paragraph1": "الرجاء التحقق من صندوق الوارد واتباع التعليمات لإعادة تعيين كلمة المرور.",
+      "paragraph2": "إذا لم ترى البريد الإلكتروني خلال بضع دقائق، فتحقق من مجلد البريد المزعج أو المهمل.",
+      "back": "الرجوع"
+    },
+    "step3": {
+      "title": "إنشاء كلمة مرور جديدة",
+      "subtitle": "ضع كلمة مرور قوية لتأمين حسابك.",
+      "reset": "إعادة تعيين كلمة المرور",
+      "success": "تم إعادة تعيين كلمة المرور بنجاح",
+      "contact": "هل تحتاج مساعدة؟",
+      "toContact": "اتصل بنا"
+    }
   }
 }
