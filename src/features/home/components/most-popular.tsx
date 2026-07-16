@@ -31,22 +31,25 @@ const MostPopular = () => {
 
   return (
     <div className="container mx-auto flex flex-col items-center gap-8 px-4 py-12 text-center">
-      <div className="flex flex-col items-center gap-3">
-        <h4 className="text-body text-ds-text-secondary font-bold tracking-[0.25em] uppercase">Most Popular</h4>
-        <p className="text-3xl leading-none font-bold">
-          <span className="text-ds-bg-secondary">Shop by</span> Occasion
-        </p>
-      </div>
+      <div className="flex w-full items-center justify-between gap-3">
+        <h4 className="text-ds-text-primary relative text-4xl font-bold">
+          Most Popular
+          <div className="bg-soft-pink-100 absolute -bottom-1 left-0 -z-1 h-5 w-[75%] rounded-r-2xl before:block before:h-1 before:w-16 before:translate-y-4 before:bg-soft-pink-700 before:content-['']"></div>
+        </h4>
 
-      <Tabs value={activeOccasion} onValueChange={(value) => setActiveOccasion(value as (typeof OCCASION_FILTERS)[number])}>
-        <TabsList variant="segmented">
-          {OCCASION_FILTERS.map((occasion) => (
-            <TabsTrigger key={occasion} value={occasion}>
-              {occasion}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+        <Tabs
+          value={activeOccasion}
+          onValueChange={(value) => setActiveOccasion(value as (typeof OCCASION_FILTERS)[number])}
+        >
+          <TabsList variant="line">
+            {OCCASION_FILTERS.map((occasion) => (
+              <TabsTrigger key={occasion} value={occasion}>
+                {occasion}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </div>
 
       {isPending ? (
         <div className="flex w-full items-center justify-center py-12">
