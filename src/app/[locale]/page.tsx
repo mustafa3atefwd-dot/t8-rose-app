@@ -1,11 +1,12 @@
-import { useTranslations } from "next-intl";
-
+import HomepageHero from '@/shared/components/hero-section';
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
-
   const t = useTranslations();
 
-  return <div className="flex flex-col items-center justify-center min-h-screen">
-  <h1 className="text-4xl font-bold text-maroon-400">{t("title")}</h1>
-    </div>;
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-maroon-400 text-4xl font-bold">{t('title')}</h1>
+    </div>
+  );
 }
