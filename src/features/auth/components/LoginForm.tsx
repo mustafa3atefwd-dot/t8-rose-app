@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
@@ -12,7 +11,17 @@ import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Field, FieldError, FieldLabel } from '@/shared/components/ui/field';
 import { Input, PasswordInput } from '@/shared/components/ui/inputs';
 import { loginSchema, type LoginSchema } from '@/features/auth/lib/schemas';
-import { REMEMBER_ME_SESSION_MAX_AGE_SECONDS } from '@/features/auth/lib/constants';
+import { Link } from '@/i18n/navigation';
+
+function getSafeReturnUrl(returnUrl: string | null, locale: string) {
+  const fallbackUrl = `/${locale}`;
+
+  if (!returnUrl?.startsWith('/') || returnUrl.startsWith('//')) {
+    return fallbackUrl;
+  }
+
+  return returnUrl;
+}
 
 export function LoginForm() {
   // Translation
@@ -25,12 +34,13 @@ export function LoginForm() {
   // Navigation
   const router = useRouter();
   const searchParams = useSearchParams();
-  const returnUrl = searchParams.get('returnUrl') || `/${locale}`;
+  const returnUrl = getSafeReturnUrl(searchParams.get('returnUrl'), locale);
 
   // Form
   const {
     control,
     formState: { errors, isSubmitting },
+    clearErrors,
     handleSubmit,
     register,
     setError,
@@ -45,18 +55,17 @@ export function LoginForm() {
 
   // Functions
   async function handleLogin(values: LoginSchema) {
+    clearErrors('root');
+
     try {
       const result = await signIn('credentials', {
         username: values.username,
         password: values.password,
         rememberMe: values.rememberMe ? 'true' : 'false',
-        ...(values.rememberMe
-          ? { maxAge: String(REMEMBER_ME_SESSION_MAX_AGE_SECONDS) }
-          : {}),
         redirect: false,
       });
 
-      if (result?.error) {
+      if (!result?.ok || result.error) {
         setError('root', { message: t('invalidCredentials') });
         return;
       }
@@ -100,7 +109,7 @@ export function LoginForm() {
         <FieldError id="password-error" errors={[errors.password]} />
         <Link
           className="ms-auto text-sm font-medium text-ds-text-primary transition-colors hover:underline"
-          href={`/${locale}/forgot-password`}
+          href="/forgot-password"
         >
           {t('forgotPassword')}
         </Link>
@@ -129,7 +138,7 @@ export function LoginForm() {
 
       <footer className="border-t border-ds-border-muted pt-6 text-center text-sm text-ds-text-muted">
         {t('noAccount')}{' '}
-        <Link className="font-semibold text-ds-text-primary hover:underline" href={`/${locale}/register`}>
+        <Link className="font-semibold text-ds-text-primary hover:underline" href="/register">
           {t('register')}
         </Link>
       </footer>

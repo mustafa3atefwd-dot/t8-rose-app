@@ -1,41 +1,49 @@
 import { authOptions } from "@/auth";
 import NextAuth from "next-auth";
+import type { NextRequest } from "next/server";
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET };
+interface NextAuthRouteContext {
+  params: Promise<{ nextauth: string[] }>;
+}
 
 function getSetCookieHeaders(headers: Headers) {
   const headersWithSetCookie = headers as Headers & {
     getSetCookie?: () => string[];
   };
 
-  const setCookieHeaders = headersWithSetCookie.getSetCookie?.();
+  const cookies = headersWithSetCookie.getSetCookie?.() ?? [];
 
-  if (setCookieHeaders?.length) {
-    return setCookieHeaders;
+  if (cookies.length) {
+    return cookies;
   }
 
-  const setCookieHeader = headers.get("set-cookie");
+  const combinedHeader = headers.get("set-cookie");
 
-  return setCookieHeader ? [setCookieHeader] : [];
+  return combinedHeader ? combinedHeader.split(/,(?=\s*[^;,\s]+=)/) : [];
 }
 
-function makeCookiesBrowserSessionOnly(response: Response) {
+function isSessionCookie(cookie: string) {
+  return /^(?:__Secure-)?next-auth\.session-token(?:\.\d+)?=/i.test(cookie.trim());
+}
+
+function makeSessionCookieBrowserOnly(response: Response) {
   const responseHeaders = new Headers(response.headers);
   const setCookieHeaders = getSetCookieHeaders(response.headers);
 
+  if (!setCookieHeaders.length) {
+    return response;
+  }
+
   responseHeaders.delete("set-cookie");
 
-  // NextAuth's maxAge is static, so Remember Me is applied by removing
-  // persistent cookie attributes only for non-remembered credentials logins.
   for (const cookie of setCookieHeaders) {
-    responseHeaders.append(
-      "set-cookie",
-      cookie
-        .replace(/;\s*Max-Age=\d+/gi, "")
-        .replace(/;\s*Expires=[^;]+/gi, ""),
-    );
+    const nextCookie = isSessionCookie(cookie)
+      ? cookie.replace(/;\s*Max-Age=\d+/gi, "").replace(/;\s*Expires=[^;]+/gi, "")
+      : cookie;
+
+    responseHeaders.append("set-cookie", nextCookie);
   }
 
   return new Response(response.body, {
@@ -45,33 +53,30 @@ function makeCookiesBrowserSessionOnly(response: Response) {
   });
 }
 
+export async function GET(request: NextRequest, context: NextAuthRouteContext) {
+  const response = await handler(request, context);
 
-import { NextRequest } from 'next/server';
-
-
-export async function POST(
-  request: NextRequest, 
-  context: { params: Promise<{ nextauth: string[] }> }
-) {
-
-  const resolvedParams = await context.params;
-
-
-  const formData = request.headers.get("content-type")?.includes("form-data")
-    ? await request.clone().formData()
-    : null;
-
-
-  const response = await handler(request, { params: resolvedParams });
-
-  if (!formData) {
+  if (!request.nextUrl.pathname.endsWith("/session")) {
     return response;
   }
-  const rememberMe = formData?.get("rememberMe") === "true";
-  const maxAge = formData?.get("maxAge");
-  const shouldPersistSession = rememberMe && typeof maxAge === "string" && maxAge.trim() !== "";
 
-  return shouldPersistSession ? response : makeCookiesBrowserSessionOnly(response);
+  const session = (await response
+    .clone()
+    .json()
+    .catch(() => null)) as { rememberMe?: boolean } | null;
 
+  return session?.rememberMe === false ? makeSessionCookieBrowserOnly(response) : response;
+}
+
+export async function POST(request: NextRequest, context: NextAuthRouteContext) {
+  const isCredentialsCallback = request.nextUrl.pathname.endsWith("/callback/credentials");
+  const formData = isCredentialsCallback ? await request.clone().formData() : null;
+  const response = await handler(request, context);
+
+  if (!formData || formData.get("rememberMe") === "true") {
+    return response;
+  }
+
+  return makeSessionCookieBrowserOnly(response);
 }
 

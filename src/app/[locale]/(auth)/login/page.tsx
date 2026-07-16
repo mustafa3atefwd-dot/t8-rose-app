@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -17,5 +18,16 @@ export default async function LoginPage({ params }: LoginPageProps) {
 
   setRequestLocale(locale);
 
-  return <LoginForm />;
+  return (
+    <Suspense
+      fallback={
+        <div
+          className="h-96 w-full max-w-md animate-pulse rounded-lg bg-ds-bg-muted"
+          aria-hidden
+        />
+      }
+    >
+      <LoginForm />
+    </Suspense>
+  );
 }

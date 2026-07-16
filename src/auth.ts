@@ -3,12 +3,17 @@ import Credentials from "next-auth/providers/credentials";
 import { BACKEND_URL } from "./shared/lib/constants/api.constant";
 import { IApiResponse } from "./shared/lib/types/api";
 import { LoginPayload } from "./shared/lib/types/auth";
+import { REMEMBER_ME_SESSION_MAX_AGE_SECONDS } from "./features/auth/lib/constants";
 
 const loginEndpoint = `${BACKEND_URL}/auth/login`;
 
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
+    maxAge: REMEMBER_ME_SESSION_MAX_AGE_SECONDS,
   },
   providers: [
     Credentials({
