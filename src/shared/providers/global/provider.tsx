@@ -2,6 +2,7 @@ import React from 'react'
 import { ReactQueryProviders } from './providers/react-query.providers'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { NextIntlClientProvider } from 'next-intl'
+import NextAuthProvider from './providers/next-auth.provider'
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ReactQueryProviders>
@@ -9,7 +10,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <ReactQueryDevtools initialIsOpen={true} />
       
       <NextIntlClientProvider>
-        {children}
+        <NextAuthProvider>
+          {children}
+        </NextAuthProvider>
       </NextIntlClientProvider>
 
     </ReactQueryProviders>

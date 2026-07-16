@@ -4,13 +4,14 @@ import { Input } from "@/shared/components/ui/input";
 import { Bell, ClipboardList, Gift, Headset, Heart, House, Info, PartyPopper, Search, ShoppingCart, User } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import LanguageSwitch from "@/features/components/toggle-language";
+import UnAuthenticatedLogin from "@/features/components/unauth-login";
 
 export default function Header() {
     return <>
         {/* parent */}
         <div className="">
             {/* up */}
-            <div className=" h-22 pt-4.5 pr-9 pb-4.5 pl-9 gap-4 flex  items-center">
+            <div className="h-22 pt-4.5 pr-9 pb-4.5 pl-9 gap-4 flex  items-center">
                 {/* image */}
 
                         <Image className="w-20.5 h-20 " src={Logo} alt="" width={200} height={200}/>
@@ -23,9 +24,8 @@ export default function Header() {
 
                 {/* login */}
                 <div className="flex">
-                    <div className="flex items-center w-24 h-13 border-r pr-4 pl-4 gap-1.5">
-                        <User />
-                        <Link href={'auth/login'}>Login</Link>
+                    <div>
+                        <UnAuthenticatedLogin/>
                     </div>
 
                     {/* icons */}
