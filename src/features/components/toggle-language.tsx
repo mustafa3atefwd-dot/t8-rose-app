@@ -19,7 +19,7 @@ export default function LanguageSwitch(){
 
     return (
         <div>
-            <button className="text-xl border rounded-2xl p-2 border-amber-200 cursor-pointer" onClick={handelToggelLanguage}>
+            <button className="cursor-pointer" onClick={handelToggelLanguage}>
                 {locale === 'ar' ? 'english' : 'العربية'}
             </button>
         </div>
