@@ -25,7 +25,6 @@
     "@tanstack/react-query-devtools": "^5.101.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.42.2",
     "input-otp": "^1.4.2",
     "libphonenumber-js": "^1.13.8",
     "lucide-react": "^1.18.0",
