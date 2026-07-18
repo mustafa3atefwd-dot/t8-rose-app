@@ -218,5 +218,16 @@
       "contact": "هل تحتاج مساعدة؟",
       "toContact": "اتصل بنا"
     }
+  },
+
+  "homeHeader":{
+    "login": "تسجيل الدخول",
+    "home": "الصفحة الرئيسيه",
+    "products": "المنتجات",
+    "categories": "فئات",
+    "occasions": "مناسبات",
+    "contact": "اتصال",
+    "about": "عن",
+    "inputPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟"
   }
 }
