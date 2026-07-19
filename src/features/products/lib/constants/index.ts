@@ -1,1 +1,1 @@
-export * from './query-keys.constant';
+export * from './product.constant';

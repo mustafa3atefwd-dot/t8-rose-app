@@ -10,6 +10,8 @@ export const getProductsAction = async (params?: IProductsQueryParams) => {
   if (params?.page) query.set('page', String(params.page));
   if (params?.limit) query.set('limit', String(params.limit));
   if (params?.occasionId) query.set('occasionId', params.occasionId);
+  if (params?.sortBy) query.set('sortBy', params.sortBy);
+  if (params?.sortOrder) query.set('sortOrder', params.sortOrder);
 
   const queryString = query.toString();
 

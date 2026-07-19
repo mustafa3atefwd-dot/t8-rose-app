@@ -1,26 +1,19 @@
 'use client';
 
 import ProductCard from '@/features/products/components/product-card';
-import { useProducts } from '@/features/products/hooks';
-import { Spinner } from '@/shared/components/ui/spinner';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/components/ui/carousel';
+import { IProduct } from '@/features/products/lib/types/product';
 
-const ProductCarousel = () => {
-  const { data, isPending, isError } = useProducts({ page: 1, limit: 10 });
-  const products = data?.data ?? [];
+interface ProductCarouselProps {
+  /** Fetched server-side by the parent; `null` means the fetch failed. */
+  products: IProduct[] | null;
+}
 
-  if (isPending) {
-    return (
-      <div className="flex w-full items-center justify-center py-12">
-        <Spinner className="size-6" />
-      </div>
-    );
-  }
-
-  if (isError || products.length === 0) {
+const ProductCarousel = ({ products }: ProductCarouselProps) => {
+  if (!products || products.length === 0) {
     return (
       <p className="w-full py-12 text-center text-ds-text-muted">
-        {isError ? 'Failed to load products.' : 'No products yet.'}
+        {products === null ? 'Failed to load products.' : 'No products yet.'}
       </p>
     );
   }
