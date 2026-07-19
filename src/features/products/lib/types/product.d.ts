@@ -1,4 +1,5 @@
 import { IDocumentFields } from '@/shared/lib/types/base';
+import { ProductSortBy, SortOrder } from '../constants/product.constant';
 
 export const PRODUCT_DISCOUNT_TYPES = {
   percent: 'PERCENT',
@@ -71,6 +72,8 @@ export interface IProductsQueryParams {
   page?: number;
   limit?: number;
   occasionId?: string;
+  sortBy?: ProductSortBy;
+  sortOrder?: SortOrder;
 }
 
 export interface IPaginationMeta {
