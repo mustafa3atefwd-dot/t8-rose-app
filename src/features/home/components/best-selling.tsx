@@ -1,8 +1,16 @@
 import ProductCarousel from '@/features/home/components/product-carousel';
 import { Button } from '@/shared/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { getProductsAction } from '@/features/products/lib/actions';
 
-const BestSelling = () => {
+const BEST_SELLING_LIMIT = 10;
+
+const BestSelling = async () => {
+  const result = await getProductsAction({ limit: BEST_SELLING_LIMIT, sortBy: 'bestSelling', sortOrder: 'desc' }).catch(
+    () => null
+  );
+  const products = result?.status ? (result.payload?.data ?? []) : null;
+
   return (
     <div className="container mx-auto flex flex-col items-start gap-8 px-4 py-12 text-start md:flex-row">
       <div className="flex max-w-1/5 flex-col items-start gap-3">
@@ -25,7 +33,7 @@ const BestSelling = () => {
       </div>
 
       {/* carousel of products */}
-      <ProductCarousel />
+      <ProductCarousel products={products} />
     </div>
   );
 };
