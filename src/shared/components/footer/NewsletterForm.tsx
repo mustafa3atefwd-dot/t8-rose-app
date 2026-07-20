@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -9,17 +8,12 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/inputs';
 import { toast } from '@/shared/components/ui/toast';
-import { STATIC_NEWSLETTER_DELAY_MS } from './footer.constants';
+import { subscribeToNewsletter } from './newsletter.api';
 import { createNewsletterSchema, type NewsletterFormValues } from './newsletter.schema';
-
-function waitForStaticSubscription() {
-  return new Promise((resolve) => window.setTimeout(resolve, STATIC_NEWSLETTER_DELAY_MS));
-}
 
 export function NewsletterForm() {
   const t = useTranslations('footer');
   const validation = useTranslations('validation');
-  const [subscribedEmails, setSubscribedEmails] = useState<ReadonlySet<string>>(() => new Set());
   const schema = createNewsletterSchema({
     required: validation('emailRequired'),
     invalid: validation('invalidEmail'),
@@ -36,18 +30,21 @@ export function NewsletterForm() {
   });
 
   async function handleSubscribe(values: NewsletterFormValues) {
-    await waitForStaticSubscription();
-
     const email = values.email.toLowerCase();
 
-    if (subscribedEmails.has(email)) {
-      toast.error(t('alreadySubscribed'));
-      return;
-    }
+    try {
+      const result = await subscribeToNewsletter(email);
 
-    setSubscribedEmails((currentEmails) => new Set(currentEmails).add(email));
-    toast.success(t('subscribeSuccess'));
-    setValue('email', '');
+      if (result === 'already-subscribed') {
+        toast.error(t('alreadySubscribed'));
+        return;
+      }
+
+      toast.success(t('subscribeSuccess'));
+      setValue('email', '');
+    } catch {
+      toast.error(t('subscribeError'));
+    }
   }
 
   return (

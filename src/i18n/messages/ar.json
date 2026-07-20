@@ -218,7 +218,8 @@
     "emailPlaceholder": "أدخل بريدك الإلكتروني",
     "subscribe": "اشترك",
     "subscribeSuccess": "تم الاشتراك بنجاح!",
-    "alreadySubscribed": "مشترك بالفعل"
+    "alreadySubscribed": "مشترك بالفعل",
+    "subscribeError": "فشل الاشتراك. يرجى المحاولة مرة أخرى."
   },
   "forgotPw": {
     "step1": {

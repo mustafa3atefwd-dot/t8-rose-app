@@ -216,7 +216,8 @@
     "emailPlaceholder": "Enter your email",
     "subscribe": "Subscribe",
     "subscribeSuccess": "Subscribed successfully!",
-    "alreadySubscribed": "Already subscribed"
+    "alreadySubscribed": "Already subscribed",
+    "subscribeError": "Subscription failed. Please try again."
   },
   "forgotPw": {
     "step1": {

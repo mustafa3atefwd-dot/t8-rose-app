@@ -9,5 +9,3 @@ export const FOOTER_LINKS = [
   { key: 'privacy', href: '/privacy-policy' },
   { key: 'faqs', href: '/faqs' },
 ] as const;
-
-export const STATIC_NEWSLETTER_DELAY_MS = 500;
