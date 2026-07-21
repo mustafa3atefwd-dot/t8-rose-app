@@ -1,4 +1,4 @@
-export const PRODUCT_SORT_FIELDS = ['price', 'rating', 'createdAt', 'title', 'bestSelling'] as const;
+export const PRODUCT_SORT_FIELDS = ['price', 'rating', 'createdAt', 'title', 'bestSelling', 'mostPopular'] as const;
 
 export type ProductSortBy = (typeof PRODUCT_SORT_FIELDS)[number];
 
