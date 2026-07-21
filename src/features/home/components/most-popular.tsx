@@ -12,7 +12,12 @@ const MostPopular = async () => {
       const occasionId = occasions.find((occasion) => occasion.title === title)?.id;
       if (!occasionId) return [title, []] as [OccasionFilter, IProduct[]];
 
-      const result = await getProductsAction({ limit: MOST_POPULAR_PRODUCTS_LIMIT, occasionId }).catch(() => null);
+      const result = await getProductsAction({
+        limit: MOST_POPULAR_PRODUCTS_LIMIT,
+        occasionId,
+        sortBy: 'mostPopular',
+        sortOrder: 'desc',
+      }).catch(() => null);
       const products = result?.status ? (result.payload?.data ?? []) : null;
       return [title, products] as [OccasionFilter, IProduct[] | null];
     })
