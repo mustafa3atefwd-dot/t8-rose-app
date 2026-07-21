@@ -1,6 +1,11 @@
 import { getOccasionsAction, getProductsAction } from '@/features/products/lib/actions';
 import MostPopularTabs from './most-popular-tabs';
-import { IOccasionTab, MOST_POPULAR_OCCASIONS_LIMIT, MOST_POPULAR_PRODUCTS_LIMIT } from './most-popular.constants';
+import {
+  IOccasionTab,
+  MOST_POPULAR_OCCASION_TABS_LIMIT,
+  MOST_POPULAR_OCCASIONS_LIMIT,
+  MOST_POPULAR_PRODUCTS_LIMIT,
+} from './most-popular.constants';
 
 const MostPopular = async () => {
   const occasionsResult = await getOccasionsAction({ limit: MOST_POPULAR_OCCASIONS_LIMIT }).catch(() => null);
@@ -19,8 +24,8 @@ const MostPopular = async () => {
     })
   );
 
-  // Only surface occasions that actually have products tagged against them.
-  const occasionTabs = entries.filter((entry) => entry.products.length > 0);
+  // Only surface occasions that actually have products tagged against them, capped to keep the tab row short.
+  const occasionTabs = entries.filter((entry) => entry.products.length > 0).slice(0, MOST_POPULAR_OCCASION_TABS_LIMIT);
 
   if (occasionTabs.length === 0) return null;
 
