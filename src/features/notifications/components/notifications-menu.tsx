@@ -2,19 +2,20 @@
 
 import {
   Bell,
+  BellOff,
   BrushCleaning,
   CheckCheck,
   EllipsisVertical,
 } from 'lucide-react';
 import { useGetNotifications } from '../hooks/use-get-notifications';
 import React, { useState } from 'react';
-import DropmenuNotificationSettings from './dropmenu-notification-settings';
+import NotificationSettingsMenu from './notification-settings-menu';
 
-export default function DropdownMenuNotifications() {
+export default function NotificationsMenu() {
   const [open, setOpen] = useState(false);
   const [openSettings, setOpenSettings] = useState<string | null>(null);
-
   const { data } = useGetNotifications();
+  const hasNotifications = (data?.payload?.data?.length ?? 0) > 0;
 
   return (
     <div className="relative">
@@ -24,38 +25,47 @@ export default function DropdownMenuNotifications() {
       </button>
 
       {open && (
-        <div className="absolute right-50 z-50 mt-2 w-84 overflow-visible rounded-xl border bg-white shadow-lg">
+        <div className="absolute -left-75 z-50 mt-2 w-84 overflow-visible rounded-xl shadow-[0_4px_9px_0_#00000026]">
           {/* Header */}
           <div className="bg-ds-bg-primary-saturated text-ds-text-inverse rounded-t-xl p-4 text-xl font-bold">
             Notifications
-            <span> ({data?.payload.metadata.total ?? 0})</span>
+            {hasNotifications && (<span> {data?.payload.metadata.total}</span>)}
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-between p-4">
+          <div className="flex items-center justify-between p-4 text-ds-text-plain text-xs font-semibold">
             <button
+              disabled={!hasNotifications}
               type="button"
-              className="flex items-center justify-center gap-1.5"
+              className="flex items-center justify-center gap-1.5 disabled:text-zinc-400 disabled:dark:text-zinc-500"
             >
-              <BrushCleaning className="size-4.5" />
+              {hasNotifications? <BrushCleaning className="size-4.5 text-zinc-500 dark:text-zinc-400" /> : <BrushCleaning className="size-4.5 text-zinc-400 dark:text-zinc-500" />}
               <span>Clear all notifications</span>
             </button>
 
             <button
+               disabled={!hasNotifications}
               type="button"
-              className="flex items-center justify-center gap-1.5"
+              className="flex items-center justify-center gap-1.5 disabled:text-zinc-400 disabled:dark:text-zinc-500"
             >
-              <CheckCheck className="size-3.5" />
+              {hasNotifications? <CheckCheck className="size-3.75 text-zinc-500 dark:text-zinc-400" /> : <BrushCleaning className="size-4.5 text-zinc-400 dark:text-zinc-500" />}
               <span>Mark all as read</span>
             </button>
           </div>
 
           {/* Notifications */}
-          {data?.payload.data.map((notification) => (
+          {!hasNotifications? (
+            <div className='h-56 flex justify-center items-center border-t border-zinc-300 dark:border-zinc-600'>
+              <div className='text-zinc-500 dark:text-zinc-400 flex flex-col items-center gap-2.5'>
+                <BellOff className='size-12.5'/>
+                <p className='font-medium text-sm'>No notifications to display.</p>
+              </div>
+            </div>
+          ) : 
+            
+             data?.payload.data.map((notification) => (
             <React.Fragment key={notification.id}>
-              <hr className="border-ds-border m-0" />
-
-              <div className="flex flex-col px-4 pt-4.5 pb-4">
+              <div className="flex flex-col px-4 pt-4.5 pb-4 border-t border-zinc-300 hover:bg-zinc-200 dark:border-zinc-600 dark:hover:bg-zinc-900">
                 <div className="flex w-full items-start justify-between">
                   <h5 className="text-ds-text-plain text-base font-semibold">
                     {notification.title}
@@ -63,6 +73,7 @@ export default function DropdownMenuNotifications() {
 
                   <div className="relative">
                     <button
+                      className='cursor-pointer'
                       type="button"
                       onClick={() =>
                         setOpenSettings((prev) =>
@@ -72,10 +83,10 @@ export default function DropdownMenuNotifications() {
                         )
                       }
                     >
-                      <EllipsisVertical className="text-ds-text-muted size-5" />
+                      <EllipsisVertical className="text-ds-text-muted hover:text-zinc-500 size-5" />
                     </button>
 
-                    <DropmenuNotificationSettings
+                    <NotificationSettingsMenu
                       notificationId={notification.id}
                       openSettings={openSettings}
                       setOpenSettings={setOpenSettings}
@@ -83,12 +94,14 @@ export default function DropdownMenuNotifications() {
                   </div>
                 </div>
 
-                <p className="line-clamp-3">
+                <p className="line-clamp-3 text-xs text-zinc-500 dark:text-zinc-400">
                   {notification.message}
                 </p>
               </div>
             </React.Fragment>
           ))}
+
+          
         </div>
       )}
     </div>

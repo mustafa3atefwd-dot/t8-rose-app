@@ -76,7 +76,6 @@
   },
   "validation": {
     "required": "This field is required",
-    "invalidEmail": "Invalid email address",
     "otpLength": "OTP must be 6 digits",
     "otpDigits": "OTP must contain only numbers",
     "firstName": "First name must be at least 2 characters",
@@ -85,8 +84,6 @@
     "invalidPhone": "Invalid phone number format",
     "invalidEgyptPhone": "Invalid Egyptian mobile number",
     "invalidGender": "Please select a valid gender",
-    "passwordMin": "Password must be at least 8 characters",
-    "passwordWeak": "Password must contain uppercase, lowercase, number and special character",
     "emailRequired": "Your email is required",
     "invalidEmail": "Please enter a valid email address",
     "newPasswordRequired": "New password is required",
@@ -215,6 +212,24 @@
       "success": "Password reset successfully",
       "contact": "Need help?",
       "toContact": "Contact us"
+    }
+  },
+
+  "homeHeader":{
+    "login": "Login",
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "occasions": "Occasions",
+    "contact": "Contact",
+    "about": "About",
+    "inputPlaceholder": "What awesome gift are you looking for?",
+    "userMenu": {
+      "account": "Account",
+      "addresses": "Addresses",
+      "order": "Orders",
+      "dashboard": "Dashboard",
+      "logout": "Logout"
     }
   }
 }
