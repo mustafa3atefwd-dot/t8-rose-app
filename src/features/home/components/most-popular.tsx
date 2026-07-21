@@ -1,31 +1,30 @@
 import { getOccasionsAction, getProductsAction } from '@/features/products/lib/actions';
-import { IProduct } from '@/features/products/lib/types/product';
 import MostPopularTabs from './most-popular-tabs';
-import { MOST_POPULAR_PRODUCTS_LIMIT, OCCASION_FILTERS, OccasionFilter } from './most-popular.constants';
+import { IOccasionTab, MOST_POPULAR_OCCASIONS_LIMIT, MOST_POPULAR_PRODUCTS_LIMIT } from './most-popular.constants';
 
 const MostPopular = async () => {
-  const occasionsResult = await getOccasionsAction({ limit: 100 }).catch(() => null);
+  const occasionsResult = await getOccasionsAction({ limit: MOST_POPULAR_OCCASIONS_LIMIT }).catch(() => null);
   const occasions = occasionsResult?.status ? (occasionsResult.payload?.data ?? []) : [];
 
   const entries = await Promise.all(
-    OCCASION_FILTERS.map(async (title) => {
-      const occasionId = occasions.find((occasion) => occasion.title === title)?.id;
-      if (!occasionId) return [title, []] as [OccasionFilter, IProduct[]];
-
+    occasions.map(async (occasion): Promise<IOccasionTab> => {
       const result = await getProductsAction({
         limit: MOST_POPULAR_PRODUCTS_LIMIT,
-        occasionId,
+        occasionId: occasion.id,
         sortBy: 'mostPopular',
         sortOrder: 'desc',
       }).catch(() => null);
-      const products = result?.status ? (result.payload?.data ?? []) : null;
-      return [title, products] as [OccasionFilter, IProduct[] | null];
+      const products = result?.status ? (result.payload?.data ?? []) : [];
+      return { id: occasion.id, title: occasion.title, products };
     })
   );
 
-  const productsByOccasion = Object.fromEntries(entries) as Record<OccasionFilter, IProduct[] | null>;
+  // Only surface occasions that actually have products tagged against them.
+  const occasionTabs = entries.filter((entry) => entry.products.length > 0);
 
-  return <MostPopularTabs productsByOccasion={productsByOccasion} />;
+  if (occasionTabs.length === 0) return null;
+
+  return <MostPopularTabs occasionTabs={occasionTabs} />;
 };
 
 export default MostPopular;
