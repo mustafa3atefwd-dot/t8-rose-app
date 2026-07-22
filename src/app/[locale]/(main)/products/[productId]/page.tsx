@@ -1,3 +1,5 @@
+import ProductReviews from "@/features/product-reviews/components/product-reviews";
+
 type Props = {
   params: Promise<{
     productId: string;
@@ -6,6 +8,6 @@ type Props = {
 export default async function page({params}: Props) {
   const {productId} = await params;
   return (
-    <div>page id {productId}</div>
+    <ProductReviews/>
   )
 }
