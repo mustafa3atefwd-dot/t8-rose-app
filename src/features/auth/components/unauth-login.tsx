@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation"
 import { Loader2, User } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { useTranslations } from "next-intl"
-import UserDropdown from "./User-Dropdown"
+import UserDropdown from "./user-dropdown"
 
 export default function UnAuthenticatedLogin() {
     const t = useTranslations('homeHeader')
