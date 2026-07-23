@@ -8,7 +8,7 @@ interface RatingProps {
 
 export default function Rating({ rating, className }: RatingProps) {
   return (
-    <div className={cn('flex justify-center items-center', className)}>
+    <div className={cn('flex items-center justify-center', className)}>
       <span className="sr-only">{rating.toFixed(1)}</span>
 
       <div className="flex">
@@ -18,11 +18,11 @@ export default function Rating({ rating, className }: RatingProps) {
           return (
             <div key={index} className="relative h-5 w-5">
               {/* Empty Star */}
-              <Star className="absolute h-5 w-5 text-gray-300" />
+              <Star className="absolute h-5 w-5 text-[#FBA707]" />
 
               {/* Filled Star */}
               <div className="absolute overflow-hidden" style={{ width: `${fill}%` }}>
-                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                <Star className="h-5 w-5 fill-[#FBA707] text-[#FBA707]" />
               </div>
             </div>
           );
