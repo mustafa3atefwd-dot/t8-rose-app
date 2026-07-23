@@ -206,6 +206,20 @@
       "rating": "{rating} out of 5"
     }
   },
+  "home": {
+    "bestSelling": "Best Selling",
+    "bestSellingHeading": "<accent>Check Out</accent> What Everyone’s <accent>Buying</accent> Right Now",
+    "bestSellingDescription": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+    "mostPopular": "Most Popular",
+    "viewAll": "View All",
+    "Explore gifts": "Explore gifts",
+    "viewMore": "View More",
+    "productCarousel": {
+      "error": "Failed to load products. Try again.",
+      "retry": "Retry",
+      "empty": "No products yet."
+    }
+  },
   "forgotPw": {
     "step1": {
       "title": "Forgot Password?",
