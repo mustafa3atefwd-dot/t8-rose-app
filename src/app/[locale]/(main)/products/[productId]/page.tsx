@@ -8,6 +8,6 @@ type Props = {
 export default async function page({params}: Props) {
   const {productId} = await params;
   return (
-    <ProductReviews/>
+    <ProductReviews productId={productId}/>
   )
 }
