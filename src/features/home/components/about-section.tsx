@@ -3,7 +3,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { aboutFeatures } from '@/features/home/lib/constants';
 import { ImageWithSkeleton, SectionLabel } from '@/shared/components';
 import { Button } from '@/shared/components/ui/button';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 function AboutSection() {
   const t = useTranslations('home.about');
@@ -18,7 +18,7 @@ function AboutSection() {
           <div className="flex justify-center">
             <div className="relative flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-3 lg:gap-5">
               {/* Primary Image */}
-              <div className="before:border-ds-bg-primary relative h-[280px] w-[230px] before:absolute before:-inset-4 before:-top-3 before:z-0 before:h-full before:w-full before:rotate-3 before:rounded-tl-[50px] before:rounded-tr-[120px] before:rounded-br-[120px] before:rounded-bl-[120px] before:border-4 before:content-[''] sm:h-[344px] sm:w-[302px]">
+              <div className="before:border-ds-bg-primary relative h-70 w-57.5 before:absolute before:-inset-4 before:-top-3 before:z-0 before:h-full before:w-full before:rotate-3 before:rounded-tl-[50px] before:rounded-tr-[120px] before:rounded-br-[120px] before:rounded-bl-[120px] before:border-4 before:content-[''] sm:h-86 sm:w-75.5">
                 <div className="relative z-10 h-full w-full overflow-hidden rounded-tl-[50px] rounded-tr-[120px] rounded-br-[120px] rounded-bl-[120px]">
                   <ImageWithSkeleton
                     src="/images/about/about-1.jpg"
@@ -32,7 +32,7 @@ function AboutSection() {
               {/* Secondary Images */}
               <div className="flex gap-3 sm:flex-col">
                 {/* Top Image */}
-                <div className="relative h-[110px] w-[110px] overflow-hidden rounded-full sm:h-[150px] sm:w-[150px] lg:h-[193px] lg:w-[193px]">
+                <div className="relative h-27.5 w-27.5 overflow-hidden rounded-full sm:h-37.5 sm:w-37.5 lg:h-48.25 lg:w-48.25">
                   <ImageWithSkeleton
                     src="/images/about/about-2.jpg"
                     alt={t('images.secondAlt')}
@@ -42,7 +42,7 @@ function AboutSection() {
                 </div>
 
                 {/* Bottom Image */}
-                <div className="relative h-[100px] w-[140px] overflow-hidden rounded-tl-[40px] rounded-tr-[80px] rounded-br-[80px] rounded-bl-[40px] sm:h-[120px] sm:w-[150px] lg:h-[144px] lg:w-[193px]">
+                <div className="relative h-25 w-25 overflow-hidden rounded-tl-[40px] rounded-tr-[80px] rounded-br-[80px] rounded-bl-[40px] sm:h-30 sm:w-37.5 lg:h-36 lg:w-48.25">
                   <ImageWithSkeleton
                     src="/images/about/about-3.jpg"
                     alt={t('images.thirdAlt')}

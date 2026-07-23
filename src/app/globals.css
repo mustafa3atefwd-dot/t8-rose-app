@@ -533,7 +533,7 @@ html[lang='en'] body {
     padding-inline: 5rem;
   }
 }
-
+auto
 /* Progress Bar */
 .progress {
   display: flex;
