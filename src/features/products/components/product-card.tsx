@@ -46,7 +46,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
 
         <div className="bg-ds-bg-primary-overlay absolute inset-0 z-10 flex items-center justify-center gap-3 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
           <Button
-            className="rounded-full"
+            className="rounded-full bg-white"
             size="icon-sm"
             variant="secondary"
             aria-label={t('wishlist')}
@@ -55,7 +55,13 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
             <Heart />
           </Button>
 
-          <Button className="rounded-full" size="icon-sm" variant="secondary" aria-label={t('quickView')} asChild>
+          <Button
+            className="rounded-full bg-white"
+            size="icon-sm"
+            variant="secondary"
+            aria-label={t('quickView')}
+            asChild
+          >
             <Link href={`/products/${product.id}`}>
               <Eye />
             </Link>
@@ -81,7 +87,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
           </div>
 
           <Button
-            className="bg-maroon-500 size-12 rounded-full text-white hover:bg-maroon-600"
+            className="bg-maroon-500 hover:bg-maroon-600 size-12 rounded-full text-white"
             size="icon-lg"
             variant="default"
             disabled={isOutOfStock}
