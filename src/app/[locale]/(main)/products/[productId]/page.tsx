@@ -1,4 +1,4 @@
-import ProductReviews from '@/features/product-reviews/components/product-reviews';
+import ProductReviewForm from '@/features/product-details/components/product-review-form';
 
 type Props = {
   params: Promise<{
@@ -7,5 +7,5 @@ type Props = {
 };
 export default async function page({ params }: Props) {
   const { productId } = await params;
-  return <ProductReviews productId={productId} />;
+  return <ProductReviewForm productId={productId} />;
 }

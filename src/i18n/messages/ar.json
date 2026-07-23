@@ -133,10 +133,7 @@
     "invalidPhone": "صيغة رقم الهاتف غير صحيحة",
     "invalidEgyptPhone": "صيغة رقم الهاتف المصري غير صحيحة",
     "invalidGender": "يرجى اختيار جنس صحيح",
-    "passwordMin": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
-    "passwordWeak": "يجب أن تحتوي كلمة المرور على حرف كبير وصغير ورقم ورمز خاص",
     "emailRequired": "يجب أن يكون لديك بريد إلكتروني",
-    "invalidEmail": "يجب أن يكون لديك بريد إلكتروني صالح",
     "newPasswordRequired": "يجب أن يكون لديك كلمة مرور جديدة",
     "passwordMin": "يجب أن تكون كلمة المرور على الأقل 8 أحرف",
     "passwordUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
@@ -190,7 +187,10 @@
 
       "firstName": "محمد",
       "lastName": "محمود",
-      "username": "mohamed123"
+      "username": "mohamed123",
+
+      "reviewHeadline": "أدخل عنوان المراجعة",
+      "reviewContent": "ما رأيك بهذا المنتج؟"
     },
     "states": {
       "title": "الحالات",
@@ -275,6 +275,27 @@
       "success": "تم إعادة تعيين كلمة المرور بنجاح",
       "contact": "هل تحتاج مساعدة؟",
       "toContact": "اتصل بنا"
+    }
+  },
+  "productDetails": {
+    "writeReview": "اكتب تقييمًا",
+
+    "review": {
+      "headlineLabel": "عنوان التقييم",
+      "contentLabel": "تقييمك",
+      "ratingLabel": "تقييمك",
+      "ratingValue": "قيّم بـ {rating} من 5",
+      "submitSuccess": "تم إرسال تقييمك بنجاح.",
+      "alreadyReviewed": "لقد قمت بتقييم هذا المنتج من قبل."
+    },
+
+    "validation": {
+      "review": {
+        "productIdRequired": "معرّف المنتج مطلوب.",
+        "headlineRequired": "عنوان التقييم مطلوب.",
+        "ratingRequired": "يرجى اختيار تقييم.",
+        "ratingInvalid": "يجب أن يكون التقييم بين 1 و5."
+      }
     }
   }
 }
