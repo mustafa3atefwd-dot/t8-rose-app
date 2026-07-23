@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { Controller } from 'react-hook-form';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslations } from 'next-intl';

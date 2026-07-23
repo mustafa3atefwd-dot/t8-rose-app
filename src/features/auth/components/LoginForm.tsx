@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
@@ -50,9 +50,7 @@ export function LoginForm() {
         username: values.username,
         password: values.password,
         rememberMe: values.rememberMe ? 'true' : 'false',
-        ...(values.rememberMe
-          ? { maxAge: String(REMEMBER_ME_SESSION_MAX_AGE_SECONDS) }
-          : {}),
+        ...(values.rememberMe ? { maxAge: String(REMEMBER_ME_SESSION_MAX_AGE_SECONDS) } : {}),
         redirect: false,
       });
 
@@ -99,7 +97,7 @@ export function LoginForm() {
         />
         <FieldError id="password-error" errors={[errors.password]} />
         <Link
-          className="ms-auto text-sm font-medium text-ds-text-primary transition-colors hover:underline"
+          className="text-ds-text-primary ms-auto text-sm font-medium transition-colors hover:underline"
           href={`/${locale}/forgot-password`}
         >
           {t('forgotPassword')}
@@ -110,7 +108,7 @@ export function LoginForm() {
         control={control}
         name="rememberMe"
         render={({ field }) => (
-          <label className="flex w-fit items-center gap-3 text-sm text-ds-text-plain">
+          <label className="text-ds-text-plain flex w-fit items-center gap-3 text-sm">
             <Checkbox checked={Boolean(field.value)} onCheckedChange={(checked) => field.onChange(checked === true)} />
             {t('rememberMe')}
           </label>
@@ -118,7 +116,7 @@ export function LoginForm() {
       />
 
       {errors.root?.message ? (
-        <p className="text-center text-sm font-medium text-ds-text-danger" role="alert">
+        <p className="text-ds-text-danger text-center text-sm font-medium" role="alert">
           {errors.root.message}
         </p>
       ) : null}
@@ -127,9 +125,9 @@ export function LoginForm() {
         {t('button')}
       </Button>
 
-      <footer className="border-t border-ds-border-muted pt-6 text-center text-sm text-ds-text-muted">
+      <footer className="border-ds-border-muted text-ds-text-muted border-t pt-6 text-center text-sm">
         {t('noAccount')}{' '}
-        <Link className="font-semibold text-ds-text-primary hover:underline" href={`/${locale}/register`}>
+        <Link className="text-ds-text-primary font-semibold hover:underline" href={`/${locale}/register`}>
           {t('register')}
         </Link>
       </footer>
