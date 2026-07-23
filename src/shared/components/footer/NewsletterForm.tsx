@@ -7,9 +7,8 @@ import { useForm } from 'react-hook-form';
 
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/inputs';
-import { toast } from '@/shared/components/ui/toast';
-import { subscribeToNewsletter } from './newsletter.api';
 import { createNewsletterSchema, type NewsletterFormValues } from './newsletter.schema';
+import { useNewsletterSubscription } from './use-newsletter-subscription';
 
 export function NewsletterForm() {
   const t = useTranslations('footer');
@@ -20,7 +19,7 @@ export function NewsletterForm() {
   });
 
   const {
-    formState: { errors, isSubmitting },
+    formState: { errors },
     handleSubmit,
     register,
     setValue,
@@ -29,28 +28,18 @@ export function NewsletterForm() {
     defaultValues: { email: '' },
   });
 
-  async function handleSubscribe(values: NewsletterFormValues) {
-    const email = values.email.toLowerCase();
+  const subscription = useNewsletterSubscription({
+    onSubscribed: () => setValue('email', ''),
+  });
 
-    try {
-      const result = await subscribeToNewsletter(email);
-
-      if (result === 'already-subscribed') {
-        toast.error(t('alreadySubscribed'));
-        return;
-      }
-
-      toast.success(t('subscribeSuccess'));
-      setValue('email', '');
-    } catch {
-      toast.error(t('subscribeError'));
-    }
+  function handleSubscribe(values: NewsletterFormValues) {
+    subscription.mutate(values.email.toLowerCase());
   }
 
   return (
     <form className="mt-4 w-full" noValidate onSubmit={handleSubmit(handleSubscribe)}>
       <div
-        className="flex h-10 w-full items-center rounded-full bg-[#5B5B65] ps-1 transition-shadow focus-within:ring-2 focus-within:ring-[#F78DA7] dark:bg-[#27272A]"
+        className="bg-ds-bg-default focus-within:ring-ds-ring dark:bg-ds-bg-subtle flex h-10 w-full items-center rounded-full ps-1 transition-shadow focus-within:ring-2"
         data-invalid={Boolean(errors.email)}
       >
         <Input
@@ -59,21 +48,21 @@ export function NewsletterForm() {
           aria-invalid={Boolean(errors.email)}
           aria-describedby={errors.email ? 'newsletter-email-error' : undefined}
           placeholder={t('emailPlaceholder')}
-          className="h-full flex-1 rounded-full border-0 bg-transparent px-3 text-sm text-white placeholder:text-[#A1A1AA] focus-visible:border-transparent focus-visible:ring-0 dark:bg-transparent"
+          className="text-ds-text-inverse placeholder:text-ds-text-muted dark:text-ds-text-plain h-full flex-1 rounded-full border-0 bg-transparent px-3 text-sm focus-visible:border-transparent focus-visible:ring-0 dark:bg-transparent"
           {...register('email')}
         />
         <Button
           type="submit"
-          loading={isSubmitting}
-          className="h-10 rounded-full bg-[#FCE7E7] px-5 text-[#7F1D1D] hover:bg-[#F9D6DA] dark:bg-[#F78DA7] dark:text-[#3F0B16] dark:hover:bg-[#F9A3B8]"
+          loading={subscription.isPending}
+          className="bg-ds-bg-primary-fade text-ds-text-primary hover:bg-ds-bg-primary-faint dark:bg-ds-bg-primary dark:text-ds-text-inverse dark:hover:bg-ds-bg-primary-saturated h-10 rounded-full px-5"
         >
           {t('subscribe')}
-          {!isSubmitting ? <ArrowRight className="size-4 rtl:rotate-180" aria-hidden /> : null}
+          {!subscription.isPending ? <ArrowRight className="size-4 rtl:rotate-180" aria-hidden /> : null}
         </Button>
       </div>
 
       {errors.email?.message ? (
-        <p id="newsletter-email-error" className="mt-2 text-sm text-[#FDA4AF]" role="alert">
+        <p id="newsletter-email-error" className="text-ds-text-danger mt-2 text-sm" role="alert">
           {errors.email.message}
         </p>
       ) : null}

@@ -208,16 +208,13 @@
       "categories": "الفئات",
       "occasions": "المناسبات",
       "contact": "اتصل بنا",
-      "about": "من نحن",
-      "terms": "الشروط والأحكام",
-      "privacy": "سياسة الخصوصية",
-      "faqs": "الأسئلة الشائعة"
+      "about": "من نحن"
     },
     "discountTitle": "احصل على كوبون خصم 20%",
     "discountSubtitle": "عند الاشتراك في نشرتنا البريدية",
     "emailPlaceholder": "أدخل بريدك الإلكتروني",
     "subscribe": "اشترك",
-    "subscribeSuccess": "تم الاشتراك بنجاح!",
+    "subscribeSuccess": "تم الاشتراك بنجاح! تحقق من بريدك للحصول على الكوبون.",
     "alreadySubscribed": "مشترك بالفعل",
     "subscribeError": "فشل الاشتراك. يرجى المحاولة مرة أخرى."
   },

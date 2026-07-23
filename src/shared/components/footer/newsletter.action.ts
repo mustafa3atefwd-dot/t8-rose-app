@@ -1,3 +1,5 @@
+'use server';
+
 import { BACKEND_URL, HEADERS } from '@/shared/lib/constants/api.constant';
 
 export type NewsletterSubscriptionResult = 'subscribed' | 'already-subscribed';

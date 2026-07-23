@@ -5,7 +5,4 @@ export const FOOTER_LINKS = [
   { key: 'occasions', href: '/occasions' },
   { key: 'contact', href: '/contact' },
   { key: 'about', href: '/about' },
-  { key: 'terms', href: '/terms-and-conditions' },
-  { key: 'privacy', href: '/privacy-policy' },
-  { key: 'faqs', href: '/faqs' },
 ] as const;

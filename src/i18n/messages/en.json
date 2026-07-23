@@ -206,16 +206,13 @@
       "categories": "Categories",
       "occasions": "Occasions",
       "contact": "Contact",
-      "about": "About",
-      "terms": "Terms & Conditions",
-      "privacy": "Privacy Policy",
-      "faqs": "FAQs"
+      "about": "About"
     },
     "discountTitle": "Get 20% Off Discount Coupon",
     "discountSubtitle": "By subscribing to our newsletter",
     "emailPlaceholder": "Enter your email",
     "subscribe": "Subscribe",
-    "subscribeSuccess": "Subscribed successfully!",
+    "subscribeSuccess": "Subscribed successfully! Check your email for the coupon.",
     "alreadySubscribed": "Already subscribed",
     "subscribeError": "Subscription failed. Please try again."
   },
