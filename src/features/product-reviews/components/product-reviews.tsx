@@ -14,7 +14,7 @@ export default function ProductReviews({productId}: Props) {
               <span className="text-ds-text-plain font-bold text-2xl">4.5</span>
               <span className="text-ds-text-muted font-medium text-sm">(8 ratings)</span>
             </div>
-            <Rating rating={4.5} className="justify-start"/>
+            <Rating  rating={4.5} className="justify-start"/>
           </header>
           <div className="flex items-center gap-5">
               {/* product reviews */}
