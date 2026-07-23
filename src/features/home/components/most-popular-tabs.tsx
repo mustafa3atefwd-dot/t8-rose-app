@@ -20,11 +20,11 @@ const MostPopularTabs = ({ occasionTabs }: MostPopularTabsProps) => {
   const products = occasionTabs.find((occasion) => occasion.id === activeOccasionId)?.products ?? [];
 
   return (
-    <div className="container mx-auto flex flex-col items-center gap-8 px-4 py-12 text-center">
+    <div className="container mx-auto flex flex-col items-end gap-8 px-4 py-12">
       <div className="flex w-full items-center justify-between gap-3">
         <h4 className="text-ds-text-primary relative text-4xl font-bold">
           {t('mostPopular')}
-          <div className="bg-soft-pink-100 before:bg-soft-pink-700 absolute -bottom-1 left-0 -z-1 h-5 w-[75%] rounded-r-2xl before:block before:h-1 before:w-16 before:translate-y-4 before:content-['']"></div>
+          <div className="bg-soft-pink-100 dark:bg-ds-bg-plain before:bg-soft-pink-700 absolute -bottom-1 left-0 -z-1 h-5 w-[75%] rounded-r-2xl before:block before:h-1 before:w-16 before:translate-y-4 before:content-['']"></div>
         </h4>
 
         <Tabs value={activeOccasionId} onValueChange={setActiveOccasionId}>
@@ -44,7 +44,7 @@ const MostPopularTabs = ({ occasionTabs }: MostPopularTabsProps) => {
         ))}
       </div>
 
-      <Button className="capitalize" asChild>
+      <Button className="capitalize" asChild variant="link">
         <Link href={`/products?occasionId=${activeOccasionId}&sortBy=mostPopular`}>
           {t('viewMore')} <ArrowRight />
         </Link>

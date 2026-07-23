@@ -30,7 +30,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
     );
 
   return (
-    <div className="rounded-ds-lg border-ds-border-soft bg-ds-bg-plain mx-auto flex w-full max-w-75  flex-col overflow-hidden">
+    <div className="rounded-ds-lg border-ds-border-soft mx-auto flex w-full max-w-75 flex-col overflow-hidden">
       <div className="bg-ds-bg-muted group relative aspect-square w-full overflow-hidden rounded-xl">
         {badge && (
           <Badge variant={badge.variant} className="absolute inset-e-2 top-2 z-10">
@@ -81,7 +81,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
           </div>
 
           <Button
-            className="size-12 rounded-full"
+            className="bg-maroon-500 size-12 rounded-full text-white hover:bg-maroon-600"
             size="icon-lg"
             variant="default"
             disabled={isOutOfStock}

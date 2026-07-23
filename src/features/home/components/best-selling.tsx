@@ -41,7 +41,7 @@ const BestSelling = async () => {
         <h4 className="text-body text-ds-text-secondary align-middle font-bold tracking-[0.25em] uppercase">
           {t('bestSelling')}
         </h4>
-        <p className="text-maroon-700 align-middle text-3xl leading-none font-bold">
+        <p className="text-maroon-700 dark:text-ds-bg-primary-saturated align-middle text-3xl leading-none font-bold">
           {t.rich('bestSellingHeading', {
             accent: (chunks) => <span className="text-ds-bg-secondary">{chunks}</span>,
           })}

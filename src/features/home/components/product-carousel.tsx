@@ -44,8 +44,8 @@ const ProductCarousel = ({ products }: ProductCarouselProps) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious variant="default" className="bg-ds-bg-primary hover:bg-ds-bg-primary-saturated left-4 p-4" />
-      <CarouselNext variant="default" className="bg-ds-bg-primary hover:bg-ds-bg-primary-saturated right-4 p-4" />
+      <CarouselPrevious variant="default" className="bg-maroon-500 hover:bg-maroon-600 left-4 p-4 text-white" />
+      <CarouselNext variant="default" className="bg-maroon-500 hover:bg-maroon-600 right-4 p-4 text-white" />
     </Carousel>
   );
 };
