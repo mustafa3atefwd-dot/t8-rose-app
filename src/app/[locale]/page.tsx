@@ -1,7 +1,4 @@
-import AboutSection from '@/features/home/components/about-section';
-import Gallery from '@/features/home/components/gallery-section';
-import TestimonialsSection from '@/features/home/components/testimonials-section';
-import TrustedCompanies from '@/features/home/components/trusted-companies-section';
+import { AboutSection, GallerySection, TestimonialsSection, TrustedCompaniesSection } from '@/features/home/components';
 import { useTranslations } from 'next-intl';
 
 export default function Home() {
@@ -10,9 +7,9 @@ export default function Home() {
   return (
     <>
       <AboutSection />
-      <Gallery />
+      <GallerySection />
       <TestimonialsSection />
-      <TrustedCompanies />
+      <TrustedCompaniesSection />
     </>
   );
 }
