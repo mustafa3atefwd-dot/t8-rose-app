@@ -1,11 +1,18 @@
-import { useTranslations } from "next-intl";
-
+import AboutSection from '@/features/home/components/about-section';
+import Gallery from '@/features/home/components/gallery-section';
+import TestimonialsSection from '@/features/home/components/testimonials-section';
+import TrustedCompanies from '@/features/home/components/trusted-companies-section';
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
-
   const t = useTranslations();
 
-  return <div className="flex flex-col items-center justify-center min-h-screen">
-  <h1 className="text-4xl font-bold text-maroon-400">{t("title")}</h1>
-    </div>;
+  return (
+    <>
+      <AboutSection />
+      <Gallery />
+      <TestimonialsSection />
+      <TrustedCompanies />
+    </>
+  );
 }
