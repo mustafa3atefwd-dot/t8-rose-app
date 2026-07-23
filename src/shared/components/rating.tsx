@@ -4,9 +4,10 @@ import { Star } from 'lucide-react';
 interface RatingProps {
   rating: number;
   className?: string;
+  variant?: 'outline' | 'filled';
 }
 
-export default function Rating({ rating, className }: RatingProps) {
+export default function Rating({ rating, className, variant = 'outline' }: RatingProps) {
   return (
     <div className={cn('flex items-center justify-center', className)}>
       <span className="sr-only">{rating.toFixed(1)}</span>
@@ -18,7 +19,7 @@ export default function Rating({ rating, className }: RatingProps) {
           return (
             <div key={index} className="relative h-5 w-5">
               {/* Empty Star */}
-              <Star className="absolute h-5 w-5 text-[#FBA707]" />
+              <Star className={cn('absolute h-5 w-5', variant === 'outline' ? 'text-[#FBA707]' : 'text-transparent')} />
 
               {/* Filled Star */}
               <div className="absolute overflow-hidden" style={{ width: `${fill}%` }}>
