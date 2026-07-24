@@ -276,5 +276,11 @@
       "contact": "هل تحتاج مساعدة؟",
       "toContact": "اتصل بنا"
     }
+  },
+    "productReview": {
+    "title": "تقييم المنتج",
+    "subTitle": "التقييم العام:",
+    "ratings": "التقييمات",
+    "noReviews": "لا يوجد تقييمات"
   }
 }

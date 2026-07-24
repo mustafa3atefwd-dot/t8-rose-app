@@ -274,5 +274,11 @@
       "contact": "Need help?",
       "toContact": "Contact us"
     }
+  },
+  "productReview": {
+    "title": "Product Reviews",
+    "subTitle": "General rating:",
+    "ratings": "ratings",
+    "noReviews": "No reviews yet."
   }
 }
