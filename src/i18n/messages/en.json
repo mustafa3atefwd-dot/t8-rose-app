@@ -5,6 +5,52 @@
     "Go Back home": "Go Back home",
     "Not Found page ": "Not Found Page"
   },
+  "home": {
+    "about": {
+      "label": "About",
+      "title": "Delivering the <highlight1>Finest</highlight1> Gift Boxes for Your <highlight2>Special</highlight2> Moments",
+      "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress.",
+      "discover": "Discover",
+      "images": {
+        "mainAlt": "Premium gift boxes",
+        "secondAlt": "Gift collection",
+        "thirdAlt": "Luxury packaging"
+      },
+      "features": {
+        "competitive": "Competitive Prices & Easy Shopping",
+        "quality": "Premium Quality & Elegant Packaging",
+        "occasion": "Perfect for Every Occasion",
+        "delivery": "Fast & Reliable Delivery"
+      }
+    },
+    "gallery": {
+      "label": "Gallery",
+      "title": "Check Out Our Wonderful Gallery"
+    },
+    "trustedCompanies": {
+      "title": "Trusted by over <count>4.5k+</count> companies"
+    },
+    "testimonials": {
+      "label": "Testimonials",
+      "title": "Real Words from Happy Customers",
+      "items": {
+        "jakeReview": "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
+        "tylerReview": "Customer service is top-notch and the flowers last longer than any others I've bought. Highly recommend!",
+        "maxReview": "The team truly cares about every order. I always feel confident when I buy flowers from here.",
+        "sophiaReview": "Absolutely beautiful flowers and amazing attention to detail. Every arrangement feels special and unique!",
+        "danielReview": "The flowers arrived fresh and beautifully arranged. Great experience from ordering to delivery!",
+        "emmaReview": "Wonderful service and stunning bouquets. This shop has become my favorite place for flowers."
+      },
+      "dates": {
+        "january12": "January 12, 2025",
+        "january18": "January 18, 2025",
+        "january24": "January 24, 2025",
+        "february02": "February 2, 2025",
+        "february10": "February 10, 2025",
+        "february15": "February 15, 2025"
+      }
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
@@ -242,5 +288,11 @@
       "contact": "Need help?",
       "toContact": "Contact us"
     }
+  },
+  "productReview": {
+    "title": "Product Reviews",
+    "subTitle": "General rating:",
+    "ratings": "ratings",
+    "noReviews": "No reviews yet."
   }
 }
