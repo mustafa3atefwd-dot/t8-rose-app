@@ -19,26 +19,35 @@ interface ProductFiltersSidebarProps {
 }
 
 const ProductFiltersSidebar = ({ categories, occasions }: ProductFiltersSidebarProps) => {
+  // Translation
   const t = useTranslations('products.filters');
-  const { categoryId, occasionId, minRating, minPrice, maxPrice, setFilter, setFilters, resetFilter, resetAll } =
+
+  // Custom hooks
+  const { categoryIds, occasionId, minRating, minPrice, maxPrice, setFilter, setFilters, resetFilter, resetAll } =
     useProductFilters();
 
-  const hasAnyFilter = Boolean(categoryId || occasionId || minRating || minPrice != null || maxPrice != null);
+  // Variables
+  const hasAnyFilter = Boolean(categoryIds.length || occasionId || minRating || minPrice != null || maxPrice != null);
+
+  // Functions
+  const handleSelectedCategoryIdsChange = (selectedCategoryIds: string[]) => {
+    setFilter('categoryId', selectedCategoryIds.length ? selectedCategoryIds.join(',') : undefined);
+  };
 
   return (
-    <aside className="bg-ds-bg-plain flex w-full shrink-0 flex-col overflow-hidden md:w-75">
+    <aside className="flex w-full shrink-0 flex-col overflow-hidden md:w-75">
       {categories.length > 0 && (
         <>
           <FilterSection
             title={t('category')}
             resetLabel={t('reset')}
-            active={Boolean(categoryId)}
+            active={categoryIds.length > 0}
             onReset={() => resetFilter('categoryId')}
           >
             <CategoryFilter
               categories={categories}
-              activeId={categoryId}
-              onSelect={(id) => setFilter('categoryId', id)}
+              selectedCategoryIds={categoryIds}
+              onSelectedCategoryIdsChange={handleSelectedCategoryIdsChange}
             />
           </FilterSection>
           <Separator className="bg-ds-border-soft" />
@@ -97,7 +106,7 @@ const ProductFiltersSidebar = ({ categories, occasions }: ProductFiltersSidebarP
         <Button
           variant="outline"
           disabled={!hasAnyFilter}
-          className="border-none bg-ds-bg-danger-faint text-ds-text-primary hover:bg-ds-bg-danger-faint/80 h-10 w-full disabled:cursor-not-allowed disabled:opacity-50"
+          className="bg-ds-bg-danger-faint text-ds-text-primary hover:bg-ds-bg-danger-faint/80 h-10 w-full border-none disabled:cursor-not-allowed disabled:opacity-50"
           onClick={resetAll}
         >
           <RotateCcw className="size-4" />

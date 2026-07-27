@@ -14,7 +14,16 @@
   --ds-bg-inverse: var(--color-zinc-800);
   --ds-bg-elevated: color-mix(in srgb, var(--color-black) 20%, transparent);
   --ds-bg-overlay: color-mix(in srgb, var(--color-black) 50%, transparent);
-  --ds-bg-occasion-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0.1375) 0%, rgba(166, 37, 42, 0.55) 100%);
+  --ds-bg-occasion-overlay: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-black) 13.75%, transparent) 0%,
+    color-mix(in srgb, var(--color-soft-pink-300) 55%, transparent) 100%
+  );
+  --ds-bg-occasion-hover-overlay: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-black) 25%, transparent) 0%,
+    color-mix(in srgb, var(--color-black) 50%, transparent) 100%
+  );
 
   /* Primary */
   --ds-bg-primary: var(--color-maroon-800);
@@ -266,6 +275,7 @@ html[data-theme='dark'] {
   --color-ds-bg-elevated: var(--ds-bg-elevated);
   --color-ds-bg-overlay: var(--ds-bg-overlay);
   --background-image-ds-bg-occasion-overlay: var(--ds-bg-occasion-overlay);
+  --background-image-ds-bg-occasion-hover-overlay: var(--ds-bg-occasion-hover-overlay);
   --color-ds-bg-primary: var(--ds-bg-primary);
   --color-ds-bg-primary-saturated: var(--ds-bg-primary-saturated);
   --color-ds-bg-primary-faint: var(--ds-bg-primary-faint);

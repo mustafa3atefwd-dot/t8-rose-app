@@ -14,12 +14,17 @@ type FilterPatch = Partial<Record<ProductFilterKey, string | number | undefined>
  * from+to) land in one navigation instead of racing two separate ones.
  */
 export const useProductFilters = () => {
+  // Navigation
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+
+  // State
   const [isPending, startTransition] = useTransition();
 
-  const categoryId = searchParams.get('categoryId') ?? undefined;
+  // Variables
+  const categoryIdsParam = searchParams.get('categoryId') ?? undefined;
+  const categoryIds = categoryIdsParam?.split(',').filter(Boolean) ?? [];
   const occasionId = searchParams.get('occasionId') ?? undefined;
   const minRatingRaw = searchParams.get('minRating');
   const minPriceRaw = searchParams.get('minPrice');
@@ -31,6 +36,7 @@ export const useProductFilters = () => {
   const maxPrice = maxPriceRaw ? Number(maxPriceRaw) : undefined;
   const page = pageRaw ? Number(pageRaw) : 1;
 
+  // Functions
   const navigate = useCallback(
     (params: URLSearchParams) => {
       const queryString = params.toString();
@@ -73,7 +79,7 @@ export const useProductFilters = () => {
   const resetAll = useCallback(() => navigate(new URLSearchParams()), [navigate]);
 
   return {
-    categoryId,
+    categoryIds,
     occasionId,
     minRating,
     minPrice,

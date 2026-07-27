@@ -1,35 +1,14 @@
 import ProductFiltersSidebar from '@/features/products/components/filters/product-filters-sidebar';
-import { getCategoriesAction, getOccasionsAction, getProductsAction } from '@/features/products/lib/actions';
-import { PRODUCTS_PAGE_SIZE } from '@/features/products/lib/constants';
+import { getCategoriesAction, getOccasionsAction } from '@/features/products/lib/actions';
 
-interface ProductsPageProps {
-  searchParams: Promise<{
-    categoryId?: string;
-    occasionId?: string;
-    minRating?: string;
-    minPrice?: string;
-    maxPrice?: string;
-    page?: string;
-  }>;
-}
-
-const ProductsPage = async ({ searchParams }: ProductsPageProps) => {
-  const { categoryId, occasionId, minRating, minPrice, maxPrice, page } = await searchParams;
-
+const ProductsPage = async () => {
+  // Query
   const [categoriesResult, occasionsResult] = await Promise.all([
     getCategoriesAction({ limit: 50 }).catch(() => null),
     getOccasionsAction({ limit: 50 }).catch(() => null),
-    getProductsAction({
-      limit: PRODUCTS_PAGE_SIZE,
-      page: page ? Number(page) : undefined,
-      categoryId,
-      occasionId,
-      minRating: minRating ? Number(minRating) : undefined,
-      minPrice: minPrice ? Number(minPrice) : undefined,
-      maxPrice: maxPrice ? Number(maxPrice) : undefined,
-    }).catch(() => null),
   ]);
 
+  // Variables
   const categories = categoriesResult?.status ? (categoriesResult.payload?.data ?? []) : [];
   const occasions = occasionsResult?.status ? (occasionsResult.payload?.data ?? []) : [];
 

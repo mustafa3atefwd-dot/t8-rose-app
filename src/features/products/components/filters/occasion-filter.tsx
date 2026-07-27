@@ -20,15 +20,19 @@ const OccasionFilter = ({ occasions, activeId, onSelect }: OccasionFilterProps) 
             type="button"
             aria-pressed={isActive}
             onClick={() => onSelect(isActive ? undefined : occasion.id)}
-            className={cn(
-              'bg-ds-bg-muted group relative flex h-19 items-center justify-center overflow-hidden rounded-lg transition-all',
-              isActive && 'ring-ds-border-primary ring-2 ring-offset-1'
-            )}
+            className="bg-ds-bg-muted group relative flex h-19 items-center justify-center overflow-hidden rounded-lg transition-all"
           >
             {occasion.image && <Image src={occasion.image} alt="photo" fill unoptimized className="object-cover" />}
-            <span className="bg-ds-bg-overlay absolute inset-0" />
-            <span className="bg-ds-bg-occasion-overlay absolute inset-x-0 bottom-0 h-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" />
-            <span className="text-ds-text-inverse relative z-10 p-2 text-center text-base font-medium drop-shadow-sm">
+            <span className="bg-ds-bg-overlay absolute inset-0 z-10" />
+            <span
+              className={cn(
+                'absolute inset-x-0 bottom-0 z-20 h-1/2 transition-opacity duration-200',
+                isActive
+                  ? 'bg-ds-bg-occasion-overlay opacity-100'
+                  : 'bg-ds-bg-occasion-hover-overlay opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'
+              )}
+            />
+            <span className="text-ds-text-inverse relative z-30 p-2 text-center text-base font-medium drop-shadow-sm dark:text-zinc-50">
               {occasion.title}
             </span>
           </button>
