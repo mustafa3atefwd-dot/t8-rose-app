@@ -1,21 +1,17 @@
-'use client';
 import { Rating, SectionTitle } from '@/shared/components';
 import ProductReview from './product-review';
-import ProductReviewSkeleton from '../skeletons/product-review.skeleton';
-import { useProductReviews } from '../hooks/use-product-reviews';
-import { useProductRating } from '../hooks/use-product-rating';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { getProductRating, getReviews } from '../lib/apis/reviews.api';
 type Props = {
   productId: string;
 };
-export default function ProductReviews({ productId }: Props) {
-  const t = useTranslations('productReview');
+export default async function ProductReviews({ productId }: Props) {
+  const t = await getTranslations('productReview');
 
-  const { data: productRatingData } = useProductRating(productId);
+  const productRatingData = await getProductRating(productId);
+  const reviewsData = await getReviews( productId, 1, 100);
 
-  const { data: reviewsData, ref, isFetchingNextPage, isPending} = useProductReviews(productId);
-
-  const reviews = reviewsData?.pages.flatMap((page) => page.payload.data) ?? [];
+  // const reviews = reviewsData?.pages.flatMap((page) => page.payload.data) ?? [];
 
   return (
     <section>
@@ -35,27 +31,18 @@ export default function ProductReviews({ productId }: Props) {
         </header>
         <div className="flex items-center gap-5">
           {/* product reviews */}
-          <div className="border-ds-border-muted max-h-91.75 flex-2 overflow-auto border-e pe-5">
-            {isPending ? (
-              Array.from({ length: 2 }).map((_, index) => (
-                <ProductReviewSkeleton key={index} />
-              ))
-            ) : reviews.length > 0 ? (
-              <>
-                {reviews.map((review) => (
+          <div className="border-ds-border-muted max-h-91.75 flex-2 overflow-auto hide-scrollbar border-e pe-5">
+           {
+            reviewsData?.payload.data.length > 0 ? reviewsData.payload.data.map((review) => (
                   <ProductReview key={review.id} review={review} />
-                ))}
-
-                <div ref={ref}>{isFetchingNextPage && <ProductReviewSkeleton />}</div>
-              </>
-            ) : (
-              <div className="flex min-h-91.75 items-center justify-center">
+                )):
+                          <div className="flex min-h-91.75 items-center justify-center">
                 <p className="text-ds-text-muted">{t('noReviews')}</p>
               </div>
-            )}
+           } 
           </div>
           {/* user rating */}
-          <div className="min-h-91.75 flex-1 bg-violet-500"></div>
+          <div className="min-h-91.75 flex-1"></div>
         </div>
       </div>
     </section>

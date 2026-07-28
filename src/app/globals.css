@@ -622,3 +622,13 @@ html[data-theme='dark'] {
     transform: translateX(-50%);
   }
 }
+
+/* hide scrollbar */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE و Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Edge, Safari */
+}
