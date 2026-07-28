@@ -1,12 +1,13 @@
 import 'server-only';
 
-import { apiRequest } from '@/shared/lib/utils/request.util';
-import { IApiResponse } from '@/shared/lib/types/api';
 import { BACKEND_URL } from '@/shared/lib/constants/api.constant';
-import { IPaginatedProducts, IProductDetail, IProductsQueryParams } from '../types/product';
+import { IApiResponse } from '@/shared/lib/types/api';
+import { apiRequest } from '@/shared/lib/utils/request.util';
+import type { IPaginatedProducts, IProductDetail, IProductsQueryParams } from '../types/product';
 
 export const getProductsAction = async (params?: IProductsQueryParams) => {
   const query = new URLSearchParams();
+
   if (params?.page) query.set('page', String(params.page));
   if (params?.limit) query.set('limit', String(params.limit));
   if (params?.occasionId) query.set('occasionId', params.occasionId);

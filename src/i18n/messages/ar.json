@@ -51,6 +51,17 @@
       }
     }
   },
+  "productDetails": {
+    "stock": "متبقي {count} في المخزون",
+    "rating": "التقييم: {rating}/5",
+    "ratings": "({count} تقييم)",
+    "description": "وصف المنتج",
+    "noDescription": "لا يوجد وصف متاح.",
+    "addToCart": "أضف إلى السلة",
+    "addToWishlist": "أضف إلى المفضلة",
+    "galleryLabel": "صور المنتج",
+    "imageLabel": "صورة المنتج"
+  },
   "toast": {
     "success": "نجاح",
     "error": "خطأ",
