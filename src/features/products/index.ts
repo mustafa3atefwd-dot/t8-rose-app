@@ -1,3 +1,3 @@
-export * from './lib/actions';
+export * from './lib/api';
 export * from './lib/constants';
 export * from './lib/utils';

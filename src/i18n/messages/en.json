@@ -52,7 +52,7 @@
     }
   },
   "productDetails": {
-    "stock": "{count} left in stock",
+    "stock": "{count} units in stock",
     "rating": "Rating: {rating}/5",
     "ratings": "({count, plural, one {# rating} other {# ratings}})",
     "description": "Product description",

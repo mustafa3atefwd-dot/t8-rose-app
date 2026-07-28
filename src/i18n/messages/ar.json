@@ -52,7 +52,7 @@
     }
   },
   "productDetails": {
-    "stock": "متبقي {count} في المخزون",
+    "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",
     "ratings": "({count} تقييم)",
     "description": "وصف المنتج",

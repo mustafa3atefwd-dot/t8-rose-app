@@ -1,4 +1,4 @@
-export default function ProductDetailsLoading() {
+export function ProductDetailsSkeleton() {
   return (
     <main className="bg-ds-bg-plain dark:bg-ds-bg-muted flex-1 py-6 sm:py-10">
       <div className="container">
