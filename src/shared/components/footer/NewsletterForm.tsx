@@ -39,7 +39,7 @@ export function NewsletterForm() {
   return (
     <form className="mt-4 w-full" noValidate onSubmit={handleSubmit(handleSubscribe)}>
       <div
-        className="bg-ds-bg-default focus-within:ring-ds-ring dark:bg-ds-bg-subtle flex h-10 w-full items-center rounded-full ps-1 transition-shadow focus-within:ring-2"
+        className="bg-ds-bg-default focus-within:ring-ds-ring data-[invalid=true]:border-ds-border-danger data-[invalid=true]:ring-ds-ring-danger data-[invalid=true]:focus-within:border-ds-border-danger data-[invalid=true]:focus-within:ring-ds-ring-danger dark:bg-ds-bg-subtle flex h-10 w-full items-center rounded-full border border-transparent ps-1 transition-shadow focus-within:ring-2 data-[invalid=true]:ring-2"
         data-invalid={Boolean(errors.email)}
       >
         <Input
