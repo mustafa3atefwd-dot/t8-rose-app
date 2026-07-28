@@ -4,6 +4,9 @@ import type { IProductDetail } from '@/features/products/lib/types/product';
 import { getDiscountedPrice } from '@/features/products/lib/utils';
 import { Badge } from '@/shared/components/ui/badge';
 import { ProductActions } from './product-actions';
+import { getServerSession } from "next-auth";
+import { authOptions } from '@/auth';
+
 
 interface ProductInformationProps {
   product: IProductDetail;
@@ -13,6 +16,10 @@ interface ProductInformationProps {
 export async function ProductInformation({ product, locale }: ProductInformationProps) {
   const t = await getTranslations({ locale, namespace: 'productDetails' });
   const discountedPrice = getDiscountedPrice(product);
+
+ const session = await getServerSession(authOptions);
+const isLoggedIn = !!session?.user;
+
   const priceFormatter = new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: 'EGP',
@@ -67,7 +74,13 @@ export async function ProductInformation({ product, locale }: ProductInformation
       </div>
 
       <div className="mt-auto">
-        <ProductActions addToCartLabel={t('addToCart')} addToWishlistLabel={t('addToWishlist')} />
+        <ProductActions 
+          productId={product.id}
+          isLoggedIn={isLoggedIn}
+          product={product as any}
+          addToCartLabel={t('addToCart')} 
+          addToWishlistLabel={t('addToWishlist')} 
+        />
       </div>
     </section>
   );

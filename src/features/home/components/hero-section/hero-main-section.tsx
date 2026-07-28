@@ -21,7 +21,7 @@ export default function HomepageHero() {
   }
 
   return (
-    <div className="bg-background text-foreground mx-auto w-full max-w-7xl space-y-6 px-4 py-8 transition-colors duration-300 select-none">
+    <div className="bg-background text-foreground container mx-auto  max-w-7xl space-y-6 px-4 py-8 transition-colors duration-300 select-none">
       <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-4">
         <HeroBanner />
         <HeroCarousel />

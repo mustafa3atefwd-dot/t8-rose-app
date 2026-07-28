@@ -1,3 +1,4 @@
+import HomepageHero from '@/features/home/components/hero-section/hero-main-section';
 import BestSelling from '@/features/home/components/best-selling';
 import MostPopular from '@/features/home/components/most-popular';
 
@@ -7,6 +8,7 @@ export const revalidate = 60;
 const HomePage = () => {
   return (
     <>
+    <HomepageHero/>
       <BestSelling />
       <MostPopular />
     </>

@@ -34,8 +34,8 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
   const product = await loadProduct(productId);
 
   return<>
-  <ProductReviews productId={productId}/>
   <ProductDetails product={product} locale={locale} />;
+  <ProductReviews productId={productId}/>
   </> 
 
 }

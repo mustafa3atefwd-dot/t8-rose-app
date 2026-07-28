@@ -3,7 +3,7 @@ import { Gift, Image as ImageIcon, ChevronLeft, ChevronRight, Sparkles } from 'l
 
 export function HeroSkeleton() {
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-6 px-4 py-8">
+    <div className="container mx-auto w-full max-w-7xl space-y-6 px-4 py-8">
       {/* ================= 1. UPPER SECTION: HERO GRID SKELETON ================= */}
       <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-4">
         {/* Left Banner Skeleton */}

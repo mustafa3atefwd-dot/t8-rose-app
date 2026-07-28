@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Eye, Heart, ShoppingCart } from 'lucide-react';
+import { Eye, Heart, ShoppingCart, Loader2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Badge } from '@/shared/components/ui/badge';
@@ -9,25 +9,66 @@ import { Button } from '@/shared/components/ui/button';
 import RatingStars from './rating-stars';
 import { getBadge, getDiscountedPrice } from '../lib/utils';
 import { IProduct } from '../lib/types/product';
+import { useCart } from '@/shared/hooks/use-cart';
+import { useWishlist } from '@/shared/hooks/use-wishlist';
+import { Product } from '@/features/product-reviews/lib/types/product';
+import { useSession } from 'next-auth/react';
+
+// Import Custom Hooks
+
 
 interface ProductCardProps {
   product: IProduct;
+  isLoggedIn?: boolean;
   onAddToCart?: (product: IProduct) => void;
   onToggleWishlist?: (product: IProduct) => void;
 }
 
-const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProps) => {
+const ProductCard = ({
+  product,
+  isLoggedIn = false,
+  onAddToCart,
+  onToggleWishlist,
+}: ProductCardProps) => {
   const t = useTranslations('products.card');
   const locale = useLocale();
+ const { data: session } = useSession();
+const userIsLoggedIn = isLoggedIn ?? !!session;
+
+
+  
+  // 1. Initialize shared custom logic hooks
+  const { addToCart, isLoading: isCartLoading } = useCart(isLoggedIn);
+  const { toggleWishlist, isWishlisted, isLoading: isWishlistLoading } = useWishlist(isLoggedIn);
 
   const discountedPrice = getDiscountedPrice(product);
   const badge = getBadge(product);
   const isOutOfStock = product.stock <= 0;
+  const savedInWishlist = isWishlisted(product.id);
 
   const formatPrice = (value: number | string) =>
     new Intl.NumberFormat(locale, { style: 'currency', currency: 'EGP', maximumFractionDigits: 0 }).format(
       Number(value)
     );
+
+  // 2. Button Action Handlers
+  const handleAddToCart = async () => {
+    if (onAddToCart) {
+      onAddToCart(product);
+    } else {
+    
+await addToCart(product.id, 1, product as unknown as Product);
+    }
+   
+  };
+
+  const handleToggleWishlist = async () => {
+    if (onToggleWishlist) {
+      onToggleWishlist(product);
+    } else {
+      await toggleWishlist(product.id);
+    }
+  };
 
   return (
     <div className="rounded-ds-lg border-ds-border-soft mx-auto flex w-full max-w-75 flex-col overflow-hidden">
@@ -44,17 +85,31 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
           <div className="text-ds-text-muted flex h-full w-full items-center justify-center">{t('noImage')}</div>
         )}
 
+        {/* Hover Overlay Actions */}
         <div className="bg-ds-bg-primary-overlay absolute inset-0 z-10 flex items-center justify-center gap-3 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+          {/* Wishlist Heart Button */}
           <Button
             className="rounded-full bg-white"
             size="icon-sm"
             variant="secondary"
             aria-label={t('wishlist')}
-            onClick={() => onToggleWishlist?.(product)}
+            disabled={isWishlistLoading}
+            onClick={handleToggleWishlist}
           >
-            <Heart />
+            {isWishlistLoading ? (
+              <Loader2 className="size-4 animate-spin text-gray-600" />
+            ) : (
+              <Heart
+                className={`size-4 transition-colors ${
+                  savedInWishlist
+                    ? 'fill-maroon-500 text-maroon-500'
+                    : 'text-gray-700 hover:text-maroon-500'
+                }`}
+              />
+            )}
           </Button>
 
+          {/* Quick View Button */}
           <Button
             className="rounded-full bg-white"
             size="icon-sm"
@@ -63,7 +118,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
             asChild
           >
             <Link href={`/products/${product.id}`}>
-              <Eye />
+              <Eye className="size-4" />
             </Link>
           </Button>
         </div>
@@ -86,15 +141,20 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
             )}
           </div>
 
+          {/* Add to Cart Button */}
           <Button
-            className="bg-maroon-500 hover:bg-maroon-600 size-12 rounded-full text-white"
+            className="bg-maroon-500 hover:bg-maroon-600 size-12 rounded-full text-white disabled:bg-gray-300"
             size="icon-lg"
             variant="default"
-            disabled={isOutOfStock}
+            disabled={isOutOfStock || isCartLoading}
             aria-label={t('addToCart')}
-            onClick={() => onAddToCart?.(product)}
+            onClick={handleAddToCart}
           >
-            <ShoppingCart className="size-5" />
+            {isCartLoading ? (
+              <Loader2 className="size-5 animate-spin" />
+            ) : (
+              <ShoppingCart className="size-5" />
+            )}
           </Button>
         </div>
       </div>
