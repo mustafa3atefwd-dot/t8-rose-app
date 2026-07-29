@@ -14,6 +14,16 @@
   --ds-bg-inverse: var(--color-zinc-800);
   --ds-bg-elevated: color-mix(in srgb, var(--color-black) 20%, transparent);
   --ds-bg-overlay: color-mix(in srgb, var(--color-black) 50%, transparent);
+  --ds-bg-occasion-overlay: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-black) 13.75%, transparent) 0%,
+    color-mix(in srgb, var(--color-soft-pink-300) 55%, transparent) 100%
+  );
+  --ds-bg-occasion-hover-overlay: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-black) 25%, transparent) 0%,
+    color-mix(in srgb, var(--color-black) 50%, transparent) 100%
+  );
 
   /* Primary */
   --ds-bg-primary: var(--color-maroon-800);
@@ -264,10 +274,13 @@ html[data-theme='dark'] {
   --color-ds-bg-inverse: var(--ds-bg-inverse);
   --color-ds-bg-elevated: var(--ds-bg-elevated);
   --color-ds-bg-overlay: var(--ds-bg-overlay);
+  --background-image-ds-bg-occasion-overlay: var(--ds-bg-occasion-overlay);
+  --background-image-ds-bg-occasion-hover-overlay: var(--ds-bg-occasion-hover-overlay);
   --color-ds-bg-primary: var(--ds-bg-primary);
   --color-ds-bg-primary-saturated: var(--ds-bg-primary-saturated);
   --color-ds-bg-primary-faint: var(--ds-bg-primary-faint);
   --color-ds-bg-primary-fade: var(--ds-bg-primary-fade);
+  --color-ds-bg-primary-overlay: var(--ds-bg-primary-overlay);
   --color-ds-bg-info: var(--ds-bg-info);
   --color-ds-bg-info-faint: var(--ds-bg-info-faint);
   --color-ds-bg-info-fade: var(--ds-bg-info-fade);
@@ -284,36 +297,6 @@ html[data-theme='dark'] {
   --color-ds-bg-danger-saturated: var(--ds-bg-danger-saturated);
   --color-ds-bg-danger-faint: var(--ds-bg-danger-faint);
   --color-ds-bg-danger-fade: var(--ds-bg-danger-fade);
-   /** Backgrounds */
---color-ds-bg-plain: var(--ds-bg-plain);
---color-ds-bg-subtle: var(--ds-bg-subtle);
---color-ds-bg-muted: var(--ds-bg-muted);
---color-ds-bg-soft: var(--ds-bg-soft);
---color-ds-bg-default: var(--ds-bg-default);
---color-ds-bg-inverse: var(--ds-bg-inverse);
---color-ds-bg-elevated: var(--ds-bg-elevated);
---color-ds-bg-overlay: var(--ds-bg-overlay);
---color-ds-bg-primary: var(--ds-bg-primary);
---color-ds-bg-primary-saturated: var(--ds-bg-primary-saturated);
---color-ds-bg-primary-faint: var(--ds-bg-primary-faint);
---color-ds-bg-primary-fade: var(--ds-bg-primary-fade);
---color-ds-bg-primary-overlay: var(--ds-bg-primary-overlay);
---color-ds-bg-info: var(--ds-bg-info);
---color-ds-bg-info-faint: var(--ds-bg-info-faint);
---color-ds-bg-info-fade: var(--ds-bg-info-fade);
---color-ds-bg-secondary: var(--ds-bg-secondary);
---color-ds-bg-secondary-faint: var(--ds-bg-secondary-faint);
---color-ds-bg-secondary-fade: var(--ds-bg-secondary-fade);
---color-ds-bg-success: var(--ds-bg-success);
---color-ds-bg-success-faint: var(--ds-bg-success-faint);
---color-ds-bg-success-fade: var(--ds-bg-success-fade);
---color-ds-bg-warning: var(--ds-bg-warning);
---color-ds-bg-warning-faint: var(--ds-bg-warning-faint);
---color-ds-bg-warning-fade: var(--ds-bg-warning-fade);
---color-ds-bg-danger: var(--ds-bg-danger);
---color-ds-bg-danger-saturated: var(--ds-bg-danger-saturated);
---color-ds-bg-danger-faint: var(--ds-bg-danger-faint);
---color-ds-bg-danger-fade: var(--ds-bg-danger-fade);
 
   /** Text */
   --color-ds-text-plain: var(--ds-text-plain);
@@ -487,6 +470,7 @@ html[lang='en'] body {
   font-family: var(--font-sarabun);
 }
 
+
 /* Container */
 .container {
   width: 100%;
@@ -603,32 +587,4 @@ html[data-theme='dark'] {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
     color: var(--color-zinc-700);
   }
-}
-
-.marquee {
-  animation: marquee 20s linear infinite;
-}
-
-.group:hover .marquee {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* hide scrollbar */
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE و Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Edge, Safari */
 }

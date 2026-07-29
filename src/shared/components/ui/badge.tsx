@@ -20,6 +20,9 @@ const badgeVariants = cva(
         error: "bg-ds-bg-danger-faint text-ds-text-danger",
         info: "bg-ds-bg-info-faint text-ds-text-info",
         outline: "border-ds-border-soft bg-transparent text-ds-text-default",
+        new: "bg-ds-bg-badge-new text-ds-text-badge-new",
+        hot: "bg-ds-bg-badge-hot text-ds-text-badge-hot",
+        outOfStock: "bg-ds-bg-badge-out-of-stock text-ds-text-badge-out-of-stock",
       },
     },
     defaultVariants: {

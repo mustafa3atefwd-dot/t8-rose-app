@@ -65,7 +65,11 @@ export interface IProductDetail extends IProduct {
 export interface IProductsQueryParams {
   page?: number;
   limit?: number;
+  categoryId?: string;
   occasionId?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  minRating?: number;
   sortBy?: ProductSortBy;
   sortOrder?: SortOrder;
 }
