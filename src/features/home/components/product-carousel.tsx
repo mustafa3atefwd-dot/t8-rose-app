@@ -1,7 +1,13 @@
 'use client';
 
 import ProductCard from '@/features/products/components/product-card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/components/ui/carousel';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/shared/components/ui/carousel';
 import { IProduct } from '@/features/products/lib/types/product';
 
 interface ProductCarouselProps {
@@ -12,7 +18,7 @@ interface ProductCarouselProps {
 const ProductCarousel = ({ products }: ProductCarouselProps) => {
   if (!products || products.length === 0) {
     return (
-      <p className="w-full py-12 text-center text-ds-text-muted">
+      <p className="text-ds-text-muted w-full py-12 text-center">
         {products === null ? 'Failed to load products.' : 'No products yet.'}
       </p>
     );
@@ -27,8 +33,9 @@ const ProductCarousel = ({ products }: ProductCarouselProps) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious variant="default" className="left-4 bg-ds-bg-primary hover:bg-ds-bg-primary-saturated p-4" />
-      <CarouselNext variant="default" className="right-4 bg-ds-bg-primary hover:bg-ds-bg-primary-saturated p-4" />
+
+      <CarouselPrevious variant="default" className="bg-ds-bg-primary hover:bg-ds-bg-primary-saturated left-4 p-4" />
+      <CarouselNext variant="default" className="bg-ds-bg-primary hover:bg-ds-bg-primary-saturated right-4 p-4" />
     </Carousel>
   );
 };
