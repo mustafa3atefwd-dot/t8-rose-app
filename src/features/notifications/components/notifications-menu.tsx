@@ -22,9 +22,9 @@ export default function NotificationsMenu() {
   return (
     <div className="relative">
       {/* Trigger */}
-      <button className='relative' type="button" onClick={() => setOpen((prev) => !prev)}>
+      <button className='relative cursor-pointer' type="button" onClick={() => setOpen((prev) => !prev)}>
         <Bell />
-        <HeaderBadge count={77}/>
+        <HeaderBadge count={data?.payload.data.length || 0}/>
       </button>
 
       {open && (

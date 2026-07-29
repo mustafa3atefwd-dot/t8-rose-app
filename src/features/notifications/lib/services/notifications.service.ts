@@ -1,5 +1,3 @@
-'use server';
-
 import { BACKEND_URL } from '@/shared/lib/constants/api.constant';
 import { getNextAuthToken } from '@/shared/lib/utils/get-token.util';
 import { NotificationsResponse } from '../types/notifications';
