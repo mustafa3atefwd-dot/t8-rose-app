@@ -3,6 +3,9 @@ import { ProductDetails, ProductDetailsSkeleton } from '@/features/product-detai
 import { getProductById } from '@/features/products';
 import { ApiError } from '@/shared/lib/utils/error.util';
 import { notFound } from 'next/navigation';
+import ProductReviewSkeleton from '@/features/product-details/skeletons/product-review.skeleton';
+import ProductReviews from '@/features/product-details/components/product-reviews';
+import { getReviews } from '@/features/product-details/lib/apis/reviews.api';
 
 interface ProductDetailsPageProps {
   params: Promise<{
@@ -29,23 +32,35 @@ async function loadProduct(productId: string) {
   }
 }
 
-async function ProductDetailsContent({ productId, locale }: { productId: string; locale: string }) {
-  const product = await loadProduct(productId);
-
-  return <ProductDetails product={product} locale={locale} />;
-}
-
-export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
+export default async function ProductDetailsContent({ params }: ProductDetailsPageProps) {
   const { locale, productId } = await params;
+  const product = await loadProduct(productId);
+  const reviewsData = await getReviews(productId, 1, 20);
 
   return (
-   <>
-       <Suspense fallback={<ProductDetailsSkeleton />}>
-      <ProductDetailsContent productId={productId} locale={locale} />
-    </Suspense>
-        <Suspense fallback={<ProductReviewSkeleton />}>
-       <ProductReviews productId={productId} />
-    </Suspense>
-   </>
+    <>
+      <Suspense
+        fallback={
+          <>
+            {' '}
+            <ProductDetailsSkeleton />
+            <ProductReviewSkeleton />
+          </>
+        }
+      >
+        <ProductDetails product={product} locale={locale} />
+        <ProductReviews reviewsData={reviewsData} productRatingData={product} />
+      </Suspense>
+    </>
   );
 }
+
+// export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
+//   const { locale, productId } = await params;
+
+//   return (
+//       <Suspense fallback={<ProductDetailsSkeleton />}>
+//         <ProductDetailsContent productId={productId} locale={locale} />
+//       </Suspense>
+//   );
+// }
