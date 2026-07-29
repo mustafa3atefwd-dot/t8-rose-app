@@ -12,6 +12,8 @@ export const getProductsAction = async (params?: IProductsQueryParams) => {
   if (params?.occasionId) query.set('occasionId', params.occasionId);
   if (params?.sortBy) query.set('sortBy', params.sortBy);
   if (params?.sortOrder) query.set('sortOrder', params.sortOrder);
+  if (params?.categoryId) query.set('categoryId', params.categoryId);
+  if (params?.subCategoryId) query.set('subCategoryId', params.subCategoryId);
 
   const queryString = query.toString();
 

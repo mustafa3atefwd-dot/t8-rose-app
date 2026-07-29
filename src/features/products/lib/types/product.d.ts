@@ -74,6 +74,8 @@ export interface IProductsQueryParams {
   occasionId?: string;
   sortBy?: ProductSortBy;
   sortOrder?: SortOrder;
+  categoryId?: string;
+  subCategoryId?: string;
 }
 
 export interface IPaginationMeta {
