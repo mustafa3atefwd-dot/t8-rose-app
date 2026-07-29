@@ -21,10 +21,10 @@ export function FeaturesBar() {
               <Icon className="h-10 w-10" />
             </div>
             <div className="flex flex-col">
-              <span className="text-maroon-600 dark:text-soft-pink-200 text-foreground text-xl font-semibold md:text-base">
+              <span className="text-maroon-600 dark:text-soft-pink-200 text-xl font-semibold md:text-base">
                 {t(`${feat.id}.title`)}
               </span>
-              <span className="text-muted-foreground text-sm text-zinc-500 dark:text-zinc-300">
+              <span className="text-sm text-zinc-500 dark:text-zinc-300">
                 {t(`${feat.id}.desc`)}
               </span>
             </div>
