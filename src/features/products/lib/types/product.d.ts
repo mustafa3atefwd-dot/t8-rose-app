@@ -8,7 +8,6 @@ export const PRODUCT_DISCOUNT_TYPES = {
 
 export type ProductDiscountType = (typeof PRODUCT_DISCOUNT_TYPES)[keyof typeof PRODUCT_DISCOUNT_TYPES];
 
-/** Lean relation shape returned for `category`/`subCategory` on list items. */
 export interface ICategorySummary {
   id: string;
   title: string;
@@ -27,13 +26,10 @@ export interface IProduct extends IDocumentFields {
   rating: number;
   ratings: number;
   stock: number;
-  /** Numeric string, e.g. "25" — the backend serializes decimal fields as strings. */
   price: string;
   discountType: ProductDiscountType | null;
-  /** Numeric string, e.g. "10" — same decimal-as-string serialization as `price`. */
   discountValue: string | null;
   cover: string | null;
-  /** Raw JSON-encoded array of image URLs — parse with `JSON.parse` before use. */
   gallery: string;
   categoryId: string;
   subCategoryId: string | null;
@@ -41,7 +37,6 @@ export interface IProduct extends IDocumentFields {
   deletedAt: string | null;
   category: ICategorySummary;
   subCategory: ICategorySummary | null;
-  /** Shape unobserved so far — every sample response has an empty array. */
   occasions: unknown[];
   _count: IProductCount;
 }
@@ -63,7 +58,6 @@ export interface IProductReview {
   };
 }
 
-/** `GET /products/{id}` returns the list shape plus `reviews` — list items don't include reviews. */
 export interface IProductDetail extends IProduct {
   reviews: IProductReview[];
 }

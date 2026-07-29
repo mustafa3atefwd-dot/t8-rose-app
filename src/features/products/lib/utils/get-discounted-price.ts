@@ -1,4 +1,4 @@
-import { IProduct } from '../types/product';
+import type { IProduct } from '../types/product';
 
 export function getDiscountedPrice(product: IProduct) {
   if (!product.discountType || !product.discountValue) return null;
