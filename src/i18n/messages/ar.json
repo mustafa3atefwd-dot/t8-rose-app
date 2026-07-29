@@ -85,12 +85,10 @@
     "welcomeBack": "مرحباً بعودتك!",
     "joinFamily": "كن جزءاً من عائلتنا!",
     "forgotPassword": "هل نسيت كلمة المرور؟",
-
     "registerEmail": "التسجيل باستخدام البريد الإلكتروني",
     "emailLabel": "البريد الإلكتروني",
     "alreadyHaveAccount": "لديك حساب بالفعل؟",
     "login": "تسجيل الدخول",
-
     "createAccount": "إنشاء حساب",
     "enterOtpCode": "أدخل رمز التحقق",
     "otpSentTo": "لقد أرسلنا رمزًا مكونًا من 6 أرقام إلى:",
@@ -102,7 +100,6 @@
     "verifyCode": "التحقق من الرمز",
     "needHelp": "هل تحتاج إلى مساعدة؟",
     "contactUs": "تواصل معنا",
-
     "createStrongPassword": "إنشاء كلمة مرور قوية",
     "tellUsMore": "أخبرنا المزيد عنك",
     "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
@@ -138,7 +135,7 @@
   },
   "validation": {
     "required": "هذا الحقل مطلوب",
-    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "invalidEmail": "يجب أن يكون لديك بريد إلكتروني صالح",
     "otpLength": "يجب أن يتكون رمز التحقق من 6 أرقام",
     "otpDigits": "يجب أن يحتوي رمز التحقق على أرقام فقط",
     "firstName": "يجب أن يكون الاسم الأول 2 حرف على الأقل",
@@ -198,7 +195,6 @@
       "password": "أدخل كلمة المرور",
       "phone": "رقم الهاتف",
       "passwordPlaceholder": "********",
-
       "firstName": "محمد",
       "lastName": "محمود",
       "username": "mohamed123",
@@ -315,24 +311,58 @@
       "toContact": "اتصل بنا"
     }
   },
-  "productDetails": {
-    "writeReview": "اكتب تقييمًا",
-
-    "review": {
-      "headlineLabel": "عنوان التقييم",
-      "contentLabel": "تقييمك",
-      "ratingLabel": "تقييمك",
-      "ratingValue": "قيّم بـ {rating} من 5",
-      "submitSuccess": "تم إرسال تقييمك بنجاح.",
-      "alreadyReviewed": "لقد قمت بتقييم هذا المنتج من قبل."
+  "hero": {
+    "prevSlide": "الشريحة السابقة",
+    "nextSlide": "\"الشريحة التالية\"",
+    "goToSlide": "الانتقال إلى الشريحة {number}",
+    "shopNow": "تسوق الآن",
+    "buying": "أود الشراء!",
+    "startingFrom": "تبدأ من 10.99 ج.م",
+    "specialGiftsTitle": "هدايا مميزة لمن تحب",
+    "slides": {
+      "flowers": {
+        "title": "عبر عن مشاعرك بالزهور",
+        "desc": "هدايا أنيقة لكل لحظة فريدة ومميزة."
+      },
+      "chocolates": {
+        "title": "أعذب عبارات المودة",
+        "desc": "شوكولاتة مصنوعة يدوياً بكل حب وشغف."
+      },
+      "gifts": {
+        "title": "مفاجآت لا تُنسى",
+        "desc": "صناديق هدايا منسقة بعناية فائقة لتناسب جميع المناسبات."
+      }
     },
-
-    "validation": {
-      "review": {
-        "productIdRequired": "معرّف المنتج مطلوب.",
-        "headlineRequired": "عنوان التقييم مطلوب.",
-        "ratingRequired": "يرجى اختيار تقييم.",
-        "ratingInvalid": "يجب أن يكون التقييم بين 1 و5."
+    "categories": {
+      "wedding": {
+        "tag": "زفاف",
+        "title": "احتفل بوجودها للأبد بهدية تدوم في ذاكرتها"
+      },
+      "engagement": {
+        "tag": "خطوبة",
+        "title": "كّرم بداية رحلة جميلة تجمعكما معاً"
+      },
+      "anniversary": {
+        "tag": "ذكرى سنوية",
+        "title": "احتفلا معاً أولى خطوات رحلتكما الجميلة"
+      }
+    },
+    "features": {
+      "delivery": {
+        "title": "توصيل مجاني",
+        "desc": "للطلبات الأكثر من 120 ج.م"
+      },
+      "refund": {
+        "title": "استرداد الأموال",
+        "desc": "إمكانية الإرجاع خلال 30 يوماً"
+      },
+      "payment": {
+        "title": "دفع آمن",
+        "desc": "عمليات دفع مشفرة وآمنة 100%"
+      },
+      "support": {
+        "title": "دعم 24/7",
+        "desc": "تواصل معنا في أي وقت على مدار الساعة"
       }
     }
   }
