@@ -8,38 +8,23 @@ import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import RatingStars from './rating-stars';
 import { getBadge, getDiscountedPrice } from '../lib/utils';
-import { IProduct } from '../lib/types/product';
 import { useCart } from '@/shared/hooks/use-cart';
 import { useWishlist } from '@/shared/hooks/use-wishlist';
-import { Product } from '@/features/product-reviews/lib/types/product';
-import { useSession } from 'next-auth/react';
-
-// Import Custom Hooks
-
+import { IProduct } from '../lib/types';
 
 interface ProductCardProps {
   product: IProduct;
-  isLoggedIn?: boolean;
   onAddToCart?: (product: IProduct) => void;
   onToggleWishlist?: (product: IProduct) => void;
 }
 
-const ProductCard = ({
-  product,
-  isLoggedIn = false,
-  onAddToCart,
-  onToggleWishlist,
-}: ProductCardProps) => {
+const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProps) => {
   const t = useTranslations('products.card');
   const locale = useLocale();
- const { data: session } = useSession();
-const userIsLoggedIn = isLoggedIn ?? !!session;
 
-
-  
-  // 1. Initialize shared custom logic hooks
-  const { addToCart, isLoading: isCartLoading } = useCart(isLoggedIn);
-  const { toggleWishlist, isWishlisted, isLoading: isWishlistLoading } = useWishlist(isLoggedIn);
+  // 1. Initialize custom hooks (session status checked internally)
+  const { addToCart, isLoading: isCartLoading } = useCart();
+  const { toggleWishlist, isWishlisted, isLoading: isWishlistLoading } = useWishlist();
 
   const discountedPrice = getDiscountedPrice(product);
   const badge = getBadge(product);
@@ -56,20 +41,17 @@ const userIsLoggedIn = isLoggedIn ?? !!session;
     if (onAddToCart) {
       onAddToCart(product);
     } else {
-    
-await addToCart(product.id, 1, product as unknown as Product);
+      await addToCart(product.id, 1, product);
     }
-   
   };
 
   const handleToggleWishlist = async () => {
     if (onToggleWishlist) {
       onToggleWishlist(product);
     } else {
-      await toggleWishlist(product.id);
+      await toggleWishlist(product.id, product);
     }
   };
-
   return (
     <div className="rounded-ds-lg border-ds-border-soft mx-auto flex w-full max-w-75 flex-col overflow-hidden">
       <div className="bg-ds-bg-muted group relative aspect-square w-full overflow-hidden rounded-xl">
@@ -101,9 +83,7 @@ await addToCart(product.id, 1, product as unknown as Product);
             ) : (
               <Heart
                 className={`size-4 transition-colors ${
-                  savedInWishlist
-                    ? 'fill-maroon-500 text-maroon-500'
-                    : 'text-gray-700 hover:text-maroon-500'
+                  savedInWishlist ? 'fill-maroon-500 text-maroon-500' : 'hover:text-maroon-500 text-gray-700'
                 }`}
               />
             )}
@@ -150,11 +130,7 @@ await addToCart(product.id, 1, product as unknown as Product);
             aria-label={t('addToCart')}
             onClick={handleAddToCart}
           >
-            {isCartLoading ? (
-              <Loader2 className="size-5 animate-spin" />
-            ) : (
-              <ShoppingCart className="size-5" />
-            )}
+            {isCartLoading ? <Loader2 className="size-5 animate-spin" /> : <ShoppingCart className="size-5" />}
           </Button>
         </div>
       </div>

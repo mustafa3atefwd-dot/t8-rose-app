@@ -1,3 +1,4 @@
+import { IProduct } from '@/features/products/lib/types';
 import { Product } from './product'; // Import your existing product types file
 
 // Generic API wrapper matching the server's response format
@@ -12,7 +13,7 @@ export interface ApiResponse<T> {
 export interface CartItem {
   id: string; // Cart item UUID
   productId: string;
-  product: Product;
+  product: IProduct;
   quantity: number;
 }
 
@@ -20,7 +21,7 @@ export interface CartItem {
 export interface WishlistItem {
   id: string; // Wishlist item UUID
   productId: string;
-  product: Product;
+  product: IProduct;
 }
 
 // Re-export for convenience across the app

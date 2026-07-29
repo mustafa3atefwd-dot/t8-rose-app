@@ -1,26 +1,29 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState, useEffect, useCallback } from 'react';
-import { getCartAction, addToCartAction, updateCartQuantityAction } from '../actions/cart-actions';
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { addToCartAction, updateCartQuantityAction } from '../actions/cart-actions';
 import { CartItem } from '../lib/types/product';
-import { Product } from '@/features/product-reviews/lib/types/product';
 
 const GUEST_CART_KEY = 'guest_cart_items';
 
-export function useCart(isLoggedIn: boolean) {
+export function useCart() {
+  const { status } = useSession();
+  const isLoggedIn = status === 'authenticated';
   const queryClient = useQueryClient();
+
   const [guestCart, setGuestCart] = useState<CartItem[]>([]);
 
-  // 1. Initialize Guest Cart from LocalStorage
+  // 1. Initialize guest cart state from localStorage
   useEffect(() => {
     if (!isLoggedIn) {
       const stored = localStorage.getItem(GUEST_CART_KEY);
       if (stored) {
         try {
-          const parsed = JSON.parse(stored);
-          setGuestCart(parsed);
+          setGuestCart(JSON.parse(stored));
         } catch (error) {
+          console.error('Failed to parse guest cart:', error);
           setGuestCart([]);
         }
       }
@@ -32,12 +35,14 @@ export function useCart(isLoggedIn: boolean) {
     localStorage.setItem(GUEST_CART_KEY, JSON.stringify(items));
   };
 
-  // 2. Query Server Cart via Server Action
+  // 2. Fetch Server Cart for Authenticated Users
   const { data: serverCart = [], isLoading: isCartLoading } = useQuery<CartItem[]>({
     queryKey: ['cart'],
     queryFn: async () => {
-      const data = await getCartAction();
-      return data;
+      const res = await fetch('/api/cart');
+      if (!res.ok) return [];
+      const data = await res.json();
+      return data.payload?.cartItems || data.payload || [];
     },
     enabled: isLoggedIn,
     staleTime: 1000 * 60 * 5,
@@ -45,49 +50,13 @@ export function useCart(isLoggedIn: boolean) {
 
   const cartItems = isLoggedIn ? serverCart : guestCart;
 
-  // 3. Sync Guest Cart to Server upon Login safely
-  const syncGuestCart = useCallback(async () => {
-    const stored = localStorage.getItem(GUEST_CART_KEY);
-    if (!stored) return;
-
-    try {
-      const itemsToSync: CartItem[] = JSON.parse(stored);
-      if (itemsToSync.length === 0) return;
-
-      localStorage.removeItem(GUEST_CART_KEY);
-      setGuestCart([]);
-
-      for (const item of itemsToSync) {
-        try {
-          await addToCartAction(item.productId, item.quantity);
-        } catch (itemError) {
-          console.error(`❌ [Guest Sync] Failed to sync item (${item.productId}):`, itemError);
-        }
-      }
-
-      queryClient.invalidateQueries({ queryKey: ['cart'] });
-    } catch (error) {
-      console.error('❌ [Guest Sync Error]:', error);
-    }
-  }, [queryClient]);
-
-  // Run sync safely when user transitions to logged in
-  useEffect(() => {
-    if (isLoggedIn) {
-      syncGuestCart();
-    }
-  }, [isLoggedIn, syncGuestCart]);
-
-  // 4. Server Actions Mutations
+  // 3. Server Action Mutations
   const addToCartMutation = useMutation({
     mutationFn: ({ productId, quantity }: { productId: string; quantity: number }) => {
       return addToCartAction(productId, quantity);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });
-    },
-    onError: (error) => {
-      console.error('❌ [Mutation - Add Error] Failed to add item:', error);
     },
   });
 
@@ -98,16 +67,12 @@ export function useCart(isLoggedIn: boolean) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });
     },
-    onError: (error) => {
-      console.error('❌ [Mutation - Update Error] Failed to update quantity:', error);
-    },
   });
 
-  // 5. Main Unified Add To Cart Function
-  const addToCart = async (productId: string, quantityToAdd = 1, productDetails?: Product) => {
-    const existingItem = cartItems.find((item) => item.productId === productId);
-
+  // 4. Unified Add To Cart Handler
+  const addToCart = async (productId: string, quantityToAdd = 1, productDetails?: CartItem['product']) => {
     if (isLoggedIn) {
+      const existingItem = serverCart.find((item) => item.productId === productId);
       if (existingItem) {
         const newQuantity = existingItem.quantity + quantityToAdd;
         await updateQuantityMutation.mutateAsync({ id: existingItem.id, quantity: newQuantity });
@@ -115,20 +80,35 @@ export function useCart(isLoggedIn: boolean) {
         await addToCartMutation.mutateAsync({ productId, quantity: quantityToAdd });
       }
     } else {
+      let currentGuestCart: CartItem[] = [];
+      const stored = localStorage.getItem(GUEST_CART_KEY);
+      if (stored) {
+        try {
+          currentGuestCart = JSON.parse(stored);
+        } catch {
+          currentGuestCart = [];
+        }
+      }
+
+      const existingItem = currentGuestCart.find((item) => item.productId === productId);
       let updatedGuestCart: CartItem[];
+
       if (existingItem) {
-        updatedGuestCart = guestCart.map((item) =>
+        updatedGuestCart = currentGuestCart.map((item) =>
           item.productId === productId ? { ...item, quantity: item.quantity + quantityToAdd } : item
         );
       } else {
+        if (!productDetails) return;
+
         const newItem: CartItem = {
           id: `guest-${Date.now()}`,
           productId,
-          product: productDetails!,
+          product: productDetails,
           quantity: quantityToAdd,
         };
-        updatedGuestCart = [...guestCart, newItem];
+        updatedGuestCart = [...currentGuestCart, newItem];
       }
+
       saveGuestCart(updatedGuestCart);
     }
   };
