@@ -471,53 +471,6 @@ html[lang='en'] body {
 }
 
 
-/* Container */
-.container {
-  width: 100%;
-  margin-inline: auto;
-  padding-inline: 1rem; /* Mobile */
-}
-
-/* Small devices */
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-    padding-inline: 1.5rem;
-  }
-}
-
-/* Tablets */
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding-inline: 2rem;
-  }
-}
-
-/* Laptops */
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-    padding-inline: 3rem;
-  }
-}
-
-/* Large screens */
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-    padding-inline: 4rem;
-  }
-}
-
-/* Extra large screens */
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1440px;
-    padding-inline: 5rem;
-  }
-}
-auto
 /* Progress Bar */
 .progress {
   display: flex;
@@ -587,4 +540,13 @@ html[data-theme='dark'] {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-soft-pink-300) 25%, transparent);
     color: var(--color-zinc-700);
   }
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
