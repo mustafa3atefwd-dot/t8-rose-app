@@ -10,6 +10,8 @@ import {
 import { useGetNotifications } from '../hooks/use-get-notifications';
 import React, { useState } from 'react';
 import NotificationSettingsMenu from './notification-settings-menu';
+import { Badge } from '@/shared/components/ui/badge';
+import HeaderBadge from '@/shared/components/header-badge';
 
 export default function NotificationsMenu() {
   const [open, setOpen] = useState(false);
@@ -20,8 +22,9 @@ export default function NotificationsMenu() {
   return (
     <div className="relative">
       {/* Trigger */}
-      <button type="button" onClick={() => setOpen((prev) => !prev)}>
+      <button className='relative' type="button" onClick={() => setOpen((prev) => !prev)}>
         <Bell />
+        <HeaderBadge count={77}/>
       </button>
 
       {open && (
