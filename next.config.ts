@@ -1,9 +1,16 @@
-import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
+import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'rose-app.elevate-bootcamp.cloud',
+      },
+    ],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();
