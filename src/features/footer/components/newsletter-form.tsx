@@ -3,12 +3,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/inputs';
-import { createNewsletterSchema, type NewsletterFormValues } from './newsletter.schema';
-import { useNewsletterSubscription } from './use-newsletter-subscription';
+import { useNewsletterSubscription } from '../hooks/use-newsletter-subscription';
+import { createNewsletterSchema, type NewsletterFormValues } from '../lib/schemas/newsletter.schema';
 
 export function NewsletterForm() {
   const t = useTranslations('footer');
@@ -19,17 +19,17 @@ export function NewsletterForm() {
   });
 
   const {
+    control,
     formState: { errors },
     handleSubmit,
-    register,
-    setValue,
+    reset,
   } = useForm<NewsletterFormValues>({
     resolver: zodResolver(schema),
     defaultValues: { email: '' },
   });
 
   const subscription = useNewsletterSubscription({
-    onSubscribed: () => setValue('email', ''),
+    onSubscribed: () => reset(),
   });
 
   function handleSubscribe(values: NewsletterFormValues) {
@@ -42,14 +42,21 @@ export function NewsletterForm() {
         className="bg-ds-bg-default focus-within:ring-ds-ring data-[invalid=true]:border-ds-border-danger data-[invalid=true]:ring-ds-ring-danger data-[invalid=true]:focus-within:border-ds-border-danger data-[invalid=true]:focus-within:ring-ds-ring-danger dark:bg-ds-bg-subtle flex h-10 w-full items-center rounded-full border border-transparent ps-1 transition-shadow focus-within:ring-2 data-[invalid=true]:ring-2"
         data-invalid={Boolean(errors.email)}
       >
-        <Input
-          type="email"
-          autoComplete="email"
-          aria-invalid={Boolean(errors.email)}
-          aria-describedby={errors.email ? 'newsletter-email-error' : undefined}
-          placeholder={t('emailPlaceholder')}
-          className="text-ds-text-inverse placeholder:text-ds-text-muted dark:text-ds-text-plain h-full flex-1 rounded-full border-0 bg-transparent px-3 text-sm focus-visible:border-transparent focus-visible:ring-0 dark:bg-transparent"
-          {...register('email')}
+        <Controller
+          control={control}
+          name="email"
+          render={({ field }) => (
+            <Input
+              {...field}
+              value={field.value}
+              type="email"
+              autoComplete="email"
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? 'newsletter-email-error' : undefined}
+              placeholder={t('emailPlaceholder')}
+              className="text-ds-text-inverse placeholder:text-ds-text-muted dark:text-ds-text-plain h-full flex-1 rounded-full border-0 bg-transparent px-3 text-sm focus-visible:border-transparent focus-visible:ring-0 dark:bg-transparent"
+            />
+          )}
         />
         <Button
           type="submit"

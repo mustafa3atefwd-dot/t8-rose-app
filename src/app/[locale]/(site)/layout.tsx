@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Footer } from '@/shared/components/footer';
+import { Footer } from '@/features/footer';
 
 interface SiteLayoutProps {
   children: ReactNode;

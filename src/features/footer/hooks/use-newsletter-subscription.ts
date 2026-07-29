@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 
 import { toast } from '@/shared/components/ui/toast';
-import { subscribeToNewsletter } from './newsletter.action';
+import { subscribeToNewsletter } from '../lib/actions/newsletter.action';
 
 interface UseNewsletterSubscriptionOptions {
   onSubscribed: () => void;
