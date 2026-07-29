@@ -218,7 +218,8 @@
     "iconOnly": "أيقونة فقط",
     "loadingDemo": "اضغط لرؤية حالة التحميل",
     "next": "التالي",
-    "creating": "جاري الإنشاء…"
+    "creating": "جاري الإنشاء…",
+    "addReview": "إضافة تقييم"
   },
   "checkbox": {
     "title": "مربع الاختيار",
@@ -280,10 +281,14 @@
   "productDetails": {
     "writeReview": "اكتب تقييمًا",
 
+    "relatedProducts": {
+      "title": "منتجات ذات صلة"
+    },
+
     "review": {
       "headlineLabel": "عنوان التقييم",
       "contentLabel": "تقييمك",
-      "ratingLabel": "تقييمك",
+      "ratingLabel": "تقييمك: ",
       "ratingValue": "قيّم بـ {rating} من 5",
       "submitSuccess": "تم إرسال تقييمك بنجاح.",
       "alreadyReviewed": "لقد قمت بتقييم هذا المنتج من قبل."

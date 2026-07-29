@@ -18,7 +18,7 @@ const RelatedProductsContent = async ({ categoryId, subCategoryId, currentProduc
     categoryId,
     subCategoryId,
     limit: RELATED_PRODUCTS_LIMIT,
-  }).catch(() => null);
+  });
 
   const products = result?.status
     ? (result.payload?.data ?? []).filter((product) => product.id !== currentProductId)
@@ -38,6 +38,9 @@ const RelatedProductsSkeleton = () => (
     <div className="hidden w-75 shrink-0 lg:block">
       <ProductCardSkeleton />
     </div>
+    <div className="hidden w-75 shrink-0 lg:block">
+      <ProductCardSkeleton />
+    </div>
   </div>
 );
 
@@ -45,10 +48,10 @@ const RelatedProducts = async (props: IRelatedProductsProps) => {
   const t = await getTranslations('productDetails');
 
   return (
-    <section className="py-8 sm:py-12 md:py-14 lg:py-17.5">
+    <section className="py-8 sm:py-12 md:py-15">
       <div className="container">
         <div className="mb-10">
-          <SectionTitle className="mx-0">{t('relatedProducts.title')}</SectionTitle>
+          <SectionTitle className="mx-0! w-fit!">{t('relatedProducts.title')}</SectionTitle>
         </div>
 
         <Suspense fallback={<RelatedProductsSkeleton />}>

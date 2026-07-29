@@ -25,87 +25,76 @@ function ProductReviewForm({ productId }: IProductReviewFormProps) {
   });
 
   return (
-    <section aria-labelledby="product-review-heading" className="w-full">
-      <h2 id="product-review-heading" className="sr-only">
-        {t('writeReview')}
-      </h2>
+    <section aria-labelledby="product-review-heading" className="py-8 sm:py-12 md:py-15">
+      <div className="container">
+        <h2 id="product-review-heading" className="sr-only">
+          {t('writeReview')}
+        </h2>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-        {/* ===== Headline ===== */}
-        <FormField
-          control={form.control}
-          name="headline"
-          label={t('review.headlineLabel')}
-          placeholder={tInput('reviewHeadline')}
-          required
-        />
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+          {/* ===== Rating ===== */}
+          <Controller
+            control={form.control}
+            name="rating"
+            render={({ field, fieldState }) => (
+              <div className="flex gap-2.5">
+                <p className="text-sm font-medium">{t('review.ratingLabel')}</p>
 
-        {/* ===== Content ===== */}
-        <FormField
-          control={form.control}
-          name="content"
-          variant="textarea"
-          label={t('review.contentLabel')}
-          placeholder={tInput('reviewContent')}
-        />
+                <div className="flex gap-1">
+                  {Array.from({ length: 5 }).map((_, index) => {
+                    const rating = index + 1;
+                    const isSelected = rating <= field.value;
 
-        {/* ===== Rating ===== */}
-        <Controller
-          control={form.control}
-          name="rating"
-          render={({ field, fieldState }) => (
-            <div>
-              <p className="mb-2 text-sm font-medium">{t('review.ratingLabel')}</p>
+                    return (
+                      <button
+                        key={rating}
+                        type="button"
+                        aria-label={t('review.ratingValue', { rating })}
+                        aria-pressed={isSelected}
+                        onClick={() => field.onChange(rating)}
+                      >
+                        <Star className={`size-6 ${isSelected ? 'fill-[#FBA707] text-[#FBA707]' : 'text-[#FBA707]'}`} />
+                      </button>
+                    );
+                  })}
+                </div>
 
-              <div className="flex gap-1">
-                {Array.from({ length: 5 }).map((_, index) => {
-                  const rating = index + 1;
-                  const isSelected = rating <= field.value;
-
-                  return (
-                    <button
-                      key={rating}
-                      type="button"
-                      aria-label={t('review.ratingValue', { rating })}
-                      aria-pressed={isSelected}
-                      onClick={() => field.onChange(rating)}
-                    >
-                      <Star
-                        className={`mb-2 size-6 ${isSelected ? 'fill-[#FBA707] text-[#FBA707]' : 'text-[#FBA707]'}`}
-                      />
-                    </button>
-                  );
-                })}
+                {fieldState.invalid && <FieldError id={`${name}-error`} errors={[fieldState.error]} />}
               </div>
+            )}
+          />
 
-              {fieldState.invalid && <FieldError id={`${name}-error`} errors={[fieldState.error]} />}
-            </div>
-          )}
-        />
+          {/* ===== Headline ===== */}
+          <FormField
+            control={form.control}
+            name="headline"
+            label={t('review.headlineLabel')}
+            placeholder={tInput('reviewHeadline')}
+          />
 
-        {/* ===== Error Feedback ===== */}
-        {mutation.isError && <FormError message={(mutation.error as Error).message} />}
+          {/* ===== Content ===== */}
+          <FormField
+            control={form.control}
+            name="content"
+            variant="textarea"
+            label={t('review.contentLabel')}
+            placeholder={tInput('reviewContent')}
+          />
 
-        {/* ===== Submit Button ===== */}
-        <Button
-          type="submit"
-          variant="secondary"
-          className="bg-maroon-600 hover:bg-maroon-600/90 dark:bg-soft-pink-300 dark:hover:bg-soft-pink-400 w-full gap-2.5 text-white dark:text-zinc-800"
-          disabled={mutation.isPending}
-        >
-          {mutation.isPending ? (
-            <>
-              {tButton('loading')}
-              <Loader2 className="size-4.5 animate-spin" />
-            </>
-          ) : (
-            <>
-              {tButton('submit')}
-              <Send className="size-4.5" />
-            </>
-          )}
-        </Button>
-      </form>
+          {/* ===== Error Feedback ===== */}
+          {mutation.isError && <FormError message={(mutation.error as Error).message} />}
+
+          {/* ===== Submit Button ===== */}
+          <Button
+            type="submit"
+            variant="secondary"
+            className="bg-maroon-600 hover:bg-maroon-600/90 dark:bg-soft-pink-300 dark:hover:bg-soft-pink-400 w-full gap-2.5 text-white dark:text-zinc-800"
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending ? tButton('loading') : tButton('addReview')}
+          </Button>
+        </form>
+      </div>
     </section>
   );
 }

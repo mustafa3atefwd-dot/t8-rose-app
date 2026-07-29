@@ -216,7 +216,8 @@
     "iconOnly": "Icon only",
     "loadingDemo": "Click to see the loading state",
     "next": "Next",
-    "creating": "Creating..."
+    "creating": "Creating...",
+    "addReview": "Add Review"
   },
   "checkbox": {
     "title": "Checkbox",
@@ -278,10 +279,14 @@
   "productDetails": {
     "writeReview": "Write a Review",
 
+    "relatedProducts": {
+      "title": "Related Products"
+    },
+
     "review": {
       "headlineLabel": "Review Title",
       "contentLabel": "Your Review",
-      "ratingLabel": "Your Rating",
+      "ratingLabel": "Your Rating:",
       "ratingValue": "Rate {rating} out of 5",
       "submitSuccess": "Your review has been submitted successfully.",
       "alreadyReviewed": "You have already reviewed this product."
