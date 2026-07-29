@@ -49,6 +49,20 @@
         "february10": "February 10, 2025",
         "february15": "February 15, 2025"
       }
+    },
+    "bestSelling": {
+      "label": "Best Selling",
+      "title": "<accent>Check Out</accent> What Everyone’s <accent>Buying</accent> Right Now",
+      "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+      "productCarousel": {
+        "error": "Failed to load products. Try again.",
+        "retry": "Retry",
+        "empty": "No products yet."
+      }
+    },
+    "mostPopular": {
+      "label": "Most Popular",
+      "Explore gifts": "Explore gifts"
     }
   },
   "toast": {
@@ -216,7 +230,9 @@
     "iconOnly": "Icon only",
     "loadingDemo": "Click to see the loading state",
     "next": "Next",
-    "creating": "Creating..."
+    "creating": "Creating...",
+    "viewAll": "View All",
+    "viewMore": "View More"
   },
   "checkbox": {
     "title": "Checkbox",
@@ -239,6 +255,28 @@
     "error": "Error",
     "info": "Info",
     "outline": "Outline"
+  },
+  "footer": {
+    "logoAlt": "Rose E-Commerce App logo",
+    "appName": "Rose E-Commerce App",
+    "tagline": "All rights reserved",
+    "year": "2025",
+    "navigationTitle": "Discover our website",
+    "navigation": {
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About"
+    },
+    "discountTitle": "Get 20% Off Discount Coupon",
+    "discountSubtitle": "By subscribing to our newsletter",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "subscribeSuccess": "Subscribed successfully! Check your email for the coupon.",
+    "alreadySubscribed": "Already subscribed",
+    "subscribeError": "Subscription failed. Please try again."
   },
   "products": {
     "card": {
