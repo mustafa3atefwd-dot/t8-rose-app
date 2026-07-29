@@ -51,6 +51,17 @@
       }
     }
   },
+  "productDetails": {
+    "stock": "{count} units in stock",
+    "rating": "Rating: {rating}/5",
+    "ratings": "({count, plural, one {# rating} other {# ratings}})",
+    "description": "Product description",
+    "noDescription": "No description available.",
+    "addToCart": "Add to Cart",
+    "addToWishlist": "Add to wishlist",
+    "galleryLabel": "Product images",
+    "imageLabel": "Product image"
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
