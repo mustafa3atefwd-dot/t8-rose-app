@@ -95,7 +95,10 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api) return
+<<<<<<< HEAD
+=======
     // eslint-disable-next-line react-hooks/set-state-in-effect
+>>>>>>> origin/sprint/home-page
     onSelect(api)
     api.on("reInit", onSelect)
     api.on("select", onSelect)
