@@ -14,6 +14,16 @@
   --ds-bg-inverse: var(--color-zinc-800);
   --ds-bg-elevated: color-mix(in srgb, var(--color-black) 20%, transparent);
   --ds-bg-overlay: color-mix(in srgb, var(--color-black) 50%, transparent);
+  --ds-bg-occasion-overlay: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-black) 13.75%, transparent) 0%,
+    color-mix(in srgb, var(--color-soft-pink-300) 55%, transparent) 100%
+  );
+  --ds-bg-occasion-hover-overlay: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-black) 25%, transparent) 0%,
+    color-mix(in srgb, var(--color-black) 50%, transparent) 100%
+  );
 
   /* Primary */
   --ds-bg-primary: var(--color-maroon-800);
@@ -47,6 +57,11 @@
   --ds-bg-danger-saturated: var(--color-red-700);
   --ds-bg-danger-faint: var(--color-red-100);
   --ds-bg-danger-fade: var(--color-red-50);
+
+  /* Badge (fixed brand colours, do not flip in dark mode) */
+  --ds-bg-badge-new: var(--color-white);
+  --ds-bg-badge-hot: var(--color-maroon-50);
+  --ds-bg-badge-out-of-stock: var(--color-maroon-500);
 
   /** Text */
   --ds-text-plain: var(--color-zinc-800);
@@ -173,6 +188,11 @@ html[data-theme='dark'] {
   --ds-bg-danger-faint: color-mix(in srgb, var(--color-red-500) 50%, transparent);
   --ds-bg-danger-fade: color-mix(in srgb, var(--color-red-50) 25%, transparent);
 
+  /* Badge (fixed brand colours, do not flip in dark mode) */
+  --ds-bg-badge-new: var(--color-white);
+  --ds-bg-badge-hot: var(--color-maroon-50);
+  --ds-bg-badge-out-of-stock: var(--color-maroon-500);
+
   /** Text */
   --ds-text-plain: var(--color-zinc-50);
   --ds-text-subtle: var(--color-zinc-500);
@@ -284,32 +304,68 @@ html[data-theme='dark'] {
   --color-ds-bg-danger-saturated: var(--ds-bg-danger-saturated);
   --color-ds-bg-danger-faint: var(--ds-bg-danger-faint);
   --color-ds-bg-danger-fade: var(--ds-bg-danger-fade);
+   /** Backgrounds */
+--color-ds-bg-plain: var(--ds-bg-plain);
+--color-ds-bg-subtle: var(--ds-bg-subtle);
+--color-ds-bg-muted: var(--ds-bg-muted);
+--color-ds-bg-soft: var(--ds-bg-soft);
+--color-ds-bg-default: var(--ds-bg-default);
+--color-ds-bg-inverse: var(--ds-bg-inverse);
+--color-ds-bg-elevated: var(--ds-bg-elevated);
+--color-ds-bg-overlay: var(--ds-bg-overlay);
+--color-ds-bg-primary: var(--ds-bg-primary);
+--color-ds-bg-primary-saturated: var(--ds-bg-primary-saturated);
+--color-ds-bg-primary-faint: var(--ds-bg-primary-faint);
+--color-ds-bg-primary-fade: var(--ds-bg-primary-fade);
+--color-ds-bg-primary-overlay: var(--ds-bg-primary-overlay);
+--color-ds-bg-info: var(--ds-bg-info);
+--color-ds-bg-info-faint: var(--ds-bg-info-faint);
+--color-ds-bg-info-fade: var(--ds-bg-info-fade);
+--color-ds-bg-secondary: var(--ds-bg-secondary);
+--color-ds-bg-secondary-faint: var(--ds-bg-secondary-faint);
+--color-ds-bg-secondary-fade: var(--ds-bg-secondary-fade);
+--color-ds-bg-success: var(--ds-bg-success);
+--color-ds-bg-success-faint: var(--ds-bg-success-faint);
+--color-ds-bg-success-fade: var(--ds-bg-success-fade);
+--color-ds-bg-warning: var(--ds-bg-warning);
+--color-ds-bg-warning-faint: var(--ds-bg-warning-faint);
+--color-ds-bg-warning-fade: var(--ds-bg-warning-fade);
+--color-ds-bg-danger: var(--ds-bg-danger);
+--color-ds-bg-danger-saturated: var(--ds-bg-danger-saturated);
+--color-ds-bg-danger-faint: var(--ds-bg-danger-faint);
+--color-ds-bg-danger-fade: var(--ds-bg-danger-fade);
+--color-ds-bg-badge-new: var(--ds-bg-badge-new);
+--color-ds-bg-badge-hot: var(--ds-bg-badge-hot);
+--color-ds-bg-badge-out-of-stock: var(--ds-bg-badge-out-of-stock);
 
-  /** Text */
-  --color-ds-text-plain: var(--ds-text-plain);
-  --color-ds-text-subtle: var(--ds-text-subtle);
-  --color-ds-text-muted: var(--ds-text-muted);
-  --color-ds-text-soft: var(--ds-text-soft);
-  --color-ds-text-default: var(--ds-text-default);
-  --color-ds-text-inverse: var(--ds-text-inverse);
-  --color-ds-text-primary: var(--ds-text-primary);
-  --color-ds-text-primary-faint: var(--ds-text-primary-faint);
-  --color-ds-text-primary-fade: var(--ds-text-primary-fade);
-  --color-ds-text-info: var(--ds-text-info);
-  --color-ds-text-info-faint: var(--ds-text-info-faint);
-  --color-ds-text-info-fade: var(--ds-text-info-fade);
-  --color-ds-text-secondary: var(--ds-text-secondary);
-  --color-ds-text-secondary-faint: var(--ds-text-secondary-faint);
-  --color-ds-text-secondary-fade: var(--ds-text-secondary-fade);
-  --color-ds-text-success: var(--ds-text-success);
-  --color-ds-text-success-faint: var(--ds-text-success-faint);
-  --color-ds-text-success-fade: var(--ds-text-success-fade);
-  --color-ds-text-warning: var(--ds-text-warning);
-  --color-ds-text-warning-faint: var(--ds-text-warning-faint);
-  --color-ds-text-warning-fade: var(--ds-text-warning-fade);
-  --color-ds-text-danger: var(--ds-text-danger);
-  --color-ds-text-danger-faint: var(--ds-text-danger-faint);
-  --color-ds-text-danger-fade: var(--ds-text-danger-fade);
+/** Text */
+--color-ds-text-plain: var(--ds-text-plain);
+--color-ds-text-subtle: var(--ds-text-subtle);
+--color-ds-text-muted: var(--ds-text-muted);
+--color-ds-text-soft: var(--ds-text-soft);
+--color-ds-text-default: var(--ds-text-default);
+--color-ds-text-inverse: var(--ds-text-inverse);
+--color-ds-text-primary: var(--ds-text-primary);
+--color-ds-text-primary-faint: var(--ds-text-primary-faint);
+--color-ds-text-primary-fade: var(--ds-text-primary-fade);
+--color-ds-text-info: var(--ds-text-info);
+--color-ds-text-info-faint: var(--ds-text-info-faint);
+--color-ds-text-info-fade: var(--ds-text-info-fade);
+--color-ds-text-secondary: var(--ds-text-secondary);
+--color-ds-text-secondary-faint: var(--ds-text-secondary-faint);
+--color-ds-text-secondary-fade: var(--ds-text-secondary-fade);
+--color-ds-text-success: var(--ds-text-success);
+--color-ds-text-success-faint: var(--ds-text-success-faint);
+--color-ds-text-success-fade: var(--ds-text-success-fade);
+--color-ds-text-warning: var(--ds-text-warning);
+--color-ds-text-warning-faint: var(--ds-text-warning-faint);
+--color-ds-text-warning-fade: var(--ds-text-warning-fade);
+--color-ds-text-danger: var(--ds-text-danger);
+--color-ds-text-danger-faint: var(--ds-text-danger-faint);
+--color-ds-text-danger-fade: var(--ds-text-danger-fade);
+--color-ds-text-badge-new: var(--ds-text-badge-new);
+--color-ds-text-badge-hot: var(--ds-text-badge-hot);
+--color-ds-text-badge-out-of-stock: var(--ds-text-badge-out-of-stock);
 
   /** Border */
   --color-ds-border-plain: var(--ds-border-plain);
@@ -456,6 +512,7 @@ html[lang='ar'] body {
 html[lang='en'] body {
   font-family: var(--font-sarabun);
 }
+
 
 /* Container */
 .container {

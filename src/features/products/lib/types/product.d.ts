@@ -71,11 +71,21 @@ export interface IProductDetail extends IProduct {
 export interface IProductsQueryParams {
   page?: number;
   limit?: number;
+<<<<<<< HEAD
   occasionId?: string;
   sortBy?: ProductSortBy;
   sortOrder?: SortOrder;
   categoryId?: string;
   subCategoryId?: string;
+=======
+  categoryId?: string;
+  occasionId?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  minRating?: number;
+  sortBy?: ProductSortBy;
+  sortOrder?: SortOrder;
+>>>>>>> sprint/products-page
 }
 
 export interface IPaginationMeta {

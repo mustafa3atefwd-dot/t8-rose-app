@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { ThemeProvider } from "./providers/theme-provider";
 import { Toaster } from '@/shared/components/ui/sonner';
 import NextAuthProvider from './providers/Next-Auth.provider';
+import GuestSyncProvider from './providers/guest-sync-provider';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -12,8 +13,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <NextIntlClientProvider>
         <ThemeProvider>
           <NextAuthProvider>
-        {children}
-        <Toaster/>
+        <GuestSyncProvider>
+      {children}
+      <Toaster/>
+    </GuestSyncProvider>
         </NextAuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
