@@ -1,8 +1,11 @@
-import { getProductByIdAction } from '@/features/products';
-import { ProductDetails } from '@/features/product-details';
+import { Suspense } from 'react';
+import { ProductDetails, ProductDetailsSkeleton } from '@/features/product-details';
+import { getProductById } from '@/features/products';
 import { ApiError } from '@/shared/lib/utils/error.util';
 import { notFound } from 'next/navigation';
-import ProductReviews from '@/features/product-reviews/components/product-reviews';
+import ProductReviewSkeleton from '@/features/product-details/skeletons/product-review.skeleton';
+import ProductReviews from '@/features/product-details/components/product-reviews';
+import { getReviews } from '@/features/product-details/lib/apis/reviews.api';
 
 interface ProductDetailsPageProps {
   params: Promise<{
@@ -13,7 +16,7 @@ interface ProductDetailsPageProps {
 
 async function loadProduct(productId: string) {
   try {
-    const response = await getProductByIdAction(productId);
+    const response = await getProductById(productId);
 
     if (!response.status || !response.payload?.product) {
       notFound();
@@ -29,13 +32,35 @@ async function loadProduct(productId: string) {
   }
 }
 
-export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
+export default async function ProductDetailsContent({ params }: ProductDetailsPageProps) {
   const { locale, productId } = await params;
   const product = await loadProduct(productId);
+  const reviewsData = await getReviews(productId, 1, 20);
 
-  return<>
-  <ProductDetails product={product} locale={locale} />;
-  <ProductReviews productId={productId}/>
-  </> 
-
+  return (
+    <>
+      <Suspense
+        fallback={
+          <>
+            {' '}
+            <ProductDetailsSkeleton />
+            <ProductReviewSkeleton />
+          </>
+        }
+      >
+        <ProductDetails product={product} locale={locale} />
+        <ProductReviews reviewsData={reviewsData} productRatingData={product} />
+      </Suspense>
+    </>
+  );
 }
+
+// export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
+//   const { locale, productId } = await params;
+
+//   return (
+//       <Suspense fallback={<ProductDetailsSkeleton />}>
+//         <ProductDetailsContent productId={productId} locale={locale} />
+//       </Suspense>
+//   );
+// }

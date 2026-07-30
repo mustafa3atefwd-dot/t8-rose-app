@@ -27,7 +27,6 @@ export function ProductGallery({ images, productTitle, galleryLabel, imageLabel 
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
-            unoptimized
           />
         ) : (
           <div className="text-ds-text-muted flex h-full items-center justify-center">
@@ -61,7 +60,6 @@ export function ProductGallery({ images, productTitle, galleryLabel, imageLabel 
                   fill
                   sizes="90px"
                   className="object-cover"
-                  unoptimized
                 />
               </button>
             );

@@ -52,7 +52,7 @@
     }
   },
   "productDetails": {
-    "stock": "{count} left in stock",
+    "stock": "{count} units in stock",
     "rating": "Rating: {rating}/5",
     "ratings": "({count, plural, one {# rating} other {# ratings}})",
     "description": "Product description",
@@ -254,6 +254,18 @@
       "wishlist": "Add to wishlist",
       "quickView": "Quick view",
       "rating": "{rating} out of 5"
+    },
+    "filters": {
+      "category": "Category",
+      "occasion": "Occasion",
+      "rating": "Rating",
+      "price": "Price",
+      "from": "from",
+      "to": "to",
+      "reset": "Reset",
+      "resetAll": "Reset All",
+      "noResults": "No products match the selected filters.",
+      "ratingLabel": "{rating} stars & up"
     }
   },
   "home": {

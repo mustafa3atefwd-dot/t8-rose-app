@@ -11,7 +11,10 @@ interface ProductInformationProps {
 }
 
 export async function ProductInformation({ product, locale }: ProductInformationProps) {
+  // Translations
   const t = await getTranslations({ locale, namespace: 'productDetails' });
+
+  // Product price and currency formatting
   const discountedPrice = getDiscountedPrice(product);
 
   const priceFormatter = new Intl.NumberFormat(locale, {
@@ -22,6 +25,7 @@ export async function ProductInformation({ product, locale }: ProductInformation
 
   return (
     <section aria-labelledby="product-title" className="flex flex-col lg:min-h-[522px]">
+      {/* Product title, price, and stock */}
       <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
         <div className="min-w-0 sm:flex-1">
           <h1 id="product-title" className="text-ds-text-plain text-2xl font-bold sm:text-3xl">
@@ -52,6 +56,7 @@ export async function ProductInformation({ product, locale }: ProductInformation
 
       <div className="border-ds-border-soft my-4 border-t" />
 
+      {/* Product rating */}
       <div className="flex flex-wrap items-center gap-2 text-sm">
         <Star aria-hidden="true" className="text-ds-text-warning size-5 fill-current" />
         <span className="text-ds-text-default font-medium">{t('rating', { rating: product.rating })}</span>
@@ -60,6 +65,7 @@ export async function ProductInformation({ product, locale }: ProductInformation
 
       <div className="border-ds-border-soft my-4 border-t" />
 
+      {/* Scrollable product description */}
       <div>
         <h2 className="sr-only">{t('description')}</h2>
         <div className="text-ds-text-default h-32 overflow-y-auto pe-2 text-sm leading-relaxed">
@@ -67,6 +73,7 @@ export async function ProductInformation({ product, locale }: ProductInformation
         </div>
       </div>
 
+      {/* Product actions */}
       <div className="mt-auto">
         <ProductActions 
           productId={product.id}
