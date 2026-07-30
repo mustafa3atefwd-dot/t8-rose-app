@@ -62,8 +62,6 @@ export default function GetPoductsPage() {
 
   return (
     <div className="w-full">
-      {/* <Header/> */}
-
       {isLoading ? (
         <div className="text-center py-20 text-zinc-500">Loading</div>
       ) : (
