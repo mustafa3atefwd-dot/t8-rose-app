@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-import { getOccasionsAction, getProductsAction } from '@/features/products/lib/actions';
-import MostPopularTabs from './most-popular-tabs';
-=======
 import { Suspense } from 'react';
 import { getOccasionsAction, getProductsAction } from '@/features/products/lib/actions';
 import MostPopularTabs from './most-popular-tabs';
 import MostPopularSkeleton from '../skeletons/most-popular-skeleton';
->>>>>>> origin/sprint/home-page
 import {
   IOccasionTab,
   MOST_POPULAR_OCCASION_TABS_LIMIT,
@@ -14,11 +9,7 @@ import {
   MOST_POPULAR_PRODUCTS_LIMIT,
 } from './most-popular.constants';
 
-<<<<<<< HEAD
-const MostPopular = async () => {
-=======
 const MostPopularContent = async () => {
->>>>>>> origin/sprint/home-page
   const occasionsResult = await getOccasionsAction({ limit: MOST_POPULAR_OCCASIONS_LIMIT }).catch(() => null);
   const occasions = occasionsResult?.status ? (occasionsResult.payload?.data ?? []) : [];
 
@@ -43,8 +34,6 @@ const MostPopularContent = async () => {
   return <MostPopularTabs occasionTabs={occasionTabs} />;
 };
 
-<<<<<<< HEAD
-=======
 const MostPopular = () => {
   return (
     <Suspense fallback={<MostPopularSkeleton />}>
@@ -53,5 +42,4 @@ const MostPopular = () => {
   );
 };
 
->>>>>>> origin/sprint/home-page
 export default MostPopular;

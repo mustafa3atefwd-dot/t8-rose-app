@@ -1,8 +1,7 @@
-import React from 'react';
-import { HeroBanner } from './hero-baner';
-import { HeroCarousel } from './hero-carousel';
 import { CategoryTrio } from './category-trio';
 import { FeaturesBar } from './features-bar';
+import HeroBanner from './hero-baner';
+import HeroCarousel from './hero-carousel';
 
 export default function HomepageHero() {
   return (

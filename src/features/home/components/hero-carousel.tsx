@@ -13,7 +13,7 @@ import sliderFlowers from '@/assets/images/slider-flowers.png';
 import sliderChocolates from '@/assets/images/slider-chocolates.png';
 import sliderGifts from '@/assets/images/slider-gift.png';
 
-export function HeroCarousel() {
+export default function HeroCarousel() {
   // 1. Translation / Locale
   const t = useTranslations('hero');
   const locale = useLocale(); 

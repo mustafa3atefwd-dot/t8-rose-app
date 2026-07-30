@@ -61,8 +61,7 @@
       }
     },
     "mostPopular": {
-      "label": "Most Popular",
-      "Explore gifts": "Explore gifts"
+      "label": "Most Popular"
     }
   },
   "toast": {
@@ -228,7 +227,8 @@
     "next": "Next",
     "creating": "Creating...",
     "viewAll": "View All",
-    "viewMore": "View More"
+    "viewMore": "View More",
+    "exploreGifts": "Explore gifts"
   },
   "checkbox": {
     "title": "Checkbox",

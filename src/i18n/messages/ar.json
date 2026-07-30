@@ -61,8 +61,7 @@
       }
     },
     "mostPopular": {
-      "label": "الأكثر رواجاً",
-      "Explore gifts": "اكتشف الهدايا"
+      "label": "الأكثر رواجاً"
     }
   },
   "toast": {
@@ -230,7 +229,8 @@
     "next": "التالي",
     "creating": "جاري الإنشاء…",
     "viewAll": "عرض الكل",
-    "viewMore": "عرض المزيد"
+    "viewMore": "عرض المزيد",
+    "exploreGifts": "اكتشف الهدايا"
   },
   "checkbox": {
     "title": "مربع الاختيار",
