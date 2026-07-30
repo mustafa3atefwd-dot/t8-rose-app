@@ -204,6 +204,18 @@
       "wishlist": "Add to wishlist",
       "quickView": "Quick view",
       "rating": "{rating} out of 5"
+    },
+    "filters": {
+      "category": "Category",
+      "occasion": "Occasion",
+      "rating": "Rating",
+      "price": "Price",
+      "from": "from",
+      "to": "to",
+      "reset": "Reset",
+      "resetAll": "Reset All",
+      "noResults": "No products match the selected filters.",
+      "ratingLabel": "{rating} stars & up"
     }
   },
   "home": {

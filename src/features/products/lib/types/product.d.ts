@@ -71,14 +71,14 @@ export interface IProductDetail extends IProduct {
 export interface IProductsQueryParams {
   page?: number;
   limit?: number;
-  occasionId?: string;
-  sortBy?: ProductSortBy;
-  sortOrder?: SortOrder;
   categoryId?: string;
-  subCategoryId?: string;
+  occasionId?: string;
   minPrice?: number;
   maxPrice?: number;
   minRating?: number;
+  sortBy?: ProductSortBy;
+  sortOrder?: SortOrder;
+  subCategoryId?: string;
   search?: string;
 }
 

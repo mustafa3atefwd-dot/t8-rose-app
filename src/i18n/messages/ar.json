@@ -206,6 +206,18 @@
       "wishlist": "أضف إلى المفضلة",
       "quickView": "عرض سريع",
       "rating": "{rating} من 5"
+    },
+    "filters": {
+      "category": "الفئة",
+      "occasion": "المناسبة",
+      "rating": "التقييم",
+      "price": "السعر",
+      "from": "من",
+      "to": "إلى",
+      "reset": "إعادة تعيين",
+      "resetAll": "إعادة تعيين الكل",
+      "noResults": "لا توجد منتجات مطابقة للفلاتر المحددة.",
+      "ratingLabel": "{rating} نجوم فأكثر"
     }
   },
   "home": {
