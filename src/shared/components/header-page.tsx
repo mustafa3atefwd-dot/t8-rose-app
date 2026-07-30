@@ -1,12 +1,11 @@
 import Image from "next/image";
 import roseLogo from '../../assets/images/roseLogo.png'
-// import { Input } from "@/shared/components/ui/input";
 import { Bell, ClipboardList, Gift, Headset, Heart, House, Info, PartyPopper, Search, ShoppingCart } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import UnAuthenticatedLogin from "@/features/auth/components/unauth-login";
 import { LanguageToggle } from "@/features/auth/components/LanguageToggle";
-import { Input } from "./ui/inputs";
 import { useTranslations } from "next-intl";
+import SearchInput from "./search-input";
 
 
 export default function Header() {
@@ -23,7 +22,8 @@ export default function Header() {
 
                 {/* search */}
                 <div dir="ltr" className="relative flex items-center max-sm:w-20 md:w-3/5">
-                        <Input type="text" className="peer w-full h-13 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-ds-xl border p-4 gap-2 border-zinc-300 placeholder:text-zinc-400 placeholder:pl-6 rtl:placeholder:pl-113" placeholder={t('inputPlaceholder')} />
+                        <SearchInput/>
+                        {/* <Input type="text" className="peer w-full h-13 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-ds-xl border p-4 gap-2 border-zinc-300 placeholder:text-zinc-400 placeholder:pl-6 rtl:placeholder:pl-113" placeholder={t('inputPlaceholder')} /> */}
                         <Search className="rtl:ml-170 w-4.5 h-4.5 absolute ml-4 peer-focus:hidden"/>
                 </div>
 

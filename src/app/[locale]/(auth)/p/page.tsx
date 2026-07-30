@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { HeartPlus, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
+import Header from "@/shared/components/header-page";
 
 
 export default function ProductsPagee() {
@@ -58,36 +59,15 @@ export default function ProductsPagee() {
   const products = data?.status ? data.payload?.data ?? [] : [];
   const metadata = data?.status ? data.payload?.metadata : undefined;
 
-//   const handleSortChange = (value: string) => {
-//     if (!value) {
-//       setFilters({ sortBy: undefined, sortOrder: undefined });
-//       return;
-//     }
-//     const [field, order] = value.split('-') as [ProductSortBy, SortOrder];
-//     setFilters({ sortBy: field, sortOrder: order });
-//   };
 
   return (
     <div className="w-full">
-      {/* <div className="flex justify-between items-center mb-6">
-        <select
-          value={sortBy && sortOrder ? `${sortBy}-${sortOrder}` : ''}
-          onChange={(e) => handleSortChange(e.target.value)}
-          className="p-2 text-sm border rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-maroon-600"
-        >
-          <option value="">الترتيب الافتراضي</option>
-          <option value="price-asc">السعر: من الأقل للأعلى</option>
-          <option value="price-desc">السعر: من الأعلى للأقل</option>
-          <option value="rating-desc">الأعلى تقييماً</option>
-          <option value="createdAt-desc">الأحدث</option>
-          <option value="title-asc">الاسم (أ - ي)</option>
-        </select>
-      </div> */}
+      {/* <Header/> */}
 
       {isLoading ? (
         <div className="text-center py-20 text-zinc-500">Loading</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mt-2">
           {products.map((p) => (
             <div key={p.id} className="w-full flex flex-col justify-between">
               <div className="relative h-68 rounded-2xl overflow-hidden bg-zinc-50 p-3 flex flex-col justify-between">
@@ -146,3 +126,29 @@ export default function ProductsPagee() {
     </div>
   );
 }
+
+
+//   const handleSortChange = (value: string) => {
+//     if (!value) {
+//       setFilters({ sortBy: undefined, sortOrder: undefined });
+//       return;
+//     }
+//     const [field, order] = value.split('-') as [ProductSortBy, SortOrder];
+//     setFilters({ sortBy: field, sortOrder: order });
+//   };
+
+
+      {/* <div className="flex justify-between items-center mb-6">
+        <select
+          value={sortBy && sortOrder ? `${sortBy}-${sortOrder}` : ''}
+          onChange={(e) => handleSortChange(e.target.value)}
+          className="p-2 text-sm border rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-maroon-600"
+        >
+          <option value="">الترتيب الافتراضي</option>
+          <option value="price-asc">السعر: من الأقل للأعلى</option>
+          <option value="price-desc">السعر: من الأعلى للأقل</option>
+          <option value="rating-desc">الأعلى تقييماً</option>
+          <option value="createdAt-desc">الأحدث</option>
+          <option value="title-asc">الاسم (أ - ي)</option>
+        </select>
+      </div> */}
