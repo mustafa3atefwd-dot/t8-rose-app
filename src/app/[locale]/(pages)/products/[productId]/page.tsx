@@ -55,12 +55,3 @@ export default async function ProductDetailsContent({ params }: ProductDetailsPa
   );
 }
 
-// export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
-//   const { locale, productId } = await params;
-
-//   return (
-//       <Suspense fallback={<ProductDetailsSkeleton />}>
-//         <ProductDetailsContent productId={productId} locale={locale} />
-//       </Suspense>
-//   );
-// }

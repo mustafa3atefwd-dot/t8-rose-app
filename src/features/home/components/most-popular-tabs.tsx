@@ -8,6 +8,7 @@ import ProductCard from '@/features/products/components/product-card';
 import { Button } from '@/shared/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
 import { IOccasionTab } from './most-popular.constants';
+import { useSession } from 'next-auth/react';
 
 interface MostPopularTabsProps {
   /** Occasions fetched server-side, pre-filtered to only those with products. */
@@ -18,6 +19,8 @@ const MostPopularTabs = ({ occasionTabs }: MostPopularTabsProps) => {
   const t = useTranslations('home');
   const [activeOccasionId, setActiveOccasionId] = useState(occasionTabs[0].id);
   const products = occasionTabs.find((occasion) => occasion.id === activeOccasionId)?.products ?? [];
+  const { data: session } = useSession(); 
+  const isLoggedIn = !!session;
 
   return (
     <div className="container mx-auto flex flex-col items-end gap-8 px-4 py-12">
@@ -40,7 +43,7 @@ const MostPopularTabs = ({ occasionTabs }: MostPopularTabsProps) => {
 
       <div className="grid w-full grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} isLoggedIn={isLoggedIn} />
         ))}
       </div>
 

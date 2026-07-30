@@ -16,6 +16,7 @@ export async function ProductInformation({ product, locale }: ProductInformation
 
   // Product price and currency formatting
   const discountedPrice = getDiscountedPrice(product);
+
   const priceFormatter = new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: 'EGP',
@@ -74,7 +75,12 @@ export async function ProductInformation({ product, locale }: ProductInformation
 
       {/* Product actions */}
       <div className="mt-auto">
-        <ProductActions addToCartLabel={t('addToCart')} addToWishlistLabel={t('addToWishlist')} />
+        <ProductActions 
+          productId={product.id}
+          product={product}
+          addToCartLabel={t('addToCart')} 
+          addToWishlistLabel={t('addToWishlist')} 
+        />
       </div>
     </section>
   );

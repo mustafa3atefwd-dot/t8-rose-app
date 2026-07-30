@@ -82,12 +82,10 @@
     "welcomeBack": "Welcome back!",
     "joinFamily": "Become part of our family!",
     "forgotPassword": "Forgot your password?",
-
     "registerEmail": "Register with Email",
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
-
     "createAccount": "Create Account",
     "enterOtpCode": "Enter the OTP Code",
     "otpSentTo": "We have sent a 6-digit code to:",
@@ -99,7 +97,6 @@
     "verifyCode": "Verify Code",
     "needHelp": "Need help?",
     "contactUs": "Contact Us",
-
     "createStrongPassword": "Create a strong password",
     "tellUsMore": "Tell us more about you",
     "securePassword": "Choose a secure password to protect your account",
@@ -133,7 +130,7 @@
   },
   "validation": {
     "required": "This field is required",
-    "invalidEmail": "Invalid email address",
+    "invalidEmail": "Please enter a valid email address",
     "otpLength": "OTP must be 6 digits",
     "otpDigits": "OTP must contain only numbers",
     "firstName": "First name must be at least 2 characters",
@@ -143,18 +140,15 @@
     "invalidEgyptPhone": "Invalid Egyptian mobile number",
     "invalidGender": "Please select a valid gender",
     "passwordMin": "Password must be at least 8 characters",
-    "passwordWeak": "Password must contain uppercase, lowercase, number and special character",
+    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
     "emailRequired": "Your email is required",
-    "invalidEmail": "Please enter a valid email address",
     "newPasswordRequired": "New password is required",
-    "passwordMin": "Password must be at least 8 characters",
     "passwordUppercase": "Password must contain at least one uppercase letter",
     "passwordLowercase": "Password must contain at least one lowercase letter",
     "passwordNumber": "Password must contain at least one number",
     "passwordSpecialCharacter": "Password must contain at least one special character",
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
-    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
     "passwordMatch": "Passwords do not match"
   },
   "error": {
@@ -196,7 +190,6 @@
       "password": "Enter your password",
       "phone": "Phone number",
       "passwordPlaceholder": "********",
-
       "firstName": "Zoe",
       "lastName": "Jonathan",
       "username": "zoe123"
@@ -310,6 +303,58 @@
       "success": "Password reset successfully",
       "contact": "Need help?",
       "toContact": "Contact us"
+    }
+  },
+  "hero": {
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "goToSlide": "Go to slide {number}",
+    "shopNow": "Shop Now",
+    "buying": "I'm buying!",
+    "startingFrom": "Starting from 10.99 EGP",
+    "specialGiftsTitle": "Special Gifts For The People You Love",
+    "slides": {
+      "flowers": {
+        "title": "Say It with Flowers",
+        "desc": "Elegant gifts for every special moment."
+      },
+      "chocolates": {
+        "title": "Sweetest Expressions",
+        "desc": "Handcrafted chocolates made with love."
+      },
+      "gifts": { "title": "Unforgettable Surprises", "desc": "Beautifully curated gift boxes for any occasion." }
+    },
+    "categories": {
+      "wedding": {
+        "tag": "Wedding",
+        "title": "Celebrate Her Forever with a Gift She'll Always Remember"
+      },
+      "engagement": {
+        "tag": "Engagement",
+        "title": "Honor the Beginning of a Beautiful Journey Together"
+      },
+      "anniversary": {
+        "tag": "Anniversary",
+        "title": "Mark Every Year of Love with a Meaningful Surprise"
+      }
+    },
+    "features": {
+      "delivery": {
+        "title": "Free Delivery",
+        "desc": "For orders above 120 EGP"
+      },
+      "refund": {
+        "title": "Get Refund",
+        "desc": "Refunds within 30 days"
+      },
+      "payment": {
+        "title": "Safe Payment",
+        "desc": "100% Secure Payment"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "desc": "Contact us at any time"
+      }
     }
   },
   "productReview": {
