@@ -22,9 +22,9 @@ export default function Header() {
 
                 {/* search */}
                 <div dir="ltr" className="relative flex items-center max-sm:w-20 md:w-3/5">
-                        <SearchInput/>
-                        {/* <Input type="text" className="peer w-full h-13 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-ds-xl border p-4 gap-2 border-zinc-300 placeholder:text-zinc-400 placeholder:pl-6 rtl:placeholder:pl-113" placeholder={t('inputPlaceholder')} /> */}
+                        <SearchInput className="peer w-full h-13 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-ds-xl border p-4 gap-2 border-zinc-300 placeholder:text-zinc-400 placeholder:pl-6 rtl:placeholder:pl-113" />
                         <Search className="rtl:ml-170 w-4.5 h-4.5 absolute ml-4 peer-focus:hidden"/>
+                        {/* <Input type="text" className="peer w-full h-13 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-ds-xl border p-4 gap-2 border-zinc-300 placeholder:text-zinc-400 placeholder:pl-6 rtl:placeholder:pl-113" placeholder={t('inputPlaceholder')} /> */}
                 </div>
 
                 {/* login */}

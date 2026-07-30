@@ -2,7 +2,13 @@
 
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
 import { useTranslations } from 'next-intl';
-export default function SearchInput() {
+
+interface ClassNameProps{
+    className: string,
+
+}
+
+export default function SearchInput({className}: ClassNameProps) {
     const t = useTranslations('homeHeader')
 
   const { search, setFilter } = useProductFilters();
@@ -18,7 +24,9 @@ export default function SearchInput() {
         type="text"
         value={search || ''}
         onChange={handleSearchChange}
-        className="peer w-full h-13 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-ds-xl border p-4 gap-2 border-zinc-300 placeholder:text-zinc-400 placeholder:pl-6 rtl:placeholder:pl-113" placeholder={t('inputPlaceholder')}
+        className={className}
+        placeholder={t('inputPlaceholder')}
+        // "peer w-full h-13 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-ds-xl border p-4 gap-2 border-zinc-300 placeholder:text-zinc-400 placeholder:pl-6 rtl:placeholder:pl-113" placeholder={t('inputPlaceholder')}
       />
     </div>
   );
