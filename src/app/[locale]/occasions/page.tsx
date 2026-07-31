@@ -1,13 +1,15 @@
 'use client';
 
 import { PaginationControl } from "@/shared/components/ui/pagination";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { HeartPlus, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
 import Header from "@/shared/components/header-page";
 import ProductFiltersSidebar from "@/features/products/components/filters/product-filters-sidebar";
 import { Link } from "@/i18n/navigation";
+import RatingStars from "@/features/products/components/rating-stars";
+import FormatPrice from "@/features/products/hooks/format-price";
 
 
 export default function GetOccasionsPagee() {
@@ -56,6 +58,7 @@ export default function GetOccasionsPagee() {
       
       return await res.json();
     },
+    placeholderData: keepPreviousData,
   });
 
   const occasions = data?.status ? data.payload?.data ?? [] : [];
@@ -74,7 +77,7 @@ export default function GetOccasionsPagee() {
           <ProductFiltersSidebar categories={categories} occasions={occasions} />
         </aside>
 
-        <main className="w-full min-w-0 ml-6 flex-1">
+        <main className="w-full min-w-0 ml-6 flex-1 rtl:mr-6">
         {isLoading ? (
         <div className="text-center py-20 text-zinc-500">Loading</div>
       ) : (
@@ -106,13 +109,15 @@ export default function GetOccasionsPagee() {
                 <div className="flex items-center justify-between mt-1">
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-1 text-amber-500">
-                      <Star className="w-3.5 h-3.5 fill-amber-500" />
-                      <span className="text-xs font-medium text-zinc-600">{p.rating}</span>
+                      <RatingStars rating={p.rating} label={`Rating: ${p.rating}`} />
                     </div>
   
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-base text-ds-text-primary">
-                        {p.price} EGP
+                        {FormatPrice(p.price)} EGP
+                      </span>
+                      <span className="font-medium text-base leading-[100%] tracking-normal align-bottom text-zinc-400 line-through">
+                         {p.discountValue}
                       </span>
                     </div>
                   </div>

@@ -26,7 +26,7 @@ const ProductsPage = async () => {
           <ProductFiltersSidebar categories={categories} occasions={occasions} />
         </aside>
 
-        <main className="w-full min-w-0 ml-6 flex-1">
+        <main className="w-full min-w-0 ml-6 flex-1 rtl:mr-6">
           <GetPoductsPage />
         </main>
       </div>
