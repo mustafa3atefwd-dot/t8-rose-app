@@ -3,10 +3,13 @@ import ProductReview from './product-review';
 import { getTranslations } from 'next-intl/server';
 import { ReviewsResponse } from '../lib/types/product-reviews';
 import { IProductDetail } from '@/features/products/lib/types';
+import ProductReviewForm from './product-review-form';
+
 type Props = {
   reviewsData: ReviewsResponse;
   productRatingData: IProductDetail;
 };
+
 export default async function ProductReviews({ reviewsData, productRatingData }: Props) {
   const t = await getTranslations('productReview');
   return (
@@ -16,9 +19,7 @@ export default async function ProductReviews({ reviewsData, productRatingData }:
         <header className="border-ds-border-muted mb-4 space-y-1 border-b pb-4">
           <h3 className="text-ds-text-plain text-xl font-semibold">{t('subTitle')}</h3>
           <div className="flex items-center gap-1">
-            <span className="text-ds-text-plain text-2xl font-bold">
-              {productRatingData?.rating.toFixed(1) || 0}
-            </span>
+            <span className="text-ds-text-plain text-2xl font-bold">{productRatingData?.rating.toFixed(1) || 0}</span>
             <span className="text-ds-text-muted text-sm font-medium">
               ({productRatingData?.ratings || 0} {t('ratings')})
             </span>
@@ -37,7 +38,9 @@ export default async function ProductReviews({ reviewsData, productRatingData }:
             )}
           </div>
           {/* user rating */}
-          <div className="min-h-91.75 flex-1"></div>
+          <div className="min-h-91.75 flex-1">
+            <ProductReviewForm productId={productRatingData.id} />
+          </div>
         </div>
       </div>
     </section>

@@ -25,8 +25,7 @@ function ProductReviewForm({ productId }: IProductReviewFormProps) {
   });
 
   return (
-    <section aria-labelledby="product-review-heading" className="py-8 sm:py-12 md:py-15">
-      <div className="container">
+    <section aria-labelledby="product-review-heading">
         <h2 id="product-review-heading" className="sr-only">
           {t('writeReview')}
         </h2>
@@ -94,7 +93,6 @@ function ProductReviewForm({ productId }: IProductReviewFormProps) {
             {mutation.isPending ? tButton('loading') : tButton('addReview')}
           </Button>
         </form>
-      </div>
     </section>
   );
 }

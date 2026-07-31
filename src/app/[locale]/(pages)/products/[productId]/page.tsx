@@ -1,11 +1,13 @@
 import { Suspense } from 'react';
-import { ProductDetails, ProductDetailsSkeleton } from '@/features/product-details';
+import { ProductDetailsSkeleton } from '@/features/product-details';
 import { getProductById } from '@/features/products';
 import { ApiError } from '@/shared/lib/utils/error.util';
 import { notFound } from 'next/navigation';
 import ProductReviewSkeleton from '@/features/product-details/skeletons/product-review.skeleton';
 import ProductReviews from '@/features/product-details/components/product-reviews';
 import { getReviews } from '@/features/product-details/lib/apis/reviews.api';
+import { ProductDetails } from '@/features/product-details/components/product-details';
+import RelatedProducts from '@/features/product-details/components/related-products';
 
 interface ProductDetailsPageProps {
   params: Promise<{
@@ -50,8 +52,12 @@ export default async function ProductDetailsContent({ params }: ProductDetailsPa
       >
         <ProductDetails product={product} locale={locale} />
         <ProductReviews reviewsData={reviewsData} productRatingData={product} />
+        <RelatedProducts
+          categoryId={product.category.id}
+          subCategoryId={product.subCategoryId ?? ''}
+          currentProductId={product.id}
+        />
       </Suspense>
     </>
   );
 }
-

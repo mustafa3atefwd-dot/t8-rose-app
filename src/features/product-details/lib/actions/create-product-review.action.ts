@@ -17,10 +17,6 @@ export const createProductReviewAction = async (payload: IReviewSchema) => {
   // Construct Request URL
   const url = `${BACKEND_URL}/reviews`;
 
-  // console.log(jwt);
-  console.log(token);
-  console.log(url);
-
   return apiRequest<ICreateProductReviewResponse>(url, {
     method: 'POST',
     headers: {

@@ -60,7 +60,20 @@
     "addToCart": "Add to Cart",
     "addToWishlist": "Add to wishlist",
     "galleryLabel": "Product images",
-    "imageLabel": "Product image"
+    "imageLabel": "Product image",
+
+    "relatedProducts": {
+      "title": "Related Products"
+    },
+
+    "writeReview": "Write a Review",
+
+    "review": {
+      "ratingLabel": "Your Rating",
+      "ratingValue": "Rate {rating} out of 5",
+      "headlineLabel": "Review Title",
+      "contentLabel": "Review"
+    }
   },
   "toast": {
     "success": "Success",
@@ -149,7 +162,14 @@
     "passwordSpecialCharacter": "Password must contain at least one special character",
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
-    "passwordMatch": "Passwords do not match"
+    "passwordMatch": "Passwords do not match",
+
+    "review": {
+      "productIdRequired": "Product ID is required",
+      "headlineRequired": "Review title is required",
+      "ratingRequired": "Please select a rating",
+      "ratingInvalid": "Rating must be between 1 and 5"
+    }
   },
   "error": {
     "networkError": "Something went wrong. Please try again."
