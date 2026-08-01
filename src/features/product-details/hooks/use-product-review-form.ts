@@ -14,7 +14,7 @@ interface IUseProductReviewFormProps {
 }
 
 export function useProductReviewForm({ productId }: IUseProductReviewFormProps) {
-  const t = useTranslations('productDetails');
+  const t = useTranslations('');
 
   const schema = useMemo(() => reviewSchema(t), [t]);
 

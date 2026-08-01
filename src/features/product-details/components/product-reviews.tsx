@@ -26,7 +26,7 @@ export default async function ProductReviews({ reviewsData, productRatingData }:
           </div>
           <Rating variant="filled" rating={productRatingData?.rating || 0} className="justify-start" />
         </header>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-2">
           {/* product reviews */}
           <div className="border-ds-border-muted hide-scrollbar max-h-91.75 flex-2 overflow-auto border-e pe-5">
             {reviewsData?.payload.data.length > 0 ? (
