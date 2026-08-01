@@ -6,7 +6,6 @@ import { useLoginForm } from '@/features/auth/hooks';
 import { Button } from '@/shared/components/ui/button';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { FormError, FormField, PasswordFormField } from '@/shared/components';
-import { Link } from '@/i18n/navigation';
 
 export function LoginForm() {
   const t = useTranslations('auth.loginForm');
