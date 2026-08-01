@@ -1,4 +1,3 @@
-import { Badge } from "./ui/badge";
 type Props = {
     count: number;
 }
