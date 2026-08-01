@@ -345,12 +345,22 @@
     "contact": "Contact",
     "about": "About",
     "inputPlaceholder": "What awesome gift are you looking for?",
+    "deliverTo": "Deliver to:",
     "userMenu": {
+      "welcome": "Welcome",
       "account": "Account",
       "addresses": "Addresses",
       "order": "Orders",
       "dashboard": "Dashboard",
       "logout": "Logout"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead" : "Mark all as read",
+    "clearAll": "Clear all",
+    "markRead": "Mark as read",
+    "delete": "Delete",
+    "empty": "No notifications yet"
   }
 }

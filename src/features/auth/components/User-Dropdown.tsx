@@ -26,7 +26,7 @@ export default function UserDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger className={'flex items-center gap-1 cursor-pointer'}>
         <div className='flex flex-col items-start justify-center -space-y-2 cursor-pointer'>
-            <span className='text-zinc-500 text-xs font-normal'>Hello</span>
+            <span className='text-zinc-500 text-xs font-normal'>{t('welcome')}</span>
             <h3 className='text-ds-bg-primary-saturated font-medium text-base'>{session?.user.firstName}</h3>
         </div>
         <ChevronDown className='text-zinc-500 size-4.5 mt-1'/>

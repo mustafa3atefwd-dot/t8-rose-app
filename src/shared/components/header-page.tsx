@@ -45,7 +45,7 @@ export default function Header() {
                     </div>
 
                     {/* language */}
-                    <div className="w-15 h-13 border-l pl-4 gap-2.5 flex items-center border-l-ds-bg-muted mr-2 rtl:mr-1">
+                    <div className="w-15 h-13 border-l pl-4 gap-2.5 flex items-center rtl:ml-2 border-l-ds-bg-muted mr-2 rtl:mr-1">
                         <LanguageToggle/>
                     </div>
 

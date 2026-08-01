@@ -1,6 +1,7 @@
 'use client';
 
 import { Bell, BellOff, BrushCleaning, CheckCheck, EllipsisVertical } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useGetNotifications } from '../hooks/use-get-notifications';
 import NotificationSettingsMenu from './notification-settings-menu';
 import HeaderBadge from '@/shared/components/header-badge';
@@ -10,6 +11,7 @@ import { useDeleteAll } from '../hooks/use-delete-all';
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function NotificationsMenu() {
+  const t = useTranslations('notifications');
   const menuRef = useRef<HTMLDivElement>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -52,11 +54,11 @@ export default function NotificationsMenu() {
       {open && (
         <div
           ref={menuRef}
-          className="bg-ds-bg-plain absolute -left-75 z-50 mt-2 w-84 overflow-visible rounded-xl shadow-[0_4px_9px_0_#00000026]"
+          className="bg-ds-bg-plain absolute ltr:right-2 rtl:left-2 z-50 mt-2 w-84 overflow-visible rounded-xl shadow-[0_4px_9px_0_#00000026]"
         >
           {/* Header */}
           <div className="bg-ds-bg-primary-saturated text-ds-text-inverse rounded-t-xl p-4 text-xl font-bold">
-            Notifications
+            {t('title')}
             {hasNotifications && <span> {data?.payload.metadata.total}</span>}
           </div>
 
@@ -73,7 +75,7 @@ export default function NotificationsMenu() {
               ) : (
                 <BrushCleaning className="size-4.5 text-zinc-400 dark:text-zinc-500" />
               )}
-              <span>Clear all notifications</span>
+              <span>{t('clearAll')}</span>
             </button>
 
             <button
@@ -87,7 +89,7 @@ export default function NotificationsMenu() {
               ) : (
                 <BrushCleaning className="size-4.5 text-zinc-400 dark:text-zinc-500" />
               )}
-              <span>Mark all as read</span>
+              <span>{t('markAllRead')}</span>
             </button>
           </div>
 
@@ -96,7 +98,7 @@ export default function NotificationsMenu() {
             <div className="flex h-56 items-center justify-center border-t border-zinc-300 dark:border-zinc-600">
               <div className="flex flex-col items-center gap-2.5 text-zinc-500 dark:text-zinc-400">
                 <BellOff className="size-12.5" />
-                <p className="text-sm font-medium">No notifications to display.</p>
+                <p className="text-sm font-medium">{t('empty')}</p>
               </div>
             </div>
           ) : (

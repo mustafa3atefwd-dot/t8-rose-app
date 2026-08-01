@@ -1,9 +1,9 @@
-'use client';
+// 'use client';
 
-import { usePushNotifications } from '../hooks/use-push-notifications';
+// import { usePushNotifications } from '../hooks/use-push-notifications';
 
-export default function PushNotificationProvider() {
-  usePushNotifications();
+// export default function PushNotificationProvider() {
+//   usePushNotifications();
 
-  return null;
-}
+//   return null;
+// }

@@ -353,7 +353,9 @@
     "contact": "اتصال",
     "about": "عن",
     "inputPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
+    "deliverTo": "التوصيل إلى:",
     "userMenu": {
+      "welcome": "مرحبا",
       "account": "حسابي",
       "addresses": "عناويني",
       "order": "طلباتي",
@@ -366,5 +368,13 @@
     "subTitle": "التقييم العام:",
     "ratings": "التقييمات",
     "noReviews": "لا يوجد تقييمات"
+  },
+    "notifications": {
+     "title": "الإشعارات",
+     "markAllRead" : "تعيين الكل كمقروء",
+     "clearAll": "حذف الكل",
+     "markRead": "تعيين كمقروء",
+     "delete": "حذف",
+     "empty": "لا توجد إشعارات حتى الآن"
   }
 }
