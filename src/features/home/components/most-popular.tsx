@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import { getOccasionsAction, getProductsAction } from '@/features/products/lib/actions';
 import MostPopularTabs from './most-popular-tabs';
+import MostPopularSkeleton from '../skeletons/most-popular-skeleton';
 import {
   IOccasionTab,
   MOST_POPULAR_OCCASION_TABS_LIMIT,
@@ -7,7 +9,7 @@ import {
   MOST_POPULAR_PRODUCTS_LIMIT,
 } from './most-popular.constants';
 
-const MostPopular = async () => {
+const MostPopularContent = async () => {
   const occasionsResult = await getOccasionsAction({ limit: MOST_POPULAR_OCCASIONS_LIMIT }).catch(() => null);
   const occasions = occasionsResult?.status ? (occasionsResult.payload?.data ?? []) : [];
 
@@ -30,6 +32,14 @@ const MostPopular = async () => {
   if (occasionTabs.length === 0) return null;
 
   return <MostPopularTabs occasionTabs={occasionTabs} />;
+};
+
+const MostPopular = () => {
+  return (
+    <Suspense fallback={<MostPopularSkeleton />}>
+      <MostPopularContent />
+    </Suspense>
+  );
 };
 
 export default MostPopular;

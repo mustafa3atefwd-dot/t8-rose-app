@@ -1,7 +1,7 @@
 import 'server-only';
 
-import { emailStepSchema } from '../schemas/email-step.schema';
-import { IOtpStepSchema, IUserInfoStepSchema } from '../types/schemas';
+import { emailStepSchema } from '@/features/auth/lib/schemas/email-step.schema';
+import { IOtpStepSchema, IUserInfoStepSchema } from '@/features/auth/lib/types/schemas';
 import { apiRequest } from '@/shared/lib/utils/request.util';
 import { IApiResponse } from '@/shared/lib/types/api';
 import { BACKEND_URL } from '@/shared/lib/constants/api.constant';
@@ -41,7 +41,6 @@ export const confirmOtpStepAction = async (payload: IOtpStepSchema) => {
  * Final registration step after email verification.
  */
 export const userInfoStepAction = async (payload: IUserInfoStepSchema) => {
-  console.log('payload: ', { ...payload, phone: payload.phone.phone });
   return await apiRequest<IApiResponse>(`${BACKEND_URL}/auth/register`, {
     method: 'POST',
     headers: {

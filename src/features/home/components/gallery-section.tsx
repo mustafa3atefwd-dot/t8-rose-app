@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { galleryColumns } from '@/features/home/lib/constants';
 import { ImageWithSkeleton, SectionLabel, SectionTitle } from '@/shared/components';
+import { cn } from '@/shared/lib/utils';
 
 function GallerySection() {
   const t = useTranslations('home.gallery');
@@ -19,7 +20,7 @@ function GallerySection() {
           {galleryColumns.map((column, columnIndex) => (
             <div key={`gallery-column-${columnIndex}`} className="flex flex-1 flex-col gap-3">
               {column.map((item) => (
-                <div key={item.src} className={`relative overflow-hidden rounded-xl ${item.className}`}>
+                <div key={item.src} className={cn('relative overflow-hidden rounded-xl', item.className)}>
                   <ImageWithSkeleton
                     src={item.src}
                     alt=""
