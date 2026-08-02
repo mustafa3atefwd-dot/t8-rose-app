@@ -21,10 +21,11 @@ function ProductReviewForm({ productId }: IProductReviewFormProps) {
   const tInput = useTranslations('input.placeholders');
   const tButton = useTranslations('button');
 
+  // User authentication status
   const { status } = useSession();
   const isUnauthenticated = status === 'unauthenticated';
 
-  // Handles form state, validation, and API request
+  // Form state, validation, and API request
   const { form, mutation, onSubmit } = useProductReviewForm({
     productId,
   });
