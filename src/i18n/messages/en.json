@@ -65,12 +65,34 @@
       }
     },
 
+
+    "label": "Most Popular",
     "mostPopular": "Most Popular",
     "viewMore": "View More",
-    "bestSelling": "Best Selling",
-    "bestSellingHeading": "<accent>Check Out</accent> What Everyone’s <accent>Buying</accent> Right Now",
-    "bestSellingDescription": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+    "bestSelling": {
+      "label": "Best Selling",
+      "title": "<accent>Check Out</accent> What Everyone's <accent>Buying</accent> Right Now",
+      "description": "Not sure what to choose? Start with our best sellers—these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary, or wedding, our top picks are guaranteed to leave a lasting impression."
+    },
+    "productCarousel": {
+      "error": "We couldn't load the products.",
+      "empty": "No products are available right now.",
+      "retry": "Try again"
+    },
     "Explore gifts": "Explore Gifts"
+  },
+
+  "homeHeader": {
+    "deliverTo": "Deliver to",
+    "userMenu": {
+      "welcome": "Welcome",
+      "account": "My account",
+      "addresses": "My addresses",
+      "order": "My orders",
+      "dashboard": "Dashboard",
+      "logout": "Log out"
+    }
+
   },
 
 

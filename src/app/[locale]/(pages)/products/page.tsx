@@ -19,8 +19,6 @@ const ProductsPage = async () => {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
-
       <div className="container mx-auto flex flex-1 flex-col gap-8 px-4 py-8 md:flex-row">
         {/* Both children read the filter state from `useSearchParams`, which
             Next requires to sit under a Suspense boundary. */}
