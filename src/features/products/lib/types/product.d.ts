@@ -71,6 +71,7 @@ export interface IProductDetail extends IProduct {
 export interface IProductsQueryParams {
   page?: number;
   limit?: number;
+  /** Comma-joined when several categories are selected, e.g. `"id1,id2"`. */
   categoryId?: string;
   subCategoryId?: string;
   occasionId?: string;
@@ -79,7 +80,6 @@ export interface IProductsQueryParams {
   minRating?: number;
   sortBy?: ProductSortBy;
   sortOrder?: SortOrder;
-  subCategoryId?: string;
   search?: string;
 }
 

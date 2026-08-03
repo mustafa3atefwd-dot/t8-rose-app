@@ -1,17 +1,24 @@
 'use client';
 
 import { PaginationControl } from "@/shared/components/ui/pagination";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { HeartPlus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
 import RatingStars from "@/features/products/components/rating-stars";
 import FormatPrice from "@/features/products/hooks/format-price";
-import { IApiResponse } from "@/shared/lib/types/api";
-import { IPaginatedProducts, IProduct } from "../lib/types";
+import { getProducts } from "../lib/api";
+import { PRODUCTS_PAGE_SIZE } from "../lib/constants";
+import { IProduct } from "../lib/types";
 
 
 export default function ProductsGrid() {
+  // Translation
+  const t = useTranslations('products.filters');
+  const tError = useTranslations('error');
+
+  // Custom hooks
   const {
     categoryIds,
     occasionId,
@@ -22,52 +29,54 @@ export default function ProductsGrid() {
     sortBy,
     sortOrder,
     search,
+    isPending,
     setFilter,
   } = useProductFilters();
 
-  const { data, isLoading } = useQuery({
-    queryKey: [
-      'products',
-      page,
-      categoryIds.join(','),
-      occasionId,
-      minRating,
-      minPrice,
-      maxPrice,
-      sortBy,
-      sortOrder,
-      search,
-    ],
-    queryFn: async () => {
-      const params = new URLSearchParams();
-      if (page) params.set('page', String(page));
-      params.set('limit', '12');
-      if (categoryIds[0]) params.set('categoryId', categoryIds[0]);
-      if (occasionId) params.set('occasionId', occasionId);
-      if (minPrice != null) params.set('minPrice', String(minPrice));
-      if (maxPrice != null) params.set('maxPrice', String(maxPrice));
-      if (minRating != null) params.set('minRating', String(minRating));
-      if (sortBy) params.set('sortBy', sortBy);
-      if (sortOrder) params.set('sortOrder', sortOrder);
-      if (search) params.set('search', search);
-  
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`);
-      if (!res.ok) throw new Error('Failed to fetch products');
+  // Variables
+  // The sidebar is multi-select, so every checked category has to travel to the
+  // backend — sending only `categoryIds[0]` silently dropped the rest.
+  const categoryId = categoryIds.length ? categoryIds.join(',') : undefined;
 
-      return (await res.json()) as IApiResponse<IPaginatedProducts>;
-    },
+  const filters = {
+    page,
+    limit: PRODUCTS_PAGE_SIZE,
+    categoryId,
+    occasionId,
+    minRating,
+    minPrice,
+    maxPrice,
+    sortBy,
+    sortOrder,
+    search,
+  };
+
+  const { data, isLoading, isFetching, isError } = useQuery({
+    queryKey: ['products', filters],
+    queryFn: () => getProducts(filters),
+    // Keeps the previous page on screen while the next filter result loads,
+    // so the grid doesn't collapse on every checkbox click.
+    placeholderData: keepPreviousData,
   });
 
   const products: IProduct[] = data?.status ? data.payload?.data ?? [] : [];
   const metadata = data?.status ? data.payload?.metadata : undefined;
+  const isRefreshing = isPending || isFetching;
 
 
   return (
     <div className="w-full">
       {isLoading ? (
         <div className="text-center py-20 text-zinc-500">Loading</div>
+      ) : isError ? (
+        <div className="text-center py-20 text-ds-text-danger">{tError('networkError')}</div>
+      ) : products.length === 0 ? (
+        <div className="text-center py-20 text-zinc-500">{t('noResults')}</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mt-2">
+        <div
+          data-pending={isRefreshing || undefined}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mt-2 transition-opacity data-[pending]:opacity-60"
+        >
           {products.map((product) => (
             <div key={product.id} className="w-full flex flex-col justify-between">
               <div className="relative h-68 rounded-2xl overflow-hidden bg-zinc-50 p-3 flex flex-col justify-between">
@@ -120,13 +129,15 @@ export default function ProductsGrid() {
         </div>
       )}
 
-      <div className="flex justify-center items-center mt-20 mb-2">
-        <PaginationControl
-          page={page}
-          totalPages={metadata?.totalPages ?? 1}
-          onPageChange={(newPage) => setFilter('page', newPage)}
-        />
-      </div>
+      {products.length > 0 && (metadata?.totalPages ?? 1) > 1 && (
+        <div className="flex justify-center items-center mt-20 mb-2">
+          <PaginationControl
+            page={page}
+            totalPages={metadata?.totalPages ?? 1}
+            onPageChange={(newPage) => setFilter('page', newPage)}
+          />
+        </div>
+      )}
     </div>
   );
 }
