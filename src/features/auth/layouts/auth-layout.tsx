@@ -17,7 +17,12 @@ function FormSeparator({ flip = false }: { flip?: boolean }) {
   return (
     <>
       <Image src={SeparatorLight} alt="" aria-hidden className={`h-auto w-70 select-none dark:hidden ${flipClass}`} />
-      <Image src={SeparatorDark} alt="" aria-hidden className={`hidden h-auto w-70 select-none dark:block ${flipClass}`} />
+      <Image
+        src={SeparatorDark}
+        alt=""
+        aria-hidden
+        className={`hidden h-auto w-70 select-none dark:block ${flipClass}`}
+      />
     </>
   );
 }
@@ -35,7 +40,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         </div>
 
         {/* Centered content — ornament, heading, form fields, ornament */}
-        <div className="flex flex-1 flex-col items-center justify-center gap-8">
+        <div className="flex flex-1 flex-col items-center justify-center gap-5">
           <FormSeparator />
           <AuthHeading />
           {children}

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Dispatch, SetStateAction } from 'react';
 import { Loader2, MoveRight } from 'lucide-react';

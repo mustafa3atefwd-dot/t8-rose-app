@@ -1,7 +1,6 @@
 // features/auth/lib/request.ts
 
 import { IApiResponse } from "../types/api";
-import { notFound } from "next/navigation";
 import { ApiError } from "./error.util";
 
 /**
@@ -23,8 +22,6 @@ export const apiRequest = async <TResponse>(
 
   // HTTP + business logic failure fallback
   if (!response.ok || !data.status) {
-    console.log({ data });
-
     throw new ApiError(
       data.message || "Request failed",
       response.status,

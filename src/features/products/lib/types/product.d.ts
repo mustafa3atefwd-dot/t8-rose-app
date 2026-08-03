@@ -72,6 +72,7 @@ export interface IProductsQueryParams {
   page?: number;
   limit?: number;
   categoryId?: string;
+  subCategoryId?: string;
   occasionId?: string;
   minPrice?: number;
   maxPrice?: number;
