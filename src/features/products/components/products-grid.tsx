@@ -7,10 +7,11 @@ import Image from "next/image";
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
 import RatingStars from "@/features/products/components/rating-stars";
 import FormatPrice from "@/features/products/hooks/format-price";
-import { IPaginatedProducts } from "@/features/products/lib/types";
+import { IApiResponse } from "@/shared/lib/types/api";
+import { IPaginatedProducts, IProduct } from "../lib/types";
 
 
-export default function GetPoductsPage() {
+export default function ProductsGrid() {
   const {
     categoryIds,
     occasionId,
@@ -22,7 +23,6 @@ export default function GetPoductsPage() {
     sortOrder,
     search,
     setFilter,
-    setFilters,
   } = useProductFilters();
 
   const { data, isLoading } = useQuery({
@@ -53,12 +53,12 @@ export default function GetPoductsPage() {
   
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`);
       if (!res.ok) throw new Error('Failed to fetch products');
-      
-      return await res.json();
+
+      return (await res.json()) as IApiResponse<IPaginatedProducts>;
     },
   });
 
-  const products = data?.status ? data.payload?.data ?? [] : [];
+  const products: IProduct[] = data?.status ? data.payload?.data ?? [] : [];
   const metadata = data?.status ? data.payload?.metadata : undefined;
 
 
@@ -68,15 +68,17 @@ export default function GetPoductsPage() {
         <div className="text-center py-20 text-zinc-500">Loading</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mt-2">
-          {products.map((p) => (
-            <div key={p.id} className="w-full flex flex-col justify-between">
+          {products.map((product) => (
+            <div key={product.id} className="w-full flex flex-col justify-between">
               <div className="relative h-68 rounded-2xl overflow-hidden bg-zinc-50 p-3 flex flex-col justify-between">
-                <Image
-                  className="object-cover rounded-xl"
-                  src={p.cover}
-                  alt={p.title}
-                  fill
-                />
+                {product.cover && (
+                  <Image
+                    className="object-cover rounded-xl"
+                    src={product.cover}
+                    alt={product.title}
+                    fill
+                  />
+                )}
                 <div className="relative z-10 flex justify-between items-center w-full">
                   <button className="w-8 h-8 rounded-full bg-white shadow-sm flex justify-center items-center hover:bg-zinc-100 transition-colors">
                     <HeartPlus className="w-4.5 h-4.5 text-red-900" />
@@ -89,21 +91,21 @@ export default function GetPoductsPage() {
 
               <div className="mt-3 flex flex-col gap-2">
                 <p className="font-semibold text-base leading-snug text-ds-text-primary line-clamp-1">
-                  {p.title}
+                  {product.title}
                 </p>
 
                 <div className="flex items-center justify-between mt-1">
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-1 text-amber-500">
-                      <RatingStars rating={p.rating} label={`Rating: ${p.rating}`} />
+                      <RatingStars rating={product.rating} label={`Rating: ${product.rating}`} />
                     </div>
 
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-base text-ds-text-primary">
-                        {FormatPrice(p.price)} EGP
+                        {FormatPrice(Number(product.price))} EGP
                       </span>
                       <span className="font-medium text-base leading-[100%] tracking-normal align-bottom text-zinc-400 line-through">
-                         {p.discountValue}
+                         {product.discountValue}
                       </span>
                     </div>
                   </div>
