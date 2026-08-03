@@ -1,7 +1,7 @@
 import ProductFiltersSidebar from '@/features/products/components/filters/product-filters-sidebar';
 import { getCategoriesAction, getOccasionsAction } from '@/features/products/lib/actions';
 import Header from '@/shared/components/header-page';
-import GetPoductsPage from '../../p/page';
+import GetPoductsPage from '../p/page';
 
 const ProductsPage = async () => {
   // Query
