@@ -8,8 +8,8 @@ import UserDropdown from "./User-Dropdown"
 
 
 export default function UnAuthenticatedLogin() {
-    const t = useTranslations('homeHeader')
-    const {status } = useSession()
+    const t = useTranslations('home.header')
+    const {status} = useSession()
     if(status === 'unauthenticated'){
         return <div className="flex items-center h-13 border-r pe-2 ps-2 gap-1.5 whitespace-nowrap">
         <User />

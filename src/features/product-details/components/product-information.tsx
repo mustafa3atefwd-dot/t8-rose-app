@@ -23,7 +23,7 @@ export async function ProductInformation({ product, locale }: ProductInformation
   });
 
   return (
-    <section aria-labelledby="product-title" className="flex flex-col lg:min-h-[522px]">
+    <section aria-labelledby="product-title" className="flex flex-col lg:min-h-130.5">
       {/* Product title, price, and stock */}
       <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
         <div className="min-w-0 sm:flex-1">
@@ -74,7 +74,12 @@ export async function ProductInformation({ product, locale }: ProductInformation
 
       {/* Product actions */}
       <div className="mt-auto">
-        <ProductActions addToCartLabel={t('addToCart')} addToWishlistLabel={t('addToWishlist')} />
+        <ProductActions 
+          productId={product.id}
+          product={product}
+          addToCartLabel={t('addToCart')} 
+          addToWishlistLabel={t('addToWishlist')} 
+        />
       </div>
     </section>
   );

@@ -3,4 +3,4 @@ export { default as GallerySection } from './gallery-section';
 export { default as TestimonialItem } from './testimonial-item';
 export { default as TestimonialsSection } from './testimonials-section';
 export { default as TrustedCompaniesSection } from './trusted-companies-section';
-export { default as HomepageHero } from './hero-main-section';
+// export { default as HomepageHero } from './hero-main-section';

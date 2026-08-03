@@ -14,12 +14,11 @@ import {
 import { IProduct } from '@/features/products/lib/types/product';
 
 interface ProductCarouselProps {
-  /** Fetched server-side by the parent; `null` means the fetch failed. */
   products: IProduct[] | null;
 }
 
 const ProductCarousel = ({ products }: ProductCarouselProps) => {
-  const t = useTranslations('home.bestSelling.productCarousel');
+  const t = useTranslations('home.productCarousel');
   const router = useRouter();
 
   if (!products || products.length === 0) {

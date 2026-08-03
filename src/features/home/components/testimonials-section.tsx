@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel, CarouselContent, CarouselItem } from '@/shared/components/ui/carousel';
 import { SectionLabel, SectionTitle } from '@/shared/components';
@@ -12,7 +12,9 @@ import { useCarouselAutoplayControl } from '@/shared/hooks';
 function TestimonialsSection() {
   const t = useTranslations('home.testimonials');
 
-  const plugin = useRef(
+  // Lazy state initializer keeps a single plugin instance without reading a ref
+  // during render.
+  const [plugin] = useState(() =>
     Autoplay({
       delay: 3000,
       stopOnInteraction: false,
@@ -20,7 +22,7 @@ function TestimonialsSection() {
     })
   );
 
-  useCarouselAutoplayControl(plugin.current);
+  useCarouselAutoplayControl(plugin);
 
   return (
     <section className="py-8 sm:py-12 md:py-14 lg:py-17.5">
@@ -35,7 +37,7 @@ function TestimonialsSection() {
         <div className="container">
           <Carousel
             dir="ltr"
-            plugins={[plugin.current]}
+            plugins={[plugin]}
             opts={{
               align: 'start',
               loop: true,
