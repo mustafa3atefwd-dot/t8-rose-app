@@ -1,39 +1,28 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
 import { useSession } from 'next-auth/react';
 import { addToWishlistAction, removeFromWishlistAction } from '../actions/wishlist-actions';
 import { WishlistItem } from '../lib/types/product';
+import { createGuestStore } from '../lib/utils/guest-storage.util';
 
 const GUEST_WISHLIST_KEY = 'guest_wishlist_items';
+
+const guestWishlistStore = createGuestStore<WishlistItem>(GUEST_WISHLIST_KEY);
 
 export function useWishlist() {
   const { status } = useSession();
   const isLoggedIn = status === 'authenticated';
   const queryClient = useQueryClient();
 
-  const [guestWishlist, setGuestWishlist] = useState<WishlistItem[]>([]);
-
-  // 1. Initialize guest wishlist state from localStorage
-  useEffect(() => {
-    if (!isLoggedIn) {
-      const stored = localStorage.getItem(GUEST_WISHLIST_KEY);
-      if (stored) {
-        try {
-          setGuestWishlist(JSON.parse(stored));
-        } catch (error) {
-          console.error('Failed to parse guest wishlist:', error);
-          setGuestWishlist([]);
-        }
-      }
-    }
-  }, [isLoggedIn]);
-
-  const saveGuestWishlist = (items: WishlistItem[]) => {
-    setGuestWishlist(items);
-    localStorage.setItem(GUEST_WISHLIST_KEY, JSON.stringify(items));
-  };
+  // 1. Guest wishlist is read straight from localStorage (an external store),
+  // so every consumer of this hook sees the same items.
+  const guestWishlist = useSyncExternalStore(
+    guestWishlistStore.subscribe,
+    guestWishlistStore.getSnapshot,
+    guestWishlistStore.getServerSnapshot
+  );
 
   // 2. Fetch Server Wishlist for Authenticated Users
   const { data: serverWishlist = [], isLoading: isWishlistLoading } = useQuery<WishlistItem[]>({
@@ -73,15 +62,7 @@ export function useWishlist() {
         await addMutation.mutateAsync(productId);
       }
     } else {
-      let currentGuestWishlist: WishlistItem[] = [];
-      const stored = localStorage.getItem(GUEST_WISHLIST_KEY);
-      if (stored) {
-        try {
-          currentGuestWishlist = JSON.parse(stored);
-        } catch {
-          currentGuestWishlist = [];
-        }
-      }
+      const currentGuestWishlist = guestWishlistStore.read();
 
       const existingItem = currentGuestWishlist.find((item) => item.productId === productId);
       let updatedGuestWishlist: WishlistItem[];
@@ -99,7 +80,7 @@ export function useWishlist() {
         updatedGuestWishlist = [...currentGuestWishlist, newItem];
       }
 
-      saveGuestWishlist(updatedGuestWishlist);
+      guestWishlistStore.save(updatedGuestWishlist);
     }
   };
 

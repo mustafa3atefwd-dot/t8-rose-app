@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl'; 
@@ -17,8 +17,6 @@ export function HeroCarousel() {
   const isRtl = locale === 'ar';
 
   const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
 
   const SLIDES = [
     { id: 'flowers', image: sliderFlowers, link: '/category/flowers' },
@@ -26,16 +24,38 @@ export function HeroCarousel() {
     { id: 'gifts', image: sliderGifts, link: '/category/gifts' },
   ];
 
-  const autoplayPlugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }));
+  // Created once via a lazy state initializer so the plugin instance is stable
+  // without reading a ref during render.
+  const [autoplayPlugin] = useState(() => Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }));
 
-  useEffect(() => {
-    if (!api) return;
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap());
-    api.on('select', () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
+  // Embla is an external store: subscribe to it instead of mirroring its state
+  // into React state from inside an effect.
+  const subscribeToApi = useCallback(
+    (onStoreChange: () => void) => {
+      if (!api) return () => {};
+
+      api.on('select', onStoreChange);
+      api.on('reInit', onStoreChange);
+
+      return () => {
+        api.off('select', onStoreChange);
+        api.off('reInit', onStoreChange);
+      };
+    },
+    [api]
+  );
+
+  const current = useSyncExternalStore(
+    subscribeToApi,
+    () => api?.selectedScrollSnap() ?? 0,
+    () => 0
+  );
+
+  const count = useSyncExternalStore(
+    subscribeToApi,
+    () => api?.scrollSnapList().length ?? 0,
+    () => 0
+  );
 
   const handleDotClick = useCallback(
     (index: number) => {
@@ -61,7 +81,7 @@ export function HeroCarousel() {
         </div>
       <Carousel
         setApi={setApi}
-        plugins={[autoplayPlugin.current]}
+        plugins={[autoplayPlugin]}
         className="h-full w-full"
         opts={{
           loop: true,

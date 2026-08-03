@@ -1,39 +1,28 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
 import { useSession } from 'next-auth/react';
 import { addToCartAction, updateCartQuantityAction } from '../actions/cart-actions';
 import { CartItem } from '../lib/types/product';
+import { createGuestStore } from '../lib/utils/guest-storage.util';
 
 const GUEST_CART_KEY = 'guest_cart_items';
+
+const guestCartStore = createGuestStore<CartItem>(GUEST_CART_KEY);
 
 export function useCart() {
   const { status } = useSession();
   const isLoggedIn = status === 'authenticated';
   const queryClient = useQueryClient();
 
-  const [guestCart, setGuestCart] = useState<CartItem[]>([]);
-
-  // 1. Initialize guest cart state from localStorage
-  useEffect(() => {
-    if (!isLoggedIn) {
-      const stored = localStorage.getItem(GUEST_CART_KEY);
-      if (stored) {
-        try {
-          setGuestCart(JSON.parse(stored));
-        } catch (error) {
-          console.error('Failed to parse guest cart:', error);
-          setGuestCart([]);
-        }
-      }
-    }
-  }, [isLoggedIn]);
-
-  const saveGuestCart = (items: CartItem[]) => {
-    setGuestCart(items);
-    localStorage.setItem(GUEST_CART_KEY, JSON.stringify(items));
-  };
+  // 1. Guest cart is read straight from localStorage (an external store), so
+  // every consumer of this hook sees the same items.
+  const guestCart = useSyncExternalStore(
+    guestCartStore.subscribe,
+    guestCartStore.getSnapshot,
+    guestCartStore.getServerSnapshot
+  );
 
   // 2. Fetch Server Cart for Authenticated Users
   const { data: serverCart = [], isLoading: isCartLoading } = useQuery<CartItem[]>({
@@ -80,15 +69,7 @@ export function useCart() {
         await addToCartMutation.mutateAsync({ productId, quantity: quantityToAdd });
       }
     } else {
-      let currentGuestCart: CartItem[] = [];
-      const stored = localStorage.getItem(GUEST_CART_KEY);
-      if (stored) {
-        try {
-          currentGuestCart = JSON.parse(stored);
-        } catch {
-          currentGuestCart = [];
-        }
-      }
+      const currentGuestCart = guestCartStore.read();
 
       const existingItem = currentGuestCart.find((item) => item.productId === productId);
       let updatedGuestCart: CartItem[];
@@ -109,7 +90,7 @@ export function useCart() {
         updatedGuestCart = [...currentGuestCart, newItem];
       }
 
-      saveGuestCart(updatedGuestCart);
+      guestCartStore.save(updatedGuestCart);
     }
   };
 

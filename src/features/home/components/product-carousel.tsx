@@ -12,7 +12,6 @@ import {
   CarouselPrevious,
 } from '@/shared/components/ui/carousel';
 import { IProduct } from '@/features/products/lib/types/product';
-import { useSession } from 'next-auth/react';
 
 interface ProductCarouselProps {
   products: IProduct[] | null;
@@ -21,8 +20,6 @@ interface ProductCarouselProps {
 const ProductCarousel = ({ products }: ProductCarouselProps) => {
   const t = useTranslations('home.productCarousel');
   const router = useRouter();
-  const { data: session } = useSession();
-  const isLoggedIn = !!session;
 
   if (!products || products.length === 0) {
     return (
@@ -42,7 +39,7 @@ const ProductCarousel = ({ products }: ProductCarouselProps) => {
       <CarouselContent className="-ml-6">
         {products.map((product) => (
           <CarouselItem key={product.id} className="basis-full pl-6 sm:basis-85">
-            <ProductCard product={product} isLoggedIn={isLoggedIn} />
+            <ProductCard product={product} />
           </CarouselItem>
         ))}
       </CarouselContent>
