@@ -1,7 +1,7 @@
 import ProductFiltersSidebar from '@/features/products/components/filters/product-filters-sidebar';
+import GetProductsPage from '@/features/products/components/product-grid';
 import { getCategoriesAction, getOccasionsAction } from '@/features/products/lib/actions';
 import Header from '@/shared/components/header-page';
-import GetPoductsPage from '../../p/page';
 
 const ProductsPage = async () => {
   // Query
@@ -27,7 +27,7 @@ const ProductsPage = async () => {
         </aside>
 
         <main className="w-full min-w-0 ml-6 flex-1 rtl:mr-6">
-          <GetPoductsPage />
+          <GetProductsPage />
         </main>
       </div>
     </div>

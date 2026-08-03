@@ -265,5 +265,9 @@
     "contact": "Contact",
     "about": "About",
     "inputPlaceholder": "What awesome gift are you looking for?"
+  },
+
+  "currency":{
+    "EGP": "EGP"
   }
 }

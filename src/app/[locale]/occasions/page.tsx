@@ -10,9 +10,12 @@ import ProductFiltersSidebar from "@/features/products/components/filters/produc
 import { Link } from "@/i18n/navigation";
 import RatingStars from "@/features/products/components/rating-stars";
 import FormatPrice from "@/features/products/hooks/format-price";
+import { useTranslations } from "next-intl";
 
 
 export default function GetOccasionsPagee() {
+  const t = useTranslations('currency')
+
   const {
     categoryIds,
     occasionId,
@@ -114,7 +117,7 @@ export default function GetOccasionsPagee() {
   
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-base text-ds-text-primary">
-                        {FormatPrice(p.price)} EGP
+                        {FormatPrice(p.price)} {t('EGP')}
                       </span>
                       <span className="font-medium text-base leading-[100%] tracking-normal align-bottom text-zinc-400 line-through">
                          {p.discountValue}
