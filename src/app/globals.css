@@ -154,6 +154,8 @@ html[data-theme='dark'] {
   --ds-bg-inverse: var(--color-zinc-50);
   --ds-bg-elevated: color-mix(in srgb, var(--color-black) 50%, transparent);
   --ds-bg-overlay: color-mix(in srgb, var(--color-black) 50%, transparent);
+  --ds-bg-pagination-button: var(--color-soft-pink-300);
+
 
   /* Primary */
   --ds-bg-primary: var(--color-soft-pink-300);

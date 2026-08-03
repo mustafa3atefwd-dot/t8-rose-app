@@ -79,6 +79,8 @@ export interface IProductsQueryParams {
   minRating?: number;
   sortBy?: ProductSortBy;
   sortOrder?: SortOrder;
+  subCategoryId?: string;
+  search?: string;
 }
 
 export interface IPaginationMeta {

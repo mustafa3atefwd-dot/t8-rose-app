@@ -3,8 +3,9 @@
 import { useCallback, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/navigation';
+import { ProductSortBy, SortOrder } from '../lib/constants';
 
-export type ProductFilterKey = 'categoryId' | 'occasionId' | 'minRating' | 'minPrice' | 'maxPrice' | 'page';
+export type ProductFilterKey = 'categoryId' | 'occasionId' | 'minRating' | 'minPrice' | 'maxPrice' | 'page' | 'sortBy' | 'sortOrder' | 'search';
 
 type FilterPatch = Partial<Record<ProductFilterKey, string | number | undefined>>;
 
@@ -35,6 +36,10 @@ export const useProductFilters = () => {
   const minPrice = minPriceRaw ? Number(minPriceRaw) : undefined;
   const maxPrice = maxPriceRaw ? Number(maxPriceRaw) : undefined;
   const page = pageRaw ? Number(pageRaw) : 1;
+
+  const sortBy = (searchParams.get('sortBy') as ProductSortBy) ?? undefined;
+  const sortOrder = (searchParams.get('sortOrder') as SortOrder) ?? undefined;
+  const search = searchParams.get('search') ?? undefined;
 
   // Functions
   const navigate = useCallback(
@@ -79,6 +84,9 @@ export const useProductFilters = () => {
   const resetAll = useCallback(() => navigate(new URLSearchParams()), [navigate]);
 
   return {
+    sortBy,
+    sortOrder,
+    search,
     categoryIds,
     occasionId,
     minRating,

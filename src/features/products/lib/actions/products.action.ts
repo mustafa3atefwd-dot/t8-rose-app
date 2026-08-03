@@ -18,6 +18,12 @@ export const getProductsAction = async (params?: IProductsQueryParams) => {
   if (params?.minRating != null) query.set('minRating', String(params.minRating));
   if (params?.sortBy) query.set('sortBy', params.sortBy);
   if (params?.sortOrder) query.set('sortOrder', params.sortOrder);
+  if (params?.categoryId) query.set('categoryId', params.categoryId);
+  if (params?.subCategoryId) query.set('subCategoryId', params.subCategoryId);
+  if (params?.minPrice !== undefined) query.set('minPrice', String(params.minPrice));
+  if (params?.maxPrice !== undefined) query.set('maxPrice', String(params.maxPrice));
+  if (params?.minRating !== undefined) query.set('minRating', String(params.minRating));
+  if (params?.search) query.set('search', params.search);
 
   const queryString = query.toString();
 
