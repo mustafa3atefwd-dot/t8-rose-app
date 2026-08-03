@@ -18,6 +18,7 @@ interface IUseRegisterOtpStepProps {
 
 export function useRegisterOtpStep({ email, setStep }: IUseRegisterOtpStepProps) {
   const t = useTranslations('validation');
+  const tAuth = useTranslations('auth');
 
   const { timer, resetTimer } = useCountdownTimer();
 
@@ -30,6 +31,14 @@ export function useRegisterOtpStep({ email, setStep }: IUseRegisterOtpStepProps)
       code: '',
     },
   });
+
+  const getOtpErrorMessage = (message: string) => {
+    if (message.toLowerCase().includes('expired')) {
+      return tAuth('registerOtp.otpExpired');
+    }
+
+    return tAuth('registerOtp.otpInvalid');
+  };
 
   const verifyOtpMutation = useMutation({
     mutationFn: async (values: IOtpStepSchema) => {
@@ -52,6 +61,10 @@ export function useRegisterOtpStep({ email, setStep }: IUseRegisterOtpStepProps)
 
     onSuccess: () => {
       setStep(REGISTER_STEPS.userInfo);
+    },
+
+    onError: () => {
+      form.resetField('code');
     },
   });
 
@@ -87,7 +100,8 @@ export function useRegisterOtpStep({ email, setStep }: IUseRegisterOtpStepProps)
   }
 
   const errorMessage =
-    form.formState.errors.code?.message || (verifyOtpMutation.isError ? verifyOtpMutation.error.message : undefined);
+    form.formState.errors.code?.message ||
+    (verifyOtpMutation.isError ? getOtpErrorMessage(verifyOtpMutation.error.message) : undefined);
 
   return {
     form,

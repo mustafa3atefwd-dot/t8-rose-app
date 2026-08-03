@@ -6,9 +6,8 @@ import { Button } from '@/shared/components/ui/button';
 import { FieldGroup } from '@/shared/components/ui/field';
 import { REGISTER_STEPS } from '@/features/auth/lib/constants';
 import { RegisterStepLayout } from '@/features/auth/layouts';
-import { useRegisterUserInfoStep, useRegisterStepDirection } from '@/features/auth/hooks';
+import { useRegisterUserInfoStep } from '@/features/auth/hooks';
 import { FormError, FormField, PasswordFormField, PhoneFormField, SubmitButton } from '@/shared/components';
-import { RegisterStepTransition } from '@/features/auth/components';
 
 interface IRegisterUserInfoStepProps {
   email: string;
@@ -24,7 +23,6 @@ function RegisterUserInfoStep({ email }: IRegisterUserInfoStepProps) {
     email,
   });
 
-  const direction = useRegisterStepDirection(currentStep);
   const isPasswordStep = currentStep === REGISTER_STEPS.password;
   const subtitle = isPasswordStep ? t('createStrongPassword') : t('tellUsMore');
   const description = isPasswordStep ? t('securePassword') : t('detailsToStart');
@@ -50,90 +48,88 @@ function RegisterUserInfoStep({ email }: IRegisterUserInfoStepProps) {
 
       {/* ===== Form ===== */}
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6">
-        <RegisterStepTransition step={currentStep} direction={direction}>
-          {/* First Step - User Info (FirstName, LastName, Username, Phone) */}
-          {currentStep === REGISTER_STEPS.userInfo && (
-            <>
-              {/* First Name & Last Name Wrapper */}
-              <FieldGroup className="grid grid-cols-2 gap-4">
-                <FormField
-                  name="firstName"
-                  control={form.control}
-                  label={t('firstName')}
-                  placeholder={tInput('firstName')}
-                  required
-                />
+        {/* First Step - User Info (FirstName, LastName, Username, Phone) */}
+        {currentStep === REGISTER_STEPS.userInfo && (
+          <>
+            {/* First Name & Last Name Wrapper */}
+            <FieldGroup className="grid grid-cols-2 gap-4">
+              <FormField
+                name="firstName"
+                control={form.control}
+                label={t('firstName')}
+                placeholder={tInput('firstName')}
+                required
+              />
 
-                <FormField
-                  name="lastName"
-                  control={form.control}
-                  label={t('lastName')}
-                  placeholder={tInput('lastName')}
-                  required
-                />
-              </FieldGroup>
+              <FormField
+                name="lastName"
+                control={form.control}
+                label={t('lastName')}
+                placeholder={tInput('lastName')}
+                required
+              />
+            </FieldGroup>
 
-              {/* Username & Phone Wrapper */}
-              <FieldGroup className="mt-4">
-                <FormField
-                  name="username"
-                  control={form.control}
-                  label={t('username')}
-                  placeholder={tInput('username')}
-                  required
-                />
+            {/* Username & Phone Wrapper */}
+            <FieldGroup className="mt-4">
+              <FormField
+                name="username"
+                control={form.control}
+                label={t('username')}
+                placeholder={tInput('username')}
+                required
+              />
 
-                <PhoneFormField name="phone" control={form.control} label={t('phoneNumber')} />
-              </FieldGroup>
+              <PhoneFormField name="phone" control={form.control} label={t('phoneNumber')} />
+            </FieldGroup>
 
-              {/* Error Message */}
-              {mutation.isError && <FormError message={(mutation.error as Error).message} />}
+            {/* Error Message */}
+            {mutation.isError && <FormError message={(mutation.error as Error).message} />}
 
-              {/* Next Button */}
-              <SubmitButton
-                isLoading={false}
-                loadingText={tButton('loading')}
-                disabled={mutation.isPending}
-                onClick={handleNextStep}
-                type="button"
-              >
-                {tButton('next')}
-                <MoveRight className="size-4.5 rtl:rotate-180" />
-              </SubmitButton>
-            </>
-          )}
+            {/* Next Button */}
+            <SubmitButton
+              isLoading={false}
+              loadingText={tButton('loading')}
+              disabled={mutation.isPending}
+              onClick={handleNextStep}
+              type="button"
+            >
+              {tButton('next')}
+              <MoveRight className="size-4.5 rtl:rotate-180" />
+            </SubmitButton>
+          </>
+        )}
 
-          {/* Second Step - Password */}
-          {currentStep === REGISTER_STEPS.password && (
-            <>
-              {/* Password & Confirm Password Wrapper */}
-              <FieldGroup className="mt-4">
-                <PasswordFormField
-                  name="password"
-                  control={form.control}
-                  label={t('password')}
-                  placeholder={tInput('passwordPlaceholder')}
-                />
+        {/* Second Step - Password */}
+        {currentStep === REGISTER_STEPS.password && (
+          <>
+            {/* Password & Confirm Password Wrapper */}
+            <FieldGroup className="mt-4">
+              <PasswordFormField
+                name="password"
+                control={form.control}
+                label={t('password')}
+                placeholder={tInput('passwordPlaceholder')}
+              />
 
-                <PasswordFormField
-                  name="confirmPassword"
-                  control={form.control}
-                  label={t('confirmPassword')}
-                  placeholder={tInput('passwordPlaceholder')}
-                />
-              </FieldGroup>
+              <PasswordFormField
+                name="confirmPassword"
+                control={form.control}
+                label={t('confirmPassword')}
+                placeholder={tInput('passwordPlaceholder')}
+              />
+            </FieldGroup>
 
-              {/* Error Message */}
-              {mutation.isError && <FormError message={(mutation.error as Error).message} />}
+            {/* Error Message */}
+            {mutation.isError && <FormError message={(mutation.error as Error).message} />}
 
-              {/* Create Account Button */}
-              <SubmitButton isLoading={mutation.isPending} loadingText={tButton('creating')}>
-                {t('createAccount')}
-                <MoveRight className="size-4.5 rtl:rotate-180" />
-              </SubmitButton>
-            </>
-          )}
-        </RegisterStepTransition>
+            {/* Create Account Button */}
+            <SubmitButton isLoading={mutation.isPending} loadingText={tButton('creating')}>
+              {t('createAccount')}
+              <MoveRight className="size-4.5 rtl:rotate-180" />
+            </SubmitButton>
+          </>
+        )}
       </form>
     </RegisterStepLayout>
   );

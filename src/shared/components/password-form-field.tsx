@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Path, Control, Controller, FieldValues } from 'react-hook-form';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { Field, FieldError, FieldLabel } from './ui/field';
 import { InputGroup, InputGroupAddon, InputGroupInput } from './ui/input-group';

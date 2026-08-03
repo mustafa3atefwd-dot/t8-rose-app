@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { Controller } from 'react-hook-form';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslations } from 'next-intl';
@@ -15,7 +15,7 @@ interface IRegisterOtpStepProps {
 }
 
 function RegisterOtpStep({ setStep, email }: IRegisterOtpStepProps) {
-  const t = useTranslations('auth');
+  const t = useTranslations('auth.registerOtp');
 
   const { form, timer, onSubmit, errorMessage, verifyOtpMutation, resendOtpMutation } = useRegisterOtpStep({
     email,
@@ -27,14 +27,14 @@ function RegisterOtpStep({ setStep, email }: IRegisterOtpStepProps) {
   return (
     <RegisterStepLayout headingId="register-otp-heading">
       {/* ===== Header ===== */}
-      <RegisterStepLayout.Title id="register-otp-heading">{t('createAccount')}</RegisterStepLayout.Title>
+      <RegisterStepLayout.Title id="register-otp-heading">{t('title')}</RegisterStepLayout.Title>
 
       {/* ===== Subtitle ===== */}
-      <RegisterStepLayout.Subtitle>{t('enterOtpCode')}</RegisterStepLayout.Subtitle>
+      <RegisterStepLayout.Subtitle>{t('subtitle')}</RegisterStepLayout.Subtitle>
 
       {/* ===== Description ===== */}
       <RegisterStepLayout.Description>
-        {t('otpSentTo')} {email}{' '}
+        {t('sentTo')} {email}{' '}
         <button
           type="button"
           className="cursor-pointer font-medium text-blue-600 hover:underline"
@@ -51,11 +51,11 @@ function RegisterOtpStep({ setStep, email }: IRegisterOtpStepProps) {
           name="code"
           render={({ field }) => (
             <InputOTP maxLength={6} value={field.value} onChange={field.onChange}>
-              {Array.from({ length: 6 }).map((_, index) => (
-                <InputOTPGroup key={index} className="mt-11 mb-7.5">
-                  <InputOTPSlot index={index} aria-invalid={!!errorMessage} />
-                </InputOTPGroup>
-              ))}
+              <InputOTPGroup className="mt-11 mb-7.5">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <InputOTPSlot key={index} index={index} aria-invalid={!!errorMessage} className="mx-1.25" />
+                ))}
+              </InputOTPGroup>
             </InputOTP>
           )}
         />
