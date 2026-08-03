@@ -78,18 +78,20 @@ function PhoneInput({
 
   const [national, setNational] = React.useState(defaultValue);
 
-  React.useEffect(() => {
-    if (!value) return;
+  // Sync from the controlled `value` prop during render rather than in an
+  // effect, so the input never paints a stale number first.
+  const [previousValue, setPreviousValue] = React.useState(value);
 
-    const nextCountry = countries.find((c) => value.startsWith(c.dial));
+  if (value !== previousValue) {
+    setPreviousValue(value);
+
+    const nextCountry = value ? countries.find((c) => value.startsWith(c.dial)) : undefined;
 
     if (nextCountry) {
       setCountry(nextCountry);
-
-      const nationalNumber = value.replace(nextCountry.dial, '');
-      setNational(nationalNumber);
+      setNational(value.replace(nextCountry.dial, ''));
     }
-  }, [value, countries]);
+  }
 
   const emit = (next: Country, nextNational: string) => {
     const digits = nextNational.replace(/\D/g, '');

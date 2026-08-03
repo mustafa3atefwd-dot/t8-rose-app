@@ -6,6 +6,20 @@
     "Not Found page ": "Not Found Page"
   },
   "home": {
+    "header": {
+      "logoAlt": "Rose logo",
+      "inputPlaceholder": "Search for a gift...",
+      "login": "Login",
+      "favorite": "Favorites",
+      "cart": "Cart",
+      "notifications": "Notifications",
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact Us",
+      "about": "About Us"
+    },
     "about": {
       "label": "About",
       "title": "Delivering the <highlight1>Finest</highlight1> Gift Boxes for Your <highlight2>Special</highlight2> Moments",
@@ -50,20 +64,15 @@
         "february15": "February 15, 2025"
       }
     },
-    "bestSelling": {
-      "label": "Best Selling",
-      "title": "<accent>Check Out</accent> What Everyone’s <accent>Buying</accent> Right Now",
-      "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-      "productCarousel": {
-        "error": "Failed to load products. Try again.",
-        "retry": "Retry",
-        "empty": "No products yet."
-      }
-    },
-    "mostPopular": {
-      "label": "Most Popular"
-    }
+
+    "mostPopular": "Most Popular",
+    "viewMore": "View More",
+    "bestSelling": "Best Selling",
+    "bestSellingHeading": "<accent>Check Out</accent> What Everyone’s <accent>Buying</accent> Right Now",
+    "bestSellingDescription": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+    "Explore gifts": "Explore Gifts"
   },
+
 
   "productDetails": {
     "stock": "{count} units in stock",
@@ -137,8 +146,8 @@
       "rememberMe": "Remember me",
       "button": "Login",
       "loading": "Logging in...",
-      "noAccount": "Don't have an account?",
-      "register": "Register",
+      "noAccount": "Don’t have an account yet?",
+      "createNow": "Create one now!",
       "showPassword": "Show password",
       "hidePassword": "Hide password",
       "invalidCredentials": "Invalid username or password",
@@ -159,17 +168,24 @@
     "invalidPhone": "Invalid phone number format",
     "invalidEgyptPhone": "Invalid Egyptian mobile number",
     "invalidGender": "Please select a valid gender",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
     "emailRequired": "Your email is required",
     "newPasswordRequired": "New password is required",
-    "passwordMin": "Password must be at least 8 characters",
     "passwordUppercase": "Password must contain at least one uppercase letter",
     "passwordLowercase": "Password must contain at least one lowercase letter",
     "passwordNumber": "Password must contain at least one number",
     "passwordSpecialCharacter": "Password must contain at least one special character",
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
-    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
-    "passwordMatch": "Passwords do not match"
+    "passwordMatch": "Passwords do not match",
+
+    "review": {
+      "productIdRequired": "Product ID is required",
+      "headlineRequired": "Review title is required",
+      "ratingRequired": "Please select a rating",
+      "ratingInvalid": "Rating must be between 1 and 5"
+    }
   },
   "error": {
     "networkError": "Something went wrong. Please try again."
@@ -246,7 +262,8 @@
     "creating": "Creating...",
     "viewAll": "View All",
     "viewMore": "View More",
-    "exploreGifts": "Explore gifts"
+    "exploreGifts": "Explore gifts",
+    "addReview": "Add Review"
   },
   "checkbox": {
     "title": "Checkbox",
@@ -302,6 +319,18 @@
       "wishlist": "Add to wishlist",
       "quickView": "Quick view",
       "rating": "{rating} out of 5"
+    },
+    "filters": {
+      "category": "Category",
+      "occasion": "Occasion",
+      "rating": "Rating",
+      "price": "Price",
+      "from": "from",
+      "to": "to",
+      "reset": "Reset",
+      "resetAll": "Reset All",
+      "noResults": "No products match the selected filters.",
+      "ratingLabel": "{rating} stars & up"
     }
   },
   "forgotPw": {
@@ -326,21 +355,6 @@
       "contact": "Need help?",
       "toContact": "Contact us"
     }
-  },
-  "productReview": {
-    "title": "Product Reviews",
-    "subTitle": "General rating:",
-    "ratings": "ratings",
-    "noReviews": "No reviews yet."
-  },
-
-  "notifications": {
-    "title": "Notifications",
-    "markAllRead": "Mark all as read",
-    "clearAll": "Clear all",
-    "markRead": "Mark as read",
-    "delete": "Delete",
-    "empty": "No notifications yet"
   },
   "hero": {
     "prevSlide": "Previous slide",
@@ -393,5 +407,11 @@
         "desc": "Contact us at any time"
       }
     }
+  },
+  "productReview": {
+    "title": "Product Reviews",
+    "subTitle": "General rating:",
+    "ratings": "ratings",
+    "noReviews": "No reviews yet."
   }
 }

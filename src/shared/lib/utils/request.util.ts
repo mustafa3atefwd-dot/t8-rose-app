@@ -1,7 +1,7 @@
 // shared/lib/request.util.ts
 
-import { IApiResponse } from '@/shared/lib/types/api';
-import { ApiError } from './error.util';
+import { IApiResponse } from "../types/api";
+import { ApiError } from "./error.util";
 
 /**
  * Generic API request handler.
@@ -19,7 +19,11 @@ export const apiRequest = async <TResponse>(input: RequestInfo, init?: RequestIn
 
   // HTTP + business logic failure fallback
   if (!response.ok || !data.status) {
-    throw new ApiError(data.message || 'Request failed', response.status, data.code);
+    throw new ApiError(
+      data.message || "Request failed",
+      response.status,
+      data.code,
+    );
   }
 
   return data as TResponse;

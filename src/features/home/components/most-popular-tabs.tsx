@@ -15,8 +15,7 @@ interface MostPopularTabsProps {
 }
 
 const MostPopularTabs = ({ occasionTabs }: MostPopularTabsProps) => {
-  const t = useTranslations('home.mostPopular');
-  const tButton = useTranslations('button');
+  const t = useTranslations('home');
   const [activeOccasionId, setActiveOccasionId] = useState(occasionTabs[0].id);
   const products = occasionTabs.find((occasion) => occasion.id === activeOccasionId)?.products ?? [];
 
@@ -47,7 +46,7 @@ const MostPopularTabs = ({ occasionTabs }: MostPopularTabsProps) => {
 
       <Button className="capitalize" asChild variant="link">
         <Link href={`/products?occasionId=${activeOccasionId}&sortBy=mostPopular`}>
-          {tButton('viewMore')} <ArrowRight />
+          {t('viewMore')} <ArrowRight />
         </Link>
       </Button>
     </div>

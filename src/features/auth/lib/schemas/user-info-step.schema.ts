@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { USER_GENDERS } from '../constants/user.constant';
-import { isValidPhoneNumber, parsePhoneNumberFromString } from 'libphonenumber-js/max';
+import { isValidPhoneNumber } from 'libphonenumber-js/max';
 
 /**
  * Validation schema for user registration info step

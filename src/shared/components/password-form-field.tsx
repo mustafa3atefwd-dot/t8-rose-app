@@ -72,7 +72,7 @@ function PasswordFormField<T extends FieldValues>({
             {hasForgotPassword && (
               <Link
                 href="/reset-password"
-                className="ml-auto block max-w-fit text-sm font-medium text-blue-600 transition-colors hover:text-blue-500"
+                className="text-ds-text-primary hover:text-ds-text-primary/90 ml-auto block max-w-fit text-sm font-medium transition-colors"
               >
                 {tAuth('forgotPassword')}
               </Link>
