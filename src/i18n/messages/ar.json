@@ -6,6 +6,20 @@
     "Go Back home": "الرجوع للصفحه الرئيسيه"
   },
   "home": {
+    "header": {
+      "logoAlt": "شعار روز",
+      "inputPlaceholder": "ابحث عن هدية...",
+      "login": "تسجيل الدخول",
+      "favorite": "المفضلة",
+      "cart": "سلة التسوق",
+      "notifications": "الإشعارات",
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "contact": "تواصل معنا",
+      "about": "من نحن"
+    },
     "about": {
       "label": "من نحن",
       "title": "نقدم <highlight1>أفضل</highlight1> صناديق الهدايا لأجمل <highlight2>مناسباتك</highlight2>",

@@ -6,6 +6,20 @@
     "Not Found page ": "Not Found Page"
   },
   "home": {
+    "header": {
+      "logoAlt": "Rose logo",
+      "inputPlaceholder": "Search for a gift...",
+      "login": "Login",
+      "favorite": "Favorites",
+      "cart": "Cart",
+      "notifications": "Notifications",
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact Us",
+      "about": "About Us"
+    },
     "about": {
       "label": "About",
       "title": "Delivering the <highlight1>Finest</highlight1> Gift Boxes for Your <highlight2>Special</highlight2> Moments",

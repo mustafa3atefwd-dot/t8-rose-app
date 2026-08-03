@@ -9,7 +9,7 @@ interface ClassNameProps{
 }
 
 export default function SearchInput({className}: ClassNameProps) {
-    const t = useTranslations('homeHeader')
+    const t = useTranslations('home.header')
 
   const { search, setFilter } = useProductFilters();
 

@@ -9,7 +9,7 @@ import SearchInput from "./search-input";
 
 
 export default function Header() {
-    const t = useTranslations('homeHeader')
+    const t = useTranslations('home.header')
 
     return <>
         {/* parent */}
@@ -18,7 +18,7 @@ export default function Header() {
             <div className="h-22 pt-4.5 pr-9 pb-4.5 pl-9 gap-4 flex items-center">
                 {/* image */}
 
-                        <Image className="w-20.5 h-20" src={roseLogo} alt="" width={200} height={200}/>
+                        <Image className="w-20.5 h-20" src={roseLogo} alt={t('logoAlt')} width={200} height={200}/>
 
                 {/* search */}
                 <div dir="ltr" className="group relative flex items-center max-sm:w-20 md:w-3/5">
@@ -34,9 +34,9 @@ export default function Header() {
 
                     {/* icons */}
                     <div className="w-31 h-13 border-r pr-4 pl-4 gap-2.5 flex items-center rtl:mr-7">
-                        <Link href={'/favorite'}><Heart/></Link>
-                        <Link href={'/cart'}><ShoppingCart/></Link>
-                        <Link href={'/notifications'}><Bell/></Link>
+                        <Link href={'/favorite'} aria-label={t('favorite')}><Heart/></Link>
+                        <Link href={'/cart'} aria-label={t('cart')}><ShoppingCart/></Link>
+                        <Link href={'/notifications'} aria-label={t('notifications')}><Bell/></Link>
                     </div>
 
                     {/* language */}
