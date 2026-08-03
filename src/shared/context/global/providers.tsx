@@ -13,13 +13,13 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <NextIntlClientProvider>
         <ThemeProvider>
           <NextAuthProvider>
-        <GuestSyncProvider>
-      {children}
-      <Toaster/>
-    </GuestSyncProvider>
-        </NextAuthProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </ThemeProvider>
+            <GuestSyncProvider>
+              {children}
+              <Toaster/>
+            </GuestSyncProvider>
+          </NextAuthProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ThemeProvider>
       </NextIntlClientProvider>
     </ReactQueryProvider>
   );
