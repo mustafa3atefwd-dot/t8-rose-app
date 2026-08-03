@@ -1,31 +1,57 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-interface UseCountdownTimerProps {
-  initialSeconds?: number;
-}
+const OTP_RESEND_COOLDOWN = 60;
+const OTP_RESEND_END_TIME_KEY = 'otp-resend-end-time';
 
-export function useCountdownTimer({
-  initialSeconds = 60,
-}: UseCountdownTimerProps = {}) {
-  const [timer, setTimer] = useState(initialSeconds);
+export function useCountdownTimer() {
+  const [timer, setTimer] = useState(0);
 
-  // Start countdown
+  /**
+   * Calculates the remaining cooldown time from the persisted end timestamp.
+   * The timestamp allows the cooldown to survive page refreshes.
+   */
+  const calculateRemainingTime = useCallback(() => {
+    const endTime = localStorage.getItem(OTP_RESEND_END_TIME_KEY);
+
+    if (!endTime) {
+      return 0;
+    }
+
+    const remainingTime = Math.ceil((Number(endTime) - Date.now()) / 1000);
+
+    if (remainingTime <= 0) {
+      localStorage.removeItem(OTP_RESEND_END_TIME_KEY);
+      return 0;
+    }
+
+    return remainingTime;
+  }, []);
+
   useEffect(() => {
-    if (timer === 0) return;
+    const updateTimer = () => {
+      setTimer(calculateRemainingTime());
+    };
 
-    const interval = setInterval(() => {
-      setTimer((prev) => prev - 1);
-    }, 1000);
+    updateTimer();
+
+    const interval = setInterval(updateTimer, 1000);
 
     return () => clearInterval(interval);
-  }, [timer]);
+  }, [calculateRemainingTime]);
 
-  // Reset timer to initial value
+  /**
+   * Starts a new cooldown and persists its end time
+   * so the timer cannot be bypassed by refreshing the page.
+   */
   const resetTimer = useCallback(() => {
-    setTimer(initialSeconds);
-  }, [initialSeconds]);
+    const endTime = Date.now() + OTP_RESEND_COOLDOWN * 1000;
+
+    localStorage.setItem(OTP_RESEND_END_TIME_KEY, endTime.toString());
+
+    setTimer(OTP_RESEND_COOLDOWN);
+  }, []);
 
   return {
     timer,

@@ -1,17 +1,13 @@
-// features/auth/lib/request.ts
+// shared/lib/request.util.ts
 
-import { IApiResponse } from "../types/api";
-import { notFound } from "next/navigation";
-import { ApiError } from "./error.util";
+import { IApiResponse } from '@/shared/lib/types/api';
+import { ApiError } from './error.util';
 
 /**
- * Generic API request handler for auth endpoints.
+ * Generic API request handler.
  * Handles JSON parsing + basic error normalization.
  */
-export const apiRequest = async <TResponse>(
-  input: RequestInfo,
-  init?: RequestInit,
-): Promise<TResponse> => {
+export const apiRequest = async <TResponse>(input: RequestInfo, init?: RequestInit): Promise<TResponse> => {
   const response = await fetch(input, init);
 
   const data: IApiResponse = await response.json();
@@ -23,13 +19,7 @@ export const apiRequest = async <TResponse>(
 
   // HTTP + business logic failure fallback
   if (!response.ok || !data.status) {
-    console.log({ data });
-
-    throw new ApiError(
-      data.message || "Request failed",
-      response.status,
-      data.code,
-    );
+    throw new ApiError(data.message || 'Request failed', response.status, data.code);
   }
 
   return data as TResponse;

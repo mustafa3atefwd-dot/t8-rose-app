@@ -64,52 +64,7 @@
       "label": "Most Popular"
     }
   },
-  "home": {
-    "about": {
-      "label": "About",
-      "title": "Delivering the <highlight1>Finest</highlight1> Gift Boxes for Your <highlight2>Special</highlight2> Moments",
-      "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress.",
-      "discover": "Discover",
-      "images": {
-        "mainAlt": "Premium gift boxes",
-        "secondAlt": "Gift collection",
-        "thirdAlt": "Luxury packaging"
-      },
-      "features": {
-        "competitive": "Competitive Prices & Easy Shopping",
-        "quality": "Premium Quality & Elegant Packaging",
-        "occasion": "Perfect for Every Occasion",
-        "delivery": "Fast & Reliable Delivery"
-      }
-    },
-    "gallery": {
-      "label": "Gallery",
-      "title": "Check Out Our Wonderful Gallery"
-    },
-    "trustedCompanies": {
-      "title": "Trusted by over <count>4.5k+</count> companies"
-    },
-    "testimonials": {
-      "label": "Testimonials",
-      "title": "Real Words from Happy Customers",
-      "items": {
-        "jakeReview": "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
-        "tylerReview": "Customer service is top-notch and the flowers last longer than any others I've bought. Highly recommend!",
-        "maxReview": "The team truly cares about every order. I always feel confident when I buy flowers from here.",
-        "sophiaReview": "Absolutely beautiful flowers and amazing attention to detail. Every arrangement feels special and unique!",
-        "danielReview": "The flowers arrived fresh and beautifully arranged. Great experience from ordering to delivery!",
-        "emmaReview": "Wonderful service and stunning bouquets. This shop has become my favorite place for flowers."
-      },
-      "dates": {
-        "january12": "January 12, 2025",
-        "january18": "January 18, 2025",
-        "january24": "January 24, 2025",
-        "february02": "February 2, 2025",
-        "february10": "February 10, 2025",
-        "february15": "February 15, 2025"
-      }
-    }
-  },
+
   "productDetails": {
     "stock": "{count} units in stock",
     "rating": "Rating: {rating}/5",
@@ -145,17 +100,23 @@
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
-    "createAccount": "Create Account",
-    "enterOtpCode": "Enter the OTP Code",
-    "otpSentTo": "We have sent a 6-digit code to:",
-    "edit": "Edit",
-    "requestCodeIn": "You can request another code in: {timer}s",
-    "resending": "Resending...",
-    "sendNewCode": "Send a new code",
-    "verifying": "Verifying...",
-    "verifyCode": "Verify Code",
-    "needHelp": "Need help?",
-    "contactUs": "Contact Us",
+
+    "registerOtp": {
+      "title": "Create Account",
+      "subtitle": "Enter the OTP Code",
+      "sentTo": "We have sent a 6-digit code to:",
+      "edit": "Edit",
+      "requestCodeIn": "You can request another code in: {timer}s",
+      "resending": "Resending...",
+      "sendNewCode": "Send a new code",
+      "verifying": "Verifying...",
+      "verifyCode": "Verify Code",
+      "needHelp": "Need help?",
+      "contactUs": "Contact Us",
+      "otpInvalid": "The verification code is incorrect.",
+      "otpExpired": "The verification code has expired."
+    },
+
     "createStrongPassword": "Create a strong password",
     "tellUsMore": "Tell us more about you",
     "securePassword": "Choose a secure password to protect your account",
@@ -198,16 +159,16 @@
     "invalidPhone": "Invalid phone number format",
     "invalidEgyptPhone": "Invalid Egyptian mobile number",
     "invalidGender": "Please select a valid gender",
-    "passwordMin": "Password must be at least 8 characters",
-    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
     "emailRequired": "Your email is required",
     "newPasswordRequired": "New password is required",
+    "passwordMin": "Password must be at least 8 characters",
     "passwordUppercase": "Password must contain at least one uppercase letter",
     "passwordLowercase": "Password must contain at least one lowercase letter",
     "passwordNumber": "Password must contain at least one number",
     "passwordSpecialCharacter": "Password must contain at least one special character",
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
+    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
     "passwordMatch": "Passwords do not match"
   },
   "error": {
@@ -373,32 +334,14 @@
     "noReviews": "No reviews yet."
   },
 
-  "homeHeader": {
-    "login": "Login",
-    "home": "Home",
-    "products": "Products",
-    "categories": "Categories",
-    "occasions": "Occasions",
-    "contact": "Contact",
-    "about": "About",
-    "inputPlaceholder": "What awesome gift are you looking for?",
-    "deliverTo": "Deliver to:",
-    "userMenu": {
-      "welcome": "Welcome",
-      "account": "Account",
-      "addresses": "Addresses",
-      "order": "Orders",
-      "dashboard": "Dashboard",
-      "logout": "Logout"
-    }
-  },
   "notifications": {
     "title": "Notifications",
-    "markAllRead" : "Mark all as read",
+    "markAllRead": "Mark all as read",
     "clearAll": "Clear all",
     "markRead": "Mark as read",
     "delete": "Delete",
     "empty": "No notifications yet"
+  },
   "hero": {
     "prevSlide": "Previous slide",
     "nextSlide": "Next slide",
