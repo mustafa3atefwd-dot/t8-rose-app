@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Path, Control, Controller, FieldValues } from 'react-hook-form';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { Field, FieldError, FieldLabel } from './ui/field';
 import { InputGroup, InputGroupAddon, InputGroupInput } from './ui/input-group';
@@ -72,7 +72,7 @@ function PasswordFormField<T extends FieldValues>({
             {hasForgotPassword && (
               <Link
                 href="/reset-password"
-                className="ml-auto block max-w-fit text-sm font-medium text-blue-600 transition-colors hover:text-blue-500"
+                className="text-ds-text-primary hover:text-ds-text-primary/90 ml-auto block max-w-fit text-sm font-medium transition-colors"
               >
                 {tAuth('forgotPassword')}
               </Link>

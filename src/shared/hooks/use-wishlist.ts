@@ -1,0 +1,113 @@
+'use client';
+
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { addToWishlistAction, removeFromWishlistAction } from '../actions/wishlist-actions';
+import { WishlistItem } from '../lib/types/product';
+
+const GUEST_WISHLIST_KEY = 'guest_wishlist_items';
+
+export function useWishlist() {
+  const { status } = useSession();
+  const isLoggedIn = status === 'authenticated';
+  const queryClient = useQueryClient();
+
+  const [guestWishlist, setGuestWishlist] = useState<WishlistItem[]>([]);
+
+  // 1. Initialize guest wishlist state from localStorage
+  useEffect(() => {
+    if (!isLoggedIn) {
+      const stored = localStorage.getItem(GUEST_WISHLIST_KEY);
+      if (stored) {
+        try {
+          setGuestWishlist(JSON.parse(stored));
+        } catch (error) {
+          console.error('Failed to parse guest wishlist:', error);
+          setGuestWishlist([]);
+        }
+      }
+    }
+  }, [isLoggedIn]);
+
+  const saveGuestWishlist = (items: WishlistItem[]) => {
+    setGuestWishlist(items);
+    localStorage.setItem(GUEST_WISHLIST_KEY, JSON.stringify(items));
+  };
+
+  // 2. Fetch Server Wishlist for Authenticated Users
+  const { data: serverWishlist = [], isLoading: isWishlistLoading } = useQuery<WishlistItem[]>({
+    queryKey: ['wishlist'],
+    queryFn: async () => {
+      const res = await fetch('/api/wishlist');
+      if (!res.ok) return [];
+      const data = await res.json();
+      return data.payload?.wishlistItems || [];
+    },
+    enabled: isLoggedIn,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const wishlistItems = isLoggedIn ? serverWishlist : guestWishlist;
+
+  // 3. Mutations for Authenticated Users
+  const addMutation = useMutation({
+    mutationFn: (productId: string) => addToWishlistAction(productId),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['wishlist'] }),
+  });
+
+  const removeMutation = useMutation({
+    mutationFn: (wishlistItemId: string) => removeFromWishlistAction(wishlistItemId),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['wishlist'] }),
+  });
+
+  const isWishlisted = (productId: string) => wishlistItems.some((item) => item.productId === productId);
+
+  // 4. Unified Toggle Wishlist Handler
+  const toggleWishlist = async (productId: string, productDetails?: WishlistItem['product']) => {
+    if (isLoggedIn) {
+      const existingItem = serverWishlist.find((item) => item.productId === productId);
+      if (existingItem) {
+        await removeMutation.mutateAsync(existingItem.id);
+      } else {
+        await addMutation.mutateAsync(productId);
+      }
+    } else {
+      let currentGuestWishlist: WishlistItem[] = [];
+      const stored = localStorage.getItem(GUEST_WISHLIST_KEY);
+      if (stored) {
+        try {
+          currentGuestWishlist = JSON.parse(stored);
+        } catch {
+          currentGuestWishlist = [];
+        }
+      }
+
+      const existingItem = currentGuestWishlist.find((item) => item.productId === productId);
+      let updatedGuestWishlist: WishlistItem[];
+
+      if (existingItem) {
+        updatedGuestWishlist = currentGuestWishlist.filter((item) => item.productId !== productId);
+      } else {
+        if (!productDetails) return;
+
+        const newItem: WishlistItem = {
+          id: `guest-wish-${Date.now()}`,
+          productId,
+          product: productDetails,
+        };
+        updatedGuestWishlist = [...currentGuestWishlist, newItem];
+      }
+
+      saveGuestWishlist(updatedGuestWishlist);
+    }
+  };
+
+  return {
+    wishlistItems,
+    isWishlisted,
+    toggleWishlist,
+    uniqueItemsCount: wishlistItems.length,
+    isLoading: isWishlistLoading || addMutation.isPending || removeMutation.isPending,
+  };
+}

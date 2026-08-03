@@ -5,6 +5,83 @@
     "Go Back home": "Go Back home",
     "Not Found page ": "Not Found Page"
   },
+  "home": {
+    "about": {
+      "label": "About",
+      "title": "Delivering the <highlight1>Finest</highlight1> Gift Boxes for Your <highlight2>Special</highlight2> Moments",
+      "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress.",
+      "discover": "Discover",
+      "images": {
+        "mainAlt": "Premium gift boxes",
+        "secondAlt": "Gift collection",
+        "thirdAlt": "Luxury packaging"
+      },
+      "features": {
+        "competitive": "Competitive Prices & Easy Shopping",
+        "quality": "Premium Quality & Elegant Packaging",
+        "occasion": "Perfect for Every Occasion",
+        "delivery": "Fast & Reliable Delivery"
+      }
+    },
+    "gallery": {
+      "label": "Gallery",
+      "title": "Check Out Our Wonderful Gallery"
+    },
+    "trustedCompanies": {
+      "title": "Trusted by over <count>4.5k+</count> companies"
+    },
+    "testimonials": {
+      "label": "Testimonials",
+      "title": "Real Words from Happy Customers",
+      "items": {
+        "jakeReview": "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
+        "tylerReview": "Customer service is top-notch and the flowers last longer than any others I've bought. Highly recommend!",
+        "maxReview": "The team truly cares about every order. I always feel confident when I buy flowers from here.",
+        "sophiaReview": "Absolutely beautiful flowers and amazing attention to detail. Every arrangement feels special and unique!",
+        "danielReview": "The flowers arrived fresh and beautifully arranged. Great experience from ordering to delivery!",
+        "emmaReview": "Wonderful service and stunning bouquets. This shop has become my favorite place for flowers."
+      },
+      "dates": {
+        "january12": "January 12, 2025",
+        "january18": "January 18, 2025",
+        "january24": "January 24, 2025",
+        "february02": "February 2, 2025",
+        "february10": "February 10, 2025",
+        "february15": "February 15, 2025"
+      }
+    },
+
+    "mostPopular": "Most Popular",
+    "viewMore": "View More",
+    "bestSelling": "Best Selling",
+    "bestSellingHeading": "<accent>Check Out</accent> What Everyone’s <accent>Buying</accent> Right Now",
+    "bestSellingDescription": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+    "Explore gifts": "Explore Gifts"
+  },
+  "productDetails": {
+    "stock": "{count} units in stock",
+    "rating": "Rating: {rating}/5",
+    "ratings": "({count, plural, one {# rating} other {# ratings}})",
+    "description": "Product description",
+    "noDescription": "No description available.",
+    "addToCart": "Add to Cart",
+    "addToWishlist": "Add to wishlist",
+    "galleryLabel": "Product images",
+    "imageLabel": "Product image",
+
+    "relatedProducts": {
+      "title": "Related Products"
+    },
+
+    "writeReview": "Write a Review",
+
+    "review": {
+      "ratingLabel": "Your Rating",
+      "ratingValue": "Rate {rating} out of 5",
+      "headlineLabel": "Review Title",
+      "contentLabel": "Review"
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
@@ -25,12 +102,10 @@
     "welcomeBack": "Welcome back!",
     "joinFamily": "Become part of our family!",
     "forgotPassword": "Forgot your password?",
-
     "registerEmail": "Register with Email",
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
-
     "createAccount": "Create Account",
     "enterOtpCode": "Enter the OTP Code",
     "otpSentTo": "We have sent a 6-digit code to:",
@@ -42,7 +117,6 @@
     "verifyCode": "Verify Code",
     "needHelp": "Need help?",
     "contactUs": "Contact Us",
-
     "createStrongPassword": "Create a strong password",
     "tellUsMore": "Tell us more about you",
     "securePassword": "Choose a secure password to protect your account",
@@ -63,8 +137,8 @@
       "rememberMe": "Remember me",
       "button": "Login",
       "loading": "Logging in...",
-      "noAccount": "Don't have an account?",
-      "register": "Register",
+      "noAccount": "Don’t have an account yet?",
+      "createNow": "Create one now!",
       "showPassword": "Show password",
       "hidePassword": "Hide password",
       "invalidCredentials": "Invalid username or password",
@@ -76,7 +150,7 @@
   },
   "validation": {
     "required": "This field is required",
-    "invalidEmail": "Invalid email address",
+    "invalidEmail": "Please enter a valid email address",
     "otpLength": "OTP must be 6 digits",
     "otpDigits": "OTP must contain only numbers",
     "firstName": "First name must be at least 2 characters",
@@ -86,19 +160,23 @@
     "invalidEgyptPhone": "Invalid Egyptian mobile number",
     "invalidGender": "Please select a valid gender",
     "passwordMin": "Password must be at least 8 characters",
-    "passwordWeak": "Password must contain uppercase, lowercase, number and special character",
+    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
     "emailRequired": "Your email is required",
-    "invalidEmail": "Please enter a valid email address",
     "newPasswordRequired": "New password is required",
-    "passwordMin": "Password must be at least 8 characters",
     "passwordUppercase": "Password must contain at least one uppercase letter",
     "passwordLowercase": "Password must contain at least one lowercase letter",
     "passwordNumber": "Password must contain at least one number",
     "passwordSpecialCharacter": "Password must contain at least one special character",
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
-    "passwordWeak": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
-    "passwordMatch": "Passwords do not match"
+    "passwordMatch": "Passwords do not match",
+
+    "review": {
+      "productIdRequired": "Product ID is required",
+      "headlineRequired": "Review title is required",
+      "ratingRequired": "Please select a rating",
+      "ratingInvalid": "Rating must be between 1 and 5"
+    }
   },
   "error": {
     "networkError": "Something went wrong. Please try again."
@@ -139,10 +217,12 @@
       "password": "Enter your password",
       "phone": "Phone number",
       "passwordPlaceholder": "********",
-
       "firstName": "Zoe",
       "lastName": "Jonathan",
-      "username": "zoe123"
+      "username": "zoe123",
+
+      "reviewHeadline": "Enter review title",
+      "reviewContent": "What do you think of this product?"
     },
     "states": {
       "title": "States",
@@ -170,7 +250,8 @@
     "iconOnly": "Icon only",
     "loadingDemo": "Click to see the loading state",
     "next": "Next",
-    "creating": "Creating..."
+    "creating": "Creating...",
+    "addReview": "Add Review"
   },
   "checkbox": {
     "title": "Checkbox",
@@ -218,20 +299,6 @@
       "ratingLabel": "{rating} stars & up"
     }
   },
-  "home": {
-    "bestSelling": "Best Selling",
-    "bestSellingHeading": "<accent>Check Out</accent> What Everyone’s <accent>Buying</accent> Right Now",
-    "bestSellingDescription": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-    "mostPopular": "Most Popular",
-    "viewAll": "View All",
-    "Explore gifts": "Explore gifts",
-    "viewMore": "View More",
-    "productCarousel": {
-      "error": "Failed to load products. Try again.",
-      "retry": "Retry",
-      "empty": "No products yet."
-    }
-  },
   "forgotPw": {
     "step1": {
       "title": "Forgot Password?",
@@ -269,5 +336,64 @@
 
   "currency":{
     "EGP": "EGP"
+  },
+  
+  "hero": {
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "goToSlide": "Go to slide {number}",
+    "shopNow": "Shop Now",
+    "buying": "I'm buying!",
+    "startingFrom": "Starting from 10.99 EGP",
+    "specialGiftsTitle": "Special Gifts For The People You Love",
+    "slides": {
+      "flowers": {
+        "title": "Say It with Flowers",
+        "desc": "Elegant gifts for every special moment."
+      },
+      "chocolates": {
+        "title": "Sweetest Expressions",
+        "desc": "Handcrafted chocolates made with love."
+      },
+      "gifts": { "title": "Unforgettable Surprises", "desc": "Beautifully curated gift boxes for any occasion." }
+    },
+    "categories": {
+      "wedding": {
+        "tag": "Wedding",
+        "title": "Celebrate Her Forever with a Gift She'll Always Remember"
+      },
+      "engagement": {
+        "tag": "Engagement",
+        "title": "Honor the Beginning of a Beautiful Journey Together"
+      },
+      "anniversary": {
+        "tag": "Anniversary",
+        "title": "Mark Every Year of Love with a Meaningful Surprise"
+      }
+    },
+    "features": {
+      "delivery": {
+        "title": "Free Delivery",
+        "desc": "For orders above 120 EGP"
+      },
+      "refund": {
+        "title": "Get Refund",
+        "desc": "Refunds within 30 days"
+      },
+      "payment": {
+        "title": "Safe Payment",
+        "desc": "100% Secure Payment"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "desc": "Contact us at any time"
+      }
+    }
+  },
+  "productReview": {
+    "title": "Product Reviews",
+    "subTitle": "General rating:",
+    "ratings": "ratings",
+    "noReviews": "No reviews yet."
   }
 }
