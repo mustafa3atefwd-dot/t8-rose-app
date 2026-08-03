@@ -9,7 +9,7 @@ export const revalidate = 60;
 const HomePage = () => {
   return (
     <>
-      <HomepageHero />
+      <HomepageHero/>
       <BestSelling />
       <MostPopular />
       <AboutSection />

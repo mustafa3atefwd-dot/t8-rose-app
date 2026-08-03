@@ -65,6 +65,7 @@
       }
     },
 
+
     "label": "Most Popular",
     "mostPopular": "Most Popular",
     "viewMore": "View More",
@@ -91,6 +92,7 @@
       "dashboard": "Dashboard",
       "logout": "Log out"
     }
+
   },
 
 
