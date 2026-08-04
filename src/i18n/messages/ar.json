@@ -100,6 +100,57 @@
     "imageLabel": "صورة المنتج"
   },
 
+  "checkout": {
+    "title": "إتمام الطلب",
+    "addressBook": {
+      "title": "عنوان التوصيل",
+      "addAddress": "إضافة عنوان",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "setPrimary": "تعيين كعنوان أساسي",
+      "primaryBadge": "أساسي",
+      "selectAddress": "اختيار هذا العنوان",
+      "empty": {
+        "title": "لا توجد عناوين محفوظة بعد",
+        "description": "أضف عنوانًا للمتابعة في طلبك."
+      },
+      "loadError": "تعذر تحميل عناوينك.",
+      "deleteSuccess": "تم حذف العنوان.",
+      "deleteError": "فشل حذف العنوان.",
+      "setPrimarySuccess": "تم تحديث العنوان الأساسي.",
+      "setPrimaryError": "فشل تحديث العنوان الأساسي."
+    },
+    "addressForm": {
+      "addTitle": "إضافة عنوان",
+      "editTitle": "تعديل العنوان",
+      "labels": {
+        "title": "التسمية",
+        "city": "المدينة",
+        "street": "عنوان الشارع",
+        "phone": "رقم الهاتف",
+        "isPrimary": "تعيين كعنوان أساسي"
+      },
+      "placeholders": {
+        "title": "مثال: المنزل، العمل",
+        "city": "مثال: القاهرة",
+        "street": "مثال: 123 شارع الرئيسي، شقة 4"
+      },
+      "cancel": "إلغاء",
+      "save": "حفظ العنوان",
+      "saving": "جارٍ الحفظ...",
+      "createSuccess": "تمت إضافة العنوان.",
+      "updateSuccess": "تم تحديث العنوان."
+    },
+    "orderSummary": {
+      "title": "ملخص الطلب",
+      "empty": "سلتك فارغة.",
+      "quantity": "الكمية {count}",
+      "total": "الإجمالي",
+      "placeOrder": "إتمام الطلب",
+      "comingSoon": "الدفع وتقديم الطلب قريبًا"
+    }
+  },
+
   "toast": {
     "success": "نجاح",
     "error": "خطأ",

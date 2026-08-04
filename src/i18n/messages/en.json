@@ -105,6 +105,56 @@
     "galleryLabel": "Product images",
     "imageLabel": "Product image"
   },
+  "checkout": {
+    "title": "Checkout",
+    "addressBook": {
+      "title": "Delivery Address",
+      "addAddress": "Add address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "setPrimary": "Set as primary",
+      "primaryBadge": "Primary",
+      "selectAddress": "Select this address",
+      "empty": {
+        "title": "No saved addresses yet",
+        "description": "Add an address to continue with your order."
+      },
+      "loadError": "We couldn't load your addresses.",
+      "deleteSuccess": "Address deleted.",
+      "deleteError": "Failed to delete address.",
+      "setPrimarySuccess": "Primary address updated.",
+      "setPrimaryError": "Failed to update primary address."
+    },
+    "addressForm": {
+      "addTitle": "Add address",
+      "editTitle": "Edit address",
+      "labels": {
+        "title": "Label",
+        "city": "City",
+        "street": "Street address",
+        "phone": "Phone number",
+        "isPrimary": "Set as primary address"
+      },
+      "placeholders": {
+        "title": "e.g. Home, Work",
+        "city": "e.g. New York",
+        "street": "e.g. 123 Main St, Apt 4"
+      },
+      "cancel": "Cancel",
+      "save": "Save address",
+      "saving": "Saving...",
+      "createSuccess": "Address added.",
+      "updateSuccess": "Address updated."
+    },
+    "orderSummary": {
+      "title": "Order Summary",
+      "empty": "Your cart is empty.",
+      "quantity": "Qty {count}",
+      "total": "Total",
+      "placeOrder": "Place order",
+      "comingSoon": "Payment & order placement coming soon"
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
