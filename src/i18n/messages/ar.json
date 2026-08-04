@@ -97,7 +97,17 @@
     "addToCart": "أضف إلى السلة",
     "addToWishlist": "أضف إلى المفضلة",
     "galleryLabel": "صور المنتج",
-    "imageLabel": "صورة المنتج"
+    "imageLabel": "صورة المنتج",
+    "writeReview": "اكتب مراجعة",
+    "review": {
+      "ratingLabel": "التقييم",
+      "ratingValue": "قيّم بـ {rating} من 5 نجوم",
+      "headlineLabel": "عنوان المراجعة",
+      "contentLabel": "محتوى المراجعة"
+    },
+    "relatedProducts": {
+      "title": "منتجات ذات صلة"
+    }
   },
 
   "checkoutPage": {

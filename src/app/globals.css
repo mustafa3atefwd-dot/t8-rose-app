@@ -513,6 +513,16 @@ html[lang='en'] body {
 }
 
 
+/* Hide scrollbar while keeping the element scrollable */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* Container */
 .container {
   width: 100%;

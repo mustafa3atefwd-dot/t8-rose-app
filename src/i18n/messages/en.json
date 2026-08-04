@@ -103,7 +103,17 @@
     "addToCart": "Add to Cart",
     "addToWishlist": "Add to wishlist",
     "galleryLabel": "Product images",
-    "imageLabel": "Product image"
+    "imageLabel": "Product image",
+    "writeReview": "Write a Review",
+    "review": {
+      "ratingLabel": "Rating",
+      "ratingValue": "Rate {rating} out of 5 stars",
+      "headlineLabel": "Review Title",
+      "contentLabel": "Review Content"
+    },
+    "relatedProducts": {
+      "title": "Related Products"
+    }
   },
   "checkoutPage": {
     "title": "Checkout"
