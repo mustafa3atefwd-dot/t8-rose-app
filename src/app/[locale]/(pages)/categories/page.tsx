@@ -87,7 +87,7 @@ export default function GetCategoriesPagee() {
                     <div className="relative h-68 rounded-2xl overflow-hidden bg-zinc-50 p-3 flex flex-col justify-between">
                       <Image
                         className="object-cover rounded-xl"
-                        src={p.cover}
+                        src={p.image}
                         alt={p.title}
                         fill
                       />

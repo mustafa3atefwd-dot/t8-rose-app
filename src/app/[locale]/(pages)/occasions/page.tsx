@@ -27,7 +27,6 @@ export default function GetOccasionsPagee() {
     sortOrder,
     search,
     setFilter,
-    setFilters,
   } = useProductFilters();
 
   const { data, isLoading } = useQuery({
@@ -64,9 +63,9 @@ export default function GetOccasionsPagee() {
     placeholderData: keepPreviousData,
   });
 
-  const occasions = data?.status ? data.payload?.data ?? [] : [];
+  const occasions  = data?.status ? data.payload?.data ?? [] : [];
   const categories = data?.status ? data.payload?.data ?? [] : [];
-  const metadata = data?.status ? data.payload?.metadata : undefined;
+  const metadata   = data?.status ? data.payload?.metadata : undefined;
 
 
   return (
@@ -90,7 +89,7 @@ export default function GetOccasionsPagee() {
               <div className="relative h-68 rounded-2xl overflow-hidden bg-zinc-50 p-3 flex flex-col justify-between">
                 <Image
                   className="object-cover rounded-xl"
-                  src={p.cover}
+                  src={p.image}
                   alt={p.title}
                   fill
                 />
