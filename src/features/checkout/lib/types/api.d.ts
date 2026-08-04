@@ -33,7 +33,8 @@ export interface CreateAddressPayload {
   city: string;
   street: string;
   phone: string;
-  isPrimary?: boolean;
+  latitude: string;
+  longitude: string;
 }
 
 export type UpdateAddressPayload = Partial<CreateAddressPayload>;
