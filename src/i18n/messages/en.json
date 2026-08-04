@@ -8,7 +8,8 @@
   "home": {
     "header": {
       "logoAlt": "Rose logo",
-      "inputPlaceholder": "Search for a gift...",
+      "inputPlaceholder": "What awesome gift are you looking for?",
+      "searchNoResults": "No products found",
       "login": "Login",
       "favorite": "Favorites",
       "cart": "Cart",

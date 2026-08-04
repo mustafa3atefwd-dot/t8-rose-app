@@ -9,7 +9,6 @@ import {
   House,
   Info,
   PartyPopper,
-  Search,
   ShoppingCart,
 } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
@@ -36,19 +35,16 @@ export default function Header() {
           {/* user address */}
           <UserAddress />
           {/* search */}
-          <div dir="ltr" className="group relative flex items-center max-sm:w-20 md:w-3/5">
-            <SearchInput className="rounded-ds-xl h-13 w-full gap-2 border border-zinc-300 p-4 placeholder:pl-6 placeholder:text-zinc-400 focus-visible:ring-0 focus-visible:ring-offset-0 rtl:placeholder:pl-113" />
-            <Search className="absolute ml-4 h-4.5 w-4.5 group-focus-within:hidden rtl:ml-100" />
+          <div className="relative flex flex-1 items-center">
+            <SearchInput className="h-13" />
           </div>
 
           {/* login */}
           <div className="flex">
-            <div>
-              <UnAuthenticatedLogin />
-            </div>
+            <UnAuthenticatedLogin />
 
             {/* icons */}
-            <div className="flex h-13 w-31 items-center gap-2.5 border-r pr-4 pl-4 rtl:mr-7">
+            <div className="border-ds-border-soft flex h-13 w-31 items-center gap-2.5 border-r pr-4 pl-4 rtl:mr-7">
               <Link href={'/favorite'} aria-label={t('favorite')}>
                 <Heart />
               </Link>

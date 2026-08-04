@@ -68,7 +68,7 @@ export default function GetCategoriesPagee() {
 
   return (
     <div className="w-full">
-      <Header/>
+      {/* <Header/> */}
 
       <div className="container mx-auto flex flex-col md:flex-row gap-8 px-4 py-8 flex-1">
 

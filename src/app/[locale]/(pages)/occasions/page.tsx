@@ -67,7 +67,7 @@ export default function GetOccasionsPagee() {
 
   return (
     <div className="w-full">
-      <Header />
+      {/* <Header /> */}
 
       <div className="container mx-auto flex flex-1 flex-col gap-8 px-4 py-8 md:flex-row">
         <aside className="w-full gap-8 md:w-64">

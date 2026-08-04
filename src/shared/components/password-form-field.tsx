@@ -45,7 +45,6 @@ function PasswordFormField<T extends FieldValues>({
               <InputGroupInput
                 id={String(name)}
                 type={showPassword ? 'text' : 'password'}
-                placeholder={tInput('passwordPlaceholder')}
                 aria-invalid={fieldState.invalid}
                 aria-describedby={`${String(name)}-error`}
                 {...inputProps}
