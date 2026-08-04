@@ -88,6 +88,14 @@
     }
   },
 
+  "notifications": {
+    "title": "الإشعارات",
+    "clearAll": "مسح الكل",
+    "markAllRead": "تحديد الكل كمقروء",
+    "empty": "لا توجد إشعارات بعد",
+    "markRead": "تحديد كمقروء",
+    "delete": "حذف"
+  },
   "productDetails": {
     "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",

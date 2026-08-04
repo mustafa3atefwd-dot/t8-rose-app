@@ -11,6 +11,7 @@ import { getBadge, getDiscountedPrice } from '../lib/utils';
 import { useCart } from '@/shared/hooks/use-cart';
 import { useWishlist } from '@/shared/hooks/use-wishlist';
 import { IProduct } from '../lib/types';
+import { useRouter } from 'next/navigation';
 
 interface ProductCardProps {
   product: IProduct;
@@ -21,6 +22,7 @@ interface ProductCardProps {
 const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProps) => {
   const t = useTranslations('products.card');
   const locale = useLocale();
+  const router = useRouter();
 
   // 1. Initialize custom hooks (session status checked internally)
   const { addToCart, isLoading: isCartLoading } = useCart();
@@ -53,7 +55,10 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
     }
   };
   return (
-    <div className="rounded-ds-lg border-ds-border-soft mx-auto flex w-full max-w-75 flex-col overflow-hidden">
+    <div
+      className="rounded-ds-lg border-ds-border-soft mx-auto flex w-full max-w-75 cursor-pointer flex-col overflow-hidden"
+      onClick={() => router.push(`/products/${product.id}`)}
+    >
       <div className="bg-ds-bg-muted group relative aspect-square w-full overflow-hidden rounded-xl">
         {badge && (
           <Badge variant={badge.variant} className="absolute inset-e-2 top-2 z-10">

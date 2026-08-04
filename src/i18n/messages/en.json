@@ -94,6 +94,14 @@
     }
   },
 
+  "notifications": {
+    "title": "Notifications",
+    "clearAll": "Clear all",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications yet",
+    "markRead": "Mark as read",
+    "delete": "Delete"
+  },
   "productDetails": {
     "stock": "{count} units in stock",
     "rating": "Rating: {rating}/5",

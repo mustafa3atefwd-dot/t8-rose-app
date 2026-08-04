@@ -46,8 +46,12 @@ export default function NotificationsMenu() {
   return (
     <div className="relative">
       {/* Trigger */}
-      <button className="relative cursor-pointer" type="button" onClick={() => setOpen((prev) => !prev)}>
-        <Bell />
+      <button
+        className="relative flex cursor-pointer items-center justify-center border-none bg-transparent p-0"
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        <Bell  />
         {notificationsCount > 0 && <HeaderBadge count={notificationsCount} />}
       </button>
 
