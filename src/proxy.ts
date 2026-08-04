@@ -72,6 +72,7 @@ export default function middleware(req: NextRequest, event: NextFetchEvent) {
     if (callbackUrl) {
       redirectUrl.searchParams.delete("callbackUrl");
       redirectUrl.searchParams.set("returnUrl", callbackUrl);
+      redirectUrl.pathname = `/${locale}${redirectUrl.pathname}`;
       return NextResponse.redirect(redirectUrl);
     }
   }

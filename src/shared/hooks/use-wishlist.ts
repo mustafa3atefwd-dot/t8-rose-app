@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useSyncExternalStore } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { useSession } from 'next-auth/react';
 import { addToWishlistAction, removeFromWishlistAction } from '../actions/wishlist-actions';
 import { WishlistItem } from '../lib/types/product';
@@ -12,8 +12,17 @@ const GUEST_WISHLIST_KEY = 'guest_wishlist_items';
 const guestWishlistStore = createGuestStore<WishlistItem>(GUEST_WISHLIST_KEY);
 
 export function useWishlist() {
+  // Session status can resolve before a deferred/streamed subtree (e.g. behind
+  // a Suspense boundary) hydrates, so gate it on mount: the hydration render
+  // then always matches the server's always-logged-out pass, and only after
+  // mount do we trust the live session status.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { status } = useSession();
-  const isLoggedIn = status === 'authenticated';
+  const isLoggedIn = mounted && status === 'authenticated';
   const queryClient = useQueryClient();
 
   // 1. Guest wishlist is read straight from localStorage (an external store),

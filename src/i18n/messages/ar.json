@@ -8,7 +8,8 @@
   "home": {
     "header": {
       "logoAlt": "شعار روز",
-      "inputPlaceholder": "ابحث عن هدية...",
+      "inputPlaceholder": "عن أي هدية رائعة تبحث؟",
+      "searchNoResults": "لم يتم العثور على منتجات",
       "login": "تسجيل الدخول",
       "favorite": "المفضلة",
       "cart": "سلة التسوق",
@@ -64,12 +65,27 @@
         "february15": "15 فبراير 2025"
       }
     },
+    "label": "الأكثر شعبية",
     "mostPopular": "الأكثر شعبية",
     "viewMore": "عرض المزيد",
-    "bestSelling": "الأكثر مبيعًا",
-    "bestSellingHeading": "اكتشف <accent>الهدايا الأكثر مبيعًا</accent> التي يفضلها عملاؤنا",
-    "bestSellingDescription": "تصفح أكثر صناديق الهدايا التي يفضلها عملاؤنا، والمختارة بعناية لتجمع بين الجودة والأناقة وتناسب كل مناسبة.",
+    "bestSelling": {
+      "label": "الأكثر مبيعًا",
+      "title": "اكتشف <accent>الهدايا الأكثر مبيعًا</accent> التي يفضلها عملاؤنا",
+      "description": "تصفح أكثر صناديق الهدايا التي يفضلها عملاؤنا، والمختارة بعناية لتجمع بين الجودة والأناقة وتناسب كل مناسبة."
+    },
     "Explore gifts": "استكشف الهدايا"
+  },
+
+  "homeHeader": {
+    "deliverTo": "التوصيل إلى",
+    "userMenu": {
+      "welcome": "مرحبًا",
+      "account": "حسابي",
+      "addresses": "عناويني",
+      "order": "طلباتي",
+      "dashboard": "لوحة التحكم",
+      "logout": "تسجيل الخروج"
+    }
   },
 
   "productDetails": {
@@ -334,6 +350,13 @@
       "noResults": "لا توجد منتجات مطابقة للفلاتر المحددة.",
       "ratingLabel": "{rating} نجوم فأكثر"
     }
+  },
+  "browse": {
+    "categoriesTitle": "الفئات",
+    "occasionsTitle": "المناسبات",
+    "noCategories": "لم يتم العثور على فئات",
+    "noOccasions": "لم يتم العثور على مناسبات",
+    "productsCount": "{count} منتج"
   },
   "forgotPw": {
     "step1": {
