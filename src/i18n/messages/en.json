@@ -105,55 +105,48 @@
     "galleryLabel": "Product images",
     "imageLabel": "Product image"
   },
-  "checkout": {
-    "title": "Checkout",
-    "addressBook": {
-      "title": "Delivery Address",
-      "addAddress": "Add address",
-      "edit": "Edit",
-      "delete": "Delete",
-      "setPrimary": "Set as primary",
-      "primaryBadge": "Primary",
-      "selectAddress": "Select this address",
-      "empty": {
-        "title": "No saved addresses yet",
-        "description": "Add an address to continue with your order."
-      },
-      "loadError": "We couldn't load your addresses.",
-      "deleteSuccess": "Address deleted.",
-      "deleteError": "Failed to delete address.",
-      "setPrimarySuccess": "Primary address updated.",
-      "setPrimaryError": "Failed to update primary address."
+  "checkoutPage": {
+    "title": "Checkout"
+  },
+  "address": {
+    "modal": {
+      "title": "My Addresses"
     },
-    "addressForm": {
-      "addTitle": "Add address",
-      "editTitle": "Edit address",
-      "labels": {
-        "title": "Label",
-        "city": "City",
-        "street": "Street address",
-        "phone": "Phone number",
-        "isPrimary": "Set as primary address"
-      },
-      "placeholders": {
-        "title": "e.g. Home, Work",
-        "city": "e.g. New York",
-        "street": "e.g. 123 Main St, Apt 4"
-      },
-      "cancel": "Cancel",
-      "save": "Save address",
-      "saving": "Saving...",
-      "createSuccess": "Address added.",
-      "updateSuccess": "Address updated."
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this address?",
+    "deleted": "Address deleted",
+    "updated": "Address updated",
+    "add": {
+      "step1Title": "Address Details",
+      "step2Title": "Pin Your Location"
     },
-    "orderSummary": {
-      "title": "Order Summary",
-      "empty": "Your cart is empty.",
-      "quantity": "Qty {count}",
-      "total": "Total",
-      "placeOrder": "Place order",
-      "comingSoon": "Payment & order placement coming soon"
-    }
+    "city": "City",
+    "cityPlaceholder": "e.g. Cairo",
+    "details": "Address",
+    "detailsPlaceholder": "e.g. 123 Main St, Apt 4",
+    "phone": "Contact Number",
+    "title": "Label",
+    "titlePlaceholder": "e.g. Home, Work",
+    "findMyLocation": "Find My Location",
+    "locationDenied": "Location access denied. Please pin manually.",
+    "added": "Address added",
+    "addAddress": "Add Address",
+    "saveChanges": "Save Changes",
+    "next": "Next",
+    "back": "Back",
+    "cancel": "Cancel",
+    "close": "Close",
+    "manageAddresses": "Manage addresses",
+    "selectedAddressTitle": "Delivery Address",
+    "noAddressSelected": "No address selected",
+    "empty": {
+      "title": "No saved addresses",
+      "description": "Add an address to get started."
+    },
+    "loadError": "We couldn't load your addresses.",
+    "mapLoadError": "Maps failed to load. Please check your connection.",
+    "pinRequired": "Please place a pin on the map before submitting."
   },
   "toast": {
     "success": "Success",
