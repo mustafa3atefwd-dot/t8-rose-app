@@ -28,7 +28,7 @@ const ProductsPage = async () => {
           </Suspense>
         </div>
 
-        <main className="ml-6 w-full min-w-0 flex-1 rtl:mr-6">
+        <main className="ml-8 w-full min-w-0 flex-1 rtl:mr-6">
           <Suspense
             fallback={
               <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
