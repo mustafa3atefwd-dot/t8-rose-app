@@ -39,12 +39,11 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
   const form = useForm<AddressSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      title: address?.title ?? '',
       city: address?.city ?? '',
       street: address?.street ?? '',
       phone: { phone: address?.phone ?? '', country: '' },
-      latitude: address?.latitude ?? '',
-      longitude: address?.longitude ?? '',
+      latitude: address?.latitude != null ? String(address.latitude) : '',
+      longitude: address?.longitude != null ? String(address.longitude) : '',
     },
   });
 
@@ -53,7 +52,7 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
   const isPending = mode === 'create' ? createMutation.isPending : updateMutation.isPending;
 
   async function goNext() {
-    const isValid = await form.trigger(['title', 'city', 'street', 'phone']);
+    const isValid = await form.trigger(['city', 'street', 'phone']);
     if (isValid) {
       setCurrentStep('location');
     }
@@ -64,8 +63,8 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
   }
 
   function setPosition(lat: number, lng: number) {
-    form.setValue('latitude', String(lat));
-    form.setValue('longitude', String(lng));
+    form.setValue('latitude', String(lat), { shouldDirty: true });
+    form.setValue('longitude', String(lng), { shouldDirty: true });
     setPinError(false);
   }
 
@@ -76,12 +75,14 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
     }
 
     const payload: CreateAddressPayload = {
-      title: values.title,
+      // The API requires a title, but the product UI only asks for city,
+      // address and phone. Use the city as the display title.
+      title: values.city,
       city: values.city,
       street: values.street,
       phone: values.phone.phone,
-      latitude: values.latitude,
-      longitude: values.longitude,
+      latitude: Number(values.latitude),
+      longitude: Number(values.longitude),
     };
 
     // Callers only ever pass mode: 'edit' together with an address (see AddressWizardForm).

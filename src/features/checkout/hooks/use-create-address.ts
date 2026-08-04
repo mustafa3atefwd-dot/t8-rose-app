@@ -15,10 +15,11 @@ export function useCreateAddress() {
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      const data = responseText ? JSON.parse(responseText) : null;
 
-      if (!response.ok || !data.status) {
-        throw new Error(data.message || 'Failed to create address');
+      if (!response.ok || !data?.status) {
+        throw new Error(data?.message || response.statusText || 'Failed to create address');
       }
 
       return data;

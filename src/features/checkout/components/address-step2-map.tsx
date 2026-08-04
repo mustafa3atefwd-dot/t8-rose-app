@@ -27,7 +27,7 @@ export default function AddressStep2Map({
   submitLabel,
 }: IAddressStep2MapProps) {
   const t = useTranslations('address');
-  const { locate, isLocating, denied } = useGeolocation();
+  const { locate, isLocating, denied, error } = useGeolocation();
 
   const latitude = form.watch('latitude');
   const longitude = form.watch('longitude');
@@ -35,6 +35,12 @@ export default function AddressStep2Map({
   return (
     <div className="flex flex-col gap-4">
       <GoogleMapPicker latitude={latitude} longitude={longitude} onPositionChange={onPositionChange} />
+
+      {latitude && longitude && (
+        <p className="text-ds-text-muted text-xs" dir="ltr">
+          Selected: {Number(latitude).toFixed(6)}, {Number(longitude).toFixed(6)}
+        </p>
+      )}
 
       <Button
         type="button"
@@ -48,7 +54,7 @@ export default function AddressStep2Map({
         {t('findMyLocation')}
       </Button>
 
-      {denied && <p className="text-ds-text-danger text-sm">{t('locationDenied')}</p>}
+      {denied && <p className="text-ds-text-danger text-sm">{error ?? t('locationDenied')}</p>}
       {pinError && <p className="text-ds-text-danger text-sm">{t('pinRequired')}</p>}
 
       <div className="mt-2 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">

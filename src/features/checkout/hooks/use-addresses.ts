@@ -9,12 +9,13 @@ export function useAddresses() {
     queryKey: ADDRESSES_QUERY_KEY,
     queryFn: async () => {
       const response = await fetch('/api/addresses');
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error('Failed to fetch addresses');
+        throw new Error(data.message || 'Failed to fetch addresses');
       }
 
-      return response.json();
+      return data;
     },
   });
 }

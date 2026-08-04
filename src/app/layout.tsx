@@ -1,4 +1,5 @@
 import './globals.css';
+import 'leaflet/dist/leaflet.css';
 
 // The root layout is intentionally a pass-through. With next-intl i18n routing,
 // the `<html>`/`<body>` shell, fonts and providers live in `app/[locale]/layout.tsx`

@@ -6,8 +6,8 @@ export interface Address {
   city: string;
   street: string;
   phone: string;
-  latitude: string;
-  longitude: string;
+  latitude: number | string;
+  longitude: number | string;
   createdAt: string;
   updatedAt: string;
 }
@@ -33,8 +33,8 @@ export interface CreateAddressPayload {
   city: string;
   street: string;
   phone: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 }
 
 export type UpdateAddressPayload = Partial<CreateAddressPayload>;

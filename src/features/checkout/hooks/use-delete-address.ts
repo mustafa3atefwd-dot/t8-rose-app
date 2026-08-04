@@ -13,10 +13,11 @@ export function useDeleteAddress() {
         method: 'DELETE',
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      const data = responseText ? JSON.parse(responseText) : null;
 
-      if (!response.ok || !data.status) {
-        throw new Error(data.message || 'Failed to delete address');
+      if (!response.ok || !data?.status) {
+        throw new Error(data?.message || response.statusText || 'Failed to delete address');
       }
 
       return data;

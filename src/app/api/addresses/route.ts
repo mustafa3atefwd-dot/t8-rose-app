@@ -6,13 +6,14 @@ export async function GET() {
     const data = await getAddresses();
     return NextResponse.json(data);
   } catch (error) {
+    const unauthorized = error instanceof Error && error.message === 'Unauthorized';
     return NextResponse.json(
       {
         status: false,
-        code: 500,
+        code: unauthorized ? 401 : 500,
         message: error instanceof Error ? error.message : 'Something went wrong',
       },
-      { status: 500 }
+      { status: unauthorized ? 401 : 500 }
     );
   }
 }
@@ -23,13 +24,14 @@ export async function POST(request: NextRequest) {
     const data = await createAddress(body);
     return NextResponse.json(data, { status: data.code });
   } catch (error) {
+    const unauthorized = error instanceof Error && error.message === 'Unauthorized';
     return NextResponse.json(
       {
         status: false,
-        code: 500,
+        code: unauthorized ? 401 : 500,
         message: error instanceof Error ? error.message : 'Something went wrong',
       },
-      { status: 500 }
+      { status: unauthorized ? 401 : 500 }
     );
   }
 }

@@ -20,10 +20,11 @@ export function useUpdateAddress() {
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      const data = responseText ? JSON.parse(responseText) : null;
 
-      if (!response.ok || !data.status) {
-        throw new Error(data.message || 'Failed to update address');
+      if (!response.ok || !data?.status) {
+        throw new Error(data?.message || response.statusText || 'Failed to update address');
       }
 
       return data;
