@@ -71,7 +71,7 @@ export default function Header() {
           <div className="flex items-center gap-2 p-3">
             <House className="h-5 w-5" />
             <Link
-              href={'/home'}
+              href={'/'}
               className="cursor-pointer align-middle text-base leading-[100%] font-medium tracking-normal"
             >
               {t('home')}
