@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { PaginationControl } from "@/shared/components/ui/pagination";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { HeartPlus, ShoppingCart, Star } from "lucide-react";
-import Image from "next/image";
+import { PaginationControl } from '@/shared/components/ui/pagination';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { HeartPlus, ShoppingCart, Star } from 'lucide-react';
+import Image from 'next/image';
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
-import Header from "@/shared/components/header-page";
-import ProductFiltersSidebar from "@/features/products/components/filters/product-filters-sidebar";
-import { Link } from "@/i18n/navigation";
-import RatingStars from "@/features/products/components/rating-stars";
-import FormatPrice from "@/features/products/hooks/format-price";
-
+import Header from '@/shared/components/header-page';
+import ProductFiltersSidebar from '@/features/products/components/filters/product-filters-sidebar';
+import { Link } from '@/i18n/navigation';
+import RatingStars from '@/features/products/components/rating-stars';
+import FormatPrice from '@/features/products/hooks/format-price';
 
 export default function GetOccasionsPagee() {
   const {
@@ -52,102 +52,86 @@ export default function GetOccasionsPagee() {
       if (sortBy) params.set('sortBy', sortBy);
       if (sortOrder) params.set('sortOrder', sortOrder);
       if (search) params.set('search', search);
-  
+
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/occasions?${params.toString()}`);
       if (!res.ok) throw new Error('Failed to fetch products');
-      
+
       return await res.json();
     },
     placeholderData: keepPreviousData,
   });
 
-  const occasions = data?.status ? data.payload?.data ?? [] : [];
-  const categories = data?.status ? data.payload?.data ?? [] : [];
+  const occasions = data?.status ? (data.payload?.data ?? []) : [];
+  const categories = data?.status ? (data.payload?.data ?? []) : [];
   const metadata = data?.status ? data.payload?.metadata : undefined;
 
-
   return (
-    
     <div className="w-full">
-      <Header/>
+      <Header />
 
-      <div className="container mx-auto flex flex-col md:flex-row gap-8 px-4 py-8 flex-1">
-
-        <aside className="w-full md:w-64 gap-8">
+      <div className="container mx-auto flex flex-1 flex-col gap-8 px-4 py-8 md:flex-row">
+        <aside className="w-full gap-8 md:w-64">
           <ProductFiltersSidebar categories={categories} occasions={occasions} />
         </aside>
 
-        <main className="w-full min-w-0 ml-6 flex-1 rtl:mr-6">
-        {isLoading ? (
-        <div className="text-center py-20 text-zinc-500">Loading</div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mt-2">
-          {occasions.map((p) => (
-            <div key={p.id} className="w-full flex flex-col justify-between">
-              <div className="relative h-68 rounded-2xl overflow-hidden bg-zinc-50 p-3 flex flex-col justify-between">
-                <Image
-                  className="object-cover rounded-xl"
-                  src={p.cover}
-                  alt={p.title}
-                  fill
-                />
-                <div className="relative z-10 flex justify-between items-center w-full">
-                  <button className="w-8 h-8 rounded-full bg-white shadow-sm flex justify-center items-center hover:bg-zinc-100 transition-colors">
-                    <HeartPlus className="w-4.5 h-4.5 text-red-900" />
-                  </button>
-                  <span className="px-2.5 py-1 rounded-full bg-zinc-100/90 backdrop-blur-sm flex justify-center items-center">
-                    <p className="font-medium text-xs tracking-normal text-zinc-700">NEW </p>
-                  </span>
-                </div>
-              </div>
-  
-              <div className="mt-3 flex flex-col gap-2">
-                <p className="font-semibold text-base leading-snug text-ds-text-primary line-clamp-1">
-                  {p.title}
-                </p>
-  
-                <div className="flex items-center justify-between mt-1">
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-1 text-amber-500">
-                      <RatingStars rating={p.rating} label={`Rating: ${p.rating}`} />
-                    </div>
-  
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-base text-ds-text-primary">
-                        {FormatPrice(p.price)} EGP
-                      </span>
-                      <span className="font-medium text-base leading-[100%] tracking-normal align-bottom text-zinc-400 line-through">
-                         {p.discountValue}
+        <main className="ml-6 w-full min-w-0 flex-1 rtl:mr-6">
+          {isLoading ? (
+            <div className="py-20 text-center text-zinc-500">Loading</div>
+          ) : (
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
+              {occasions.map((p: any) => (
+                <div key={p.id} className="flex w-full flex-col justify-between">
+                  <div className="relative flex h-68 flex-col justify-between overflow-hidden rounded-2xl bg-zinc-50 p-3">
+                    <Image className="rounded-xl object-cover" src={p.cover} alt={p.title} fill />
+                    <div className="relative z-10 flex w-full items-center justify-between">
+                      <button className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm transition-colors hover:bg-zinc-100">
+                        <HeartPlus className="h-4.5 w-4.5 text-red-900" />
+                      </button>
+                      <span className="flex items-center justify-center rounded-full bg-zinc-100/90 px-2.5 py-1 backdrop-blur-sm">
+                        <p className="text-xs font-medium tracking-normal text-zinc-700">NEW </p>
                       </span>
                     </div>
                   </div>
-  
-                  <Link href={'/cart'} className="w-10 h-10 rounded-full bg-maroon-600 hover:bg-maroon-700 transition-colors flex justify-center items-center shrink-0">
-                    <ShoppingCart className="w-5 h-5 text-white" />
-                  </Link>
+
+                  <div className="mt-3 flex flex-col gap-2">
+                    <p className="text-ds-text-primary line-clamp-1 text-base leading-snug font-semibold">{p.title}</p>
+
+                    <div className="mt-1 flex items-center justify-between">
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1 text-amber-500">
+                          <RatingStars rating={p.rating} label={`Rating: ${p.rating}`} />
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <span className="text-ds-text-primary text-base font-bold">{FormatPrice(p.price)} EGP</span>
+                          <span className="align-bottom text-base leading-[100%] font-medium tracking-normal text-zinc-400 line-through">
+                            {p.discountValue}
+                          </span>
+                        </div>
+                      </div>
+
+                      <Link
+                        href={'/cart'}
+                        className="bg-maroon-600 hover:bg-maroon-700 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors"
+                      >
+                        <ShoppingCart className="h-5 w-5 text-white" />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
-
+          )}
         </main>
-
       </div>
-  
-      <div className="flex justify-center items-center mt-20 mb-2">
+
+      <div className="mt-20 mb-2 flex items-center justify-center">
         <PaginationControl
           page={page}
           totalPages={metadata?.totalPages ?? 1}
           onPageChange={(newPage) => setFilter('page', newPage)}
         />
       </div>
-
-
     </div>
-
-  )
+  );
 }
-
-

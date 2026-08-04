@@ -1,15 +1,14 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Loader2, Send, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { Controller } from 'react-hook-form';
-
-import { useProductReviewForm } from '@/features/product-details/hooks';
-import { FormError, FormField, Rating } from '@/shared/components';
+import { FormError, FormField } from '@/shared/components';
 import { Button } from '@/shared/components/ui/button';
 import { FieldError } from '@/shared/components/ui/field';
 import { useSession } from 'next-auth/react';
 import { cn } from '@/shared/lib/utils';
+import { useProductReviewForm } from '../hooks/use-product-review-form';
 
 interface IProductReviewFormProps {
   productId: string;
@@ -40,7 +39,7 @@ function ProductReviewForm({ productId }: IProductReviewFormProps) {
         {/* Overlay */}
         {isUnauthenticated && (
           <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg backdrop-blur-[3px]">
-            <p className="bg-ds-bg-cardpx-4 text-ds-text-plain py-2 text-center font-semibold">
+            <p className="bg-ds-bg-plain text-ds-text-plain px-4 py-2 text-center font-semibold">
               Please login to be able to review the product.
             </p>
           </div>

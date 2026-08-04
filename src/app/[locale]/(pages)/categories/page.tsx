@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { PaginationControl } from "@/shared/components/ui/pagination";
@@ -80,7 +81,7 @@ export default function GetCategoriesPagee() {
               <div className="text-center py-20 text-zinc-500">Loading</div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mt-2">
-                {categories.map((p) => (
+                {categories.map((p:any) => (
                   <div key={p.id} className="w-full flex flex-col justify-between">
                     <div className="relative h-68 rounded-2xl overflow-hidden bg-zinc-50 p-3 flex flex-col justify-between">
                       <Image
