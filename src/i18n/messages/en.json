@@ -8,7 +8,8 @@
   "home": {
     "header": {
       "logoAlt": "Rose logo",
-      "inputPlaceholder": "Search for a gift...",
+      "inputPlaceholder": "What awesome gift are you looking for?",
+      "searchNoResults": "No products found",
       "login": "Login",
       "favorite": "Favorites",
       "cart": "Cart",
@@ -65,7 +66,6 @@
       }
     },
 
-
     "label": "Most Popular",
     "mostPopular": "Most Popular",
     "viewMore": "View More",
@@ -92,9 +92,7 @@
       "dashboard": "Dashboard",
       "logout": "Log out"
     }
-
   },
-
 
   "productDetails": {
     "stock": "{count} units in stock",
@@ -354,6 +352,13 @@
       "noResults": "No products match the selected filters.",
       "ratingLabel": "{rating} stars & up"
     }
+  },
+  "browse": {
+    "categoriesTitle": "Categories",
+    "occasionsTitle": "Occasions",
+    "noCategories": "No categories found",
+    "noOccasions": "No occasions found",
+    "productsCount": "{count} products"
   },
   "forgotPw": {
     "step1": {

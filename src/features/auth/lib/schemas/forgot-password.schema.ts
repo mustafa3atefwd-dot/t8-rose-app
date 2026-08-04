@@ -7,6 +7,7 @@ export const forgotPasswordStep1Schema = (t: (key: string) => string) =>
       .string()
       .min(1, t('validation.emailRequired'))
       .pipe(z.email(t('validation.invalidEmail'))),
+    redirectUrl: z.string(),
   });
 
 export type TForgotPasswordStep1Schema = z.infer<

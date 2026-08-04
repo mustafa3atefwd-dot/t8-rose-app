@@ -1,4 +1,4 @@
-import { REGISTER_STEPS } from "../constants/user.constant";
+import { REGISTER_STEPS } from "../constants/register-step.constant";
 
 /**
  * Derived type from REGISTER_STEPS constant
