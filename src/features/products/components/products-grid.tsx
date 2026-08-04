@@ -10,7 +10,6 @@ import { useProductFilters } from '@/features/products/hooks/use-product-filters
 import { PaginationControl } from '@/shared/components/ui/pagination';
 
 export default function ProductsGrid() {
-
   // Custom hooks
   const {
     categoryIds,
@@ -55,7 +54,7 @@ export default function ProductsGrid() {
   return (
     <div className="w-full">
       {isLoading ? (
-        <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
+        <div className="gap-y-8sm:grid-cols-2 mt-2 grid grid-cols-1 gap-x-6 md:grid-cols-3">
           {Array.from({ length: PRODUCTS_PAGE_SIZE }).map((_, index) => (
             <ProductCardSkeleton key={`product-skeleton-${index}`} />
           ))}
@@ -63,7 +62,7 @@ export default function ProductsGrid() {
       ) : (
         <div
           data-pending={isRefreshing || undefined}
-          className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 transition-opacity data-pending:opacity-60 sm:grid-cols-2 md:grid-cols-3"
+          className="border-ds-border-soft pl-6 mt-2 grid grid-cols-1 gap-x-6 gap-y-8 border-l transition-opacity data-pending:opacity-60 sm:grid-cols-2 md:grid-cols-3"
         >
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
