@@ -119,7 +119,15 @@
   },
 
   "checkoutPage": {
-    "title": "إتمام الطلب"
+    "title": "إتمام الطلب",
+    "orderSummary": {
+      "title": "ملخص الطلب",
+      "empty": "سلتك فارغة.",
+      "quantity": "الكمية {count}",
+      "total": "الإجمالي",
+      "placeOrder": "إتمام الطلب",
+      "comingSoon": "الدفع وتقديم الطلب قريبًا"
+    }
   },
   "address": {
     "modal": {

@@ -124,7 +124,15 @@
     }
   },
   "checkoutPage": {
-    "title": "Checkout"
+    "title": "Checkout",
+    "orderSummary": {
+      "title": "Order Summary",
+      "empty": "Your cart is empty.",
+      "quantity": "Qty {count}",
+      "total": "Total",
+      "placeOrder": "Place order",
+      "comingSoon": "Payment & order placement coming soon"
+    }
   },
   "address": {
     "modal": {
