@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/shared/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog';
 import { Address } from '../lib/types';
 import AddressList from './address-list';
@@ -33,10 +34,22 @@ export default function AddressBookModal({ open, onOpenChange, onSelectAddress }
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent>
-        <DialogHeader>
+      <DialogContent showCloseButton={false}>
+        <DialogHeader className="flex-row items-center justify-between gap-3 text-start">
           <DialogTitle>{t('modal.title')}</DialogTitle>
+          {modalView.view === 'list' && (
+            <Button
+              type="button"
+              variant={'secondary'}
+              size="sm"
+              onClick={() => setModalView({ view: 'form', mode: 'create' })}
+              className="gap-1.5 capitalize"
+            >
+              {t('addNewAddress')}
+            </Button>
+          )}
         </DialogHeader>
+
 
         {modalView.view === 'list' ? (
           <AddressList

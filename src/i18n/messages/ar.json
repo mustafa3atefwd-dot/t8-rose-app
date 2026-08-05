@@ -158,7 +158,8 @@
     "back": "رجوع",
     "cancel": "إلغاء",
     "close": "إغلاق",
-    "manageAddresses": "إدارة العناوين",
+    "addNewAddress": "اضافة عنوان جديد",
+    "or": "أو",
     "selectedAddressTitle": "عنوان التوصيل",
     "noAddressSelected": "لم يتم اختيار عنوان",
     "empty": {

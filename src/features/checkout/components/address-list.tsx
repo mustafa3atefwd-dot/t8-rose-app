@@ -30,13 +30,6 @@ export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListPro
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-end">
-        <Button type="button" size="sm" onClick={onAdd} className="gap-1.5">
-          <Plus className="size-4" />
-          {t('addAddress')}
-        </Button>
-      </div>
-
       {isLoading && (
         <div className="flex flex-col gap-3">
           <Skeleton className="h-20 w-full" />

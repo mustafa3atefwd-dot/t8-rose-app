@@ -124,7 +124,7 @@
     }
   },
   "checkoutPage": {
-    "title": "Checkout",
+    "title": "Shipping Address",
     "orderSummary": {
       "title": "Order Summary",
       "empty": "Your cart is empty.",
@@ -163,7 +163,8 @@
     "back": "Back",
     "cancel": "Cancel",
     "close": "Close",
-    "manageAddresses": "Manage addresses",
+    "addNewAddress": "add new address",
+    "or": "OR",
     "selectedAddressTitle": "Delivery Address",
     "noAddressSelected": "No address selected",
     "empty": {

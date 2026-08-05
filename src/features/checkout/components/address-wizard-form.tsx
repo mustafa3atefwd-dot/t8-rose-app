@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ProgressSteps } from '@/shared/components';
 import { useAddressWizardForm, WIZARD_STEPS } from '../hooks';
 import { Address } from '../lib/types';
 import AddressStep1Fields from './address-step1-fields';
 import AddressStep2Map from './address-step2-map';
+import CheckoutStepper from './checkout-stepper';
 
 interface IAddressWizardFormProps {
   mode: 'create' | 'edit';
@@ -24,9 +24,11 @@ export default function AddressWizardForm({ mode, address, onSuccess, onCancel }
 
   return (
     <div className="flex flex-col gap-4">
-      <ProgressSteps steps={WIZARD_STEPS} currentStep={currentStep} />
+      <CheckoutStepper steps={WIZARD_STEPS} currentStep={currentStep} />
 
-      <h3 className="text-base font-semibold">{currentStep === 'details' ? t('add.step1Title') : t('add.step2Title')}</h3>
+      <h3 className="text-base font-semibold">
+        {currentStep === 'details' ? t('add.step1Title') : t('add.step2Title')}
+      </h3>
 
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
         {currentStep === 'details' ? (
