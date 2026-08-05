@@ -65,7 +65,6 @@
         "february15": "February 15, 2025"
       }
     },
-
     "label": "Most Popular",
     "mostPopular": "Most Popular",
     "viewMore": "View More",
@@ -81,7 +80,6 @@
     },
     "Explore gifts": "Explore Gifts"
   },
-
   "homeHeader": {
     "deliverTo": "Deliver to",
     "userMenu": {
@@ -93,7 +91,6 @@
       "logout": "Log out"
     }
   },
-
   "productDetails": {
     "stock": "{count} units in stock",
     "rating": "Rating: {rating}/5",
@@ -129,7 +126,6 @@
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
-
     "registerOtp": {
       "title": "Create Account",
       "subtitle": "Enter the OTP Code",
@@ -145,7 +141,6 @@
       "otpInvalid": "The verification code is incorrect.",
       "otpExpired": "The verification code has expired."
     },
-
     "createStrongPassword": "Create a strong password",
     "tellUsMore": "Tell us more about you",
     "securePassword": "Choose a secure password to protect your account",
@@ -199,7 +194,6 @@
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
     "passwordMatch": "Passwords do not match",
-
     "review": {
       "productIdRequired": "Product ID is required",
       "headlineRequired": "Review title is required",
@@ -249,7 +243,6 @@
       "firstName": "Zoe",
       "lastName": "Jonathan",
       "username": "zoe123",
-
       "reviewHeadline": "Enter review title",
       "reviewContent": "What do you think of this product?"
     },
@@ -400,7 +393,10 @@
         "title": "Sweetest Expressions",
         "desc": "Handcrafted chocolates made with love."
       },
-      "gifts": { "title": "Unforgettable Surprises", "desc": "Beautifully curated gift boxes for any occasion." }
+      "gifts": {
+        "title": "Unforgettable Surprises",
+        "desc": "Beautifully curated gift boxes for any occasion."
+      }
     },
     "categories": {
       "wedding": {
@@ -440,5 +436,13 @@
     "subTitle": "General rating:",
     "ratings": "ratings",
     "noReviews": "No reviews yet."
+  },
+  "checkout": {
+    "step1Title": "Shipping Address",
+    "addAddress": "Add a new address",
+    "next": "Next",
+    "noAddresses": "Add a new address to proceed with checkout.",
+    "errorLoading": "Failed to load addresses.",
+    "step": "Step {current} of {total}"
   }
 }
