@@ -7,7 +7,7 @@ import { Button } from '@/shared/components/ui/button';
 import { SubmitButton } from '@/shared/components';
 import { AddressSchema } from '../lib/schemas';
 import { useGeolocation } from '../hooks';
-import GoogleMapPicker from './google-map-picker';
+import MapPicker from './map-picker';
 
 interface IAddressStep2MapProps {
   form: UseFormReturn<AddressSchema>;
@@ -35,7 +35,7 @@ export default function AddressStep2Map({
   return (
     <div className="flex flex-col gap-4">
       <div className="relative">
-        <GoogleMapPicker latitude={latitude} longitude={longitude} onPositionChange={onPositionChange} />
+        <MapPicker latitude={latitude} longitude={longitude} onPositionChange={onPositionChange} />
 
         <Button
           type="button"

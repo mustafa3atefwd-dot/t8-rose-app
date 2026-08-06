@@ -7,4 +7,4 @@ export { default as CheckoutStepper } from './checkout-stepper';
 export { default as AddressWizardForm } from './address-wizard-form';
 export { default as AddressStep1Fields } from './address-step1-fields';
 export { default as AddressStep2Map } from './address-step2-map';
-export { default as GoogleMapPicker } from './google-map-picker';
+export { default as MapPicker } from './map-picker';
