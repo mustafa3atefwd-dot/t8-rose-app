@@ -65,7 +65,6 @@
         "february15": "February 15, 2025"
       }
     },
-
     "label": "Most Popular",
     "mostPopular": "Most Popular",
     "viewMore": "View More",
@@ -81,7 +80,6 @@
     },
     "Explore gifts": "Explore Gifts"
   },
-
   "homeHeader": {
     "deliverTo": "Deliver to",
     "userMenu": {
@@ -93,7 +91,6 @@
       "logout": "Log out"
     }
   },
-
   "notifications": {
     "title": "Notifications",
     "clearAll": "Clear all",
@@ -144,14 +141,14 @@
     "deleted": "Address deleted",
     "updated": "Address updated",
     "add": {
-      "step1Title": "Address Details",
-      "step2Title": "Pin Your Location"
+      "step1Title": "Enter address details",
+      "step2Title": "Find Your Location"
     },
     "city": "City",
     "cityPlaceholder": "e.g. Cairo",
     "details": "Address",
     "detailsPlaceholder": "e.g. 123 Main St, Apt 4",
-    "phone": "Contact Number",
+    "phone": "Phone",
     "title": "Label",
     "titlePlaceholder": "e.g. Home, Work",
     "findMyLocation": "Find My Location",
@@ -164,6 +161,7 @@
     "cancel": "Cancel",
     "close": "Close",
     "addNewAddress": "add new address",
+    "editAddress": "Update Address Info",
     "or": "OR",
     "selectedAddressTitle": "Delivery Address",
     "noAddressSelected": "No address selected",
@@ -199,7 +197,6 @@
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
-
     "registerOtp": {
       "title": "Create Account",
       "subtitle": "Enter the OTP Code",
@@ -215,7 +212,6 @@
       "otpInvalid": "The verification code is incorrect.",
       "otpExpired": "The verification code has expired."
     },
-
     "createStrongPassword": "Create a strong password",
     "tellUsMore": "Tell us more about you",
     "securePassword": "Choose a secure password to protect your account",
@@ -269,7 +265,6 @@
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
     "passwordMatch": "Passwords do not match",
-
     "review": {
       "productIdRequired": "Product ID is required",
       "headlineRequired": "Review title is required",
@@ -319,7 +314,6 @@
       "firstName": "Zoe",
       "lastName": "Jonathan",
       "username": "zoe123",
-
       "reviewHeadline": "Enter review title",
       "reviewContent": "What do you think of this product?"
     },
@@ -470,7 +464,10 @@
         "title": "Sweetest Expressions",
         "desc": "Handcrafted chocolates made with love."
       },
-      "gifts": { "title": "Unforgettable Surprises", "desc": "Beautifully curated gift boxes for any occasion." }
+      "gifts": {
+        "title": "Unforgettable Surprises",
+        "desc": "Beautifully curated gift boxes for any occasion."
+      }
     },
     "categories": {
       "wedding": {

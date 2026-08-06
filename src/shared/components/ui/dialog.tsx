@@ -50,7 +50,7 @@ function DialogContent({
         data-slot="dialog-content"
         className={cn(
           'bg-ds-bg-plain text-ds-text-plain ring-ds-border-plain/10',
-          'fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2',
+          'fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2 -translate-y-1/2',
           'max-h-[85vh] overflow-y-auto rounded-lg p-6 shadow-lg ring-1 duration-100',
           'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
           'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',

@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
-import { LocateFixed } from 'lucide-react';
+import { MapPinHouse } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { SubmitButton } from '@/shared/components';
 import { AddressSchema } from '../lib/schemas';
@@ -34,7 +34,21 @@ export default function AddressStep2Map({
 
   return (
     <div className="flex flex-col gap-4">
-      <GoogleMapPicker latitude={latitude} longitude={longitude} onPositionChange={onPositionChange} />
+      <div className="relative">
+        <GoogleMapPicker latitude={latitude} longitude={longitude} onPositionChange={onPositionChange} />
+
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          loading={isLocating}
+          onClick={() => locate((coords) => onPositionChange(coords.lat, coords.lng))}
+          className="text-ds-bg-primary border-ds-bg-primary absolute top-5 right-5 z-10 w-fit gap-1.5 border"
+        >
+          <MapPinHouse className="size-4" />
+          {t('findMyLocation')}
+        </Button>
+      </div>
 
       {latitude && longitude && (
         <p className="text-ds-text-muted text-xs" dir="ltr">
@@ -42,29 +56,14 @@ export default function AddressStep2Map({
         </p>
       )}
 
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        loading={isLocating}
-        onClick={() => locate((coords) => onPositionChange(coords.lat, coords.lng))}
-        className="w-fit gap-1.5"
-      >
-        <LocateFixed className="size-4" />
-        {t('findMyLocation')}
-      </Button>
-
       {denied && <p className="text-ds-text-danger text-sm">{error ?? t('locationDenied')}</p>}
       {pinError && <p className="text-ds-text-danger text-sm">{t('pinRequired')}</p>}
 
-      <div className="mt-2 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-        <Button type="button" variant="outline" onClick={onBack}>
-          {t('back')}
-        </Button>
+
         <SubmitButton isLoading={isPending} loadingText={submitLabel} className="my-0 w-full sm:w-auto">
           {submitLabel}
         </SubmitButton>
-      </div>
+    
     </div>
   );
 }

@@ -43,7 +43,7 @@ export default function LeafletMapPicker({ latitude, longitude, onPositionChange
 
   return (
     <div
-      className="relative"
+      className="relative isolate"
       onClickCapture={(event) => {
         const map = mapRef.current;
         if (!map || (event.target as HTMLElement).closest('.leaflet-control')) return;

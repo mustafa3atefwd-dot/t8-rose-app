@@ -6,6 +6,7 @@ import { Address } from '../lib/types';
 import AddressStep1Fields from './address-step1-fields';
 import AddressStep2Map from './address-step2-map';
 import CheckoutStepper from './checkout-stepper';
+import { ArrowLeft } from 'lucide-react';
 
 interface IAddressWizardFormProps {
   mode: 'create' | 'edit';
@@ -26,8 +27,17 @@ export default function AddressWizardForm({ mode, address, onSuccess, onCancel }
     <div className="flex flex-col gap-4">
       <CheckoutStepper steps={WIZARD_STEPS} currentStep={currentStep} />
 
-      <h3 className="text-base font-semibold">
-        {currentStep === 'details' ? t('add.step1Title') : t('add.step2Title')}
+      <h3 className="text-ds-bg-primary-saturated text-base font-semibold">
+        {currentStep === 'details' ? (
+          t('add.step1Title')
+        ) : (
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={goBack} aria-label={t('back')} className="cursor-pointer">
+              <ArrowLeft className="text-white bg-ds-bg-primary rounded-full p-1" />
+            </button>
+            {t('add.step2Title')}
+          </div>
+        )}
       </h3>
 
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">

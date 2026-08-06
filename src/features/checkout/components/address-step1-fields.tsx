@@ -12,23 +12,24 @@ interface IAddressStep1FieldsProps {
   onCancel: () => void;
 }
 
-export default function AddressStep1Fields({ form, onNext, onCancel }: IAddressStep1FieldsProps) {
+export default function AddressStep1Fields({ form, onNext }: IAddressStep1FieldsProps) {
   const t = useTranslations('address');
 
   return (
     <div className="flex flex-col gap-4">
       <FormField name="city" control={form.control} label={t('city')} placeholder={t('cityPlaceholder')} required />
-      <FormField name="street" control={form.control} label={t('details')} placeholder={t('detailsPlaceholder')} required />
+      <FormField
+        name="street"
+        control={form.control}
+        label={t('details')}
+        placeholder={t('detailsPlaceholder')}
+        required
+      />
       <PhoneFormField name="phone" control={form.control} label={t('phone')} />
 
-      <div className="mt-2 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-        <Button type="button" variant="outline" onClick={onCancel}>
-          {t('cancel')}
-        </Button>
-        <Button type="button" onClick={onNext}>
-          {t('next')}
-        </Button>
-      </div>
+      <Button type="button" onClick={onNext} className="mt-5 w-full">
+        {t('next')}
+      </Button>
     </div>
   );
 }

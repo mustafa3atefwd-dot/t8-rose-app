@@ -35,8 +35,14 @@ export default function AddressBookModal({ open, onOpenChange, onSelectAddress }
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent showCloseButton={false}>
-        <DialogHeader className="flex-row items-center justify-between gap-3 text-start">
-          <DialogTitle>{t('modal.title')}</DialogTitle>
+        <DialogHeader className="border-b-ds-border-soft flex-row items-center justify-between gap-3 border-b pb-4 text-start">
+          <DialogTitle>
+            {modalView.view === 'list'
+              ? t('modal.title')
+              : modalView.mode === 'create'
+                ? t('addNewAddress')
+                : t('editAddress')}
+          </DialogTitle>
           {modalView.view === 'list' && (
             <Button
               type="button"
@@ -49,7 +55,6 @@ export default function AddressBookModal({ open, onOpenChange, onSelectAddress }
             </Button>
           )}
         </DialogHeader>
-
 
         {modalView.view === 'list' ? (
           <AddressList
