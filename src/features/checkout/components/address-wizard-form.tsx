@@ -2,18 +2,11 @@
 
 import { useTranslations } from 'next-intl';
 import { useAddressWizardForm, WIZARD_STEPS } from '../hooks';
-import { Address } from '../lib/types';
+import { IAddressWizardFormProps } from '../lib/types';
 import AddressStep1Fields from './address-step1-fields';
 import AddressStep2Map from './address-step2-map';
 import CheckoutStepper from './checkout-stepper';
 import { ArrowLeft } from 'lucide-react';
-
-interface IAddressWizardFormProps {
-  mode: 'create' | 'edit';
-  address?: Address;
-  onSuccess: () => void;
-  onCancel: () => void;
-}
 
 export default function AddressWizardForm({ mode, address, onSuccess, onCancel }: IAddressWizardFormProps) {
   const t = useTranslations('address');

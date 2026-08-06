@@ -2,12 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Spinner } from '@/shared/components/ui/spinner';
-
-interface IMapPickerProps {
-  latitude: string;
-  longitude: string;
-  onPositionChange: (lat: number, lng: number) => void;
-}
+import { IMapPickerProps } from '../lib/types';
 
 const GoogleMapPicker = dynamic(() => import('./google-map-picker'), {
   ssr: false,

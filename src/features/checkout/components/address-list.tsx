@@ -6,14 +6,8 @@ import { Button } from '@/shared/components/ui/button';
 import { Skeleton } from '@/shared/components/ui/skeleton';
 import { toast } from '@/shared/components/ui/toast';
 import { useAddresses, useDeleteAddress } from '../hooks';
-import { Address } from '../lib/types';
+import { Address, IAddressListProps } from '../lib/types';
 import AddressCard from './address-card';
-
-interface IAddressListProps {
-  onSelect: (address: Address) => void;
-  onAdd: () => void;
-  onEdit: (address: Address) => void;
-}
 
 export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListProps) {
   const t = useTranslations('address');

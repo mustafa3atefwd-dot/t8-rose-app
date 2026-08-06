@@ -2,12 +2,7 @@
 
 import { memo } from 'react';
 import clsx from 'clsx';
-
-interface ICheckoutStepperProps<T extends string> {
-  steps: T[];
-  currentStep: T;
-  className?: string;
-}
+import { ICheckoutStepperProps } from '../lib/types';
 
 function CheckoutStepper<T extends string>({ steps, currentStep, className }: ICheckoutStepperProps<T>) {
   const currentIndex = steps.indexOf(currentStep);

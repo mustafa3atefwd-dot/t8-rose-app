@@ -5,17 +5,8 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { MapPin, PenLine, Phone, Trash2 } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
-import { Address } from '../lib/types';
+import { IAddressCardProps } from '../lib/types';
 import DeleteModal from './delete-modal';
-
-interface IAddressCardProps {
-  address: Address;
-  onSelect: () => void;
-  selected?: boolean;
-  onEdit?: () => void;
-  onDelete?: () => void;
-  isDeleting?: boolean;
-}
 
 export default function AddressCard({
   address,

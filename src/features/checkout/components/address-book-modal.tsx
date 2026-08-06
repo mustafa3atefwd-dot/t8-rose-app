@@ -4,17 +4,9 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog';
-import { Address } from '../lib/types';
+import { Address, IAddressBookModalProps, ModalView } from '../lib/types';
 import AddressList from './address-list';
 import AddressWizardForm from './address-wizard-form';
-
-type ModalView = { view: 'list' } | { view: 'form'; mode: 'create' | 'edit'; address?: Address };
-
-interface IAddressBookModalProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  onSelectAddress: (address: Address) => void;
-}
 
 export default function AddressBookModal({ open, onOpenChange, onSelectAddress }: IAddressBookModalProps) {
   const t = useTranslations('address');

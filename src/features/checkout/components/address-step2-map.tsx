@@ -1,22 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { UseFormReturn } from 'react-hook-form';
 import { MapPinHouse } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { SubmitButton } from '@/shared/components';
-import { AddressSchema } from '../lib/schemas';
+import { IAddressStep2MapProps } from '../lib/types';
 import { useGeolocation } from '../hooks';
 import MapPicker from './map-picker';
-
-interface IAddressStep2MapProps {
-  form: UseFormReturn<AddressSchema>;
-  onBack: () => void;
-  onPositionChange: (lat: number, lng: number) => void;
-  isPending: boolean;
-  pinError: boolean;
-  submitLabel: string;
-}
 
 export default function AddressStep2Map({
   form,

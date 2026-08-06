@@ -1,16 +1,9 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { UseFormReturn } from 'react-hook-form';
 import { FormField, PhoneFormField } from '@/shared/components';
 import { Button } from '@/shared/components/ui/button';
-import { AddressSchema } from '../lib/schemas';
-
-interface IAddressStep1FieldsProps {
-  form: UseFormReturn<AddressSchema>;
-  onNext: () => void;
-  onCancel: () => void;
-}
+import { IAddressStep1FieldsProps } from '../lib/types';
 
 export default function AddressStep1Fields({ form, onNext }: IAddressStep1FieldsProps) {
   const t = useTranslations('address');
