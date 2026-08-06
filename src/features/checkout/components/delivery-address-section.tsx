@@ -2,16 +2,16 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { MoveRight } from 'lucide-react';
+// import { MoveRight } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
-import { Separator } from '@/shared/components/ui/separator';
+// import { Separator } from '@/shared/components/ui/separator';
 import { Skeleton } from '@/shared/components/ui/skeleton';
 import { useAddresses } from '../hooks';
-import { CHECKOUT_STEPS } from '../lib/constants';
+// import { CHECKOUT_STEPS } from '../lib/constants';
 import { Address } from '../lib/types';
 import AddressBookModal from './address-book-modal';
-import AddressCard from './address-card';
-import CheckoutStepper from './checkout-stepper';
+// import AddressCard from './address-card';
+// import CheckoutStepper from './checkout-stepper';
 
 export default function DeliveryAddressSection() {
   const t = useTranslations('address');
@@ -37,7 +37,7 @@ export default function DeliveryAddressSection() {
 
   return (
     <div className="flex flex-col gap-4">
-      <CheckoutStepper steps={CHECKOUT_STEPS} currentStep="address" />
+      {/* <CheckoutStepper steps={CHECKOUT_STEPS} currentStep="address" /> */}
 
       {isLoading && (
         <div className="flex flex-col gap-3">
@@ -45,7 +45,7 @@ export default function DeliveryAddressSection() {
           <Skeleton className="h-20 w-full" />
         </div>
       )}
-
+{/* 
       {!isLoading && addresses.length > 0 && (
         <div className="flex flex-col gap-3">
           {addresses.map((address) => (
@@ -57,25 +57,25 @@ export default function DeliveryAddressSection() {
             />
           ))}
         </div>
-      )}
+      )} */}
 
       {!isLoading && addresses.length === 0 && <p className="text-ds-text-muted text-sm">{t('noAddressSelected')}</p>}
 
       <AddressBookModal open={modalOpen} onOpenChange={setModalOpen} onSelectAddress={setSelectedAddress} />
 
-      <div className="flex items-center gap-3">
+      {/* <div className="flex items-center gap-3">
         <Separator className="flex-1" />
         <span className="text-ds-text-muted text-xs font-medium uppercase">{t('or')}</span>
         <Separator className="flex-1" />
-      </div>
+      </div> */}
 
       <div className="flex flex-col items-end justify-between gap-5">
         <Button type="button" className="w-full capitalize" variant="secondary" onClick={() => setModalOpen(true)}>
           {t('addNewAddress')}
         </Button>
-        <Button className="px-10" size={'lg'}>
+        {/* <Button className="px-10" size={'lg'}>
           Next <MoveRight />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
