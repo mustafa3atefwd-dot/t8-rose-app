@@ -102,10 +102,10 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
                   />
 
                   <div className="space-y-1">
-                    <h4 className={`text-base font-semibold ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-900 dark:text-zinc-100'}`}>
+                    <h4 className={`text-2xl font-semibold py-1 px-3 ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-900 dark:text-zinc-100'}`}>
                       {address.title}
                     </h4>
-                    <p className={`text-sm ${isSelected ? 'text-zinc-100 dark:text-zinc-800' : 'text-zinc-500 dark:text-zinc-100'}`}>
+                    <p className={`text-lg font-medium py-1 px-3 ${isSelected ? 'text-zinc-100 dark:text-zinc-800' : 'text-zinc-500 dark:text-zinc-100'}`}>
                       {address.street}, {address.city}
                     </p>
                   </div>
@@ -118,7 +118,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
                     >
                       <Phone className="h-4 w-4" />
                     </div>
-                    <span className={`text-sm font-medium ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-600 dark:text-zinc-100'}`}>
+                    <span className={`text-lg font-medium ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-600 dark:text-zinc-100'}`}>
                       {address.phone}
                     </span>
                   </div>
@@ -130,7 +130,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
       />
       
       {errors.addressId && <p className="text-sm font-medium text-red-600">{errors.addressId.message}</p>}
-      <div className='text-center w-full'>OR</div>
+      <div className='text-center font-semibold text-lg text-zinc-500 dark:text-white w-full'>OR</div>
 
       {/* Static "Add a new address" button per request */}
       <div className="pt-2"> 

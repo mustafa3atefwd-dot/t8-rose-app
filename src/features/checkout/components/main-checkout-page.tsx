@@ -20,7 +20,7 @@ export default function CheckoutPage() {
         <div className="space-y-6 lg:col-span-2">
           <CheckoutStepper currentStep={1} totalSteps={2} />
 
-          <h2 className="text-2xl font-bold text-zinc-900">{t('step1Title', { defaultValue: 'Shipping Address' })}</h2>
+          <h2 className="text-3xl font-semibold dark:text-white text-zinc-900">{t('step1Title', { defaultValue: 'Shipping Address' })}</h2>
 
           <ShippingAddressForm onNext={handleNextStep} />
         </div>
