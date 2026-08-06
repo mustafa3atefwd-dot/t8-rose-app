@@ -55,8 +55,16 @@ export default function GoogleMapPicker({ latitude, longitude, onPositionChange 
     const map = mapRef.current;
     if (!map || !committedPosition) return;
 
+    // Pan first so the camera glides to the new position; only bump the zoom
+    // once that pan settles ('idle'), otherwise the simultaneous zoom change
+    // cuts the pan animation short and the map just jumps instead of flying.
     map.panTo(committedPosition);
-    map.setZoom(Math.max(map.getZoom() ?? PIN_ZOOM, PIN_ZOOM));
+    const currentZoom = map.getZoom() ?? DEFAULT_ZOOM;
+    if (currentZoom < PIN_ZOOM) {
+      google.maps.event.addListenerOnce(map, 'idle', () => {
+        map.setZoom(PIN_ZOOM);
+      });
+    }
 
     if (process.env.NODE_ENV !== 'production') {
       console.log('[MapPicker] checkpoint:', committedPosition);

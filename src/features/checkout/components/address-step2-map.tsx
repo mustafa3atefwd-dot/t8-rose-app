@@ -20,7 +20,6 @@ interface IAddressStep2MapProps {
 
 export default function AddressStep2Map({
   form,
-  onBack,
   onPositionChange,
   isPending,
   pinError,

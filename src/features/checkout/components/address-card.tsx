@@ -84,7 +84,7 @@ export default function AddressCard({
                   <Button
                     type="button"
                     variant="ghost"
-                    className="rounded-full border border-zinc-400 bg-zinc-50"
+                    className="border-ds-border-default bg-ds-bg-subtle rounded-full border"
                     size="icon-sm"
                     aria-label={t('edit')}
                     onClick={(event) => {
