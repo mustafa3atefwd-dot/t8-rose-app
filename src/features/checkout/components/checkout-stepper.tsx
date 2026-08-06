@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/utils';
-import React from 'react';
+
 
 interface CheckoutStepperProps {
   currentStep: number;
@@ -19,7 +19,7 @@ export function CheckoutStepper({ currentStep, totalSteps }: CheckoutStepperProp
 
         {/* Active maroon line */}
         <div
-          className="absolute left-0 top-1/2 h-1 -translate-y-1/2 bg-maroon-600 transition-all duration-300 z-0"
+          className="absolute left-0 top-1/2 h-1 -translate-y-1/2 bg-maroon-600 dark:bg-ds-bg-primary transition-all duration-300 z-0"
           style={{ width: `${progressPercentage}%` }}
         />
 
@@ -32,7 +32,7 @@ export function CheckoutStepper({ currentStep, totalSteps }: CheckoutStepperProp
               key={stepNumber}
               className={cn(
                 'relative z-10 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors',
-                isActive ? 'bg-maroon-600 text-white' : 'bg-zinc-200 text-zinc-600'
+                isActive ? 'bg-maroon-600 dark:bg-ds-bg-primary dark:text-zinc-800 text-white' : 'bg-zinc-200 text-zinc-600'
               )}
             >
               {stepNumber}

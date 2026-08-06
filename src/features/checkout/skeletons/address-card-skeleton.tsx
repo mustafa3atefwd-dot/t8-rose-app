@@ -1,24 +1,23 @@
-import React from 'react';
+import { Skeleton } from '@/shared/components/ui/skeleton'; 
 
 export function AddressSkeleton() {
   return (
     <div className="space-y-4">
-      {/* checkout skeleton */}
       {[1, 2, 3].map((i) => (
         <div
           key={i}
-          className="flex animate-pulse items-center justify-between rounded-2xl border border-zinc-200 bg-zinc-50/80 p-4"
+          className="flex items-center justify-between rounded-2xl border border-zinc-200 bg-zinc-50/80 p-4"
         >
-          {/* skeleton Placeholders UI */}
+          {/* Title & Street Address Pill */}
           <div className="space-y-2.5">
-            <div className="h-5 w-24 rounded-md bg-zinc-200" />
-            <div className="h-6 w-52 rounded-full bg-zinc-200 sm:w-64" />
+            <Skeleton className="h-5 w-24 bg-zinc-400  rounded-md" />
+            <Skeleton className="h-6 w-52 bg-zinc-400  rounded-full sm:w-64" />
           </div>
 
-          <div className="dir-ltr flex items-center gap-2">
-            <div className="h-8 w-8 shrink-0 rounded-full bg-zinc-200" />
-
-            <div className="h-4 w-28 rounded-md bg-zinc-200" />
+          {/* Phone Circle Icon & Number */}
+          <div className="flex items-center gap-2 dir-ltr">
+            <Skeleton className="h-8 w-8 bg-zinc-400 shrink-0 rounded-full" />
+            <Skeleton className="h-4 w-28 bg-zinc-400  rounded-md" />
           </div>
         </div>
       ))}
