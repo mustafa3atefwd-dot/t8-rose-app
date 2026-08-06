@@ -29,7 +29,7 @@ export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListPro
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="">
       {isLoading && (
         <div className="flex flex-col gap-3">
           <Skeleton className="h-20 w-full" />
@@ -51,7 +51,7 @@ export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListPro
       )}
 
       {!isLoading && !isError && addresses.length > 0 && (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-5">
           {addresses.map((address) => (
             <AddressCard
               key={address.id}

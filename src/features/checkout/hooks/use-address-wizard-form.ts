@@ -39,6 +39,7 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
   const form = useForm<AddressSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
+      title: address?.title ?? '',
       city: address?.city ?? '',
       street: address?.street ?? '',
       phone: { phone: address?.phone ?? '', country: '' },
@@ -75,9 +76,8 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
     }
 
     const payload: CreateAddressPayload = {
-      // The API requires a title, but the product UI only asks for city,
-      // address and phone. Use the city as the display title.
-      title: values.city,
+      // The API requires a non-empty title; fall back to city if the user left the label blank.
+      title: values.title?.trim() || values.city,
       city: values.city,
       street: values.street,
       phone: values.phone.phone,

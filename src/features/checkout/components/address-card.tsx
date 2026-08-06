@@ -41,14 +41,20 @@ export default function AddressCard({
           }
         }}
         className={clsx(
-          'focus-visible:ring-ds-ring flex cursor-pointer flex-col gap-2 rounded-lg border p-4 text-sm transition-colors outline-none focus-visible:ring-3',
+          'focus-visible:ring-ds-ring relative flex cursor-pointer flex-col gap-2 rounded-lg border p-4 text-sm transition-colors outline-none focus-visible:ring-3',
           selected ? 'bg-ds-bg-primary border-ds-border-primary' : 'border-ds-border-soft',
           onEdit || onDelete ? 'hover:border-ds-bg-primary-saturated' : ''
         )}
       >
+        {address.title && (
+          <span className="text-ds-text-primary bg-ds-bg-plain px-2 absolute -top-4 left-2 text-lg font-medium capitalize">
+            {address.title}
+          </span>
+        )}
+
         <div className="flex items-start justify-between gap-3">
           <span className={clsx('flex items-center gap-2 font-medium', selected && 'text-ds-text-inverse')}>
-            {onEdit && <MapPin className="size-6 rounded-full bg-emerald-500 p-1 text-white" />} {address.title}
+            {onEdit && <MapPin className="size-6 rounded-full bg-emerald-500 p-1 text-white" />} {address.street}
           </span>
 
           <div className="relative flex shrink-0 items-center gap-2">
@@ -56,7 +62,7 @@ export default function AddressCard({
               className={clsx(
                 'flex items-center gap-1',
                 selected ? 'text-ds-text-inverse' : 'text-ds-text-muted',
-                onEdit || onDelete ? 'mr-3 text-ds-text-plain' : ''
+                onEdit || onDelete ? 'text-ds-text-plain mr-3' : ''
               )}
               dir="ltr"
             >
@@ -71,7 +77,7 @@ export default function AddressCard({
                   className={clsx(
                     'size-4.5',
                     selected ? 'text-ds-text-primary' : 'text-ds-text-inverse',
-                    onEdit && 'text-zinc-900'
+                    onEdit && 'text-zinc-900 dark:text-zinc-100'
                   )}
                 />
               </span>

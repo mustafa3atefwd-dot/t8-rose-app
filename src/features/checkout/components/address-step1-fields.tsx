@@ -17,6 +17,7 @@ export default function AddressStep1Fields({ form, onNext }: IAddressStep1Fields
 
   return (
     <div className="flex flex-col gap-4">
+      <FormField name="title" control={form.control} label={t('title')} placeholder={t('titlePlaceholder')} />
       <FormField name="city" control={form.control} label={t('city')} placeholder={t('cityPlaceholder')} required />
       <FormField
         name="street"
