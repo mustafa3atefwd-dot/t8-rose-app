@@ -5,7 +5,6 @@ import {
   ClipboardList,
   Gift,
   Headset,
-  Heart,
   House,
   Info,
   PartyPopper,
@@ -18,6 +17,7 @@ import SearchInput from './search-input';
 import UserAddress from './user-address';
 import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { ThemeToggle } from './ThemeToggle';
+import { WishlistHeaderLink } from '@/features/wishlist';
 
 export default function Header() {
   const t = useTranslations('home.header');
@@ -45,9 +45,7 @@ export default function Header() {
 
             {/* icons */}
             <div className="border-ds-border-soft flex h-13 w-31 items-center gap-2.5 border-r pr-4 pl-4 rtl:mr-7">
-              <Link href={'/favorite'} aria-label={t('favorite')}>
-                <Heart />
-              </Link>
+              <WishlistHeaderLink />
               <Link href={'/cart'} aria-label={t('cart')}>
                 <ShoppingCart />
               </Link>

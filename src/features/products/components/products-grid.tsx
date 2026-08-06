@@ -2,7 +2,7 @@
 
 import { PaginationControl } from "@/shared/components/ui/pagination";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { HeartPlus, ShoppingCart } from "lucide-react";
+import { Heart, HeartPlus, Loader2, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
@@ -11,16 +11,20 @@ import FormatPrice from "@/features/products/hooks/format-price";
 import { getProducts } from "../lib/api";
 import { PRODUCTS_PAGE_SIZE } from "../lib/constants";
 import { IProduct } from "../lib/types";
+import { useWishlist } from '@/shared/hooks/use-wishlist';
+import { toast } from '@/shared/components/ui/toast';
 
 
 export default function ProductsGrid() {
   // Translation
   const t = useTranslations('products.filters');
   const tError = useTranslations('error');
+  const tWishlist = useTranslations('wishlist');
 
   // Custom hooks
   const {
     categoryIds,
+    subCategoryId,
     occasionId,
     minRating,
     minPrice,
@@ -32,6 +36,7 @@ export default function ProductsGrid() {
     isPending,
     setFilter,
   } = useProductFilters();
+  const { toggleWishlist, isWishlisted, isLoading: isWishlistLoading } = useWishlist();
 
   // Variables
   // The sidebar is multi-select, so every checked category has to travel to the
@@ -42,6 +47,7 @@ export default function ProductsGrid() {
     page,
     limit: PRODUCTS_PAGE_SIZE,
     categoryId,
+    subCategoryId,
     occasionId,
     minRating,
     minPrice,
@@ -62,6 +68,17 @@ export default function ProductsGrid() {
   const products: IProduct[] = data?.status ? data.payload?.data ?? [] : [];
   const metadata = data?.status ? data.payload?.metadata : undefined;
   const isRefreshing = isPending || isFetching;
+
+  const handleToggleWishlist = async (product: IProduct) => {
+    const wasSaved = isWishlisted(product.id);
+
+    try {
+      await toggleWishlist(product.id, product);
+      toast.success(tWishlist(wasSaved ? 'removed' : 'addedToWishlist'));
+    } catch {
+      toast.error(tWishlist('wishlistError'));
+    }
+  };
 
 
   return (
@@ -89,8 +106,20 @@ export default function ProductsGrid() {
                   />
                 )}
                 <div className="relative z-10 flex justify-between items-center w-full">
-                  <button className="w-8 h-8 rounded-full bg-white shadow-sm flex justify-center items-center hover:bg-zinc-100 transition-colors">
-                    <HeartPlus className="w-4.5 h-4.5 text-red-900" />
+                  <button
+                    type="button"
+                    className="w-8 h-8 rounded-full bg-white shadow-sm flex justify-center items-center hover:bg-zinc-100 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+                    aria-label={tWishlist(isWishlisted(product.id) ? 'remove' : 'add')}
+                    disabled={isWishlistLoading}
+                    onClick={() => void handleToggleWishlist(product)}
+                  >
+                    {isWishlistLoading ? (
+                      <Loader2 className="w-4.5 h-4.5 animate-spin text-red-900" />
+                    ) : isWishlisted(product.id) ? (
+                      <Heart className="w-4.5 h-4.5 fill-red-900 text-red-900" />
+                    ) : (
+                      <HeartPlus className="w-4.5 h-4.5 text-red-900" />
+                    )}
                   </button>
                   <span className="px-2.5 py-1 rounded-full bg-zinc-100/90 backdrop-blur-sm flex justify-center items-center">
                     <p className="font-medium text-xs tracking-normal text-zinc-700">NEW </p>
