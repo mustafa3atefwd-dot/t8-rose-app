@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { CheckoutStepper } from '@/features/checkout/components/checkout-stepper';
 import { ShippingAddressForm } from './address-selection-form';
-
 
 export default function CheckoutPage() {
   const t = useTranslations('checkout');
@@ -12,9 +11,6 @@ export default function CheckoutPage() {
 
   const handleNextStep = (addressId: string) => {
     setSelectedAddressId(addressId);
-    console.log('Proceeding to Step 2 with Address ID:', addressId);
-    // When teammate finishes Step 2:
-    // router.push(`/checkout/step-2?addressId=${addressId}`);
   };
 
   return (
@@ -28,8 +24,6 @@ export default function CheckoutPage() {
 
           <ShippingAddressForm onNext={handleNextStep} />
         </div>
-
-        {/* Placeholder Summary Panel */}
       </div>
     </div>
   );

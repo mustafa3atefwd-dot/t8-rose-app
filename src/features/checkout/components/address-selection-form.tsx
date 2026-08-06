@@ -4,8 +4,7 @@ import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { Phone, Plus } from 'lucide-react';
-
+import { MoveRight, Phone, Plus } from 'lucide-react';
 import { useUserAddresses } from '../hooks/use-user-addresses';
 import { ShippingAddressFormValues, shippingAddressSchema } from '../lib/schemas/shipping-address.schema';
 import { AddressSkeleton } from '../skeletons/address-card-skeleton';
@@ -33,7 +32,8 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
     },
   });
 
-  // Auto-select single or primary address once data loads
+  {/*Auto-select single or primary address once data loads*/}
+
   useEffect(() => {
     if (addresses.length > 0) {
       const primary = addresses.find((a) => a.isPrimary) || addresses[0];
@@ -126,15 +126,15 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
           </div>
         )}
       />
-
+      
       {errors.addressId && <p className="text-sm font-medium text-red-600">{errors.addressId.message}</p>}
+      <div className='text-center w-full'>OR</div>
 
       {/* Static "Add a new address" button per request */}
-      <div className="pt-2">
+      <div className="pt-2"> 
         <button
           type="button"
-          onClick={() => console.log('Static Trigger: Address Modal')}
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-900 transition-colors hover:bg-red-100"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm font-medium text-maroon-600 transition-colors hover:bg-red-100"
         >
           <Plus className="h-4 w-4" />
           {t('addAddress', { defaultValue: 'Add a new address' })}
@@ -144,9 +144,10 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
       <div className="flex justify-end pt-4">
         <button
           type="submit"
-          className="bg-maroon-600 hover:bg-maroon-700 rounded-xl px-8 py-3 font-medium text-white transition-colors"
+          className="bg-maroon-600 flex w-40 items-center justify-center gap-2 hover:bg-maroon-700 rounded-xl px-4 py-2.5 font-medium text-white transition-colors"
         >
           {t('next', { defaultValue: 'Next →' })}
+          <MoveRight className="h-4 w-4" />
         </button>
       </div>
     </form>
