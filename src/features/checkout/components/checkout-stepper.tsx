@@ -8,7 +8,7 @@ interface CheckoutStepperProps {
 
 export function CheckoutStepper({ currentStep, totalSteps }: CheckoutStepperProps) {
 
-  {/* progress track percentage */}
+  // progress track percentage 
   const progressPercentage = (currentStep / totalSteps) * 50;
 
   return (

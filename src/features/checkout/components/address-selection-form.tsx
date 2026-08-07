@@ -11,7 +11,6 @@ import { AddressSkeleton } from '../skeletons/address-card-skeleton';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/inputs';
 
-
 interface ShippingAddressFormProps {
   onNext: (addressId: string) => void;
 }
@@ -34,7 +33,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
     },
   });
 
-  {/*Auto-select single or primary address once data loads*/}
+  // Auto-select single or primary address once data loads
 
   useEffect(() => {
     if (addresses.length > 0) {
@@ -87,10 +86,10 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
               return (
                 <label
                   key={address.id}
-                  className={`relative flex cursor-pointer  items-center justify-between rounded-2xl border border-zinc-200 dark:border-zinc-600 p-4 transition-all ${
+                  className={`relative flex cursor-pointer items-center justify-between rounded-2xl border border-zinc-200 p-4 transition-all dark:border-zinc-600 ${
                     isSelected
-                      ? 'bg-maroon-600 dark:bg-ds-bg-primary dark:text-zinc-800 text-white shadow-md'
-                      : 'border-zinc-200 dark:bg-zinc-700  bg-zinc-50 text-zinc-900 hover:border-zinc-300'
+                      ? 'bg-maroon-600 dark:bg-ds-bg-primary text-white shadow-md dark:text-zinc-800'
+                      : 'border-zinc-200 bg-zinc-50 text-zinc-900 hover:border-zinc-300 dark:bg-zinc-700'
                   }`}
                 >
                   <Input
@@ -102,10 +101,14 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
                   />
 
                   <div className="space-y-1">
-                    <h4 className={`text-2xl font-semibold py-1 px-3 ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-900 dark:text-zinc-100'}`}>
+                    <h4
+                      className={`px-3 py-1 text-2xl font-semibold ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-900 dark:text-zinc-100'}`}
+                    >
                       {address.title}
                     </h4>
-                    <p className={`text-lg font-medium py-1 px-3 ${isSelected ? 'text-zinc-100 dark:text-zinc-800' : 'text-zinc-500 dark:text-zinc-100'}`}>
+                    <p
+                      className={`px-3 py-1 text-lg font-medium ${isSelected ? 'text-zinc-100 dark:text-zinc-800' : 'text-zinc-500 dark:text-zinc-100'}`}
+                    >
                       {address.street}, {address.city}
                     </p>
                   </div>
@@ -113,12 +116,14 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
                   <div className="dir-ltr flex items-center gap-2">
                     <div
                       className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                        isSelected ? 'text-maroon-600  bg-white' : 'bg-maroon-600 text-white'
+                        isSelected ? 'text-maroon-600 bg-white' : 'bg-maroon-600 text-white'
                       }`}
                     >
                       <Phone className="h-4 w-4" />
                     </div>
-                    <span className={`text-lg font-medium ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-600 dark:text-zinc-100'}`}>
+                    <span
+                      className={`text-lg font-medium ${isSelected ? 'text-white dark:text-zinc-800' : 'text-zinc-600 dark:text-zinc-100'}`}
+                    >
                       {address.phone}
                     </span>
                   </div>
@@ -128,15 +133,18 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
           </div>
         )}
       />
-      
+
       {errors.addressId && <p className="text-sm font-medium text-red-600">{errors.addressId.message}</p>}
-      <div className='text-center font-semibold text-lg text-zinc-500 dark:text-white w-full'>OR</div>
+
+      <div className="my-6 flex items-center justify-center gap-4 text-lg font-semibold text-zinc-500 before:flex-1 before:border-t before:border-zinc-200 before:content-[''] after:flex-1 after:border-t after:border-zinc-200 after:content-[''] dark:text-zinc-400 dark:before:border-zinc-700 dark:after:border-zinc-700">
+        OR
+      </div>
 
       {/* Static "Add a new address" button per request */}
-      <div className="pt-2"> 
+      <div className="pt-2">
         <Button
           type="button"
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm font-medium text-maroon-600 transition-colors hover:bg-red-100 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint  dark:text-zinc-800"
+          className="text-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-red-100 dark:text-zinc-800"
         >
           <Plus className="h-4 w-4" />
           {t('addAddress', { defaultValue: 'Add a new address' })}
@@ -146,7 +154,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
       <div className="flex justify-end pt-4">
         <Button
           type="submit"
-          className="bg-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint dark:text-zinc-800 flex w-40 items-center justify-center gap-2 hover:bg-maroon-700 rounded-xl px-4 py-2.5 font-medium text-white transition-colors"
+          className="bg-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint hover:bg-maroon-700 flex w-40 items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-medium text-white transition-colors dark:text-zinc-800"
         >
           {t('next', { defaultValue: 'Next →' })}
           <MoveRight className="h-4 w-4" />

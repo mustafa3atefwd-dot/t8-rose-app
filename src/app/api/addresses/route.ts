@@ -1,7 +1,14 @@
+import "server-only";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://rose-app.elevate-bootcamp.cloud/api";
+
+const BASE_URL = process.env.BACKEND_URL;
+
+
+if (!BASE_URL) {
+  throw new Error("FATAL: Missing required server-side environment variable 'BACKEND_URL'.");
+}
 
 export async function GET(req: NextRequest) {
   try {
