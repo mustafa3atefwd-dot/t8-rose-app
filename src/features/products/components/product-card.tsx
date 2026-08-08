@@ -55,11 +55,11 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
     }
   };
   return (
-    <div
-      className="rounded-ds-lg border-ds-border-soft mx-auto flex w-full max-w-75 cursor-pointer flex-col overflow-hidden"
-      onClick={() => router.push(`/products/${product.id}`)}
-    >
-      <div className="bg-ds-bg-muted group relative aspect-square w-full overflow-hidden rounded-xl">
+    <div className="rounded-ds-lg border-ds-border-soft mx-auto flex w-full max-w-75 cursor-pointer flex-col overflow-hidden">
+      <div
+        className="bg-ds-bg-muted group relative aspect-square w-full overflow-hidden rounded-xl"
+        onClick={() => router.push(`/products/${product.id}`)}
+      >
         {badge && (
           <Badge variant={badge.variant} className="absolute inset-e-2 top-2 z-10">
             {t(badge.label)}
@@ -116,11 +116,11 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
           <div className="flex flex-col items-baseline gap-1">
             <RatingStars rating={product.rating} label={t('rating', { rating: product.rating })} />
             <div>
-              <span className="text-body-lg  text-ds-text-primary font-semibold">
+              <span className="text-body-lg text-ds-text-primary font-semibold">
                 {formatPrice(discountedPrice ?? product.price)}
               </span>
               {discountedPrice !== null && (
-                <span className="text-caption ml-2 text-ds-text-muted line-through">{formatPrice(product.price)}</span>
+                <span className="text-caption text-ds-text-muted ml-2 line-through">{formatPrice(product.price)}</span>
               )}
             </div>
           </div>

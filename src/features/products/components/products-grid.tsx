@@ -1,6 +1,7 @@
 'use client';
 
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import ProductCard from './product-card';
 import ProductCardSkeleton from '../skeletons/product-card-skeleton';
 import { getProducts } from '../lib/api';
@@ -10,6 +11,10 @@ import { useProductFilters } from '@/features/products/hooks/use-product-filters
 import { PaginationControl } from '@/shared/components/ui/pagination';
 
 export default function ProductsGrid() {
+  // Translation
+  const t = useTranslations('products.filters');
+  const tError = useTranslations('error');
+
   // Custom hooks
   const {
     categoryIds,
@@ -25,6 +30,9 @@ export default function ProductsGrid() {
     setFilter,
   } = useProductFilters();
 
+  // Variables
+  // The sidebar is multi-select, so every checked category has to travel to the
+  // backend — sending only `categoryIds[0]` silently dropped the rest.
   const categoryId = categoryIds.length > 0 ? categoryIds.join(',') : undefined;
 
   const filters = {
@@ -40,9 +48,11 @@ export default function ProductsGrid() {
     search,
   };
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: ['products', filters],
     queryFn: () => getProducts(filters),
+    // Keeps the previous page on screen while the next filter result loads,
+    // so the grid doesn't collapse on every checkbox click.
     placeholderData: keepPreviousData,
   });
 
@@ -54,11 +64,15 @@ export default function ProductsGrid() {
   return (
     <div className="w-full">
       {isLoading ? (
-        <div className="gap-y-8sm:grid-cols-2 mt-2 grid grid-cols-1 gap-x-6 md:grid-cols-3">
+        <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
           {Array.from({ length: PRODUCTS_PAGE_SIZE }).map((_, index) => (
             <ProductCardSkeleton key={`product-skeleton-${index}`} />
           ))}
         </div>
+      ) : isError ? (
+        <p className="text-ds-text-danger py-20 text-center text-sm">{tError('networkError')}</p>
+      ) : products.length === 0 ? (
+        <p className="text-ds-text-muted py-20 text-center text-sm">{t('noResults')}</p>
       ) : (
         <div
           data-pending={isRefreshing || undefined}
