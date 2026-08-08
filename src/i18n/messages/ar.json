@@ -88,6 +88,14 @@
     }
   },
 
+  "notifications": {
+    "title": "الإشعارات",
+    "clearAll": "مسح الكل",
+    "markAllRead": "تحديد الكل كمقروء",
+    "empty": "لا توجد إشعارات بعد",
+    "markRead": "تحديد كمقروء",
+    "delete": "حذف"
+  },
   "productDetails": {
     "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",
@@ -97,7 +105,72 @@
     "addToCart": "أضف إلى السلة",
     "addToWishlist": "أضف إلى المفضلة",
     "galleryLabel": "صور المنتج",
-    "imageLabel": "صورة المنتج"
+    "imageLabel": "صورة المنتج",
+    "writeReview": "اكتب مراجعة",
+    "review": {
+      "ratingLabel": "التقييم",
+      "ratingValue": "قيّم بـ {rating} من 5 نجوم",
+      "headlineLabel": "عنوان المراجعة",
+      "contentLabel": "محتوى المراجعة"
+    },
+    "relatedProducts": {
+      "title": "منتجات ذات صلة"
+    }
+  },
+
+  "checkoutPage": {
+    "title": "إتمام الطلب",
+    "orderSummary": {
+      "title": "ملخص الطلب",
+      "empty": "سلتك فارغة.",
+      "quantity": "الكمية {count}",
+      "total": "الإجمالي",
+      "placeOrder": "إتمام الطلب",
+      "comingSoon": "الدفع وتقديم الطلب قريبًا"
+    }
+  },
+  "address": {
+    "modal": {
+      "title": "عناويني"
+    },
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنوان؟",
+    "deleted": "تم حذف العنوان",
+    "updated": "تم تحديث العنوان",
+    "add": {
+      "step1Title": "تفاصيل العنوان",
+      "step2Title": "حدد موقعك على الخريطة"
+    },
+
+    "city": "المدينة",
+    "cityPlaceholder": "مثال: القاهرة",
+    "details": "العنوان",
+    "detailsPlaceholder": "مثال: 123 شارع الرئيسي، شقة 4",
+    "phone": "رقم التواصل",
+    "title": "التسمية",
+    "titlePlaceholder": "مثال: المنزل، العمل",
+    "findMyLocation": "حدد موقعي",
+    "locationDenied": "تم رفض إذن الموقع. يرجى تحديد الموقع يدوياً.",
+    "added": "تم إضافة العنوان",
+    "addAddress": "إضافة عنوان",
+    "saveChanges": "حفظ التغييرات",
+    "next": "التالي",
+    "back": "رجوع",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "addNewAddress": "اضافة عنوان جديد",
+    "editAddress": "تحديث معلومات العنوان",
+    "or": "أو",
+    "selectedAddressTitle": "عنوان التوصيل",
+    "noAddressSelected": "لم يتم اختيار عنوان",
+    "empty": {
+      "title": "لا توجد عناوين محفوظة",
+      "description": "أضف عنوانًا للبدء."
+    },
+    "loadError": "تعذر تحميل عناوينك.",
+    "mapLoadError": "فشل تحميل الخريطة. يرجى التحقق من اتصالك.",
+    "pinRequired": "يرجى تحديد موقع على الخريطة قبل الإرسال."
   },
 
   "toast": {
