@@ -39,7 +39,6 @@ export default function AddressWizardForm({ mode, address, onSuccess, onCancel }
         ) : (
           <AddressStep2Map
             form={form}
-            onBack={goBack}
             onPositionChange={setPosition}
             isPending={isPending}
             pinError={pinError}

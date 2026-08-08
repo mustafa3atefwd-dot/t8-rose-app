@@ -38,7 +38,13 @@ export default function AddressCard({
         )}
       >
         {address.title && (
-          <span className="text-ds-text-primary bg-ds-bg-plain px-2 absolute -top-4 left-2 text-lg font-medium capitalize">
+          <span
+            className={clsx(
+              onEdit || onDelete
+                ? 'text-ds-text-primary bg-ds-bg-plain absolute -top-4 left-2 px-2 text-lg font-medium capitalize'
+                : 'hidden'
+            )}
+          >
             {address.title}
           </span>
         )}

@@ -9,9 +9,13 @@ import AddressList from './address-list';
 import AddressWizardForm from './address-wizard-form';
 
 export default function AddressBookModal({ open, onOpenChange, onSelectAddress }: IAddressBookModalProps) {
+  // Translation
   const t = useTranslations('address');
+
+  // State
   const [modalView, setModalView] = useState<ModalView>({ view: 'list' });
 
+  // Functions
   function handleOpenChange(nextOpen: boolean) {
     if (!nextOpen) {
       setModalView({ view: 'list' });

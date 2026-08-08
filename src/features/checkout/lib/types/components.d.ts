@@ -33,7 +33,6 @@ export interface IAddressStep1FieldsProps {
 
 export interface IAddressStep2MapProps {
   form: UseFormReturn<AddressSchema>;
-  onBack: () => void;
   onPositionChange: (lat: number, lng: number) => void;
   isPending: boolean;
   pinError: boolean;

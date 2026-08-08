@@ -10,12 +10,19 @@ import { Address, IAddressListProps } from '../lib/types';
 import AddressCard from './address-card';
 
 export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListProps) {
+  // Translation
   const t = useTranslations('address');
+
+  // Query
   const { data, isLoading, isError } = useAddresses();
+
+  // Mutation
   const deleteMutation = useDeleteAddress();
 
+  // Variables
   const addresses = data?.payload.addresses ?? [];
 
+  // Functions
   function handleDelete(address: Address) {
     deleteMutation.mutate(address.id, {
       onSuccess: () => toast.success(t('deleted')),

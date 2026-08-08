@@ -21,12 +21,15 @@ interface IUseAddressWizardFormProps {
 }
 
 export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWizardFormProps) {
+  // Translation
   const t = useTranslations('validation');
   const tAddress = useTranslations('address');
 
+  // State
   const [currentStep, setCurrentStep] = useState<WizardStep>('details');
   const [pinError, setPinError] = useState(false);
 
+  // Memo
   const schema = useMemo(
     () =>
       addressSchema({
@@ -36,6 +39,7 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
     [t]
   );
 
+  // Form
   const form = useForm<AddressSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -48,10 +52,12 @@ export function useAddressWizardForm({ mode, address, onSuccess }: IUseAddressWi
     },
   });
 
+  // Mutations
   const createMutation = useCreateAddress();
   const updateMutation = useUpdateAddress();
   const isPending = mode === 'create' ? createMutation.isPending : updateMutation.isPending;
 
+  // Functions
   async function goNext() {
     const isValid = await form.trigger(['city', 'street', 'phone']);
     if (isValid) {
