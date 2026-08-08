@@ -395,5 +395,16 @@
     "subTitle": "General rating:",
     "ratings": "ratings",
     "noReviews": "No reviews yet."
+  },
+  "cart": {
+    "couponPlaceholder": "Enter coupon code",
+    "applyCoupon": "Apply Coupon",
+    "invalidCoupon": "Invalid coupon",
+    "couponApplied": "Coupon applied!",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "mayLike": "Products you may like",
+    "summary": "Summary"
   }
 }

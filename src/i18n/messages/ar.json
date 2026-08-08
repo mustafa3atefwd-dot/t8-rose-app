@@ -397,5 +397,16 @@
     "contact": "اتصل بنا",
     "about": "عن",
     "inputPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟"
+  },
+  "cart": {
+    "couponPlaceholder": "أدخل رمز الكوبون",
+    "applyCoupon": "استخدم القسيمة",
+    "invalidCoupon": "كوبون غير صالح أو منتهي الصلاحية",
+    "couponApplied": "تم استخدم القسيمة!",
+    "subtotal": "المجموع الفرعي",
+    "total": "الإجمالي",
+    "checkout": "المتابعة للدفع",
+    "mayLike": "منتجات قد تعجبك",
+    "summary": "ملخص"
   }
 }

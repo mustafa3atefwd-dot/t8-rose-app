@@ -48,7 +48,7 @@ export default function Header() {
 
 
             {/* dwon */}
-            <div className="h-11 flex justify-center items-center space-x-4 bg-ds-bg-primary text-white dark:text-maroon-800">
+            <div className="h-11 flex justify-center items-center space-x-4 bg-ds-bg-primary text-white dark:text-maroon-800 focus:border-b">
                 <div className="flex items-center p-3 gap-2">
                     <House className="w-5 h-5"/>
                     <Link href={'/home'} className="font-medium text-base leading-[100%] tracking-normal align-middle cursor-pointer">{t('home')}</Link>
