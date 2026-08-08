@@ -440,5 +440,15 @@
     "subTitle": "General rating:",
     "ratings": "ratings",
     "noReviews": "No reviews yet."
+  },
+  "cart":{
+    "title": "Cart",
+    "products": "Products",
+    "clearCart": "Clear Cart",
+    "continueShopping": "Continue Shopping",
+    "empty": "Your cart is empty",
+    "startShopping": "Start Shopping",
+    "remove": "Remove",
+    "confirmClear": "Are you sure you want to clear your cart?"
   }
 }
