@@ -2,8 +2,8 @@ import 'server-only';
 
 import { apiRequest } from '@/shared/lib/utils/request.util';
 import { BACKEND_URL } from '@/shared/lib/constants';
-import { IReviewSchema } from '@/features/product-details/lib/types';
-import { ICreateProductReviewResponse } from '@/features/product-details/lib/types';
+import { IReviewSchema } from '@/features/product-details/lib/types/schemas';
+import { ICreateProductReviewResponse } from '@/features/product-details/lib/types/api';
 import { getNextAuthToken } from '@/shared/lib/utils/auth.util';
 
 /**

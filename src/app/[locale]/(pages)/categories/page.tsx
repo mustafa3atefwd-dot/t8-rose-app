@@ -1,5 +1,8 @@
-'use client';
+import { getTranslations } from 'next-intl/server';
+import { getCategoriesAction } from '@/features/products/lib/actions';
+import { BrowseEntityGrid } from '@/features/products/components/browse-entity-grid';
 
+<<<<<<< HEAD
 import { PaginationControl } from "@/shared/components/ui/pagination";
 import { useQuery } from "@tanstack/react-query";
 import { HeartPlus, ShoppingCart } from "lucide-react";
@@ -11,8 +14,14 @@ import { Link } from "@/i18n/navigation";
 import RatingStars from "@/features/products/components/rating-stars";
 import FormatPrice from "@/features/products/hooks/format-price";
 import { useTranslations } from "next-intl";
+=======
+const CATEGORIES_LIMIT = 50;
+>>>>>>> origin/testing
 
+export default async function CategoriesPage() {
+  const t = await getTranslations('browse');
 
+<<<<<<< HEAD
 export default function GetCategoriesPagee() {
   const t = useTranslations('currency')
   const {
@@ -65,9 +74,20 @@ export default function GetCategoriesPagee() {
   const categories = data?.status ? data.payload?.data ?? [] : [];
   const occasions = data?.status ? data.payload?.data ?? [] : [];
   const metadata = data?.status ? data.payload?.metadata : undefined;
+=======
+  const result = await getCategoriesAction({ limit: CATEGORIES_LIMIT }).catch(() => null);
+  const categories = result?.status ? (result.payload?.data ?? []) : [];
+>>>>>>> origin/testing
 
+  const items = categories.map((category) => ({
+    id: category.id,
+    title: category.title,
+    image: category.image,
+    countLabel: t('productsCount', { count: category._count.products }),
+  }));
 
   return (
+<<<<<<< HEAD
     <div className="w-full">
       <Header/>
 
@@ -146,6 +166,15 @@ export default function GetCategoriesPagee() {
       </div>
 
 
+=======
+    <div className="container mx-auto flex flex-col gap-8 px-4 py-8">
+      <h1 className="text-ds-text-plain text-2xl font-bold">{t('categoriesTitle')}</h1>
+      <BrowseEntityGrid
+        items={items}
+        getHref={(item) => `/products?categoryId=${item.id}`}
+        emptyLabel={t('noCategories')}
+      />
+>>>>>>> origin/testing
     </div>
   );
 }

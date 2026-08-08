@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Great_Vibes, Sarabun, Tajawal } from 'next/font/google';
-import { hasLocale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { getLocaleConfig, type Locale } from '@/shared/i18n/config';
@@ -56,6 +56,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   setRequestLocale(locale);
   const { direction } = getLocaleConfig(locale as Locale);
+  const messages = await getMessages();
 
   return (
     <html
@@ -65,7 +66,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        <Providers>{children}</Providers>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Providers>{children}</Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

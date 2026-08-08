@@ -1,5 +1,8 @@
-'use client';
+import { getTranslations } from 'next-intl/server';
+import { getOccasionsAction } from '@/features/products/lib/actions';
+import { BrowseEntityGrid } from '@/features/products/components/browse-entity-grid';
 
+<<<<<<< HEAD
 import { PaginationControl } from "@/shared/components/ui/pagination";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { HeartPlus, ShoppingCart, Star } from "lucide-react";
@@ -11,8 +14,14 @@ import { Link } from "@/i18n/navigation";
 import RatingStars from "@/features/products/components/rating-stars";
 import FormatPrice from "@/features/products/hooks/format-price";
 import { useTranslations } from "next-intl";
+=======
+const OCCASIONS_LIMIT = 50;
+>>>>>>> origin/testing
 
+export default async function OccasionsPage() {
+  const t = await getTranslations('browse');
 
+<<<<<<< HEAD
 export default function GetOccasionsPagee() {
   const t = useTranslations('currency')
 
@@ -66,9 +75,19 @@ export default function GetOccasionsPagee() {
   const occasions  = data?.status ? data.payload?.data ?? [] : [];
   const categories = data?.status ? data.payload?.data ?? [] : [];
   const metadata   = data?.status ? data.payload?.metadata : undefined;
+=======
+  const result = await getOccasionsAction({ limit: OCCASIONS_LIMIT }).catch(() => null);
+  const occasions = result?.status ? (result.payload?.data ?? []) : [];
+>>>>>>> origin/testing
 
+  const items = occasions.map((occasion) => ({
+    id: occasion.id,
+    title: occasion.title,
+    image: occasion.image,
+  }));
 
   return (
+<<<<<<< HEAD
     
     <div className="w-full">
       <Header/>
@@ -147,9 +166,15 @@ export default function GetOccasionsPagee() {
       </div>
 
 
+=======
+    <div className="container mx-auto flex flex-col gap-8 px-4 py-8">
+      <h1 className="text-ds-text-plain text-2xl font-bold">{t('occasionsTitle')}</h1>
+      <BrowseEntityGrid
+        items={items}
+        getHref={(item) => `/products?occasionId=${item.id}`}
+        emptyLabel={t('noOccasions')}
+      />
+>>>>>>> origin/testing
     </div>
-
-  )
+  );
 }
-
-

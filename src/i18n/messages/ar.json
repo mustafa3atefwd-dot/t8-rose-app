@@ -6,6 +6,21 @@
     "Go Back home": "الرجوع للصفحه الرئيسيه"
   },
   "home": {
+    "header": {
+      "logoAlt": "شعار روز",
+      "inputPlaceholder": "عن أي هدية رائعة تبحث؟",
+      "searchNoResults": "لم يتم العثور على منتجات",
+      "login": "تسجيل الدخول",
+      "favorite": "المفضلة",
+      "cart": "سلة التسوق",
+      "notifications": "الإشعارات",
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "contact": "تواصل معنا",
+      "about": "من نحن"
+    },
     "about": {
       "label": "من نحن",
       "title": "نقدم <highlight1>أفضل</highlight1> صناديق الهدايا لأجمل <highlight2>مناسباتك</highlight2>",
@@ -50,37 +65,41 @@
         "february15": "15 فبراير 2025"
       }
     },
+    "label": "الأكثر شعبية",
     "mostPopular": "الأكثر شعبية",
     "viewMore": "عرض المزيد",
-    "bestSelling": "الأكثر مبيعًا",
-    "bestSellingHeading": "اكتشف <accent>الهدايا الأكثر مبيعًا</accent> التي يفضلها عملاؤنا",
-    "bestSellingDescription": "تصفح أكثر صناديق الهدايا التي يفضلها عملاؤنا، والمختارة بعناية لتجمع بين الجودة والأناقة وتناسب كل مناسبة.",
+    "bestSelling": {
+      "label": "الأكثر مبيعًا",
+      "title": "اكتشف <accent>الهدايا الأكثر مبيعًا</accent> التي يفضلها عملاؤنا",
+      "description": "تصفح أكثر صناديق الهدايا التي يفضلها عملاؤنا، والمختارة بعناية لتجمع بين الجودة والأناقة وتناسب كل مناسبة."
+    },
     "Explore gifts": "استكشف الهدايا"
   },
+
+  "homeHeader": {
+    "deliverTo": "التوصيل إلى",
+    "userMenu": {
+      "welcome": "مرحبًا",
+      "account": "حسابي",
+      "addresses": "عناويني",
+      "order": "طلباتي",
+      "dashboard": "لوحة التحكم",
+      "logout": "تسجيل الخروج"
+    }
+  },
+
   "productDetails": {
-    "stock": "{count} وحدة متاحة",
+    "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",
-    "ratings": "({count, plural, one {تقييم واحد} other {# تقييمات}})",
+    "ratings": "({count} تقييم)",
     "description": "وصف المنتج",
     "noDescription": "لا يوجد وصف متاح.",
     "addToCart": "أضف إلى السلة",
     "addToWishlist": "أضف إلى المفضلة",
     "galleryLabel": "صور المنتج",
-    "imageLabel": "صورة المنتج",
-
-    "relatedProducts": {
-      "title": "منتجات ذات صلة"
-    },
-
-    "writeReview": "اكتب مراجعة",
-
-    "review": {
-      "ratingLabel": "تقييمك",
-      "ratingValue": "قيّم المنتج بـ {rating} من 5",
-      "headlineLabel": "عنوان المراجعة",
-      "contentLabel": "المراجعة"
-    }
+    "imageLabel": "صورة المنتج"
   },
+
   "toast": {
     "success": "نجاح",
     "error": "خطأ",
@@ -96,27 +115,33 @@
   },
   "auth": {
     "switchLang": "English",
-    "langLabel": "التحويل إلى الإنجليزية",
+    "langLabel": "التبديل إلى الإنجليزية",
     "pageTitle": "المصادقة",
-    "welcomeBack": "مرحباً بعودتك!",
-    "joinFamily": "كن جزءاً من عائلتنا!",
+    "welcomeBack": "مرحبًا بعودتك!",
+    "joinFamily": "كن جزءًا من عائلتنا!",
     "forgotPassword": "هل نسيت كلمة المرور؟",
     "registerEmail": "التسجيل باستخدام البريد الإلكتروني",
     "emailLabel": "البريد الإلكتروني",
-    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
     "login": "تسجيل الدخول",
-    "createAccount": "إنشاء حساب",
-    "enterOtpCode": "أدخل رمز التحقق",
-    "otpSentTo": "لقد أرسلنا رمزًا مكونًا من 6 أرقام إلى:",
-    "edit": "تعديل",
-    "requestCodeIn": "يمكنك طلب رمز آخر خلال: {timer}ث",
-    "resending": "جاري إعادة الإرسال...",
-    "sendNewCode": "إرسال رمز جديد",
-    "verifying": "جاري التحقق...",
-    "verifyCode": "التحقق من الرمز",
-    "needHelp": "هل تحتاج إلى مساعدة؟",
-    "contactUs": "تواصل معنا",
-    "createStrongPassword": "إنشاء كلمة مرور قوية",
+
+    "registerOtp": {
+      "title": "إنشاء حساب",
+      "subtitle": "أدخل رمز التحقق",
+      "sentTo": "لقد أرسلنا رمزًا مكونًا من 6 أرقام إلى:",
+      "edit": "تعديل",
+      "requestCodeIn": "يمكنك طلب رمز جديد خلال: {timer} ثانية",
+      "resending": "جارٍ إعادة الإرسال...",
+      "sendNewCode": "إرسال رمز جديد",
+      "verifying": "جارٍ التحقق...",
+      "verifyCode": "تحقق من الرمز",
+      "needHelp": "هل تحتاج إلى مساعدة؟",
+      "contactUs": "تواصل معنا",
+      "otpInvalid": "رمز التحقق غير صحيح.",
+      "otpExpired": "انتهت صلاحية رمز التحقق."
+    },
+
+    "createStrongPassword": "أنشئ كلمة مرور قوية",
     "tellUsMore": "أخبرنا المزيد عنك",
     "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
     "detailsToStart": "بعض التفاصيل للبدء",
@@ -253,6 +278,9 @@
     "loadingDemo": "اضغط لرؤية حالة التحميل",
     "next": "التالي",
     "creating": "جاري الإنشاء…",
+    "viewAll": "عرض الكل",
+    "viewMore": "عرض المزيد",
+    "exploreGifts": "اكتشف الهدايا",
     "addReview": "إضافة تقييم"
   },
   "checkbox": {
@@ -277,6 +305,28 @@
     "info": "معلومة",
     "outline": "محدد"
   },
+  "footer": {
+    "logoAlt": "شعار متجر روز الإلكتروني",
+    "appName": "Rose E-Commerce App",
+    "tagline": "جميع الحقوق محفوظة",
+    "year": "٢٠٢٥",
+    "navigationTitle": "اكتشف موقعنا",
+    "navigation": {
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "contact": "اتصل بنا",
+      "about": "من نحن"
+    },
+    "discountTitle": "احصل على كوبون خصم 20%",
+    "discountSubtitle": "عند الاشتراك في نشرتنا البريدية",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "subscribe": "اشترك",
+    "subscribeSuccess": "تم الاشتراك بنجاح! تحقق من بريدك للحصول على الكوبون.",
+    "alreadySubscribed": "مشترك بالفعل",
+    "subscribeError": "فشل الاشتراك. يرجى المحاولة مرة أخرى."
+  },
   "products": {
     "card": {
       "new": "جديد",
@@ -300,6 +350,13 @@
       "noResults": "لا توجد منتجات مطابقة للفلاتر المحددة.",
       "ratingLabel": "{rating} نجوم فأكثر"
     }
+  },
+  "browse": {
+    "categoriesTitle": "الفئات",
+    "occasionsTitle": "المناسبات",
+    "noCategories": "لم يتم العثور على فئات",
+    "noOccasions": "لم يتم العثور على مناسبات",
+    "productsCount": "{count} منتج"
   },
   "forgotPw": {
     "step1": {

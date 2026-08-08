@@ -104,26 +104,25 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 py-3">
+      <div className="flex flex-col gap-1 py-2">
         <h3 className="text-ds-bg-primary line-clamp-1 font-medium">{product.title}</h3>
 
-        <div className="flex items-center gap-1.5">
-          <RatingStars rating={product.rating} label={t('rating', { rating: product.rating })} />
-        </div>
-
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-body-lg text-ds-text-primary font-semibold">
-              {formatPrice(discountedPrice ?? product.price)}
-            </span>
-            {discountedPrice !== null && (
-              <span className="text-caption text-ds-text-muted line-through">{formatPrice(product.price)}</span>
-            )}
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col items-baseline gap-1">
+            <RatingStars rating={product.rating} label={t('rating', { rating: product.rating })} />
+            <div>
+              <span className="text-body-lg text-ds-text-primary font-semibold">
+                {formatPrice(discountedPrice ?? product.price)}
+              </span>
+              {discountedPrice !== null && (
+                <span className="text-caption text-ds-text-muted line-through">{formatPrice(product.price)}</span>
+              )}
+            </div>
           </div>
 
           {/* Add to Cart Button */}
           <Button
-            className="bg-maroon-500 hover:bg-maroon-600 size-12 rounded-full text-white disabled:bg-gray-300"
+            className="bg-maroon-500 hover:bg-maroon-600 size-10 rounded-full text-white disabled:bg-gray-300"
             size="icon-lg"
             variant="default"
             disabled={isOutOfStock || isCartLoading}

@@ -336,9 +336,6 @@ html[data-theme='dark'] {
 --color-ds-bg-danger-saturated: var(--ds-bg-danger-saturated);
 --color-ds-bg-danger-faint: var(--ds-bg-danger-faint);
 --color-ds-bg-danger-fade: var(--ds-bg-danger-fade);
---color-ds-bg-badge-new: var(--ds-bg-badge-new);
---color-ds-bg-badge-hot: var(--ds-bg-badge-hot);
---color-ds-bg-badge-out-of-stock: var(--ds-bg-badge-out-of-stock);
 
 /** Text */
 --color-ds-text-plain: var(--ds-text-plain);

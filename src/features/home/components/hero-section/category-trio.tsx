@@ -28,7 +28,7 @@ export function CategoryTrio() {
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-            <span className="text-maroon-600 bg-maroon-50 mb-2 inline-block w-fit px-2 py-0.5 text-xs font-medium tracking-widest uppercase backdrop-blur-md rounded-md">
+            <span className="text-maroon-600 bg-maroon-50 mb-2 inline-block w-fit rounded-md px-2 py-0.5 text-xs font-medium tracking-widest uppercase backdrop-blur-md">
               {t(`${cat.id}.tag`)}
             </span>
             <h3 className="group-hover:text-maroon-500 text-2xl leading-snug font-semibold transition-all">

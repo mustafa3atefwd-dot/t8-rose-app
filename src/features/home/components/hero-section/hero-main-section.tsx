@@ -1,20 +1,24 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { HeroSkeleton } from './hero-skeleton';
-import { HeroBanner } from './hero-baner';
+import React, { useSyncExternalStore } from 'react';
 import { HeroCarousel } from './hero-carousel';
 import { CategoryTrio } from './category-trio';
 import { FeaturesBar } from './features-bar';
+import { HeroSkeleton } from '../../skeletons/hero-skeleton';
+import HeroBanner from './hero-baner';
 
 
+
+// Never emits, so the snapshot is read once per environment: `false` while
+// server-rendering / hydrating, `true` on the client afterwards.
+const subscribeToNothing = () => () => {};
 
 export default function HomepageHero() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false
+  );
 
   if (!mounted) {
     return <HeroSkeleton />;
