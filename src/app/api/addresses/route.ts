@@ -1,51 +1,19 @@
-import "server-only";
-import { getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { getAddresses } from '@/features/checkout/lib/actions/addresses.action';
 
-
-const BASE_URL = process.env.BACKEND_URL;
-
-
-if (!BASE_URL) {
-  throw new Error("FATAL: Missing required server-side environment variable 'BACKEND_URL'.");
-}
-
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const token = await getToken({ req });
-
-    if (!token?.token && !token?.accessToken) {
-      return NextResponse.json(
-        {
-          code: 401,
-          message: "Unauthorized",
-          status: false,
-        },
-        { status: 401 }
-      );
-    }
-
-    const bearerToken = token.token || token.accessToken;
-
-    const response = await fetch(`${BASE_URL}/addresses`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${bearerToken}`,
-      },
-      cache: "no-store",
-    });
-
-    const payload = await response.json();
-    return NextResponse.json(payload, { status: response.status });
+    const data = await getAddresses();
+    return NextResponse.json(data);
   } catch (error) {
+    const unauthorized = error instanceof Error && error.message === 'Unauthorized';
     return NextResponse.json(
       {
-        code: 500,
-        message: "Failed to fetch addresses",
         status: false,
+        code: unauthorized ? 401 : 500,
+        message: error instanceof Error ? error.message : 'Something went wrong',
       },
-      { status: 500 }
+      { status: unauthorized ? 401 : 500 }
     );
   }
 }

@@ -1,45 +1,42 @@
-import { cn } from '@/shared/lib/utils';
+'use client';
 
+import { memo } from 'react';
+import clsx from 'clsx';
+import { ICheckoutStepperProps } from '../lib/types';
 
-interface CheckoutStepperProps {
-  currentStep: number;
-  totalSteps: number;
-}
-
-export function CheckoutStepper({ currentStep, totalSteps }: CheckoutStepperProps) {
-
-  // progress track percentage 
-  const progressPercentage = (currentStep / totalSteps) * 50;
+function CheckoutStepper<T extends string>({ steps, currentStep, className }: ICheckoutStepperProps<T>) {
+  const currentIndex = steps.indexOf(currentStep);
+  const progress = ((currentIndex + 0.5) / steps.length) * 100;
 
   return (
-    <div className="w-full my-6">
-      <div className="relative flex items-center justify-around">
-        {/* Background track */}
-        <div className="absolute left-0 top-1/2 h-1 w-full -translate-y-1/2 bg-zinc-200 z-0" />
+    <ol
+      aria-label="Checkout progress"
+      className={clsx('relative grid h-6 w-full grid-flow-col auto-cols-fr items-center', className)}
+    >
+      <div aria-hidden="true" className="bg-ds-bg-muted absolute inset-x-0 h-1.5 rounded-full" />
+      <div
+        aria-hidden="true"
+        className="bg-ds-bg-primary-saturated absolute inset-s-0 h-1.5 rounded-full"
+        style={{ width: `${progress}%` }}
+      />
 
-        {/* Active maroon line */}
-        <div
-          className="absolute left-0 top-1/2 h-1 -translate-y-1/2 bg-maroon-600 dark:bg-ds-bg-primary transition-all duration-300 z-0"
-          style={{ width: `${progressPercentage}%` }}
-        />
-
-        {Array.from({ length: totalSteps }).map((_, index) => {
-          const stepNumber = index + 1;
-          const isActive = stepNumber <= currentStep;
-
-          return (
-            <div
-              key={stepNumber}
-              className={cn(
-                'relative z-10 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors',
-                isActive ? 'bg-maroon-600 dark:bg-ds-bg-primary dark:text-zinc-800 text-white' : 'bg-zinc-200 text-zinc-600'
-              )}
-            >
-              {stepNumber}
-            </div>
-          );
-        })}
-      </div>
-    </div>
+      {steps.map((step, index) => (
+        <li
+          key={step}
+          aria-current={index === currentIndex ? 'step' : undefined}
+          className={clsx(
+            'relative z-10 mx-auto flex size-6 items-center justify-center rounded-full text-xs font-normal',
+            index <= currentIndex
+              ? 'bg-ds-bg-primary-saturated text-ds-text-inverse'
+              : 'bg-ds-bg-muted text-ds-text-plain',
+          )}
+        >
+          <span className="sr-only">Step </span>
+          {index + 1}
+        </li>
+      ))}
+    </ol>
   );
 }
+
+export default memo(CheckoutStepper) as typeof CheckoutStepper;
