@@ -19,3 +19,9 @@ export interface AddressesApiResponse {
     addresses: Address[];
   };
 }
+
+export interface ICheckoutStepperProps<T extends string> {
+  steps: readonly T[]; 
+  currentStep: T;
+  className?: string;
+}

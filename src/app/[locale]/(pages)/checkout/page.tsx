@@ -6,7 +6,7 @@ export default function checkout() {
   return (<>
   
   <CheckoutPage/>
-    <CheckoutView />
+    {/* <CheckoutView /> */}
     </>
   )
 }

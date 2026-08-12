@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AddressesApiResponse } from '../lib/taypes/address.types';
+import { AddressesApiResponse } from '../lib/types/address.types';
 
 export function useUserAddresses() {
   return useQuery({
