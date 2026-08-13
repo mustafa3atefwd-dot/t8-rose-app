@@ -64,7 +64,7 @@ function PhoneInput({
   disabled,
   invalid,
   success,
-  placeholder = 'Phone number',
+  placeholder,
   onValueChange,
   className,
   id,
@@ -72,11 +72,14 @@ function PhoneInput({
   countryLabel = 'Select country',
 }: PhoneInputProps) {
   const t = useTranslations('input.placeholders');
-  const [country, setCountry] = React.useState<Country>(
-    () => countries.find((c) => c.code === defaultCountry) ?? countries[0]
-  );
+  const initialCountry =
+    countries.find((c) => c.code === countryCode) ??
+    countries.find((c) => value.startsWith(c.dial)) ??
+    countries.find((c) => c.code === defaultCountry) ??
+    countries[0];
+  const [country, setCountry] = React.useState<Country>(initialCountry);
 
-  const [national, setNational] = React.useState(defaultValue);
+  const [national, setNational] = React.useState(() => (value ? value.replace(initialCountry.dial, '') : defaultValue));
 
   // Sync from the controlled `value` prop during render rather than in an
   // effect, so the input never paints a stale number first.
@@ -85,11 +88,13 @@ function PhoneInput({
   if (value !== previousValue) {
     setPreviousValue(value);
 
-    const nextCountry = value ? countries.find((c) => value.startsWith(c.dial)) : undefined;
+    const nextCountry = value
+      ? countries.find((c) => value.startsWith(c.dial))
+      : (countries.find((c) => c.code === countryCode) ?? country);
 
     if (nextCountry) {
       setCountry(nextCountry);
-      setNational(value.replace(nextCountry.dial, ''));
+      setNational(value ? value.replace(nextCountry.dial, '') : '');
     }
   }
 
@@ -150,7 +155,7 @@ function PhoneInput({
         autoComplete="tel-national"
         disabled={disabled}
         aria-invalid={invalid || undefined}
-        placeholder={t('phone')}
+        placeholder={placeholder ?? t('phone')}
         value={national}
         onChange={(e) => {
           setNational(e.target.value);
