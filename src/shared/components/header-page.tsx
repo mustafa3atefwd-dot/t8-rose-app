@@ -9,6 +9,8 @@ import UserAddress from './user-address';
 import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { ThemeToggle } from './ThemeToggle';
 import NotificationsMenu from '@/features/notifications/components/notifications-menu';
+import HeaderBadge from './header-badge';
+import CartBadge from '@/features/cart/components/cart-badge';
 
 export default function Header() {
   const t = useTranslations('home.header');
@@ -39,8 +41,9 @@ export default function Header() {
               <Link href={'/favorite'} aria-label={t('favorite')}>
                 <Heart />
               </Link>
-              <Link href={'/cart'} aria-label={t('cart')}>
+              <Link className='relative' href={'/cart'} aria-label={t('cart')}>
                 <ShoppingCart />
+                <CartBadge />
               </Link>
               <NotificationsMenu />
             </div>
