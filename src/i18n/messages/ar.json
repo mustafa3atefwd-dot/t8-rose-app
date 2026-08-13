@@ -397,7 +397,8 @@
       "photoAlt": "صورة الملف الشخصي",
       "changePhoto": "تغيير الصورة",
       "uploading": "جارٍ الرفع...",
-      "photoHint": "JPG أو PNG أو WebP، بحد أقصى 5 ميجابايت."
+      "photoHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحجم أقصى 5 ميجابايت.",
+      "uploadPhoto": "رفع الصورة"
     },
     "password": { "title": "تغيير كلمة المرور", "description": "استخدم 8 أحرف على الأقل لإنشاء كلمة مرور قوية." },
     "fields": {

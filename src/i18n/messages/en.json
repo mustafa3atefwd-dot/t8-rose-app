@@ -451,7 +451,8 @@
       "photoAlt": "Profile photo",
       "changePhoto": "Change photo",
       "uploading": "Uploading...",
-      "photoHint": "JPG, PNG or WebP. Max 5 MB."
+      "photoHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "uploadPhoto": "Upload photo"
     },
     "password": { "title": "Change password", "description": "Use at least 8 characters for a strong password." },
     "fields": {

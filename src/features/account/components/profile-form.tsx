@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { Camera, CheckCircle2, Mail, Trash2, UserRound } from 'lucide-react';
+import { CheckCircle2, CloudUpload, Mail, Trash2, UserRound } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -23,34 +23,24 @@ export function ProfileForm() {
   const canRenderPhoto = displayPhoto && !displayPhoto.startsWith('/api/upload/temp/');
 
   return (
-    <section
-      id="profile"
-      className="border-ds-border-muted bg-ds-bg-plain scroll-mt-24 rounded-2xl border p-5 shadow-sm sm:p-8"
-    >
-      <header className="mb-7 flex items-center gap-3">
-        <UserRound className="text-ds-text-primary size-5" />
-        <div>
-          <h2 className="text-ds-text-plain text-xl font-semibold">{t('profile.title')}</h2>
-          <p className="text-ds-text-soft text-sm">{t('profile.description')}</p>
-        </div>
-      </header>
+    <section id="profile" className="scroll-mt-24 px-2">
       <form onSubmit={account.saveProfile}>
         <div className="mb-8 flex items-center gap-5">
-          <div className="bg-ds-bg-primary-fade text-ds-text-primary flex size-24 items-center justify-center overflow-hidden rounded-full">
-            {canRenderPhoto ? (
-              <Image
-                unoptimized={displayPhoto.startsWith('blob:')}
-                src={displayPhoto}
-                alt={t('profile.photoAlt')}
-                width={96}
-                height={96}
-                className="size-full object-cover"
-              />
-            ) : (
-              <UserRound className="size-10" />
-            )}
-          </div>
-          <div>
+          <div className="relative shrink-0">
+            <div className="bg-ds-bg-primary-fade text-ds-text-primary flex size-24 items-center justify-center overflow-hidden rounded-full">
+              {canRenderPhoto ? (
+                <Image
+                  unoptimized={displayPhoto.startsWith('blob:')}
+                  src={displayPhoto}
+                  alt={t('profile.photoAlt')}
+                  width={96}
+                  height={96}
+                  className="size-full object-cover"
+                />
+              ) : (
+                <UserRound className="size-10" />
+              )}
+            </div>
             <input
               ref={fileRef}
               type="file"
@@ -65,11 +55,15 @@ export function ProfileForm() {
               loading={account.uploading}
               loadingText={t('profile.uploading')}
               onClick={() => fileRef.current?.click()}
+              className="absolute right-0 bottom-0 size-9 rounded-full shadow-md"
+              aria-label={t('profile.changePhoto')}
             >
-              <Camera />
-              {t('profile.changePhoto')}
+              <CloudUpload className="size-5" />
             </Button>
-            <p className="text-ds-text-muted mt-2 text-xs">{t('profile.photoHint')}</p>
+          </div>
+          <div>
+            <h2 className="text-ds-text-plain text-xl font-semibold capitalize">{t('profile.uploadPhoto')}</h2>
+            <p className="text-ds-text-soft mt-2 text-lg">{t('profile.photoHint')}</p>
           </div>
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
@@ -86,13 +80,14 @@ export function ProfileForm() {
             required
           />
           <AccountField
+            className="sm:col-span-2"
             label={t('fields.email')}
             type="email"
             value={account.profile.email}
             onChange={account.update('email')}
             required
           />
-          <label className="text-ds-text-plain grid gap-2 text-sm font-medium">
+          <label className="text-ds-text-plain grid gap-2 text-sm font-medium sm:col-span-2">
             {t('fields.phone')}
             <PhoneInput
               value={account.profile.phone || ''}
@@ -102,6 +97,7 @@ export function ProfileForm() {
             />
           </label>
           <AccountField
+            className="sm:col-span-2"
             label={t('fields.gender')}
             value={
               account.profile.gender ? t(`gender.${account.profile.gender.toLowerCase()}`) : t('gender.unspecified')
@@ -135,8 +131,7 @@ export function ProfileForm() {
           </div>
         )}
         <div className="mt-8 flex flex-wrap justify-between gap-3">
-          <Button type="button" variant="ghost" className="text-ds-text-danger" onClick={account.deleteAccount}>
-            <Trash2 />
+          <Button type="button" variant="ghost" className="text-ds-text-danger capitalize" onClick={account.deleteAccount}>
             {t('actions.delete')}
           </Button>
           <Button type="submit" loading={account.saving} loadingText={t('actions.saving')}>

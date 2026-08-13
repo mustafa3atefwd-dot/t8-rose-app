@@ -1,10 +1,17 @@
 import { Input } from '@/shared/components/ui/inputs/input';
+import { cn } from '@/shared/lib/utils';
 
-export function AccountField({ label, ...props }: React.ComponentProps<typeof Input> & { label: string }) {
+type AccountFieldProps = Omit<React.ComponentProps<typeof Input>, 'className'> & {
+  label: string;
+  className?: string;
+  inputClassName?: string;
+};
+
+export function AccountField({ label, className, inputClassName, ...props }: AccountFieldProps) {
   return (
-    <label className="text-ds-text-plain grid gap-2 text-sm font-medium">
+    <label className={cn('text-ds-text-plain grid gap-2 text-sm font-medium', className)}>
       {label}
-      <Input {...props} />
+      <Input className={inputClassName} {...props} />
     </label>
   );
 }
