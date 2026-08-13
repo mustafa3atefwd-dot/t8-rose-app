@@ -9,7 +9,7 @@ export default function Cart() {
             <LeftSide/>
         </div>
         {/* right side */}
-        <div className="bg-lime-500"></div>
+        <div></div>
       </div>
     </>
   );
