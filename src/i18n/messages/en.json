@@ -507,5 +507,13 @@
     "subTitle": "General rating:",
     "ratings": "ratings",
     "noReviews": "No reviews yet."
+  },
+  "checkout": {
+    "step1Title": "Shipping Address",
+    "addAddress": "Add a new address",
+    "next": "Next",
+    "noAddresses": "Add a new address to proceed with checkout.",
+    "errorLoading": "Failed to load addresses.",
+    "step": "Step {current} of {total}"
   }
 }

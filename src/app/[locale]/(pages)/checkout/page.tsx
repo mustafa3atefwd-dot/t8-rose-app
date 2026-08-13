@@ -1,5 +1,7 @@
-import CheckoutView from '@/features/checkout/components/checkout-view';
+import CheckoutPage from '@/features/checkout/components/main-checkout-page'
 
-export default function CheckoutPage() {
-  return <CheckoutView />;
+
+export default function checkout() {
+  return (<CheckoutPage/>
+  )
 }
