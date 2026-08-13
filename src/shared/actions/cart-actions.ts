@@ -82,3 +82,32 @@ export async function removeFromCartAction(id: string): Promise<ApiResponse<void
 
   return data;
 }
+
+
+
+
+/**
+ * Remove cart
+ */
+export async function removeCartAction(): Promise<ApiResponse<void>> {
+  const token = await getNextAuthToken();
+  if (!token?.accessToken) {
+    throw new Error('Authentication required');
+  }
+
+  const res = await fetch(`${BASE_URL}/cart`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token.accessToken}`,
+    },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || 'Failed to remove cart');
+  }
+
+  return data;
+}
