@@ -65,7 +65,6 @@
         "february15": "February 15, 2025"
       }
     },
-
     "label": "Most Popular",
     "mostPopular": "Most Popular",
     "viewMore": "View More",
@@ -81,7 +80,6 @@
     },
     "Explore gifts": "Explore Gifts"
   },
-
   "homeHeader": {
     "deliverTo": "Deliver to",
     "userMenu": {
@@ -93,7 +91,14 @@
       "logout": "Log out"
     }
   },
-
+  "notifications": {
+    "title": "Notifications",
+    "clearAll": "Clear all",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications yet",
+    "markRead": "Mark as read",
+    "delete": "Delete"
+  },
   "productDetails": {
     "stock": "{count} units in stock",
     "rating": "Rating: {rating}/5",
@@ -103,7 +108,70 @@
     "addToCart": "Add to Cart",
     "addToWishlist": "Add to wishlist",
     "galleryLabel": "Product images",
-    "imageLabel": "Product image"
+    "imageLabel": "Product image",
+    "writeReview": "Write a Review",
+    "review": {
+      "ratingLabel": "Rating",
+      "ratingValue": "Rate {rating} out of 5 stars",
+      "headlineLabel": "Review Title",
+      "contentLabel": "Review Content"
+    },
+    "relatedProducts": {
+      "title": "Related Products"
+    }
+  },
+  "checkoutPage": {
+    "title": "Shipping Address",
+    "orderSummary": {
+      "title": "Order Summary",
+      "empty": "Your cart is empty.",
+      "quantity": "Qty {count}",
+      "total": "Total",
+      "placeOrder": "Place order",
+      "comingSoon": "Payment & order placement coming soon"
+    }
+  },
+  "address": {
+    "modal": {
+      "title": "My Addresses"
+    },
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this address?",
+    "deleted": "Address deleted",
+    "updated": "Address updated",
+    "add": {
+      "step1Title": "Enter address details",
+      "step2Title": "Find Your Location"
+    },
+    "city": "City",
+    "cityPlaceholder": "e.g. Cairo",
+    "details": "Address",
+    "detailsPlaceholder": "e.g. 123 Main St, Apt 4",
+    "phone": "Phone",
+    "title": "Label",
+    "titlePlaceholder": "e.g. Home, Work",
+    "findMyLocation": "Find My Location",
+    "locationDenied": "Location access denied. Please pin manually.",
+    "added": "Address added",
+    "addAddress": "Add Address",
+    "saveChanges": "Save Changes",
+    "next": "Next",
+    "back": "Back",
+    "cancel": "Cancel",
+    "close": "Close",
+    "addNewAddress": "add new address",
+    "editAddress": "Update Address Info",
+    "or": "OR",
+    "selectedAddressTitle": "Delivery Address",
+    "noAddressSelected": "No address selected",
+    "empty": {
+      "title": "No saved addresses",
+      "description": "Add an address to get started."
+    },
+    "loadError": "We couldn't load your addresses.",
+    "mapLoadError": "Maps failed to load. Please check your connection.",
+    "pinRequired": "Please place a pin on the map before submitting."
   },
   "toast": {
     "success": "Success",
@@ -129,7 +197,6 @@
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
-
     "registerOtp": {
       "title": "Create Account",
       "subtitle": "Enter the OTP Code",
@@ -145,7 +212,6 @@
       "otpInvalid": "The verification code is incorrect.",
       "otpExpired": "The verification code has expired."
     },
-
     "createStrongPassword": "Create a strong password",
     "tellUsMore": "Tell us more about you",
     "securePassword": "Choose a secure password to protect your account",
@@ -199,7 +265,6 @@
     "confirmPasswordRequired": "Your confirm password is required",
     "passwordsDoNotMatch": "Confirm Password must match New Password",
     "passwordMatch": "Passwords do not match",
-
     "review": {
       "productIdRequired": "Product ID is required",
       "headlineRequired": "Review title is required",
@@ -249,7 +314,6 @@
       "firstName": "Zoe",
       "lastName": "Jonathan",
       "username": "zoe123",
-
       "reviewHeadline": "Enter review title",
       "reviewContent": "What do you think of this product?"
     },
@@ -400,7 +464,10 @@
         "title": "Sweetest Expressions",
         "desc": "Handcrafted chocolates made with love."
       },
-      "gifts": { "title": "Unforgettable Surprises", "desc": "Beautifully curated gift boxes for any occasion." }
+      "gifts": {
+        "title": "Unforgettable Surprises",
+        "desc": "Beautifully curated gift boxes for any occasion."
+      }
     },
     "categories": {
       "wedding": {
@@ -440,5 +507,13 @@
     "subTitle": "General rating:",
     "ratings": "ratings",
     "noReviews": "No reviews yet."
+  },
+  "checkout": {
+    "step1Title": "Shipping Address",
+    "addAddress": "Add a new address",
+    "next": "Next",
+    "noAddresses": "Add a new address to proceed with checkout.",
+    "errorLoading": "Failed to load addresses.",
+    "step": "Step {current} of {total}"
   }
 }
