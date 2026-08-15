@@ -1,41 +1,42 @@
 import { cn } from '@/shared/lib/utils';
-import React from 'react';
+import { CheckoutStep } from '../lib/types/checkout';
 
-interface CheckoutStepperProps {
-  currentStep: number;
-  totalSteps: number;
+interface ICheckoutStepperProps {
+  steps: readonly CheckoutStep[];
+  currentStep: CheckoutStep;
 }
 
-export function CheckoutStepper({ currentStep, totalSteps }: CheckoutStepperProps) {
+export function CheckoutStepper({ steps, currentStep }: ICheckoutStepperProps) {
+  const currentIndex = steps.indexOf(currentStep);
 
-  {/* progress track percentage */}
-  const progressPercentage = (currentStep / totalSteps) * 50;
+  const progressPercentage = steps.length > 1 ? (currentIndex / (steps.length - 1)) * 100 : 0;
 
   return (
-    <div className="w-full my-6">
-      <div className="relative flex items-center justify-around">
+    <div className="my-6 w-full">
+      <div className="relative flex items-center justify-between">
         {/* Background track */}
-        <div className="absolute left-0 top-1/2 h-1 w-full -translate-y-1/2 bg-zinc-200 z-0" />
+        <div className="absolute top-1/2 left-0 z-0 h-1 w-full -translate-y-1/2 bg-zinc-200" />
 
-        {/* Active maroon line */}
+        {/* Active track */}
         <div
-          className="absolute left-0 top-1/2 h-1 -translate-y-1/2 bg-maroon-600 transition-all duration-300 z-0"
-          style={{ width: `${progressPercentage}%` }}
+          className="bg-maroon-600 absolute top-1/2 left-0 z-0 h-1 -translate-y-1/2 transition-all duration-300"
+          style={{
+            width: `${progressPercentage}%`,
+          }}
         />
 
-        {Array.from({ length: totalSteps }).map((_, index) => {
-          const stepNumber = index + 1;
-          const isActive = stepNumber <= currentStep;
+        {steps.map((step, index) => {
+          const isCompleted = index <= currentIndex;
 
           return (
             <div
-              key={stepNumber}
+              key={step}
               className={cn(
-                'relative z-10 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors',
-                isActive ? 'bg-maroon-600 text-white' : 'bg-zinc-200 text-zinc-600'
+                `relative z-10 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors`,
+                isCompleted ? 'bg-maroon-600 text-white' : 'bg-zinc-200 text-zinc-600'
               )}
             >
-              {stepNumber}
+              {index + 1}
             </div>
           );
         })}
