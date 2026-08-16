@@ -1,8 +1,5 @@
-import CheckoutPage from '@/features/checkout/components/main-checkout-page'
-import React from 'react'
+import { MainCheckoutPage } from '@/features/checkout/components';
 
 export default function checkout() {
-  return (
-    <div><CheckoutPage/></div>
-  )
+  return <MainCheckoutPage />;
 }
