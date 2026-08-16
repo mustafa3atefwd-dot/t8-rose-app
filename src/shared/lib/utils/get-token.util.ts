@@ -4,14 +4,24 @@ import { cookies } from 'next/headers';
 export async function getNextAuthToken() {
   const cookiesStore = await cookies();
 
-  const token = cookiesStore.get(process.env.NEXTAUTH_SESSION_COOKIE!)?.value;
+  const cookieNames = [
+    process.env.NEXTAUTH_SESSION_COOKIE,
+    '__Secure-next-auth.session-token',
+    'next-auth.session-token',
+  ].filter((name): name is string => Boolean(name));
+
+  const token = cookieNames.map((name) => cookiesStore.get(name)?.value).find(Boolean);
 
   if (!token) return null;
 
-  const jwt = await decode({
-    token,
-    secret: process.env.NEXTAUTH_SECRET!,
-  });
+  try {
+    const jwt = await decode({
+      token,
+      secret: process.env.NEXTAUTH_SECRET!,
+    });
 
-  return jwt?.accessToken as string | null;
+    return typeof jwt?.accessToken === 'string' ? jwt.accessToken : null;
+  } catch {
+    return null;
+  }
 }

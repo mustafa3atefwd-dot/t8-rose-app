@@ -243,6 +243,7 @@
       "search": "بحث…",
       "password": "أدخل كلمة المرور",
       "phone": "رقم الهاتف",
+      "country": "اختر الدولة",
       "passwordPlaceholder": "********",
       "firstName": "محمد",
       "lastName": "محمود",
@@ -379,6 +380,77 @@
       "success": "تم إعادة تعيين كلمة المرور بنجاح",
       "contact": "هل تحتاج مساعدة؟",
       "toContact": "اتصل بنا"
+    }
+  },
+  "account": {
+    "loading": "جارٍ تحميل الملف الشخصي",
+    "layout": {
+      "title": "إعدادات الحساب"
+    },
+    "sidebar": {
+      "title": "حسابي",
+      "navigation": "التنقل في الحساب",
+      "profile": "الملف الشخصي",
+      "password": "تغيير كلمة المرور",
+      "logout": "تسجيل الخروج"
+    },
+    "profile": {
+      "title": "معلومات الملف الشخصي",
+      "description": "حدّث صورتك وبياناتك الشخصية.",
+      "photoAlt": "صورة الملف الشخصي",
+      "changePhoto": "تغيير الصورة",
+      "uploading": "جارٍ الرفع...",
+      "photoHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحجم أقصى 5 ميجابايت.",
+      "uploadPhoto": "رفع الصورة"
+    },
+    "password": { "title": "تغيير كلمة المرور", "description": "استخدم 8 أحرف على الأقل لإنشاء كلمة مرور قوية." },
+    "fields": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "country": "اختر الدولة",
+      "gender": "النوع",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة"
+    },
+    "gender": { "male": "ذكر", "female": "أنثى", "unspecified": "غير محدد" },
+    "emailVerification": {
+      "title": "تحقق من بريدك الإلكتروني الجديد",
+      "placeholder": "رمز التحقق",
+      "confirm": "تأكيد البريد"
+    },
+    "actions": {
+      "delete": "حذف حسابي",
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
+      "updatePassword": "تحديث كلمة المرور",
+      "updating": "جارٍ التحديث..."
+    },
+    "deleteDialog": {
+      "title": "هل أنت متأكد من رغبتك في حذف حسابك؟",
+      "warning": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+      "close": "إغلاق تأكيد حذف الحساب",
+      "cancel": "لا، لن أفعل ذلك",
+      "confirm": "نعم، احذف"
+    },
+    "messages": {
+      "photoUploaded": "تم رفع الصورة",
+      "saved": "تم حفظ الملف الشخصي",
+      "savedVerifyEmail": "تم حفظ الملف الشخصي. تحقق من بريدك للحصول على رمز التحقق.",
+      "emailVerified": "تم التحقق من البريد الإلكتروني",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح",
+      "deleted": "تم حذف حسابك"
+    },
+    "errors": {
+      "missingProfile": "بيانات الملف الشخصي غير موجودة",
+      "imageType": "اختر صورة بصيغة JPG أو PNG أو GIF أو WebP",
+      "imageSize": "يجب أن يكون حجم الصورة أقل من 5 ميجابايت",
+      "imageTooLargeTitle": "حجم الصورة كبير جدًا",
+      "imageTooLargeDescription": "اختر صورة أصغر أو مضغوطة (بحد أقصى 5 ميجابايت) ثم حاول مرة أخرى.",
+      "uploadUrl": "لم تتضمن استجابة الرفع رابط الصورة",
+      "passwordMismatch": "كلمتا المرور الجديدتان غير متطابقتين"
     }
   },
   "productReview": {
