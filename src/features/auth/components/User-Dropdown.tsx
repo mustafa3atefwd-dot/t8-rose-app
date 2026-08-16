@@ -39,7 +39,7 @@ export default function UserDropdown() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator className={'my-0'}/>
         <DropdownMenuItem>
-          <Link href={'/'} className='text-zinc-700 dark:text-zinc-100 flex items-center gap-2'>
+          <Link href={'/account'} className='text-zinc-700 dark:text-zinc-100 flex items-center gap-2'>
            <User className='size-4'/>
            <span className='font-medium text-sm'>{t('account')}</span>
           </Link>
