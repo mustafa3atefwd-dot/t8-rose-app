@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { ApiError } from 'next/dist/server/api-utils';
 import { IAddressesResponse } from '@/features/checkout/lib/types';
+import { ADDRESSES_QUERY_KEY } from '../lib/constants';
 
 export function useUserAddresses() {
   return useQuery({
-    queryKey: ['user-addresses'],
+    queryKey: ADDRESSES_QUERY_KEY,
     queryFn: async () => {
       const res = await fetch('/api/addresses');
 
@@ -14,7 +15,7 @@ export function useUserAddresses() {
         throw new ApiError(res.status, String(data.message));
       }
 
-      return data.payload?.addresses;
+      return data;
     },
   });
 }

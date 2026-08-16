@@ -3,7 +3,7 @@
 import { BACKEND_URL } from '@/shared/lib/constants/api.constant';
 import { getNextAuthToken } from '@/shared/lib/utils/get-token.util';
 import { apiRequest } from '@/shared/lib/utils/request.util';
-import { AddressResponse, AddressesResponse, CreateAddressPayload, UpdateAddressPayload } from '../types';
+import { IAddressResponse, IAddressesResponse, CreateAddressPayload, UpdateAddressPayload } from '../types';
 
 async function getAccessToken() {
   const token = await getNextAuthToken();
@@ -16,9 +16,9 @@ async function getAccessToken() {
 }
 
 // Get the current user's saved addresses
-export async function getAddresses(): Promise<AddressesResponse> {
+export async function getAddresses(): Promise<IAddressesResponse> {
   const token = await getAccessToken();
-  return apiRequest<AddressesResponse>(`${BACKEND_URL}/addresses`, {
+  return apiRequest<IAddressesResponse>(`${BACKEND_URL}/addresses`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,9 +28,9 @@ export async function getAddresses(): Promise<AddressesResponse> {
 }
 
 // Create a new address
-export async function createAddress(payload: CreateAddressPayload): Promise<AddressResponse> {
+export async function createAddress(payload: CreateAddressPayload): Promise<IAddressResponse> {
   const token = await getAccessToken();
-  return apiRequest<AddressResponse>(`${BACKEND_URL}/addresses`, {
+  return apiRequest<IAddressResponse>(`${BACKEND_URL}/addresses`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,9 +41,9 @@ export async function createAddress(payload: CreateAddressPayload): Promise<Addr
 }
 
 // Update an existing address
-export async function updateAddress(addressId: string, payload: UpdateAddressPayload): Promise<AddressResponse> {
+export async function updateAddress(addressId: string, payload: UpdateAddressPayload): Promise<IAddressResponse> {
   const token = await getAccessToken();
-  return apiRequest<AddressResponse>(`${BACKEND_URL}/addresses/${addressId}`, {
+  return apiRequest<IAddressResponse>(`${BACKEND_URL}/addresses/${addressId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -54,9 +54,9 @@ export async function updateAddress(addressId: string, payload: UpdateAddressPay
 }
 
 // Delete an address
-export async function deleteAddress(addressId: string): Promise<AddressResponse> {
+export async function deleteAddress(addressId: string): Promise<IAddressResponse> {
   const token = await getAccessToken();
-  return apiRequest<AddressResponse>(`${BACKEND_URL}/addresses/${addressId}`, {
+  return apiRequest<IAddressResponse>(`${BACKEND_URL}/addresses/${addressId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,

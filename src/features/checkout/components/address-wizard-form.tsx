@@ -26,7 +26,7 @@ export default function AddressWizardForm({ mode, address, onSuccess, onCancel }
         ) : (
           <div className="flex items-center gap-2">
             <button type="button" onClick={goBack} aria-label={t('back')} className="cursor-pointer">
-              <ArrowLeft className="text-white bg-ds-bg-primary rounded-full p-1" />
+              <ArrowLeft className="bg-ds-bg-primary rounded-full p-1 text-white" />
             </button>
             {t('add.step2Title')}
           </div>

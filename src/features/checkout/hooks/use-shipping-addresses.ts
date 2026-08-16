@@ -15,7 +15,9 @@ interface IUseShippingAddressesProps {
 
 export function useShippingAddresses({ methods, setCurrentStep }: IUseShippingAddressesProps) {
   // Fetch user addresses.
-  const { data: addresses, isLoading, isError } = useUserAddresses();
+  const { data, isLoading, isError } = useUserAddresses();
+
+  const addresses = data?.payload?.addresses ?? [];
 
   // Get form methods and state.
   const { getValues, setValue } = methods;

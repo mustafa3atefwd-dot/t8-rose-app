@@ -5,8 +5,8 @@ import { Plus } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { Skeleton } from '@/shared/components/ui/skeleton';
 import { toast } from '@/shared/components/ui/toast';
-import { useAddresses, useDeleteAddress } from '../hooks';
-import { Address, IAddressListProps } from '../lib/types';
+import { useUserAddresses, useDeleteAddress } from '../hooks';
+import { IAddress, IAddressListProps } from '../lib/types';
 import AddressCard from './address-card';
 
 export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListProps) {
@@ -14,16 +14,16 @@ export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListPro
   const t = useTranslations('address');
 
   // Query
-  const { data, isLoading, isError } = useAddresses();
+  const { data, isLoading, isError } = useUserAddresses();
 
   // Mutation
   const deleteMutation = useDeleteAddress();
 
   // Variables
-  const addresses = data?.payload.addresses ?? [];
+  const addresses = data?.payload?.addresses ?? [];
 
   // Functions
-  function handleDelete(address: Address) {
+  function handleDelete(address: IAddress) {
     deleteMutation.mutate(address.id, {
       onSuccess: () => toast.success(t('deleted')),
     });

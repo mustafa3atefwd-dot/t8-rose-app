@@ -1,6 +1,7 @@
 'use client';
 
-import { MoveRight } from 'lucide-react';
+import { useState } from 'react';
+import { MoveRight, Plus } from 'lucide-react';
 import { Controller, useFormContext, useFormState } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 
@@ -8,6 +9,7 @@ import { Button } from '@/shared/components/ui/button';
 import { FormError } from '@/shared/components';
 
 import { AddressOption } from './address-option';
+import AddressBookModal from './address-book-modal';
 import { CheckoutStepHeading } from './checkout-step-heading';
 import { EmptyAddressState } from './empty-address-state';
 import { IAddress, ICheckoutFormSchema } from '@/features/checkout/lib/types';
@@ -24,12 +26,29 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
   const t = useTranslations('checkout');
 
   // Form context
-  const { control } = useFormContext<ICheckoutFormSchema>();
+  const { control, setValue } = useFormContext<ICheckoutFormSchema>();
 
   // Form state
   const { errors } = useFormState({
     control,
   });
+
+  // Modal state
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+
+  // Handle address selection from modal
+  const handleSelectAddress = (address: IAddress | string) => {
+    const addressId = typeof address === 'string' ? address : address.id;
+
+    if (addressId) {
+      setValue('addressId', addressId, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+
+    setIsAddressModalOpen(false);
+  };
 
   // Loading state
   if (isLoading) {
@@ -49,53 +68,84 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
 
   // Empty state
   if (!addresses?.length) {
-    return <EmptyAddressState />;
+    return (
+      <>
+        {/* <EmptyAddressState onOpenModal={() => setIsAddressModalOpen(true)} /> */}
+
+        <AddressBookModal
+          open={isAddressModalOpen}
+          onOpenChange={setIsAddressModalOpen}
+          onSelectAddress={handleSelectAddress}
+        />
+      </>
+    );
   }
 
   return (
-    <fieldset className="space-y-4">
-      {/* Step heading */}
-      <CheckoutStepHeading title={t('shipping.title')} />
+    <>
+      <fieldset>
+        {/* Step heading */}
+        <CheckoutStepHeading title={t('shipping.title')} />
 
-      {/* Address options */}
-      <Controller
-        name="addressId"
-        control={control}
-        render={({ field }) => (
-          <div className="space-y-3">
-            {addresses.map((address) => (
-              <AddressOption
-                key={address.id}
-                id={address.id}
-                title={address.title}
-                street={address.street}
-                city={address.city}
-                phone={address.phone}
-                checked={field.value === address.id}
-                onChange={() => field.onChange(address.id)}
-              />
-            ))}
-          </div>
-        )}
-      />
+        {/* Address options */}
+        <Controller
+          name="addressId"
+          control={control}
+          render={({ field }) => (
+            <div className="space-y-3">
+              {addresses.map((address) => (
+                <AddressOption
+                  key={address.id}
+                  id={address.id}
+                  title={address.title}
+                  street={address.street}
+                  city={address.city}
+                  phone={address.phone}
+                  checked={field.value === address.id}
+                  onChange={() => field.onChange(address.id)}
+                />
+              ))}
+            </div>
+          )}
+        />
 
-      {/* Address validation error */}
-      {errors.addressId && <FormError message={errors.addressId.message} />}
+        {/* Address validation error */}
+        {errors.addressId && <FormError message={errors.addressId.message} />}
 
-      {/* Next button */}
-      <div className="flex justify-end pt-4">
+        {/* Add Address Divider */}
+        <div className="before:bg-ds-bg-soft text-ds-text-soft relative flex items-center gap-4 py-4.5 text-center text-lg font-semibold before:absolute before:top-1/2 before:h-px before:w-full before:translate-x-0 before:-translate-y-1/2">
+          <span className="bg-ds-bg-plain z-5 mx-auto px-4">OR</span>
+        </div>
+
+        {/* Add Address Action */}
         <Button
           type="button"
-          onClick={onNext}
-          className="bg-maroon-600 hover:bg-maroon-700 flex w-40 items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-medium text-white transition-colors"
+          onClick={() => setIsAddressModalOpen(true)}
+          className="text-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 text-sm font-medium transition-colors hover:bg-red-100 dark:text-zinc-800"
         >
-          {/* Text */}
-          {t('actions.next')}
-
-          {/* Icon */}
-          <MoveRight className="h-4 w-4" />
+          <Plus className="h-4 w-4" />
+          {t('actions.addAddress', { defaultValue: 'Add a new address' })}
         </Button>
-      </div>
-    </fieldset>
+
+        {/* Next button */}
+        <div className="flex justify-end pt-10">
+          <Button
+            type="button"
+            onClick={onNext}
+            className="bg-maroon-600 hover:bg-maroon-700 flex w-40 items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-medium text-white transition-colors"
+          >
+            {t('actions.next')}
+            <MoveRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </fieldset>
+
+      {/* Address modal */}
+      <AddressBookModal
+        open={isAddressModalOpen}
+        onOpenChange={setIsAddressModalOpen}
+        onSelectAddress={handleSelectAddress}
+      />
+    </>
   );
 }

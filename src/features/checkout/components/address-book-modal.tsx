@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog';
-import { Address, IAddressBookModalProps, ModalView } from '../lib/types';
+import { IAddress, IAddressBookModalProps, ModalView } from '../lib/types';
 import AddressList from './address-list';
 import AddressWizardForm from './address-wizard-form';
 
@@ -23,7 +23,7 @@ export default function AddressBookModal({ open, onOpenChange, onSelectAddress }
     onOpenChange(nextOpen);
   }
 
-  function handleSelect(address: Address) {
+  function handleSelect(address: IAddress) {
     onSelectAddress(address);
     handleOpenChange(false);
   }

@@ -2,7 +2,7 @@
 
 import { FormProvider } from 'react-hook-form';
 
-import { CheckoutStepper } from '@/features/checkout/components/checkout-stepper';
+import CheckoutStepper from '@/features/checkout/components/checkout-stepper';
 import { ShippingAddressForm } from './shipping-address-form';
 import { PaymentMethodForm } from './payment-method-form';
 
@@ -33,7 +33,7 @@ export default function CheckoutPage() {
             {/* Checkout content */}
             <div className="space-y-6 lg:col-span-2">
               {/* Checkout stepper */}
-              <CheckoutStepper steps={CHECKOUT_STEPS_LIST} currentStep={currentStep} />
+              {/* <CheckoutStepper steps={CHECKOUT_STEPS_LIST} currentStep={currentStep} /> */}
 
               {/* Shipping address form */}
               {currentStep === CHECKOUT_STEPS.SHIPPING && (

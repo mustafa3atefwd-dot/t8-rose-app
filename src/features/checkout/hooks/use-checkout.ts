@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -12,7 +12,6 @@ import { useShippingAddresses } from './use-shipping-addresses';
 import { useCreateOrder } from './use-create-order';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { useCart } from '@/shared/hooks/use-cart';
 
 export function useCheckout() {
@@ -79,7 +78,7 @@ export function useCheckout() {
     onSubmit,
     createOrderMutation,
 
-    isCartLoading,
-    cartItems,
+    // isCartLoading,
+    // cartItems,
   };
 }

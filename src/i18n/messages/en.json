@@ -203,7 +203,8 @@
       "next": "Continue",
       "back": "Back",
       "placeOrder": "Place Order",
-      "placingOrder": "Placing order..."
+      "placingOrder": "Placing order...",
+      "addAddress": "Add a New Address"
     },
 
     "messages": {

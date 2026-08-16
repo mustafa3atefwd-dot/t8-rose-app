@@ -3,7 +3,8 @@ import 'server-only';
 import { apiRequest } from '@/shared/lib/utils/request.util';
 import { getNextAuthToken } from '@/shared/lib/utils/auth.util';
 import { BACKEND_URL } from '@/shared/lib/constants';
-import type { IConfirmPaymentRequest } from '../types/payment';
+import { IConfirmPaymentRequest } from '@/features/orders/lib/types';
+// import type { IConfirmPaymentRequest } from '../types/payment';
 
 /**
  * Confirms a payment.

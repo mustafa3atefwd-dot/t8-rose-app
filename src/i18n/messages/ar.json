@@ -101,7 +101,8 @@
     "actions": {
       "next": "التالي",
       "placeOrder": "تأكيد الطلب",
-      "placingOrder": "جاري تأكيد الطلب..."
+      "placingOrder": "جاري تأكيد الطلب...",
+      "addAddress": "إضافة عنوان جديد"
     },
     "messages": {
       "orderCreated": "تم إنشاء طلبك بنجاح!",

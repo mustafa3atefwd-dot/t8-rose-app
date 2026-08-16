@@ -33,6 +33,7 @@ export function PaymentMethodForm({ isSubmitting }: IPaymentMethodFormProps) {
     <fieldset disabled={isSubmitting} className="space-y-6">
       {/* Step title */}
       <CheckoutStepHeading title={t('payment.title')} />
+
       {/* Payment method selection */}
       <Controller
         name="paymentMethod"
@@ -64,8 +65,10 @@ export function PaymentMethodForm({ isSubmitting }: IPaymentMethodFormProps) {
           </div>
         )}
       />
+
       {/* Payment method validation error */}
       {errors.paymentMethod && <FormError message={errors.paymentMethod.message} />}
+
       {/* Place order button */}
       <div className="flex justify-end">
         <Button type="submit" disabled={isSubmitting} className="flex w-40 items-center justify-center gap-2">
