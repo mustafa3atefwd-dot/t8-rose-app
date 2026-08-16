@@ -16,7 +16,6 @@ export { default as CheckoutStepper } from './checkout-stepper';
 export { default as DeleteModal } from './delete-modal';
 export { default as EmptyAddressState } from './empty-address-state';
 
-
 export { default as GoogleMapPicker } from './google-map-picker';
 export { default as MapPicker } from './map-picker';
 

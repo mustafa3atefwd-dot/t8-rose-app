@@ -35,7 +35,7 @@ export default function PaymentMethodForm({ isSubmitting, onBack }: IPaymentMeth
       <div className="flex items-center gap-4">
         {/* Back button */}
         <Button type="button" variant="outline" onClick={onBack} className="flex items-center gap-2">
-          <MoveLeft className="h-4 w-4" />
+          <MoveLeft className="size-4 rtl:rotate-180" />
           {t('actions.back')}
         </Button>
 
@@ -85,7 +85,7 @@ export default function PaymentMethodForm({ isSubmitting, onBack }: IPaymentMeth
           {isSubmitting ? t('actions.placingOrder') : t('actions.placeOrder')}
 
           {/* Place order button icon */}
-          {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <MoveRight className="h-4 w-4" />}
+          {isSubmitting && <Loader2 className="size-4 animate-spin" />}
         </Button>
       </div>
     </fieldset>

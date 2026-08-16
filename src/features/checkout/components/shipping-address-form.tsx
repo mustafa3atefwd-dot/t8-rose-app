@@ -125,7 +125,7 @@ export default function ShippingAddressForm({
             className="bg-maroon-600 hover:bg-maroon-700 flex w-40 items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-medium text-white transition-colors"
           >
             {t('actions.next')}
-            <MoveRight className="h-4 w-4" />
+            <MoveRight className="size-4 rtl:rotate-180" />
           </Button>
         </div>
       </fieldset>

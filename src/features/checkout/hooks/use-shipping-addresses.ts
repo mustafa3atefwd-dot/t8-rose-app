@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-import type { ICheckoutFormSchema } from '../lib/types/schemas';
 import { useUserAddresses } from './use-user-addresses';
 import { useTranslations } from 'next-intl';
-import { CheckoutStep } from '../lib/types/checkout';
 import { Dispatch, SetStateAction } from 'react';
 import { CHECKOUT_STEPS } from '../lib/constants';
+import { CheckoutStep, ICheckoutFormSchema } from '../lib/types';
 
 interface IUseShippingAddressesProps {
   methods: UseFormReturn<ICheckoutFormSchema>;
