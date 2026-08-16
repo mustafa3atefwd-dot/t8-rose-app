@@ -1,46 +1,42 @@
-import { cn } from '@/shared/lib/utils';
-import { CheckoutStep } from '../lib/types/checkout';
+'use client';
 
-interface ICheckoutStepperProps {
-  steps: readonly CheckoutStep[];
-  currentStep: CheckoutStep;
-}
+import { memo } from 'react';
+import clsx from 'clsx';
+import { ICheckoutStepperProps } from '../lib/types';
 
-export function CheckoutStepper({ steps, currentStep }: ICheckoutStepperProps) {
+function CheckoutStepper<T extends string>({ steps, currentStep, className }: ICheckoutStepperProps<T>) {
   const currentIndex = steps.indexOf(currentStep);
-
-  const progressPercentage = steps.length > 1 ? (currentIndex / (steps.length - 1)) * 100 : 0;
+  const progress = ((currentIndex + 0.5) / steps.length) * 100;
 
   return (
-    <div className="my-6 w-full">
-      <div className="relative flex items-center justify-between">
-        {/* Background track */}
-        <div className="absolute top-1/2 left-0 z-0 h-1 w-full -translate-y-1/2 bg-zinc-200" />
+    <ol
+      aria-label="Checkout progress"
+      className={clsx('relative grid h-6 w-full grid-flow-col auto-cols-fr items-center', className)}
+    >
+      <div aria-hidden="true" className="bg-ds-bg-muted absolute inset-x-0 h-1.5 rounded-full" />
+      <div
+        aria-hidden="true"
+        className="bg-ds-bg-primary-saturated absolute inset-s-0 h-1.5 rounded-full"
+        style={{ width: `${progress}%` }}
+      />
 
-        {/* Active track */}
-        <div
-          className="bg-maroon-600 absolute top-1/2 left-0 z-0 h-1 -translate-y-1/2 transition-all duration-300"
-          style={{
-            width: `${progressPercentage}%`,
-          }}
-        />
-
-        {steps.map((step, index) => {
-          const isCompleted = index <= currentIndex;
-
-          return (
-            <div
-              key={step}
-              className={cn(
-                `relative z-10 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors`,
-                isCompleted ? 'bg-maroon-600 text-white' : 'bg-zinc-200 text-zinc-600'
-              )}
-            >
-              {index + 1}
-            </div>
-          );
-        })}
-      </div>
-    </div>
+      {steps.map((step, index) => (
+        <li
+          key={step}
+          aria-current={index === currentIndex ? 'step' : undefined}
+          className={clsx(
+            'relative z-10 mx-auto flex size-6 items-center justify-center rounded-full text-xs font-normal',
+            index <= currentIndex
+              ? 'bg-ds-bg-primary-saturated text-ds-text-inverse'
+              : 'bg-ds-bg-muted text-ds-text-plain',
+          )}
+        >
+          <span className="sr-only">Step </span>
+          {index + 1}
+        </li>
+      ))}
+    </ol>
   );
 }
+
+export default memo(CheckoutStepper) as typeof CheckoutStepper;
