@@ -25,9 +25,3 @@ export async function accountApi<T>(url: string, init?: RequestInit): Promise<Ap
   }
   return data;
 }
-
-export const jsonRequest = (method: string, body: unknown): RequestInit => ({
-  method,
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(body),
-});

@@ -5,7 +5,7 @@ import { User } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/shared/components/ui/skeleton';
-import UserDropdown from './User-Dropdown';
+import UserDropdown from './user-dropdown';
 
 export default function UnAuthenticatedLogin() {
   const t = useTranslations('home.header');

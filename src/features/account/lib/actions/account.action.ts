@@ -17,6 +17,18 @@ function jsonHeaders(token: string) {
   return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
 }
 
+function buildProfileRequestBody(profile: Omit<UpdateProfilePayload, 'originalEmail'>) {
+  return Object.fromEntries(
+    Object.entries({
+      firstName: profile.firstName.trim(),
+      lastName: profile.lastName.trim(),
+      phone: profile.phone.trim(),
+      gender: profile.gender || undefined,
+      photo: profile.photo || undefined,
+    }).filter(([, value]) => value !== undefined && value !== '')
+  );
+}
+
 export async function updateProfileAction(payload: UpdateProfilePayload): Promise<UpdateProfileResult> {
   const token = await getAccountAccessToken();
   const { originalEmail, ...profile } = payload;
@@ -24,17 +36,7 @@ export async function updateProfileAction(payload: UpdateProfilePayload): Promis
   const response = await apiRequest<ISuccessResponse<{ user: IUser }>>(`${BACKEND_URL}/users/profile`, {
     method: 'PATCH',
     headers: jsonHeaders(token),
-    body: JSON.stringify(
-      Object.fromEntries(
-        Object.entries({
-          firstName: profile.firstName.trim(),
-          lastName: profile.lastName.trim(),
-          phone: profile.phone.trim(),
-          gender: profile.gender || undefined,
-          photo: profile.photo || undefined,
-        }).filter(([, value]) => value !== undefined && value !== '')
-      )
-    ),
+    body: JSON.stringify(buildProfileRequestBody(profile)),
   });
 
   const user = response.payload?.user;

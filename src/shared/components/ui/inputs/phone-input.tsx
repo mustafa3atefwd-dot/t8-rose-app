@@ -17,8 +17,8 @@ type PhoneInputProps = FieldStateProps & {
   disabled?: boolean;
   placeholder?: string;
 
-  value?: string; // <-- add
-  countryCode?: string; // <-- add
+  value?: string;
+  countryCode?: string;
 
   /** Fires with the full E.164 string and whether it is valid. */
   onValueChange?: (value: string, meta: { country: Country; national: string; isValid: boolean }) => void;

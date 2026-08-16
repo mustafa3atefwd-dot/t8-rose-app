@@ -8,7 +8,6 @@ export type ApiResponse<T = unknown> = {
   errors?: Array<{ message: string }>;
 };
 
-export type PasswordForm = { currentPassword: string; newPassword: string; confirmPassword: string };
 export type UploadPayload = { url: string };
 
 // Fields the profile mutation submits, beyond what the validated form collects.

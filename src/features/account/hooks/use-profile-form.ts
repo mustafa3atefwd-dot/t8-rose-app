@@ -13,13 +13,34 @@ import { profileSchema, type ProfileFormValues } from '../lib/schemas/profile.sc
 import { updateProfileAction } from '../lib/actions/account.action';
 
 export function useProfileForm(initialProfile: IUser) {
+  // Translation
   const t = useTranslations('account');
   const tValidation = useTranslations('validation');
+
+  // Context
   const { update: updateSession } = useSession();
 
+  // State
   const [originalEmail, setOriginalEmail] = useState(initialProfile.email);
   const [awaitingCode, setAwaitingCode] = useState(false);
 
+  // Mutation
+  const mutation = useMutation({
+    mutationFn: ({ values, photo }: { values: ProfileFormValues; photo: string | null }) =>
+      updateProfileAction({ ...values, gender: initialProfile.gender, photo, originalEmail }),
+    onSuccess: async ({ user, emailChangePending }) => {
+      await updateSession({ user });
+      if (emailChangePending) {
+        setAwaitingCode(true);
+        toast.success(t('messages.savedVerifyEmail'));
+      } else {
+        toast.success(t('messages.saved'));
+      }
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  // Form
   const schema = useMemo(
     () =>
       profileSchema({
@@ -42,21 +63,7 @@ export function useProfileForm(initialProfile: IUser) {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: ({ values, photo }: { values: ProfileFormValues; photo: string | null }) =>
-      updateProfileAction({ ...values, gender: initialProfile.gender, photo, originalEmail }),
-    onSuccess: async ({ user, emailChangePending }) => {
-      await updateSession({ user });
-      if (emailChangePending) {
-        setAwaitingCode(true);
-        toast.success(t('messages.savedVerifyEmail'));
-      } else {
-        toast.success(t('messages.saved'));
-      }
-    },
-    onError: (error: Error) => toast.error(error.message),
-  });
-
+  // Functions
   function saveProfile(values: ProfileFormValues, photo: string | null) {
     mutation.mutate({ values, photo });
   }

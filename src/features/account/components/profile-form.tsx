@@ -21,9 +21,13 @@ interface ProfileFormProps {
 }
 
 export function ProfileForm({ profile }: ProfileFormProps) {
+  // Translation
   const t = useTranslations('account');
+
+  // Ref
   const fileRef = useRef<HTMLInputElement>(null);
 
+  // Custom hooks
   const photoUpload = usePhotoUpload(profile.photo);
   const { form, mutation, saveProfile, awaitingCode, confirmedEmail } = useProfileForm(profile);
   const {
@@ -35,6 +39,7 @@ export function ProfileForm({ profile }: ProfileFormProps) {
   const emailValue = form.watch('email');
   const confirmEmail = useConfirmEmail(emailValue, { onConfirmed: () => confirmedEmail(emailValue) });
 
+  // Variables
   const displayPhoto = photoUpload.preview || photoUpload.photo;
   // Temporary upload URLs are Redis references for the PATCH request, not durable image URLs.
   const canRenderPhoto = displayPhoto && !displayPhoto.startsWith('/api/upload/temp/');

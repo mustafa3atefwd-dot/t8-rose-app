@@ -16,33 +16,47 @@ export function usePhotoUpload(initialPhoto: string | null) {
   const [preview, setPreview] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
 
+  function getImageValidationError(image: File) {
+    if (!ALLOWED_IMAGE_TYPES.includes(image.type)) return t('errors.imageType');
+    if (image.size > MAX_IMAGE_SIZE_BYTES) return t('errors.imageSize');
+    return null;
+  }
+
+  async function uploadImage(image: File) {
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+
+    const { payload } = await accountApi<UploadPayload>('/api/upload', { method: 'POST', body: formData });
+    if (!payload?.url) throw new Error(t('errors.uploadUrl'));
+
+    return payload.url;
+  }
+
+  function showUploadError(error: unknown) {
+    if (error instanceof AccountApiError && error.status === 413) {
+      toast.error(t('errors.imageTooLargeTitle'), { description: t('errors.imageTooLargeDescription') });
+    } else {
+      toast.error((error as Error).message);
+    }
+  }
+
   async function uploadPhoto(event: ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget;
     const image = input.files?.[0];
 
     if (!image) return;
 
-    if (!ALLOWED_IMAGE_TYPES.includes(image.type)) {
-      toast.error(t('errors.imageType'));
+    const validationError = getImageValidationError(image);
+    if (validationError) {
+      toast.error(validationError);
       input.value = '';
       return;
     }
-
-    if (image.size > MAX_IMAGE_SIZE_BYTES) {
-      toast.error(t('errors.imageSize'));
-      input.value = '';
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('image', image, image.name);
 
     setUploading(true);
 
     try {
-      const { payload } = await accountApi<UploadPayload>('/api/upload', { method: 'POST', body: formData });
-
-      if (!payload?.url) throw new Error(t('errors.uploadUrl'));
+      const url = await uploadImage(image);
 
       const localPreview = URL.createObjectURL(image);
       if (preview?.startsWith('blob:')) URL.revokeObjectURL(preview);
@@ -50,16 +64,10 @@ export function usePhotoUpload(initialPhoto: string | null) {
 
       // Keep this backend-relative temporary URL unchanged. The backend consumes
       // it when PATCH /users/profile is submitted.
-      setPhoto(payload.url);
+      setPhoto(url);
       toast.success(t('messages.photoUploaded'));
     } catch (e) {
-      if (e instanceof AccountApiError && e.status === 413) {
-        toast.error(t('errors.imageTooLargeTitle'), {
-          description: t('errors.imageTooLargeDescription'),
-        });
-      } else {
-        toast.error((e as Error).message);
-      }
+      showUploadError(e);
     } finally {
       setUploading(false);
       input.value = '';
