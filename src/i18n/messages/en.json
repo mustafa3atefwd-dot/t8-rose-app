@@ -438,6 +438,9 @@
   },
   "account": {
     "loading": "Loading profile",
+    "layout": {
+      "title": "Account settings"
+    },
     "sidebar": {
       "title": "My account",
       "navigation": "Account navigation",
@@ -479,7 +482,13 @@
       "updatePassword": "Update password",
       "updating": "Updating..."
     },
-    "deleteConfirmation": "Delete your account permanently? This action cannot be undone.",
+    "deleteDialog": {
+      "title": "Are you sure you want to delete your account?",
+      "warning": "This action is permanent and cannot be undone.",
+      "close": "Close delete account confirmation",
+      "cancel": "Nope, not doing it",
+      "confirm": "Yes, delete"
+    },
     "messages": {
       "photoUploaded": "Photo uploaded",
       "saved": "Profile saved",

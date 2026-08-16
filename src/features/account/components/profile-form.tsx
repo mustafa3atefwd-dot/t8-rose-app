@@ -1,30 +1,47 @@
 'use client';
 
 import { useRef } from 'react';
-import { CheckCircle2, CloudUpload, Mail, Trash2, UserRound } from 'lucide-react';
+import { Controller } from 'react-hook-form';
+import { CheckCircle2, CloudUpload, Mail, UserRound } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
+import type { IUser } from '@/shared/lib/types/user';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/inputs/input';
 import { PhoneInput } from '@/shared/components/ui/inputs/phone-input';
 import { AccountField } from './account-field';
-import { useAccountProfile } from '../hooks/use-account-profile';
+import { DeleteAccountDialog } from './delete-account-dialog';
+import { useConfirmEmail } from '../hooks/use-confirm-email';
+import { usePhotoUpload } from '../hooks/use-photo-upload';
+import { useProfileForm } from '../hooks/use-profile-form';
 
-export function ProfileForm() {
+interface ProfileFormProps {
+  profile: IUser;
+}
+
+export function ProfileForm({ profile }: ProfileFormProps) {
   const t = useTranslations('account');
   const fileRef = useRef<HTMLInputElement>(null);
-  const account = useAccountProfile();
-  if (account.loading)
-    return <div className="bg-ds-bg-muted h-96 animate-pulse rounded-2xl" aria-label={t('loading')} />;
 
-  const displayPhoto = account.preview || account.profile.photo;
+  const photoUpload = usePhotoUpload(profile.photo);
+  const { form, mutation, saveProfile, awaitingCode, confirmedEmail } = useProfileForm(profile);
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = form;
+
+  const emailValue = form.watch('email');
+  const confirmEmail = useConfirmEmail(emailValue, { onConfirmed: () => confirmedEmail(emailValue) });
+
+  const displayPhoto = photoUpload.preview || photoUpload.photo;
   // Temporary upload URLs are Redis references for the PATCH request, not durable image URLs.
   const canRenderPhoto = displayPhoto && !displayPhoto.startsWith('/api/upload/temp/');
 
   return (
     <section id="profile" className="scroll-mt-24 px-2">
-      <form onSubmit={account.saveProfile}>
+      <form onSubmit={form.handleSubmit((values) => saveProfile(values, photoUpload.photo))}>
         <div className="mb-8 flex items-center gap-5">
           <div className="relative shrink-0">
             <div className="bg-ds-bg-primary-fade text-ds-text-primary flex size-24 items-center justify-center overflow-hidden rounded-full">
@@ -47,12 +64,12 @@ export function ProfileForm() {
               name="image"
               accept="image/jpeg,image/png,image/gif,image/webp"
               className="sr-only"
-              onChange={account.uploadPhoto}
+              onChange={photoUpload.uploadPhoto}
             />
             <Button
               type="button"
               variant="outline"
-              loading={account.uploading}
+              loading={photoUpload.uploading}
               loadingText={t('profile.uploading')}
               onClick={() => fileRef.current?.click()}
               className="absolute right-0 bottom-0 size-9 rounded-full shadow-md"
@@ -69,43 +86,53 @@ export function ProfileForm() {
         <div className="grid gap-5 sm:grid-cols-2">
           <AccountField
             label={t('fields.firstName')}
-            value={account.profile.firstName}
-            onChange={account.update('firstName')}
+            error={errors.firstName?.message}
             required
+            {...register('firstName')}
           />
           <AccountField
             label={t('fields.lastName')}
-            value={account.profile.lastName}
-            onChange={account.update('lastName')}
+            error={errors.lastName?.message}
             required
+            {...register('lastName')}
           />
           <AccountField
             className="sm:col-span-2"
             label={t('fields.email')}
             type="email"
-            value={account.profile.email}
-            onChange={account.update('email')}
+            error={errors.email?.message}
             required
+            {...register('email')}
           />
-          <label className="text-ds-text-plain grid gap-2 text-sm font-medium sm:col-span-2">
-            {t('fields.phone')}
-            <PhoneInput
-              value={account.profile.phone || ''}
-              defaultCountry="EG"
-              countryLabel={t('fields.country')}
-              onValueChange={(value) => account.setPhone(value)}
-            />
-          </label>
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field, fieldState }) => (
+              <label className="text-ds-text-plain grid gap-2 text-sm font-medium sm:col-span-2">
+                {t('fields.phone')}
+                <PhoneInput
+                  value={field.value}
+                  defaultCountry="EG"
+                  countryLabel={t('fields.country')}
+                  invalid={fieldState.invalid}
+                  onValueChange={(value) => field.onChange(value)}
+                />
+                {fieldState.error && (
+                  <span role="alert" className="text-ds-text-danger text-sm">
+                    {fieldState.error.message}
+                  </span>
+                )}
+              </label>
+            )}
+          />
           <AccountField
             className="sm:col-span-2"
             label={t('fields.gender')}
-            value={
-              account.profile.gender ? t(`gender.${account.profile.gender.toLowerCase()}`) : t('gender.unspecified')
-            }
+            value={profile.gender ? t(`gender.${profile.gender.toLowerCase()}`) : t('gender.unspecified')}
             disabled
           />
         </div>
-        {account.awaitingCode && (
+        {awaitingCode && (
           <div className="border-ds-border-info bg-ds-bg-info-fade mt-5 rounded-xl border p-4">
             <div className="text-ds-text-info mb-3 flex items-center gap-2 text-sm font-medium">
               <Mail className="size-4" />
@@ -113,16 +140,16 @@ export function ProfileForm() {
             </div>
             <div className="flex flex-col gap-2 sm:flex-row">
               <Input
-                value={account.verificationCode}
-                onChange={(e) => account.setVerificationCode(e.target.value)}
+                value={confirmEmail.code}
+                onChange={(e) => confirmEmail.setCode(e.target.value)}
                 placeholder={t('emailVerification.placeholder')}
                 inputMode="numeric"
               />
               <Button
                 type="button"
-                loading={account.emailBusy}
-                disabled={!account.verificationCode.trim()}
-                onClick={account.confirmEmail}
+                loading={confirmEmail.mutation.isPending}
+                disabled={!confirmEmail.code.trim()}
+                onClick={confirmEmail.confirmEmail}
               >
                 <CheckCircle2 />
                 {t('emailVerification.confirm')}
@@ -131,10 +158,8 @@ export function ProfileForm() {
           </div>
         )}
         <div className="mt-8 flex flex-wrap justify-between gap-3">
-          <Button type="button" variant="ghost" className="text-ds-text-danger capitalize" onClick={account.deleteAccount}>
-            {t('actions.delete')}
-          </Button>
-          <Button type="submit" loading={account.saving} loadingText={t('actions.saving')}>
+          <DeleteAccountDialog />
+          <Button type="submit" loading={mutation.isPending} loadingText={t('actions.saving')}>
             {t('actions.save')}
           </Button>
         </div>
