@@ -1,7 +1,11 @@
 import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-export function EmptyAddressState() {
+interface IEmptyAddressStateProps {
+  onAddAddress: () => void;
+}
+
+export default function EmptyAddressState({ onAddAddress }: IEmptyAddressStateProps) {
   const t = useTranslations('checkout');
 
   return (
@@ -17,6 +21,7 @@ export function EmptyAddressState() {
       {/* Add address button */}
       <button
         type="button"
+        onClick={onAddAddress}
         className="border-maroon-600 text-maroon-600 hover:bg-maroon-50 focus-visible:ring-maroon-600 inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         {/* Add icon */}

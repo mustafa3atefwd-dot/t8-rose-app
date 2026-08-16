@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { MoveRight, Plus } from 'lucide-react';
 import { Controller, useFormContext, useFormState } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
@@ -8,20 +7,24 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/components/ui/button';
 import { FormError } from '@/shared/components';
 
-import { AddressOption } from './address-option';
-import AddressBookModal from './address-book-modal';
-import { CheckoutStepHeading } from './checkout-step-heading';
-import { EmptyAddressState } from './empty-address-state';
+import { CheckoutStepHeading, AddressOption, EmptyAddressState } from '@/features/checkout/components';
 import { IAddress, ICheckoutFormSchema } from '@/features/checkout/lib/types';
 
 interface IShippingAddressFormProps {
   onNext: () => void;
+  onAddAddress: () => void;
   isLoading: boolean;
   isError: boolean;
   addresses: IAddress[] | undefined;
 }
 
-export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: IShippingAddressFormProps) {
+export default function ShippingAddressForm({
+  addresses,
+  isLoading,
+  isError,
+  onNext,
+  onAddAddress,
+}: IShippingAddressFormProps) {
   // Translations
   const t = useTranslations('checkout');
 
@@ -34,7 +37,6 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
   });
 
   // Modal state
-  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   // Handle address selection from modal
   const handleSelectAddress = (address: IAddress | string) => {
@@ -46,8 +48,6 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
         shouldDirty: true,
       });
     }
-
-    setIsAddressModalOpen(false);
   };
 
   // Loading state
@@ -68,17 +68,7 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
 
   // Empty state
   if (!addresses?.length) {
-    return (
-      <>
-        {/* <EmptyAddressState onOpenModal={() => setIsAddressModalOpen(true)} /> */}
-
-        <AddressBookModal
-          open={isAddressModalOpen}
-          onOpenChange={setIsAddressModalOpen}
-          onSelectAddress={handleSelectAddress}
-        />
-      </>
-    );
+    return <EmptyAddressState onAddAddress={onAddAddress} />;
   }
 
   return (
@@ -92,7 +82,7 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
           name="addressId"
           control={control}
           render={({ field }) => (
-            <div className="space-y-3">
+            <div className="mt-6 space-y-3">
               {addresses.map((address) => (
                 <AddressOption
                   key={address.id}
@@ -120,7 +110,7 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
         {/* Add Address Action */}
         <Button
           type="button"
-          onClick={() => setIsAddressModalOpen(true)}
+          onClick={onAddAddress}
           className="text-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 text-sm font-medium transition-colors hover:bg-red-100 dark:text-zinc-800"
         >
           <Plus className="h-4 w-4" />
@@ -139,13 +129,6 @@ export function ShippingAddressForm({ addresses, isLoading, isError, onNext }: I
           </Button>
         </div>
       </fieldset>
-
-      {/* Address modal */}
-      <AddressBookModal
-        open={isAddressModalOpen}
-        onOpenChange={setIsAddressModalOpen}
-        onSelectAddress={handleSelectAddress}
-      />
     </>
   );
 }

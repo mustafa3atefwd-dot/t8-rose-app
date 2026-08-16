@@ -1,23 +1,23 @@
 'use client';
 
 import Image from 'next/image';
-import { Loader2, MoveRight } from 'lucide-react';
+import { Loader2, MoveLeft, MoveRight } from 'lucide-react';
 import { Controller, useFormContext, useFormState } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/shared/components/ui/button';
 import { FormError } from '@/shared/components';
 
-import type { ICheckoutFormSchema } from '../lib/types/schemas';
-import { CheckoutStepHeading } from './checkout-step-heading';
-import { PaymentMethodOption } from './payment-method-option';
-import { PAYMENT_METHODS_CONFIG } from '../lib/constants';
+import type { ICheckoutFormSchema } from '@/features/checkout/lib/types/schemas';
+import { CheckoutStepHeading, PaymentMethodOption } from '@/features/checkout/components';
+import { PAYMENT_METHODS_CONFIG } from '@/features/checkout/lib/constants';
 
 interface IPaymentMethodFormProps {
   isSubmitting: boolean;
+  onBack: () => void;
 }
 
-export function PaymentMethodForm({ isSubmitting }: IPaymentMethodFormProps) {
+export default function PaymentMethodForm({ isSubmitting, onBack }: IPaymentMethodFormProps) {
   // Translations
   const t = useTranslations('checkout');
 
@@ -31,8 +31,17 @@ export function PaymentMethodForm({ isSubmitting }: IPaymentMethodFormProps) {
 
   return (
     <fieldset disabled={isSubmitting} className="space-y-6">
-      {/* Step title */}
-      <CheckoutStepHeading title={t('payment.title')} />
+      {/* Step heading */}
+      <div className="flex items-center gap-4">
+        {/* Back button */}
+        <Button type="button" variant="outline" onClick={onBack} className="flex items-center gap-2">
+          <MoveLeft className="h-4 w-4" />
+          {t('actions.back')}
+        </Button>
+
+        {/* Step heading */}
+        <CheckoutStepHeading title={t('payment.title')} />
+      </div>
 
       {/* Payment method selection */}
       <Controller

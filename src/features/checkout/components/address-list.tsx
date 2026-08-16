@@ -5,9 +5,9 @@ import { Plus } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { Skeleton } from '@/shared/components/ui/skeleton';
 import { toast } from '@/shared/components/ui/toast';
-import { useUserAddresses, useDeleteAddress } from '../hooks';
-import { IAddress, IAddressListProps } from '../lib/types';
-import AddressCard from './address-card';
+import { useUserAddresses, useDeleteAddress } from '@/features/checkout/hooks';
+import { IAddress, IAddressListProps } from '@/features/checkout/lib/types';
+import { AddressCard } from '@/features/checkout/components';
 
 export default function AddressList({ onSelect, onAdd, onEdit }: IAddressListProps) {
   // Translation

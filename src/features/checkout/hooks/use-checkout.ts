@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -12,7 +12,6 @@ import { useShippingAddresses } from './use-shipping-addresses';
 import { useCreateOrder } from './use-create-order';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useCart } from '@/shared/hooks/use-cart';
 
 export function useCheckout() {
   // Router
@@ -25,14 +24,14 @@ export function useCheckout() {
   const t = useTranslations('checkout');
 
   // Cart
-  const { cartItems, isLoading: isCartLoading } = useCart();
+  //   const { cartItems, isLoading: isCartLoading } = useCart();
 
-  // Redirect if cart is empty
-  useEffect(() => {
-    if (!isCartLoading && cartItems.length === 0) {
-      router.replace('/cart');
-    }
-  }, [isCartLoading, cartItems.length, router]);
+  //   // Redirect if cart is empty
+  //   useEffect(() => {
+  //     if (!isCartLoading && cartItems.length === 0) {
+  //       router.replace('/cart');
+  //     }
+  //   }, [isCartLoading, cartItems.length, router]);
 
   // Validation schema
   const schema = useMemo(() => createCheckoutSchema(t), [t]);
@@ -56,6 +55,7 @@ export function useCheckout() {
     isLoading: isAddressesLoading,
     isError: isAddressesError,
     handleNextStep,
+    handleBackStep,
   } = useShippingAddresses({
     methods: form,
     setCurrentStep,
@@ -74,6 +74,7 @@ export function useCheckout() {
     isAddressesError,
 
     handleNextStep,
+    handleBackStep,
 
     onSubmit,
     createOrderMutation,

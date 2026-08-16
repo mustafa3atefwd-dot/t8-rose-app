@@ -51,6 +51,7 @@ export function useShippingAddresses({ methods, setCurrentStep }: IUseShippingAd
     });
   }, [addresses, getValues, setValue]);
 
+  // Go to the next step.
   async function handleNextStep(): Promise<void> {
     // Validate address before moving to payment step.
     const valid = await methods.trigger(['addressId']);
@@ -64,10 +65,16 @@ export function useShippingAddresses({ methods, setCurrentStep }: IUseShippingAd
     if (valid) setCurrentStep(CHECKOUT_STEPS.PAYMENT);
   }
 
+  // Go back to the previous step.
+  function handleBackStep(): void {
+    setCurrentStep(CHECKOUT_STEPS.SHIPPING);
+  }
+
   return {
     addresses,
     isLoading,
     isError,
     handleNextStep,
+    handleBackStep,
   };
 }

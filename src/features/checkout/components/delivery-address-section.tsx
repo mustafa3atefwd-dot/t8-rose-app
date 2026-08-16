@@ -4,9 +4,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/components/ui/button';
 import { Skeleton } from '@/shared/components/ui/skeleton';
-import { useUserAddresses } from '../hooks';
-import { IAddress } from '../lib/types';
-import AddressBookModal from './address-book-modal';
+import { useUserAddresses } from '@/features/checkout/hooks';
+import { IAddress } from '@/features/checkout/lib/types';
+import { AddressBookModal } from '@/features/checkout/components';
 // import AddressCard from './address-card';
 
 export default function DeliveryAddressSection() {

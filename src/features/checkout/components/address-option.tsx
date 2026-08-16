@@ -11,12 +11,12 @@ interface IAddressOptionProps {
   onChange: () => void;
 }
 
-export function AddressOption({ id, title, street, city, phone, checked, onChange }: IAddressOptionProps) {
+export default function AddressOption({ id, title, street, city, phone, checked, onChange }: IAddressOptionProps) {
   return (
     <label
       htmlFor={id}
       className={cn(
-        'relative flex cursor-pointer items-center justify-between rounded-xl border p-4 transition-all',
+        'relative flex cursor-pointer flex-wrap items-center justify-between gap-2 rounded-xl border p-4 transition-all',
         checked
           ? 'bg-ds-bg-primary-saturated text-ds-text-inverse shadow-md'
           : 'border-ds-border-soft hover:border-ds-border-soft/80 text-ds-text-plain'
@@ -49,16 +49,16 @@ export function AddressOption({ id, title, street, city, phone, checked, onChang
         {/* Phone icon */}
         <span
           className={cn(
-            'flex h-8 w-8 items-center justify-center rounded-full',
+            'flex h-6 w-6 items-center justify-center rounded-full sm:h-8 sm:w-8',
             checked ? 'text-ds-bg-primary-saturated bg-ds-bg-plain' : 'bg-ds-bg-primary-saturated text-ds-text-inverse'
           )}
           aria-hidden="true"
         >
-          <Phone className="h-4 w-4" />
+          <Phone className="h-3 w-3 sm:h-4 sm:w-4" />
         </span>
 
         {/* Phone number */}
-        <span className={cn('text-lg font-medium', checked ? 'text-ds-text-inverse' : 'text-ds-text-soft')}>
+        <span className={cn('text-sm font-medium sm:text-lg', checked ? 'text-ds-text-inverse' : 'text-ds-text-soft')}>
           {phone}
         </span>
       </div>

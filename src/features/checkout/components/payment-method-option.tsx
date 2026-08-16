@@ -16,7 +16,7 @@ interface IPaymentMethodOptionProps {
   onChange: (value: PaymentMethod) => void;
 }
 
-export function PaymentMethodOption({
+export default function PaymentMethodOption({
   id,
   name,
   value,
