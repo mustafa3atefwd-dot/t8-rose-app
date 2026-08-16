@@ -6,6 +6,6 @@ export const PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const HEADERS = {
   jsonBody: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 };

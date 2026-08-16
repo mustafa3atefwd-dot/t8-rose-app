@@ -76,6 +76,63 @@
     "Explore gifts": "استكشف الهدايا"
   },
 
+  "checkout": {
+    "shipping": {
+      "title": "عنوان الشحن",
+      "select": "اختر عنوان الشحن",
+      "empty": {
+        "title": "ليس لديك أي عنوان محفوظ.",
+        "action": "إضافة عنوان"
+      },
+      "error": "فشل تحميل العناوين."
+    },
+
+    "payment": {
+      "title": "طريقة الدفع",
+
+      "methods": {
+        "cash": {
+          "title": "الدفع عند الاستلام",
+          "description": "ادفع عند استلام طلبك."
+        },
+        "card": {
+          "title": "بطاقة ائتمانية / بطاقة بنكية",
+          "description": "ادفع عبر الإنترنت بأمان."
+        }
+      }
+    },
+
+    "orderSummary": {
+      "title": "ملخص الطلب",
+      "empty": "سلة التسوق فارغة.",
+      "quantity": "الكمية {count}",
+      "total": "الإجمالي"
+    },
+
+    "actions": {
+      "next": "التالي",
+      "back": "السابق",
+      "placeOrder": "تأكيد الطلب",
+      "placingOrder": "جاري تأكيد الطلب...",
+      "addAddress": "إضافة عنوان جديد"
+    },
+
+    "messages": {
+      "orderCreated": "تم إنشاء طلبك بنجاح!",
+      "cartEmpty": "سلة التسوق فارغة.",
+      "paymentInitializationFailed": "تعذر تهيئة عملية الدفع.",
+      "orderFailed": "فشل إنشاء الطلب."
+    },
+
+    "validation": {
+      "addressRequired": "يرجى اختيار عنوان الشحن.",
+      "addressInvalid": "عنوان الشحن المحدد غير صالح.",
+      "paymentRequired": "يرجى اختيار طريقة الدفع.",
+      "notesMaxLength": "يجب ألا تتجاوز الملاحظات 500 حرف.",
+      "urlRequired": "رابط النجاح مطلوب."
+    }
+  },
+
   "homeHeader": {
     "deliverTo": "التوصيل إلى",
     "userMenu": {
@@ -118,17 +175,6 @@
     }
   },
 
-  "checkoutPage": {
-    "title": "إتمام الطلب",
-    "orderSummary": {
-      "title": "ملخص الطلب",
-      "empty": "سلتك فارغة.",
-      "quantity": "الكمية {count}",
-      "total": "الإجمالي",
-      "placeOrder": "إتمام الطلب",
-      "comingSoon": "الدفع وتقديم الطلب قريبًا"
-    }
-  },
   "address": {
     "modal": {
       "title": "عناويني"
@@ -514,25 +560,5 @@
         "desc": "تواصل معنا في أي وقت على مدار الساعة"
       }
     }
-  },
-    "cart":{
-    "title": "سلة التسوق",
-    "products": "منتجات",
-    "clearCart": "إفراغ السلة",
-    "continueShopping": "مواصلة التسوق",
-    "empty": "سلتك فارغة",
-    "startShopping": "ابدأ التسوق",
-    "remove": "إزالة",
-    "confirmClear": "هل أنت متأكد من إفراغ السلة؟"
-},
-  
-  "checkout": {
-    "step1Title": "عنوان الشحن",
-    "addAddress": "إضافة عنوان جديد",
-    "next": "التالي",
-    "noAddresses": "أضف عنوانك الأول للمتابعة",
-    "errorLoading": "فشل تحميل العناوين.",
-    "step": "الخطوة {current} من {total}"
   }
-
 }

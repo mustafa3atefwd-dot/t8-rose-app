@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { FormField, PhoneFormField } from '@/shared/components';
 import { Button } from '@/shared/components/ui/button';
-import { IAddressStep1FieldsProps } from '../lib/types';
+import { IAddressStep1FieldsProps } from '@/features/checkout/lib/types';
 
 export default function AddressStep1Fields({ form, onNext }: IAddressStep1FieldsProps) {
   const t = useTranslations('address');

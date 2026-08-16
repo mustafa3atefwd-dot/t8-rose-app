@@ -120,17 +120,6 @@
       "title": "Related Products"
     }
   },
-  "checkoutPage": {
-    "title": "Shipping Address",
-    "orderSummary": {
-      "title": "Order Summary",
-      "empty": "Your cart is empty.",
-      "quantity": "Qty {count}",
-      "total": "Total",
-      "placeOrder": "Place order",
-      "comingSoon": "Payment & order placement coming soon"
-    }
-  },
   "address": {
     "modal": {
       "title": "My Addresses"
@@ -172,6 +161,62 @@
     "loadError": "We couldn't load your addresses.",
     "mapLoadError": "Maps failed to load. Please check your connection.",
     "pinRequired": "Please place a pin on the map before submitting."
+  },
+  "checkout": {
+    "shipping": {
+      "title": "Shipping Address",
+      "select": "Select a shipping address",
+      "empty": {
+        "title": "You don't have any saved addresses.",
+        "action": "Add Address"
+      },
+      "error": "Unable to load your addresses."
+    },
+
+    "payment": {
+      "title": "Payment Method",
+
+      "methods": {
+        "cash": {
+          "title": "Cash on Delivery",
+          "description": "Pay when your order arrives."
+        },
+        "card": {
+          "title": "Credit / Debit Card",
+          "description": "Secure online payment."
+        }
+      }
+    },
+
+    "orderSummary": {
+      "title": "Order Summary",
+      "empty": "Your cart is empty.",
+      "quantity": "Qty {count}",
+      "total": "Total"
+    },
+
+    "actions": {
+      "next": "Continue",
+      "back": "Back",
+      "placeOrder": "Place Order",
+      "placingOrder": "Placing order...",
+      "addAddress": "Add a New Address"
+    },
+
+    "messages": {
+      "orderCreated": "Your order has been created successfully!",
+      "cartEmpty": "Your cart is empty.",
+      "paymentInitializationFailed": "Unable to initialize payment.",
+      "orderFailed": "Order failed."
+    },
+
+    "validation": {
+      "addressRequired": "Please select a shipping address.",
+      "addressInvalid": "Invalid shipping address.",
+      "paymentRequired": "Please select a payment method.",
+      "notesMaxLength": "Notes cannot exceed 500 characters.",
+      "urlRequired": "Success URL is required"
+    }
   },
   "toast": {
     "success": "Success",
@@ -508,7 +553,7 @@
     "ratings": "ratings",
     "noReviews": "No reviews yet."
   },
-  "cart":{
+  "cart": {
     "title": "Cart",
     "products": "Products",
     "clearCart": "Clear Cart",
@@ -517,13 +562,5 @@
     "startShopping": "Start Shopping",
     "remove": "Remove",
     "confirmClear": "Are you sure you want to clear your cart?"
-},
-  "checkout": {
-    "step1Title": "Shipping Address",
-    "addAddress": "Add a new address",
-    "next": "Next",
-    "noAddresses": "Add a new address to proceed with checkout.",
-    "errorLoading": "Failed to load addresses.",
-    "step": "Step {current} of {total}"
   }
 }
