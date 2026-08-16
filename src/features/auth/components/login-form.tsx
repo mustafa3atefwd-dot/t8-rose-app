@@ -51,7 +51,7 @@ export function LoginForm() {
       {mutation.isError && <FormError message={(mutation.error as Error).message} />}
 
       {/* Submit button */}
-      <Button type="submit" loading={mutation.isPending} loadingText={t('loading')} className="h-12 w-full">
+      <Button  type="submit" loading={mutation.isPending} loadingText={t('loading')} className="h-12 w-full">
         {t('button')}
       </Button>
     </form>
