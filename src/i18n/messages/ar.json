@@ -19,7 +19,8 @@
       "categories": "الفئات",
       "occasions": "المناسبات",
       "contact": "تواصل معنا",
-      "about": "من نحن"
+      "about": "من نحن",
+      "register": "انشاء حساب"
     },
     "about": {
       "label": "من نحن",
@@ -75,7 +76,6 @@
     },
     "Explore gifts": "استكشف الهدايا"
   },
-
   "homeHeader": {
     "deliverTo": "التوصيل إلى",
     "userMenu": {
@@ -87,7 +87,14 @@
       "logout": "تسجيل الخروج"
     }
   },
-
+  "notifications": {
+    "title": "الإشعارات",
+    "clearAll": "مسح الكل",
+    "markAllRead": "تحديد الكل كمقروء",
+    "empty": "لا توجد إشعارات بعد",
+    "markRead": "تحديد كمقروء",
+    "delete": "حذف"
+  },
   "productDetails": {
     "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",
@@ -97,9 +104,71 @@
     "addToCart": "أضف إلى السلة",
     "addToWishlist": "أضف إلى المفضلة",
     "galleryLabel": "صور المنتج",
-    "imageLabel": "صورة المنتج"
+    "imageLabel": "صورة المنتج",
+    "writeReview": "اكتب مراجعة",
+    "review": {
+      "ratingLabel": "التقييم",
+      "ratingValue": "قيّم بـ {rating} من 5 نجوم",
+      "headlineLabel": "عنوان المراجعة",
+      "contentLabel": "محتوى المراجعة"
+    },
+    "relatedProducts": {
+      "title": "منتجات ذات صلة"
+    }
   },
-
+  "checkoutPage": {
+    "title": "إتمام الطلب",
+    "orderSummary": {
+      "title": "ملخص الطلب",
+      "empty": "سلتك فارغة.",
+      "quantity": "الكمية {count}",
+      "total": "الإجمالي",
+      "placeOrder": "إتمام الطلب",
+      "comingSoon": "الدفع وتقديم الطلب قريبًا"
+    }
+  },
+  "address": {
+    "modal": {
+      "title": "عناويني"
+    },
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنوان؟",
+    "deleted": "تم حذف العنوان",
+    "updated": "تم تحديث العنوان",
+    "add": {
+      "step1Title": "تفاصيل العنوان",
+      "step2Title": "حدد موقعك على الخريطة"
+    },
+    "city": "المدينة",
+    "cityPlaceholder": "مثال: القاهرة",
+    "details": "العنوان",
+    "detailsPlaceholder": "مثال: 123 شارع الرئيسي، شقة 4",
+    "phone": "رقم التواصل",
+    "title": "التسمية",
+    "titlePlaceholder": "مثال: المنزل، العمل",
+    "findMyLocation": "حدد موقعي",
+    "locationDenied": "تم رفض إذن الموقع. يرجى تحديد الموقع يدوياً.",
+    "added": "تم إضافة العنوان",
+    "addAddress": "إضافة عنوان",
+    "saveChanges": "حفظ التغييرات",
+    "next": "التالي",
+    "back": "رجوع",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "addNewAddress": "اضافة عنوان جديد",
+    "editAddress": "تحديث معلومات العنوان",
+    "or": "أو",
+    "selectedAddressTitle": "عنوان التوصيل",
+    "noAddressSelected": "لم يتم اختيار عنوان",
+    "empty": {
+      "title": "لا توجد عناوين محفوظة",
+      "description": "أضف عنوانًا للبدء."
+    },
+    "loadError": "تعذر تحميل عناوينك.",
+    "mapLoadError": "فشل تحميل الخريطة. يرجى التحقق من اتصالك.",
+    "pinRequired": "يرجى تحديد موقع على الخريطة قبل الإرسال."
+  },
   "toast": {
     "success": "نجاح",
     "error": "خطأ",
@@ -124,7 +193,6 @@
     "emailLabel": "البريد الإلكتروني",
     "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
     "login": "تسجيل الدخول",
-
     "registerOtp": {
       "title": "إنشاء حساب",
       "subtitle": "أدخل رمز التحقق",
@@ -140,7 +208,6 @@
       "otpInvalid": "رمز التحقق غير صحيح.",
       "otpExpired": "انتهت صلاحية رمز التحقق."
     },
-
     "createStrongPassword": "أنشئ كلمة مرور قوية",
     "tellUsMore": "أخبرنا المزيد عنك",
     "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
@@ -197,7 +264,6 @@
     "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب",
     "passwordsDoNotMatch": "يجب أن تتطابق كلمة المرور مع تأكيد كلمة المرور",
     "passwordMatch": "كلمتا المرور غير متطابقتين",
-
     "review": {
       "productIdRequired": "معرّف المنتج مطلوب",
       "headlineRequired": "عنوان المراجعة مطلوب",
@@ -248,7 +314,6 @@
       "firstName": "محمد",
       "lastName": "محمود",
       "username": "mohamed123",
-
       "reviewHeadline": "أدخل عنوان المراجعة",
       "reviewContent": "ما رأيك بهذا المنتج؟"
     },
@@ -513,5 +578,13 @@
         "desc": "تواصل معنا في أي وقت على مدار الساعة"
       }
     }
+  },
+  "checkout": {
+    "step1Title": "عنوان الشحن",
+    "addAddress": "إضافة عنوان جديد",
+    "next": "التالي",
+    "noAddresses": "أضف عنوانك الأول للمتابعة",
+    "errorLoading": "فشل تحميل العناوين.",
+    "step": "الخطوة {current} من {total}"
   }
 }

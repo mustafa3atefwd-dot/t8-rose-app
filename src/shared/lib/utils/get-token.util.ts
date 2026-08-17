@@ -20,7 +20,7 @@ export async function getNextAuthToken() {
       secret: process.env.NEXTAUTH_SECRET!,
     });
 
-    return typeof jwt?.accessToken === 'string' ? jwt.accessToken : null;
+    return (jwt?.accessToken ?? jwt?.token) as string | null;
   } catch {
     return null;
   }

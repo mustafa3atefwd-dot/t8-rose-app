@@ -22,8 +22,9 @@ function AlertDialogBackdrop({ className, ...props }: AlertDialogPrimitive.Backd
     <AlertDialogPrimitive.Backdrop
       data-slot="alert-dialog-backdrop"
       className={cn(
-        'fixed inset-0 z-50 bg-black/50',
-        'data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
+        'bg-ds-bg-overlay fixed inset-0 z-50',
+        'data-open:animate-in data-open:fade-in-0',
+        'data-closed:animate-out data-closed:fade-out-0',
         className
       )}
       {...props}
@@ -31,20 +32,24 @@ function AlertDialogBackdrop({ className, ...props }: AlertDialogPrimitive.Backd
   );
 }
 
-function AlertDialogContent({ className, ...props }: AlertDialogPrimitive.Popup.Props) {
+function AlertDialogContent({ className, children, ...props }: AlertDialogPrimitive.Popup.Props) {
   return (
     <AlertDialogPortal>
       <AlertDialogBackdrop />
       <AlertDialogPrimitive.Popup
         data-slot="alert-dialog-content"
         className={cn(
-          'border-ds-border-soft bg-ds-bg-plain shadow-soft-lg fixed top-1/2 left-1/2 z-50 grid w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border p-6 duration-150',
+          'bg-ds-bg-plain text-ds-text-plain ring-ds-border-plain/10',
+          'fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2',
+          'max-h-[85vh] overflow-y-auto rounded-lg p-6 shadow-lg ring-1 duration-100',
           'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
           'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
           className
         )}
         {...props}
-      />
+      >
+        {children}
+      </AlertDialogPrimitive.Popup>
     </AlertDialogPortal>
   );
 }
@@ -53,7 +58,7 @@ function AlertDialogHeader({ className, ...props }: React.ComponentProps<'div'>)
   return (
     <div
       data-slot="alert-dialog-header"
-      className={cn('flex flex-col gap-2 text-start', className)}
+      className={cn('mb-4 flex flex-col gap-1.5 text-center sm:text-start', className)}
       {...props}
     />
   );
@@ -63,7 +68,7 @@ function AlertDialogFooter({ className, ...props }: React.ComponentProps<'div'>)
   return (
     <div
       data-slot="alert-dialog-footer"
-      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
+      className={cn('mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
       {...props}
     />
   );
@@ -73,7 +78,7 @@ function AlertDialogTitle({ className, ...props }: AlertDialogPrimitive.Title.Pr
   return (
     <AlertDialogPrimitive.Title
       data-slot="alert-dialog-title"
-      className={cn('text-ds-text-plain text-lg font-semibold', className)}
+      className={cn('text-lg font-semibold', className)}
       {...props}
     />
   );
@@ -83,14 +88,10 @@ function AlertDialogDescription({ className, ...props }: AlertDialogPrimitive.De
   return (
     <AlertDialogPrimitive.Description
       data-slot="alert-dialog-description"
-      className={cn('text-ds-text-soft text-sm', className)}
+      className={cn('text-ds-text-muted text-sm', className)}
       {...props}
     />
   );
-}
-
-function AlertDialogClose({ className, ...props }: AlertDialogPrimitive.Close.Props) {
-  return <AlertDialogPrimitive.Close data-slot="alert-dialog-close" className={className} {...props} />;
 }
 
 export {
@@ -103,5 +104,4 @@ export {
   AlertDialogFooter,
   AlertDialogTitle,
   AlertDialogDescription,
-  AlertDialogClose,
 };
