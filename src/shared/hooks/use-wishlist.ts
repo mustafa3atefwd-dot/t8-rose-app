@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useSyncExternalStore } from 'react';
 import { useSession } from 'next-auth/react';
 import { addToWishlistAction, removeFromWishlistAction } from '../actions/wishlist-actions';
 import { WishlistItem } from '../lib/types/product';
@@ -10,16 +10,16 @@ import { createGuestStore } from '../lib/utils/guest-storage.util';
 const GUEST_WISHLIST_KEY = 'guest_wishlist_items';
 
 const guestWishlistStore = createGuestStore<WishlistItem>(GUEST_WISHLIST_KEY);
+const subscribeToMount = () => () => undefined;
+const getClientMountState = () => true;
+const getServerMountState = () => false;
 
 export function useWishlist() {
   // Session status can resolve before a deferred/streamed subtree (e.g. behind
   // a Suspense boundary) hydrates, so gate it on mount: the hydration render
   // then always matches the server's always-logged-out pass, and only after
   // mount do we trust the live session status.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(subscribeToMount, getClientMountState, getServerMountState);
 
   const { status } = useSession();
   const isLoggedIn = mounted && status === 'authenticated';
@@ -34,12 +34,21 @@ export function useWishlist() {
   );
 
   // 2. Fetch Server Wishlist for Authenticated Users
-  const { data: serverWishlist = [], isLoading: isWishlistLoading } = useQuery<WishlistItem[]>({
+  const {
+    data: serverWishlist = [],
+    isLoading: isWishlistLoading,
+    isError: isWishlistError,
+    refetch: refetchWishlist,
+  } = useQuery<WishlistItem[]>({
     queryKey: ['wishlist'],
     queryFn: async () => {
       const res = await fetch('/api/wishlist');
-      if (!res.ok) return [];
       const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to fetch wishlist');
+      }
+
       return data.payload?.wishlistItems || [];
     },
     enabled: isLoggedIn,
@@ -98,6 +107,13 @@ export function useWishlist() {
     isWishlisted,
     toggleWishlist,
     uniqueItemsCount: wishlistItems.length,
-    isLoading: isWishlistLoading || addMutation.isPending || removeMutation.isPending,
+    isLoading:
+      !mounted ||
+      status === 'loading' ||
+      (isLoggedIn && isWishlistLoading) ||
+      addMutation.isPending ||
+      removeMutation.isPending,
+    isError: isWishlistError,
+    retry: refetchWishlist,
   };
 }

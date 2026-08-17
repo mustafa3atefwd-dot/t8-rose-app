@@ -14,10 +14,12 @@ export default function ProductsGrid() {
   // Translation
   const t = useTranslations('products.filters');
   const tError = useTranslations('error');
+  const tWishlist = useTranslations('wishlist');
 
   // Custom hooks
   const {
     categoryIds,
+    subCategoryId,
     occasionId,
     minRating,
     minPrice,
@@ -29,6 +31,7 @@ export default function ProductsGrid() {
     isPending,
     setFilter,
   } = useProductFilters();
+  const { toggleWishlist, isWishlisted, isLoading: isWishlistLoading } = useWishlist();
 
   // Variables
   // The sidebar is multi-select, so every checked category has to travel to the
@@ -39,6 +42,7 @@ export default function ProductsGrid() {
     page,
     limit: PRODUCTS_PAGE_SIZE,
     categoryId,
+    subCategoryId,
     occasionId,
     minRating,
     minPrice,
