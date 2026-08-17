@@ -10,7 +10,14 @@ import { ApiError } from "./error.util";
 export const apiRequest = async <TResponse>(input: RequestInfo, init?: RequestInit): Promise<TResponse> => {
   const response = await fetch(input, init);
 
-  const data: IApiResponse = await response.json();
+  const responseText = await response.text();
+  let data: IApiResponse;
+
+  try {
+    data = responseText ? JSON.parse(responseText) : { status: response.ok, code: response.status };
+  } catch {
+    throw new ApiError(responseText || response.statusText || 'Request failed', response.status);
+  }
 
   // Backend-level validation errors
   if (!data.status && data.errors?.length) {

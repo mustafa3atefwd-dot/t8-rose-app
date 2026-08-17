@@ -10,6 +10,7 @@ import {
   PartyPopper,
   ShoppingCart,
 } from 'lucide-react';
+import { ClipboardList, Gift, Headset, Heart, House, Info, PartyPopper, ShoppingCart } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { LanguageToggle } from '@/features/auth/components/LanguageToggle';
 import { useTranslations } from 'next-intl';
@@ -18,6 +19,7 @@ import UserAddress from './user-address';
 import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { ThemeToggle } from './ThemeToggle';
 import { WishlistHeaderLink } from '@/features/wishlist';
+import NotificationsMenu from '@/features/notifications/components/notifications-menu';
 
 export default function Header() {
   const t = useTranslations('home.header');
@@ -49,9 +51,7 @@ export default function Header() {
               <Link href={'/cart'} aria-label={t('cart')}>
                 <ShoppingCart />
               </Link>
-              <Link href={'/notifications'} aria-label={t('notifications')}>
-                <Bell />
-              </Link>
+              <NotificationsMenu />
             </div>
 
             {/* language */}
