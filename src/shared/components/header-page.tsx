@@ -9,6 +9,7 @@ import UserAddress from './user-address';
 import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { ThemeToggle } from './ThemeToggle';
 import NotificationsMenu from '@/features/notifications/components/notifications-menu';
+import PushNotificationButton from '@/features/notifications/components/push-notification-button';
 
 export default function Header() {
   const t = useTranslations('home.header');
@@ -43,6 +44,7 @@ export default function Header() {
                 <ShoppingCart />
               </Link>
               <NotificationsMenu />
+              <PushNotificationButton />
             </div>
 
             {/* language */}
