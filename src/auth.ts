@@ -1,18 +1,18 @@
-import { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import { BACKEND_URL } from "./shared/lib/constants/api.constant";
-import { IApiResponse } from "./shared/lib/types/api";
-import { LoginPayload } from "./shared/lib/types/auth";
+import { NextAuthOptions } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import { BACKEND_URL } from './shared/lib/constants/api.constant';
+import { IApiResponse } from './shared/lib/types/api';
+import { LoginPayload } from './shared/lib/types/auth';
 
 const loginEndpoint = `${BACKEND_URL}/auth/login`;
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   providers: [
     Credentials({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
         username: {},
         password: {},
@@ -20,12 +20,12 @@ export const authOptions: NextAuthOptions = {
       },
       authorize: async (credentials) => {
         const response = await fetch(loginEndpoint, {
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify({
             username: credentials?.username,
             password: credentials?.password,
           }),
-          headers: { "Content-Type": "application/json" },
+          headers: { 'Content-Type': 'application/json' },
         });
 
         const payload: IApiResponse<LoginPayload> = await response.json();
@@ -38,24 +38,27 @@ export const authOptions: NextAuthOptions = {
         const accessToken = payload.payload?.token;
 
         if (!user || !accessToken) {
-          throw new Error("Invalid login response");
+          throw new Error('Invalid login response');
         }
 
         return {
           id: user.id,
           accessToken,
-          rememberMe: credentials?.rememberMe === "true",
+          rememberMe: credentials?.rememberMe === 'true',
           user,
         };
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.user = user.user;
         token.accessToken = user.accessToken;
         token.rememberMe = Boolean(user.rememberMe);
+      }
+      if (trigger === 'update' && session?.user && token.user) {
+        token.user = { ...token.user, ...session.user };
       }
       return token;
     },
