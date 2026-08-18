@@ -50,10 +50,14 @@ export function useCart() {
 
   // Fetch server cart for authenticated users
   const {
+   
     data: serverCart = [],
+   
     isLoading: isCartLoading,
     isError: isCartError,
     refetch: refetchCart,
+ ,
+    isPending: isServerCartPending,
   } = useQuery<CartItem[]>({
     queryKey: ["cart"],
 
@@ -74,10 +78,17 @@ export function useCart() {
     staleTime: 1000 * 60 * 5,
   });
 
-  // Decide which cart to use
-  const cartItems = isLoggedIn
-    ? serverCart
-    : guestCart;
+  const cartItems = isLoggedIn ? serverCart : guestCart;
+
+  // True only once `cartItems` actually reflects the user's cart. Until the
+  // session resolves and (for a logged-in user) the server cart arrives,
+  // `cartItems` is an empty placeholder — a caller that reads that as "the
+  // cart is empty" will act on a cart that simply has not loaded yet.
+  //
+  // This cannot be derived from `isLoading`: a disabled query reports
+  // `isLoading: false`, so during the pre-mount pass the hook would otherwise
+  // claim to be settled on an empty guest cart.
+  const isCartReady = mounted && status !== 'loading' && (!isLoggedIn || !isServerCartPending);
 
   // Add to cart mutation
   const addToCartMutation = useMutation({
@@ -312,5 +323,6 @@ export function useCart() {
 
     // Retry
     refetchCart,
+    isCartReady,
   };
 }

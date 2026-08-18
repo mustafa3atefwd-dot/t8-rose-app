@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export default function UserDropdown() {
-  const t = useTranslations('homeHeader.userMenu');
+  const t = useTranslations('home.header.userMenu');
   const {status, data:session} = useSession();
   const handleLogout = async () => {
   await signOut({

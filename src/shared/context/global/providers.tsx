@@ -1,9 +1,10 @@
-import React from 'react'
-import ReactQueryProvider from './providers/react-query.provider'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { NextIntlClientProvider } from 'next-intl'
-import { ThemeProvider } from "./providers/theme-provider";
+import React from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { NextIntlClientProvider } from 'next-intl';
+import { WishlistProvider } from '@/features/wishlist/context/wishlist-provider';
 import { Toaster } from '@/shared/components/ui/sonner';
+import ReactQueryProvider from './providers/react-query.provider';
+import { ThemeProvider } from './providers/theme-provider';
 import NextAuthProvider from './providers/Next-Auth.provider';
 import GuestSyncProvider from './providers/guest-sync-provider';
 
@@ -13,10 +14,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <NextIntlClientProvider>
         <ThemeProvider>
           <NextAuthProvider>
-            <GuestSyncProvider>
-              {children}
-              <Toaster/>
-            </GuestSyncProvider>
+            <WishlistProvider>
+              <GuestSyncProvider>
+                {children}
+                <Toaster />
+              </GuestSyncProvider>
+            </WishlistProvider>
           </NextAuthProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </ThemeProvider>

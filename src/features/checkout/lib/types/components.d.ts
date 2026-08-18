@@ -47,7 +47,7 @@ export interface IAddressWizardFormProps {
 }
 
 export interface ICheckoutStepperProps<T extends string> {
-  steps: T[];
+  steps: readonly T[];
   currentStep: T;
   className?: string;
 }

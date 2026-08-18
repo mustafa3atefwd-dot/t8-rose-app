@@ -14,7 +14,7 @@ export default function UnAuthenticatedLogin() {
     return (
       <div className="border-ds-border-soft flex h-13 items-center gap-1.5 border-r p-4 whitespace-nowrap">
         <User />
-        <Link href={'auth/login'}>{t('login')}</Link>
+        <Link href="/login">{t('login')}</Link>
       </div>
     );
   }

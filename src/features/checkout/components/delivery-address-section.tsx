@@ -4,17 +4,17 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/components/ui/button';
 import { Skeleton } from '@/shared/components/ui/skeleton';
-import { useAddresses } from '../hooks';
-import { Address } from '../lib/types';
-import AddressBookModal from './address-book-modal';
+import { useUserAddresses } from '@/features/checkout/hooks';
+import { IAddress } from '@/features/checkout/lib/types';
+import { AddressBookModal } from '@/features/checkout/components';
 // import AddressCard from './address-card';
 
 export default function DeliveryAddressSection() {
   const t = useTranslations('address');
-  const { data, isLoading } = useAddresses();
-  const addresses = useMemo(() => data?.payload.addresses ?? [], [data?.payload.addresses]);
+  const { data, isLoading } = useUserAddresses();
+  const addresses = useMemo(() => data?.payload?.addresses ?? [], [data?.payload?.addresses]);
 
-  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [selectedAddress, setSelectedAddress] = useState<IAddress | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {

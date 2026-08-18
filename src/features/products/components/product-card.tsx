@@ -81,7 +81,10 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
             variant="secondary"
             aria-label={t('wishlist')}
             disabled={isWishlistLoading}
-            onClick={handleToggleWishlist}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleToggleWishlist();
+            }}
           >
             {isWishlistLoading ? (
               <Loader2 className="size-4 animate-spin text-gray-600" />

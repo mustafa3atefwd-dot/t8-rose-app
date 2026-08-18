@@ -19,7 +19,16 @@
       "categories": "Categories",
       "occasions": "Occasions",
       "contact": "Contact Us",
-      "about": "About Us"
+      "about": "About Us",
+      "deliverTo": "Deliver to",
+      "userMenu": {
+        "welcome": "Welcome",
+        "account": "My account",
+        "addresses": "My addresses",
+        "order": "My orders",
+        "dashboard": "Dashboard",
+        "logout": "Log out"
+      }
     },
     "about": {
       "label": "About",
@@ -80,16 +89,14 @@
     },
     "Explore gifts": "Explore Gifts"
   },
-  "homeHeader": {
-    "deliverTo": "Deliver to",
-    "userMenu": {
-      "welcome": "Welcome",
-      "account": "My account",
-      "addresses": "My addresses",
-      "order": "My orders",
-      "dashboard": "Dashboard",
-      "logout": "Log out"
-    }
+  "about": {
+    "title": "About Us"
+  },
+  "contact": {
+    "title": "Contact Us"
+  },
+  "favorite": {
+    "title": "Favorites"
   },
   "notifications": {
     "title": "Notifications",
@@ -118,17 +125,6 @@
     },
     "relatedProducts": {
       "title": "Related Products"
-    }
-  },
-  "checkoutPage": {
-    "title": "Shipping Address",
-    "orderSummary": {
-      "title": "Order Summary",
-      "empty": "Your cart is empty.",
-      "quantity": "Qty {count}",
-      "total": "Total",
-      "placeOrder": "Place order",
-      "comingSoon": "Payment & order placement coming soon"
     }
   },
   "address": {
@@ -173,6 +169,64 @@
     "mapLoadError": "Maps failed to load. Please check your connection.",
     "pinRequired": "Please place a pin on the map before submitting."
   },
+  "checkout": {
+    "title": "Checkout",
+    "or": "OR",
+    "shipping": {
+      "title": "Shipping Address",
+      "select": "Select a shipping address",
+      "empty": {
+        "title": "You don't have any saved addresses.",
+        "action": "Add Address"
+      },
+      "error": "Unable to load your addresses."
+    },
+
+    "payment": {
+      "title": "Payment Method",
+
+      "methods": {
+        "cash": {
+          "title": "Cash on Delivery",
+          "description": "Pay when your order arrives."
+        },
+        "card": {
+          "title": "Credit / Debit Card",
+          "description": "Secure online payment."
+        }
+      }
+    },
+
+    "orderSummary": {
+      "title": "Order Summary",
+      "empty": "Your cart is empty.",
+      "quantity": "Qty {count}",
+      "total": "Total"
+    },
+
+    "actions": {
+      "next": "Continue",
+      "back": "Back",
+      "placeOrder": "Place Order",
+      "placingOrder": "Placing order...",
+      "addAddress": "Add a New Address"
+    },
+
+    "messages": {
+      "orderCreated": "Your order has been created successfully!",
+      "cartEmpty": "Your cart is empty.",
+      "paymentInitializationFailed": "Unable to initialize payment.",
+      "orderFailed": "Order failed."
+    },
+
+    "validation": {
+      "addressRequired": "Please select a shipping address.",
+      "addressInvalid": "Invalid shipping address.",
+      "paymentRequired": "Please select a payment method.",
+      "notesMaxLength": "Notes cannot exceed 500 characters.",
+      "urlRequired": "Success URL is required"
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
@@ -197,6 +251,7 @@
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
+    "createAccount": "Create Account",
     "registerOtp": {
       "title": "Create Account",
       "subtitle": "Enter the OTP Code",
@@ -393,6 +448,37 @@
     "alreadySubscribed": "Already subscribed",
     "subscribeError": "Subscription failed. Please try again."
   },
+  "wishlist": {
+    "title": "Wishlist",
+    "items": "{count, plural, one {# item} other {# items}}",
+    "clear": "Clear Wishlist",
+    "clearConfirmation": "Are you sure you want to clear your Wishlist?",
+    "closeDialog": "Close confirmation",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "empty": "Your wishlist is empty",
+    "emptyDescription": "Save products you love and find them here later.",
+    "browse": "Browse products",
+    "remove": "Remove from wishlist",
+    "add": "Add to wishlist",
+    "removed": "Product removed from your wishlist.",
+    "addedToWishlist": "Product added to your wishlist.",
+    "wishlistError": "We could not update your wishlist.",
+    "removeError": "We could not remove this product from your wishlist.",
+    "cleared": "Wishlist cleared.",
+    "clearError": "We could not clear your wishlist.",
+    "addToCart": "Add to Cart",
+    "addedToCart": "Product added to your cart.",
+    "addToCartError": "We could not add this product to your cart.",
+    "continueShopping": "Continue Shopping",
+    "exploreSimilar": "Explore Similar Products",
+    "inStock": "{count} units in stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "({count, plural, one {# rating} other {# ratings}})",
+    "noImage": "No image",
+    "error": "We could not load your wishlist.",
+    "retry": "Try again"
+  },
   "products": {
     "card": {
       "new": "New",
@@ -446,6 +532,9 @@
       "contact": "Need help?",
       "toContact": "Contact us"
     }
+  },
+  "currency": {
+    "EGP": "EGP"
   },
   "hero": {
     "prevSlide": "Previous slide",
@@ -508,7 +597,21 @@
     "ratings": "ratings",
     "noReviews": "No reviews yet."
   },
-  "cart":{
+  "cart": {
+    "couponPlaceholder": "Enter coupon code",
+    "applyCoupon": "Apply Coupon",
+    "invalidCoupon": "Invalid coupon",
+    "couponLookupFailed": "Could not check this coupon. Please try again.",
+    "checkingCoupon": "Checking coupon…",
+    "noCouponApplied": "No coupons applied",
+    "removeCoupon": "Remove",
+    "couponApplied": "Coupon applied!",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "checkout": "Checkout",
+    "mayLike": "Products you may like",
+    "summary": "Summary",
     "title": "Cart",
     "products": "Products",
     "clearCart": "Clear Cart",

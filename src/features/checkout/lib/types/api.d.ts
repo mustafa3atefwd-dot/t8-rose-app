@@ -1,32 +1,16 @@
-export interface Address {
-  id: string;
-  userId: string;
-  title: string;
-  isPrimary: boolean;
-  city: string;
-  street: string;
-  phone: string;
-  latitude: number | string;
-  longitude: number | string;
-  createdAt: string;
-  updatedAt: string;
+import { IApiResponse } from '@/shared/lib/types/api';
+
+export interface IAddressPayload {
+  address: IAddress;
 }
 
-export interface AddressResponse {
-  status: boolean;
-  code: number;
-  payload: {
-    address: Address;
-  };
+export type IAddressResponse = IApiResponse<IAddressPayload>;
+
+export interface IAddressesPayload {
+  addresses: IAddress[];
 }
 
-export interface AddressesResponse {
-  status: boolean;
-  code: number;
-  payload: {
-    addresses: Address[];
-  };
-}
+export type IAddressesResponse = IApiResponse<IAddressesPayload>;
 
 export interface CreateAddressPayload {
   title: string;
