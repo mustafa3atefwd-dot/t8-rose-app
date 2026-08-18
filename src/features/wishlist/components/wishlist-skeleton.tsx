@@ -2,7 +2,7 @@ import { Skeleton } from '@/shared/components/ui/skeleton';
 
 export function WishlistSkeleton() {
   return (
-    <main className="bg-ds-bg-default py-8 sm:py-12">
+    <main className="py-8 sm:py-12">
       <div className="mx-auto max-w-7xl space-y-6 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4">
           <Skeleton className="h-9 w-48" />
