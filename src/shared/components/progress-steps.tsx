@@ -2,15 +2,14 @@
 
 import { Fragment, memo } from 'react';
 import clsx from 'clsx';
-import { RegisterStep } from '@/features/auth/lib/types/auth';
 
-interface ProgressStepsProps {
-  steps: RegisterStep[];
-  currentStep: RegisterStep;
+interface ProgressStepsProps<T extends string> {
+  steps: T[];
+  currentStep: T;
   className?: string;
 }
 
-function ProgressSteps({ steps, currentStep, className }: ProgressStepsProps) {
+function ProgressSteps<T extends string>({ steps, currentStep, className }: ProgressStepsProps<T>) {
   const currentStepIndex = steps.indexOf(currentStep);
 
   return (
@@ -45,4 +44,4 @@ function ProgressSteps({ steps, currentStep, className }: ProgressStepsProps) {
   );
 }
 
-export default memo(ProgressSteps);
+export default memo(ProgressSteps) as typeof ProgressSteps;

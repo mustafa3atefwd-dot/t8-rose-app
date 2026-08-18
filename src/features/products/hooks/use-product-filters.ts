@@ -5,7 +5,17 @@ import { useSearchParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { ProductSortBy, SortOrder } from '../lib/constants';
 
-export type ProductFilterKey = 'categoryId' | 'occasionId' | 'minRating' | 'minPrice' | 'maxPrice' | 'page' | 'sortBy' | 'sortOrder' | 'search';
+export type ProductFilterKey =
+  | 'categoryId'
+  | 'subCategoryId'
+  | 'occasionId'
+  | 'minRating'
+  | 'minPrice'
+  | 'maxPrice'
+  | 'page'
+  | 'sortBy'
+  | 'sortOrder'
+  | 'search';
 
 type FilterPatch = Partial<Record<ProductFilterKey, string | number | undefined>>;
 
@@ -26,6 +36,7 @@ export const useProductFilters = () => {
   // Variables
   const categoryIdsParam = searchParams.get('categoryId') ?? undefined;
   const categoryIds = categoryIdsParam?.split(',').filter(Boolean) ?? [];
+  const subCategoryId = searchParams.get('subCategoryId') ?? undefined;
   const occasionId = searchParams.get('occasionId') ?? undefined;
   const minRatingRaw = searchParams.get('minRating');
   const minPriceRaw = searchParams.get('minPrice');
@@ -88,6 +99,7 @@ export const useProductFilters = () => {
     sortOrder,
     search,
     categoryIds,
+    subCategoryId,
     occasionId,
     minRating,
     minPrice,
