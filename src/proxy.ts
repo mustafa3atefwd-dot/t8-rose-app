@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse, type NextFetchEvent } from "next/server
 import { routing } from "./i18n/routing";
 
 const AUTH_PAGES = ["/login", "/register", "/reset-password"];
-const PUBLIC_PAGES = ["/"];
+const PUBLIC_PAGES = ["/","/cart","/products"];
 
 const handleI18nRouting = createMiddleware(routing);
 

@@ -76,6 +76,63 @@
     "Explore gifts": "استكشف الهدايا"
   },
 
+  "checkout": {
+    "shipping": {
+      "title": "عنوان الشحن",
+      "select": "اختر عنوان الشحن",
+      "empty": {
+        "title": "ليس لديك أي عنوان محفوظ.",
+        "action": "إضافة عنوان"
+      },
+      "error": "فشل تحميل العناوين."
+    },
+
+    "payment": {
+      "title": "طريقة الدفع",
+
+      "methods": {
+        "cash": {
+          "title": "الدفع عند الاستلام",
+          "description": "ادفع عند استلام طلبك."
+        },
+        "card": {
+          "title": "بطاقة ائتمانية / بطاقة بنكية",
+          "description": "ادفع عبر الإنترنت بأمان."
+        }
+      }
+    },
+
+    "orderSummary": {
+      "title": "ملخص الطلب",
+      "empty": "سلة التسوق فارغة.",
+      "quantity": "الكمية {count}",
+      "total": "الإجمالي"
+    },
+
+    "actions": {
+      "next": "التالي",
+      "back": "السابق",
+      "placeOrder": "تأكيد الطلب",
+      "placingOrder": "جاري تأكيد الطلب...",
+      "addAddress": "إضافة عنوان جديد"
+    },
+
+    "messages": {
+      "orderCreated": "تم إنشاء طلبك بنجاح!",
+      "cartEmpty": "سلة التسوق فارغة.",
+      "paymentInitializationFailed": "تعذر تهيئة عملية الدفع.",
+      "orderFailed": "فشل إنشاء الطلب."
+    },
+
+    "validation": {
+      "addressRequired": "يرجى اختيار عنوان الشحن.",
+      "addressInvalid": "عنوان الشحن المحدد غير صالح.",
+      "paymentRequired": "يرجى اختيار طريقة الدفع.",
+      "notesMaxLength": "يجب ألا تتجاوز الملاحظات 500 حرف.",
+      "urlRequired": "رابط النجاح مطلوب."
+    }
+  },
+
   "homeHeader": {
     "deliverTo": "التوصيل إلى",
     "userMenu": {
@@ -88,6 +145,14 @@
     }
   },
 
+  "notifications": {
+    "title": "الإشعارات",
+    "clearAll": "مسح الكل",
+    "markAllRead": "تحديد الكل كمقروء",
+    "empty": "لا توجد إشعارات بعد",
+    "markRead": "تحديد كمقروء",
+    "delete": "حذف"
+  },
   "productDetails": {
     "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",
@@ -97,7 +162,61 @@
     "addToCart": "أضف إلى السلة",
     "addToWishlist": "أضف إلى المفضلة",
     "galleryLabel": "صور المنتج",
-    "imageLabel": "صورة المنتج"
+    "imageLabel": "صورة المنتج",
+    "writeReview": "اكتب مراجعة",
+    "review": {
+      "ratingLabel": "التقييم",
+      "ratingValue": "قيّم بـ {rating} من 5 نجوم",
+      "headlineLabel": "عنوان المراجعة",
+      "contentLabel": "محتوى المراجعة"
+    },
+    "relatedProducts": {
+      "title": "منتجات ذات صلة"
+    }
+  },
+
+  "address": {
+    "modal": {
+      "title": "عناويني"
+    },
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنوان؟",
+    "deleted": "تم حذف العنوان",
+    "updated": "تم تحديث العنوان",
+    "add": {
+      "step1Title": "تفاصيل العنوان",
+      "step2Title": "حدد موقعك على الخريطة"
+    },
+
+    "city": "المدينة",
+    "cityPlaceholder": "مثال: القاهرة",
+    "details": "العنوان",
+    "detailsPlaceholder": "مثال: 123 شارع الرئيسي، شقة 4",
+    "phone": "رقم التواصل",
+    "title": "التسمية",
+    "titlePlaceholder": "مثال: المنزل، العمل",
+    "findMyLocation": "حدد موقعي",
+    "locationDenied": "تم رفض إذن الموقع. يرجى تحديد الموقع يدوياً.",
+    "added": "تم إضافة العنوان",
+    "addAddress": "إضافة عنوان",
+    "saveChanges": "حفظ التغييرات",
+    "next": "التالي",
+    "back": "رجوع",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "addNewAddress": "اضافة عنوان جديد",
+    "editAddress": "تحديث معلومات العنوان",
+    "or": "أو",
+    "selectedAddressTitle": "عنوان التوصيل",
+    "noAddressSelected": "لم يتم اختيار عنوان",
+    "empty": {
+      "title": "لا توجد عناوين محفوظة",
+      "description": "أضف عنوانًا للبدء."
+    },
+    "loadError": "تعذر تحميل عناوينك.",
+    "mapLoadError": "فشل تحميل الخريطة. يرجى التحقق من اتصالك.",
+    "pinRequired": "يرجى تحديد موقع على الخريطة قبل الإرسال."
   },
 
   "toast": {
@@ -327,6 +446,37 @@
     "alreadySubscribed": "مشترك بالفعل",
     "subscribeError": "فشل الاشتراك. يرجى المحاولة مرة أخرى."
   },
+  "wishlist": {
+    "title": "قائمة المفضلة",
+    "items": "{count} منتجات",
+    "clear": "مسح قائمة المفضلة",
+    "clearConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
+    "closeDialog": "إغلاق نافذة التأكيد",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "empty": "قائمة المفضلة فارغة",
+    "emptyDescription": "احفظ المنتجات التي تحبها لتجدها هنا لاحقاً.",
+    "browse": "تصفح المنتجات",
+    "remove": "إزالة من المفضلة",
+    "add": "أضف إلى المفضلة",
+    "removed": "تمت إزالة المنتج من قائمة المفضلة.",
+    "addedToWishlist": "تمت إضافة المنتج إلى قائمة المفضلة.",
+    "wishlistError": "تعذر تحديث قائمة المفضلة.",
+    "removeError": "تعذرت إزالة المنتج من قائمة المفضلة.",
+    "cleared": "تم مسح قائمة المفضلة.",
+    "clearError": "تعذر مسح قائمة المفضلة.",
+    "addToCart": "أضف إلى السلة",
+    "addedToCart": "تمت إضافة المنتج إلى السلة.",
+    "addToCartError": "تعذر إضافة هذا المنتج إلى السلة.",
+    "continueShopping": "متابعة التسوق",
+    "exploreSimilar": "استكشف منتجات مشابهة",
+    "inStock": "{count} وحدة في المخزون",
+    "outOfStock": "غير متوفر",
+    "ratings": "({count} تقييم)",
+    "noImage": "لا توجد صورة",
+    "error": "تعذر تحميل قائمة المفضلة.",
+    "retry": "حاول مرة أخرى"
+  },
   "products": {
     "card": {
       "new": "جديد",
@@ -441,5 +591,34 @@
         "desc": "تواصل معنا في أي وقت على مدار الساعة"
       }
     }
+  },
+  "currency":{
+    "EGP": "جنية مصري"
+  },
+  "homeHeader":{
+    "login": "تسجيل الدخول",
+    "home": "الصفحة الرئيسية",
+    "products": "المنتجات",
+    "categories": "فئات",
+    "occasions": "المناسبات",
+    "contact": "اتصل بنا",
+    "about": "عن",
+    "inputPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟"
+  },
+  "cart": {
+    "couponPlaceholder": "أدخل رمز الكوبون",
+    "applyCoupon": "استخدم القسيمة",
+    "invalidCoupon": "كوبون غير صالح أو منتهي الصلاحية",
+    "couponLookupFailed": "تعذر التحقق من الكوبون. حاول مرة أخرى.",
+    "checkingCoupon": "جارٍ التحقق من الكوبون…",
+    "noCouponApplied": "لم يتم تطبيق أي كوبون",
+    "removeCoupon": "إزالة",
+    "couponApplied": "تم استخدم القسيمة!",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "المتابعة للدفع",
+    "mayLike": "منتجات قد تعجبك",
+    "summary": "ملخص"
   }
 }
