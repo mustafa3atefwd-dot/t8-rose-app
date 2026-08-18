@@ -8,10 +8,10 @@ export function WishlistSkeleton() {
           <Skeleton className="h-9 w-48" />
           <Skeleton className="h-10 w-36" />
         </div>
-        <div className="space-y-4">
+        <div>
           {Array.from({ length: 4 }, (_, index) => (
-            <div key={index} className="border-ds-border-soft flex gap-4 rounded-2xl border p-4 sm:p-5">
-              <Skeleton className="size-28 shrink-0 rounded-xl sm:size-32" />
+            <div key={index} className="border-ds-border-soft flex gap-4 border-b py-5">
+              <Skeleton className="h-28 w-24 shrink-0 rounded-lg sm:h-35 sm:w-29" />
               <div className="flex flex-1 flex-col justify-center gap-3">
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-6 w-2/3" />

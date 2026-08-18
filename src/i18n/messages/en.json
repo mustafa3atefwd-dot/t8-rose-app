@@ -440,6 +440,7 @@
   },
   "wishlist": {
     "title": "Wishlist",
+    "items": "{count, plural, one {# item} other {# items}}",
     "clear": "Clear Wishlist",
     "clearConfirmation": "Are you sure you want to clear your Wishlist?",
     "closeDialog": "Close confirmation",

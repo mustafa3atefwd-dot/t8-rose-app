@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Loader2, ShoppingCart, Star, Trash2 } from 'lucide-react';
+import { ShoppingCart, Star, Trash2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import type { IProduct } from '@/features/products/lib/types';
 import { getDiscountedPrice } from '@/features/products';
@@ -54,10 +54,10 @@ export function WishlistItem({ product }: WishlistItemProps) {
   };
 
   return (
-    <article className="border-ds-border-soft bg-ds-bg-plain flex flex-col gap-4 rounded-2xl border p-4 shadow-sm sm:flex-row sm:items-center sm:p-5">
+    <article className="border-ds-border-soft grid grid-cols-[6rem_minmax(0,1fr)] gap-4 border-b py-5 sm:grid-cols-[7.25rem_minmax(0,1fr)_auto] sm:gap-5">
       <Link
         href={`/products/${product.id}`}
-        className="bg-ds-bg-muted relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-xl sm:size-32"
+        className="bg-ds-bg-muted relative aspect-[5/6] w-24 shrink-0 overflow-hidden rounded-lg sm:w-[7.25rem]"
         aria-label={product.title}
       >
         {product.cover ? (
@@ -65,7 +65,7 @@ export function WishlistItem({ product }: WishlistItemProps) {
             src={product.cover}
             alt={product.title}
             fill
-            unoptimized
+            sizes="(max-width: 639px) 6rem, 7.25rem"
             className={`object-cover transition-transform duration-200 hover:scale-105 ${isOutOfStock ? 'opacity-55' : ''}`}
           />
         ) : (
@@ -73,7 +73,7 @@ export function WishlistItem({ product }: WishlistItemProps) {
         )}
       </Link>
 
-      <div className="min-w-0 flex-1 space-y-2">
+      <div className="flex min-w-0 flex-col gap-1.5">
         <p className={`text-sm font-medium ${isOutOfStock ? 'text-ds-text-danger' : 'text-ds-text-success'}`}>
           {isOutOfStock ? t('outOfStock') : t('inStock', { count: product.stock })}
         </p>
@@ -90,22 +90,20 @@ export function WishlistItem({ product }: WishlistItemProps) {
           <span className="text-ds-text-info">{t('ratings', { count: product.ratings })}</span>
         </div>
 
-        <div className="flex flex-wrap items-baseline gap-2">
-          <span className="text-ds-text-primary text-lg font-bold">
-            {formatPrice(discountedPrice ?? product.price)}
-          </span>
+        <div className="mt-auto flex flex-wrap items-baseline gap-2 pt-3">
+          <span className="text-ds-text-plain text-2xl font-bold">{formatPrice(discountedPrice ?? product.price)}</span>
           {discountedPrice !== null && (
             <span className="text-ds-text-muted text-sm line-through">{formatPrice(product.price)}</span>
           )}
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center gap-3 sm:flex-col-reverse lg:flex-row">
+      <div className="col-span-2 flex shrink-0 items-center justify-between gap-3 sm:col-span-1 sm:flex-col sm:items-end">
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           size="icon-lg"
-          className="text-ds-text-danger hover:text-ds-text-danger"
+          className="text-ds-text-danger hover:text-ds-text-danger sm:order-none"
           aria-label={t('remove')}
           onClick={() => void handleRemove()}
         >
@@ -113,17 +111,17 @@ export function WishlistItem({ product }: WishlistItemProps) {
         </Button>
 
         {isOutOfStock ? (
-          <Button asChild variant="outline" className="min-w-0 flex-1 px-4 sm:flex-none">
+          <Button asChild variant="secondary" className="min-w-0 flex-1 px-5 sm:mt-auto sm:flex-none">
             <Link href={`/products?${similarProductsParams.toString()}`}>{t('exploreSimilar')}</Link>
           </Button>
         ) : (
           <Button
             type="button"
-            className="min-w-0 flex-1 px-5 sm:flex-none"
-            disabled={isCartLoading}
+            className="min-w-0 flex-1 px-6 sm:mt-auto sm:flex-none"
+            loading={isCartLoading}
             onClick={handleAddToCart}
           >
-            {isCartLoading ? <Loader2 className="size-4 animate-spin" /> : <ShoppingCart className="size-4" />}
+            <ShoppingCart className="size-4" />
             {t('addToCart')}
           </Button>
         )}
