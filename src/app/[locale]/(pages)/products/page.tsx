@@ -1,14 +1,10 @@
 import { Suspense } from 'react';
 import ProductFiltersSidebar from '@/features/products/components/filters/product-filters-sidebar';
-import ProductsGrid from '@/features/products/components/products-grid';
-<<<<<<< HEAD
-import { getOccasionsAction } from '@/features/products/lib/actions';
-import { getCategoriesAction } from '@/features/products/lib/actions/categories.action';
+import { getCategoriesAction, getOccasionsAction } from '@/features/products/lib/actions';
 import Header from '@/shared/components/header-page';
-=======
+import ProductsGrid from '@/features/products/components/products-grid';
 import ProductCardSkeleton from '@/features/products/skeletons/product-card-skeleton';
 import { PRODUCTS_PAGE_SIZE } from '@/features/products/lib/constants';
->>>>>>> origin/testing
 
 const ProductsPage = async () => {
   // Query
@@ -32,21 +28,6 @@ const ProductsPage = async () => {
           </Suspense>
         </div>
 
-<<<<<<< HEAD
-
-    <div className="min-h-screen flex flex-col">
-      <Header />
-
-      <div className="container mx-auto flex flex-col md:flex-row gap-8 px-4 py-8 flex-1">
-        
-        <aside className="w-full md:w-64 gap-8">
-          <ProductFiltersSidebar categories={categories} occasions={occasions} />
-        </aside>
-
-        <main className="w-full min-w-0 ml-6 flex-1 rtl:mr-6">
-          {/* <GetProductsPage /> */}
-          <ProductsGrid />
-=======
         <main className="ml-6 w-full min-w-0 flex-1 rtl:mr-6">
           <Suspense
             fallback={
@@ -59,7 +40,6 @@ const ProductsPage = async () => {
           >
             <ProductsGrid />
           </Suspense>
->>>>>>> origin/testing
         </main>
       </div>
     </div>

@@ -56,43 +56,9 @@ export default function Header() {
               </Link>
             </div>
 
-<<<<<<< HEAD
-
-            {/* dwon */}
-            <div className="h-11 flex justify-center items-center space-x-4 bg-ds-bg-primary text-white dark:text-maroon-800 focus:border-b">
-                <div className="flex items-center p-3 gap-2">
-                    <House className="w-5 h-5"/>
-                    <Link href={'/home'} className="font-medium text-base leading-[100%] tracking-normal align-middle cursor-pointer">{t('home')}</Link>
-                </div>
-
-                <div className="flex items-center p-3 gap-2">
-                    <Gift className="w-5 h-5"/>
-                    <Link href={'/products'} className="font-medium text-base leading-[100%] tracking-normal align-middle cursor-pointer">{t('products')}</Link>
-                </div>
-
-                <div className="flex items-center p-3 gap-2">
-                    <ClipboardList className="w-5 h-5"/>
-                    <Link href={'/categories'} className="font-medium text-base leading-[100%] tracking-normal align-middle cursor-pointer">{t('categories')}</Link>
-                </div>
-
-                <div className="flex items-center p-3 gap-2">
-                    <PartyPopper className="w-5 h-5"/>
-                    <Link href={'/occasions'} className="font-medium text-base leading-[100%] tracking-normal align-middle cursor-pointer">{t('occasions')}</Link>
-                </div>
-
-                <div className="flex items-center p-3 gap-2">
-                    <Headset className="w-5 h-5"/>
-                    <Link href={'/contact'} className="font-medium text-base leading-[100%] tracking-normal align-middle cursor-pointer">{t('contact')}</Link>
-                </div>
-                <div className="flex items-center p-3 gap-2">
-                    <Info className="w-5 h-5"/>
-                    <Link href={'/about'} className="font-medium text-base leading-[100%] tracking-normal align-middle cursor-pointer">{t('about')}</Link>
-                </div>
-=======
             {/* language */}
             <div className="border-l-ds-bg-muted mr-2 flex h-13 w-15 items-center gap-2.5 border-l pl-4 rtl:mr-1 rtl:ml-2">
               <LanguageToggle />
->>>>>>> origin/testing
             </div>
 
             {/* theme toggle */}
