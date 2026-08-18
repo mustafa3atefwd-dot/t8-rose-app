@@ -1,41 +1,77 @@
-import { MoveRight } from "lucide-react";
-import Copuonee from "./copuone";
-import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+'use client';
 
-interface readOnly{
-    readOnly?: boolean
+import { MoveRight } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import { useCart } from '@/shared/hooks/use-cart';
+import { getDiscountedPrice } from '@/features/products/lib/utils';
+import CouponField from './coupon-field';
+
+interface IOrderSummaryProps {
+  readOnly?: boolean;
 }
 
-export default function OrderSummary({readOnly = false}: readOnly) {
-    const t = useTranslations('cart')
-    return <>
+export default function OrderSummary({ readOnly = false }: IOrderSummaryProps) {
+  const t = useTranslations('cart');
+  const locale = useLocale();
+  const { cartItems } = useCart();
 
-            <div className="w-114.5 h-151 gap-6">
-                <h3 className="font-semibold text-3xl leading-25 tracking-normal text-black">{t('summary')}</h3>
-                {!readOnly && <Copuonee />}
-                <div className="w-106.5 h-24 p-2.5 gap-4 ">
-                            
-                    {!readOnly && 
-                                <div className="flex justify-between items-center w-101.5 h-5.5">
-                                    <p className="font-medium text-lg leading-25 tracking-normal text-zinc-800">{t('subtotal')}</p>
-                                    <p className="font-semibold text-lg leading-25 tracking-normal text-zinc-800">250 EGP</p>
-                                </div>
-                    }
-                            <span className="w-101.5 border border-zinc-300 flex mt-4"></span>
-                    <div className="flex justify-between items-center w-101.5 h-5.5 mt-4">
-                         <p className="font-bold text-2xl leading-25 tracking-normal text-maroon-600">{t('total')}</p>
-                         <p className="font-bold text-2xl leading-25 tracking-normal text-maroon-600">125 EGP</p>
-                    </div>
-                </div>
-             
-                            {!readOnly && <Link href="/" className="flex items-center justify-center space-x-2.5 w-full h-17.5 rounded-ds-xl bg-maroon-600 px-4 py-2.5 text-white">
-                              <span>{t('checkout')}</span>
-                              <MoveRight className="w-6 h-6" />
-                              </Link>
-                            }
-             
-             </div>
+  // Totals are derived on every render rather than stored, so they can never
+  // drift from the cart the rest of the app is reading.
+  const subtotal = cartItems.reduce((sum, item) => sum + Number(item.product.price) * item.quantity, 0);
 
-    </>
+  const discount = cartItems.reduce((sum, item) => {
+    const discountedPrice = getDiscountedPrice(item.product);
+    if (discountedPrice === null) return sum;
+
+    return sum + (Number(item.product.price) - discountedPrice) * item.quantity;
+  }, 0);
+
+  const total = subtotal - discount;
+
+  const formatPrice = (value: number) =>
+    new Intl.NumberFormat(locale, { style: 'currency', currency: 'EGP', maximumFractionDigits: 0 }).format(value);
+
+  return (
+    <div className="flex w-full flex-col gap-6">
+      <h3 className="text-ds-text-primary text-3xl font-semibold">{t('summary')}</h3>
+
+      {!readOnly && <CouponField />}
+
+      <div className="flex flex-col gap-4 p-2.5">
+        {!readOnly && (
+          <>
+            <div className="flex items-center justify-between">
+              <p className="text-lg font-medium text-zinc-800">{t('subtotal')}</p>
+              <p className="text-lg font-semibold text-zinc-800">{formatPrice(subtotal)}</p>
+            </div>
+
+            {discount > 0 && (
+              <div className="flex items-center justify-between">
+                <p className="text-lg font-medium text-zinc-800">{t('discount')}</p>
+                <p className="text-lg font-semibold text-zinc-800">-{formatPrice(discount)}</p>
+              </div>
+            )}
+          </>
+        )}
+
+        <span className="border-ds-border-soft flex border-t" />
+
+        <div className="flex items-center justify-between">
+          <p className="text-maroon-600 text-2xl font-bold">{t('total')}</p>
+          <p className="text-maroon-600 text-2xl font-bold">{formatPrice(total)}</p>
+        </div>
+      </div>
+
+      {!readOnly && (
+        <Link
+          href="/"
+          className="rounded-ds-xl bg-maroon-600 flex h-17.5 w-full items-center justify-center gap-2.5 px-4 py-2.5 text-white"
+        >
+          <span>{t('checkout')}</span>
+          <MoveRight className="h-6 w-6 rtl:rotate-180" />
+        </Link>
+      )}
+    </div>
+  );
 }

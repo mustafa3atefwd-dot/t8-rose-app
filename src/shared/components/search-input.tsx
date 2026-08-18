@@ -6,7 +6,6 @@ import { ProductSearchResults } from '@/features/products/components/product-sea
 import { useDebouncedValue } from '@/shared/hooks';
 import { SearchInput as SearchField } from '@/shared/components/ui/inputs/search-input';
 import { useTranslations } from 'next-intl';
-import { useDebouncedCallback } from "use-debounce";
 
 interface ClassNameProps {
   className?: string;
@@ -18,28 +17,6 @@ export default function SearchInput({ className }: ClassNameProps) {
   const t = useTranslations('home.header');
 
   const { search, setFilter } = useProductFilters();
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-
-  const [inputValue , setInputValue] = useState(search || '')
-
-useEffect(() => {
-  function handleClickOutside(event: MouseEvent) {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  }
-  document.addEventListener('mousedown', handleClickOutside);
-  return () => document.removeEventListener('mousedown', handleClickOutside);
-}, []);
-
-  useEffect(() => {
-      setInputValue(search || '')
-  },[search])
-
-  const debounceSetFilter = useDebouncedCallback((value: string) =>{
-    setFilter('search', value ? value : undefined)
-  }, 300)
 
   // Local state keeps every keystroke instant; only the debounced value
   // below is pushed to the URL, so typing doesn't trigger a navigation
