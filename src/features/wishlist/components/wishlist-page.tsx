@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FolderHeart, Trash2 } from 'lucide-react';
+import { ArrowLeft, FolderHeart, Paintbrush } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/shared/components/ui/button';
@@ -38,19 +38,25 @@ export function WishlistPage() {
   if (isError) return <WishlistErrorState retry={retry} />;
 
   return (
-    <main className="bg-ds-bg-default py-8 sm:py-12">
+    <main className="bg-ds-bg-default py-10 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="border-ds-border-soft mb-0 flex flex-wrap items-center justify-between gap-4 border-b pb-5">
           <div className="flex items-center gap-3">
-            <FolderHeart className="text-ds-text-primary size-8" aria-hidden="true" />
-            <h1 className="text-ds-text-plain text-2xl font-bold sm:text-3xl">
-              {t('title')} <span className="text-ds-text-muted text-base font-normal">({count})</span>
+            <FolderHeart className="text-ds-text-plain size-11 sm:size-14" strokeWidth={1.6} aria-hidden="true" />
+            <h1 className="text-ds-text-plain text-3xl font-bold sm:text-5xl">
+              {t('title')}{' '}
+              <span className="text-ds-text-muted text-sm font-normal sm:text-base">{t('items', { count })}</span>
             </h1>
           </div>
 
           {count > 0 && (
-            <Button type="button" variant="outline" onClick={() => setClearDialogOpen(true)}>
-              <Trash2 className="size-4" />
+            <Button
+              type="button"
+              variant="destructive"
+              className="h-11 px-5 text-base"
+              onClick={() => setClearDialogOpen(true)}
+            >
+              <Paintbrush className="size-5" />
               {t('clear')}
             </Button>
           )}
@@ -60,7 +66,7 @@ export function WishlistPage() {
           <WishlistEmptyState />
         ) : (
           <>
-            <div className="space-y-4">
+            <div>
               {visibleProducts.map((product) => (
                 <WishlistItem key={product.id} product={product} />
               ))}
@@ -68,9 +74,12 @@ export function WishlistPage() {
 
             <WishlistPagination page={currentPage} totalPages={totalPages} onPageChange={setPage} />
 
-            <div className="mt-8 flex justify-center">
-              <Button asChild variant="outline" className="min-w-44">
-                <Link href="/products">{t('continueShopping')}</Link>
+            <div className="mt-4 flex">
+              <Button asChild className="h-12 min-w-52 px-6 text-base">
+                <Link href="/products">
+                  <ArrowLeft className="size-5 rtl:rotate-180" />
+                  {t('continueShopping')}
+                </Link>
               </Button>
             </div>
           </>
