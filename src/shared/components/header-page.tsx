@@ -20,6 +20,8 @@ import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { ThemeToggle } from './ThemeToggle';
 import { WishlistHeaderLink } from '@/features/wishlist';
 import NotificationsMenu from '@/features/notifications/components/notifications-menu';
+import HeaderBadge from './header-badge';
+import CartBadge from '@/features/cart/components/cart-badge';
 
 export default function Header() {
   const t = useTranslations('home.header');
@@ -48,8 +50,9 @@ export default function Header() {
             {/* icons */}
             <div className="border-ds-border-soft flex h-13 w-31 items-center gap-2.5 border-r pr-4 pl-4 rtl:mr-7">
               <WishlistHeaderLink />
-              <Link href={'/cart'} aria-label={t('cart')}>
+              <Link className='relative' href={'/cart'} aria-label={t('cart')}>
                 <ShoppingCart />
+                <CartBadge />
               </Link>
               <NotificationsMenu />
             </div>

@@ -1,52 +1,79 @@
-'use client';
+"use client";
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState, useSyncExternalStore } from 'react';
-import { useSession } from 'next-auth/react';
-import { addToCartAction, removeCartAction, removeFromCartAction, updateCartQuantityAction } from '../actions/cart-actions';
-import { CartItem } from '../lib/types/product';
-import { createGuestStore } from '../lib/utils/guest-storage.util';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import { useSession } from "next-auth/react";
 
-const GUEST_CART_KEY = 'guest_cart_items';
+import {
+  addToCartAction,
+  removeCartAction,
+  removeFromCartAction,
+  updateCartQuantityAction,
+} from "../actions/cart-actions";
+
+import { CartItem } from "../lib/types/product";
+import { createGuestStore } from "../lib/utils/guest-storage.util";
+
+const GUEST_CART_KEY = "guest_cart_items";
 
 const guestCartStore = createGuestStore<CartItem>(GUEST_CART_KEY);
 
 export function useCart() {
-  // Session status can resolve before a deferred/streamed subtree (e.g. behind
-  // a Suspense boundary) hydrates, so gate it on mount: the hydration render
-  // then always matches the server's always-logged-out pass, and only after
-  // mount do we trust the live session status.
+  // Session status
   const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const { status } = useSession();
-  const isLoggedIn = mounted && status === 'authenticated';
+
+  const isLoggedIn =
+    mounted && status === "authenticated";
+
   const queryClient = useQueryClient();
 
-  // 1. Guest cart is read straight from localStorage (an external store), so
-  // every consumer of this hook sees the same items.
+  // Guest cart
   const guestCart = useSyncExternalStore(
     guestCartStore.subscribe,
     guestCartStore.getSnapshot,
     guestCartStore.getServerSnapshot
   );
 
-  // 2. Fetch Server Cart for Authenticated Users
+  // Fetch server cart for authenticated users
   const {
+   
     data: serverCart = [],
+   
     isLoading: isCartLoading,
+    isError: isCartError,
+    refetch: refetchCart,
     isPending: isServerCartPending,
   } = useQuery<CartItem[]>({
-    queryKey: ['cart'],
+    queryKey: ["cart"],
+
     queryFn: async () => {
-      const res = await fetch('/api/cart');
-      if (!res.ok) return [];
+      const res = await fetch("/api/cart");
+
+      if (!res.ok) {
+        throw new Error("Failed to load cart");
+      }
+
       const data = await res.json();
+
       return data.payload?.cartItems || data.payload || [];
     },
+
     enabled: isLoggedIn,
+
     staleTime: 1000 * 60 * 5,
   });
 
@@ -62,145 +89,239 @@ export function useCart() {
   // claim to be settled on an empty guest cart.
   const isCartReady = mounted && status !== 'loading' && (!isLoggedIn || !isServerCartPending);
 
-  // 3. Server Action Mutations
+  // Add to cart mutation
   const addToCartMutation = useMutation({
-    mutationFn: ({ productId, quantity }: { productId: string; quantity: number }) => {
+    mutationFn: ({
+      productId,
+      quantity,
+    }: {
+      productId: string;
+      quantity: number;
+    }) => {
       return addToCartAction(productId, quantity);
     },
+
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] });
+      queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      });
     },
   });
 
+  // Update quantity mutation
   const updateQuantityMutation = useMutation({
-    mutationFn: ({ id, quantity }: { id: string; quantity: number }) => {
+    mutationFn: ({
+      id,
+      quantity,
+    }: {
+      id: string;
+      quantity: number;
+    }) => {
       return updateCartQuantityAction(id, quantity);
     },
+
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] });
+      queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      });
     },
   });
 
-    const removeCartMutation = useMutation({
+  // Clear cart mutation
+  const removeCartMutation = useMutation({
     mutationFn: () => {
       return removeCartAction();
     },
+
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] });
+      queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      });
     },
   });
 
-    const removeFromCartMutation = useMutation({
-    mutationFn: ({ id }: { id: string; }) => {
+  // Remove item mutation
+  const removeFromCartMutation = useMutation({
+    mutationFn: ({
+      id,
+    }: {
+      id: string;
+    }) => {
       return removeFromCartAction(id);
     },
+
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] });
+      queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      });
     },
   });
 
-  // 4. Unified Add To Cart Handler
-  const addToCart = async (productId: string, quantityToAdd = 1, productDetails?: CartItem['product']) => {
+  // Add to cart
+  const addToCart = async (
+    productId: string,
+    quantityToAdd = 1,
+    productDetails?: CartItem["product"]
+  ) => {
     if (isLoggedIn) {
-      const existingItem = serverCart.find((item) => item.productId === productId);
-      if (existingItem) {
-        const newQuantity = existingItem.quantity + quantityToAdd;
-        await updateQuantityMutation.mutateAsync({ id: existingItem.id, quantity: newQuantity });
-      } else {
-        await addToCartMutation.mutateAsync({ productId, quantity: quantityToAdd });
-      }
-    } else {
-      const currentGuestCart = guestCartStore.read();
-
-      const existingItem = currentGuestCart.find((item) => item.productId === productId);
-      let updatedGuestCart: CartItem[];
+      const existingItem = serverCart.find(
+        (item) => item.productId === productId
+      );
 
       if (existingItem) {
-        updatedGuestCart = currentGuestCart.map((item) =>
-          item.productId === productId ? { ...item, quantity: item.quantity + quantityToAdd } : item
-        );
-      } else {
-        if (!productDetails) return;
+        const newQuantity =
+          existingItem.quantity + quantityToAdd;
 
-        const newItem: CartItem = {
-          id: `guest-${Date.now()}`,
+        await updateQuantityMutation.mutateAsync({
+          id: existingItem.id,
+          quantity: newQuantity,
+        });
+      } else {
+        await addToCartMutation.mutateAsync({
           productId,
-          product: productDetails,
           quantity: quantityToAdd,
-        };
-        updatedGuestCart = [...currentGuestCart, newItem];
+        });
       }
 
-      guestCartStore.save(updatedGuestCart);
+      return;
     }
+
+    // Guest cart
+    const currentGuestCart =
+      guestCartStore.read();
+
+    const existingItem =
+      currentGuestCart.find(
+        (item) => item.productId === productId
+      );
+
+    let updatedGuestCart: CartItem[];
+
+    if (existingItem) {
+      updatedGuestCart =
+        currentGuestCart.map((item) =>
+          item.productId === productId
+            ? {
+                ...item,
+                quantity:
+                  item.quantity + quantityToAdd,
+              }
+            : item
+        );
+    } else {
+      if (!productDetails) return;
+
+      const newItem: CartItem = {
+        id: `guest-${Date.now()}`,
+        productId,
+        product: productDetails,
+        quantity: quantityToAdd,
+      };
+
+      updatedGuestCart = [
+        ...currentGuestCart,
+        newItem,
+      ];
+    }
+
+    guestCartStore.save(updatedGuestCart);
   };
 
-  // Unified Remove Item
-const removeFromCart = async (id: string) => {
-  if (isLoggedIn) {
-    await removeFromCartMutation.mutateAsync({ id });
-    return;
-  }
+  // Remove item from cart
+  const removeFromCart = async (id: string) => {
+    if (isLoggedIn) {
+      await removeFromCartMutation.mutateAsync({
+        id,
+      });
 
-  const currentGuestCart = guestCartStore.read();
+      return;
+    }
 
-  const updatedGuestCart = currentGuestCart.filter(
-    (item) => item.id !== id
-  );
+    const currentGuestCart =
+      guestCartStore.read();
 
-  guestCartStore.save(updatedGuestCart);
-};
+    const updatedGuestCart =
+      currentGuestCart.filter(
+        (item) => item.id !== id
+      );
 
-// Unified Update Quantity
-const updateQuantity = async (
-  id: string,
-  quantity: number
-) => {
-  if (quantity <= 0) {
-    return removeFromCart(id);
-  }
+    guestCartStore.save(updatedGuestCart);
+  };
 
-  if (isLoggedIn) {
-    await updateQuantityMutation.mutateAsync({
-      id,
-      quantity,
-    });
+  // Update quantity
+  const updateQuantity = async (
+    id: string,
+    quantity: number
+  ) => {
+    // Minimum quantity
+    if (quantity <= 0) {
+      return removeFromCart(id);
+    }
 
-    return;
-  }
+    if (isLoggedIn) {
+      await updateQuantityMutation.mutateAsync({
+        id,
+        quantity,
+      });
 
-  const currentGuestCart = guestCartStore.read();
+      return;
+    }
 
-  const updatedGuestCart = currentGuestCart.map((item) =>
-    item.id === id
-      ? { ...item, quantity }
-      : item
-  );
+    // Guest cart
+    const currentGuestCart =
+      guestCartStore.read();
 
-  guestCartStore.save(updatedGuestCart);
-};
+    const updatedGuestCart =
+      currentGuestCart.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity,
+            }
+          : item
+      );
 
-// Unified Clear Cart
-const clearCart = async () => {
-  if (isLoggedIn) {
-    await removeCartMutation.mutateAsync();
-    return;
-  }
+    guestCartStore.save(updatedGuestCart);
+  };
 
-  guestCartStore.save([]);
-};
+  // Clear cart
+  const clearCart = async () => {
+    if (isLoggedIn) {
+      await removeCartMutation.mutateAsync();
+
+      return;
+    }
+
+    guestCartStore.save([]);
+  };
 
   return {
-    removeCartMutation,
-    removeFromCartMutation,
-    updateQuantityMutation,
+    // Cart actions
+    addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
+
+    // Cart data
     cartItems,
-    addToCart,
     uniqueItemsCount: cartItems.length,
-    isLoading: isCartLoading || addToCartMutation.isPending || updateQuantityMutation.isPending,
+
+    // Mutations
+    removeCartMutation,
+    removeFromCartMutation,
+    updateQuantityMutation,
+
+    // Loading
+    isLoading:
+      isCartLoading ||
+      addToCartMutation.isPending ||
+      updateQuantityMutation.isPending,
+
+    // Error
+    isError: isLoggedIn && isCartError,
+
+    // Retry
+    refetchCart,
     isCartReady,
   };
 }
