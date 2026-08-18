@@ -8,10 +8,16 @@ import { getDiscountedPrice } from '@/features/products/lib/utils';
 import CouponField from './coupon-field';
 
 interface IOrderSummaryProps {
-  readOnly?: boolean;
+  /**
+   * Hides the "proceed to checkout" link for summaries rendered on the
+   * checkout page itself. The coupon field and the price breakdown stay
+   * visible either way, so the totals a user agreed to in the cart are the
+   * same ones they see while placing the order.
+   */
+  hideCheckoutButton?: boolean;
 }
 
-export default function OrderSummary({ readOnly = false }: IOrderSummaryProps) {
+export default function OrderSummary({ hideCheckoutButton = false }: IOrderSummaryProps) {
   const t = useTranslations('cart');
   const locale = useLocale();
   const { cartItems } = useCart();
@@ -36,23 +42,19 @@ export default function OrderSummary({ readOnly = false }: IOrderSummaryProps) {
     <div className="flex w-full flex-col gap-6">
       <h3 className="text-ds-text-primary text-3xl font-semibold">{t('summary')}</h3>
 
-      {!readOnly && <CouponField />}
+      <CouponField />
 
       <div className="flex flex-col gap-4 p-2.5">
-        {!readOnly && (
-          <>
-            <div className="flex items-center justify-between">
-              <p className="text-lg font-medium text-zinc-800">{t('subtotal')}</p>
-              <p className="text-lg font-semibold text-zinc-800">{formatPrice(subtotal)}</p>
-            </div>
+        <div className="flex items-center justify-between">
+          <p className="text-lg font-medium text-zinc-800">{t('subtotal')}</p>
+          <p className="text-lg font-semibold text-zinc-800">{formatPrice(subtotal)}</p>
+        </div>
 
-            {discount > 0 && (
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-medium text-zinc-800">{t('discount')}</p>
-                <p className="text-lg font-semibold text-zinc-800">-{formatPrice(discount)}</p>
-              </div>
-            )}
-          </>
+        {discount > 0 && (
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-medium text-zinc-800">{t('discount')}</p>
+            <p className="text-lg font-semibold text-zinc-800">-{formatPrice(discount)}</p>
+          </div>
         )}
 
         <span className="border-ds-border-soft flex border-t" />
@@ -63,10 +65,11 @@ export default function OrderSummary({ readOnly = false }: IOrderSummaryProps) {
         </div>
       </div>
 
-      {!readOnly && (
+      {!hideCheckoutButton && (
         <Link
-          href="/"
-          className="rounded-ds-xl bg-maroon-600 flex h-17.5 w-full items-center justify-center gap-2.5 px-4 py-2.5 text-white"
+          href="/checkout"
+          aria-disabled={cartItems.length === 0}
+          className="rounded-ds-xl bg-maroon-600 flex h-17.5 w-full items-center justify-center gap-2.5 px-4 py-2.5 text-white aria-disabled:pointer-events-none aria-disabled:opacity-60"
         >
           <span>{t('checkout')}</span>
           <MoveRight className="h-6 w-6 rtl:rotate-180" />

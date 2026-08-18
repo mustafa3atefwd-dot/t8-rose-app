@@ -19,7 +19,16 @@
       "categories": "الفئات",
       "occasions": "المناسبات",
       "contact": "تواصل معنا",
-      "about": "من نحن"
+      "about": "من نحن",
+      "deliverTo": "التوصيل إلى",
+      "userMenu": {
+        "welcome": "مرحبًا",
+        "account": "حسابي",
+        "addresses": "عناويني",
+        "order": "طلباتي",
+        "dashboard": "لوحة التحكم",
+        "logout": "تسجيل الخروج"
+      }
     },
     "about": {
       "label": "من نحن",
@@ -73,10 +82,17 @@
       "title": "اكتشف <accent>الهدايا الأكثر مبيعًا</accent> التي يفضلها عملاؤنا",
       "description": "تصفح أكثر صناديق الهدايا التي يفضلها عملاؤنا، والمختارة بعناية لتجمع بين الجودة والأناقة وتناسب كل مناسبة."
     },
+    "productCarousel": {
+      "error": "تعذر تحميل المنتجات.",
+      "empty": "لا توجد منتجات متاحة حاليًا.",
+      "retry": "حاول مرة أخرى"
+    },
     "Explore gifts": "استكشف الهدايا"
   },
 
   "checkout": {
+    "title": "إتمام الطلب",
+    "or": "أو",
     "shipping": {
       "title": "عنوان الشحن",
       "select": "اختر عنوان الشحن",
@@ -133,16 +149,14 @@
     }
   },
 
-  "homeHeader": {
-    "deliverTo": "التوصيل إلى",
-    "userMenu": {
-      "welcome": "مرحبًا",
-      "account": "حسابي",
-      "addresses": "عناويني",
-      "order": "طلباتي",
-      "dashboard": "لوحة التحكم",
-      "logout": "تسجيل الخروج"
-    }
+  "about": {
+    "title": "من نحن"
+  },
+  "contact": {
+    "title": "تواصل معنا"
+  },
+  "favorite": {
+    "title": "المفضلة"
   },
 
   "notifications": {
@@ -156,7 +170,7 @@
   "productDetails": {
     "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",
-    "ratings": "({count} تقييم)",
+    "ratings": "({count, plural, zero {لا توجد تقييمات} one {تقييم واحد} two {تقييمان} few {# تقييمات} many {# تقييمًا} other {# تقييم}})",
     "description": "وصف المنتج",
     "noDescription": "لا يوجد وصف متاح.",
     "addToCart": "أضف إلى السلة",
@@ -243,6 +257,7 @@
     "emailLabel": "البريد الإلكتروني",
     "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
     "login": "تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
 
     "registerOtp": {
       "title": "إنشاء حساب",
@@ -270,8 +285,6 @@
     "phoneNumber": "رقم الهاتف",
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
-    "next": "التالي",
-    "creating": "جاري الإنشاء...",
     "loginForm": {
       "subtitle": "تسجيل الدخول إلى حسابك",
       "username": "اسم المستخدم",
@@ -284,7 +297,6 @@
       "loading": "جاري تسجيل الدخول...",
       "noAccount": "ليس لديك حساب؟",
       "createNow": "أنشئ حسابك الآن!",
-      "register": "إنشاء حساب",
       "showPassword": "إظهار كلمة المرور",
       "hidePassword": "إخفاء كلمة المرور",
       "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة",
@@ -448,7 +460,7 @@
   },
   "wishlist": {
     "title": "قائمة المفضلة",
-    "items": "{count} منتجات",
+    "items": "{count, plural, zero {لا توجد منتجات} one {منتج واحد} two {منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
     "clear": "مسح قائمة المفضلة",
     "clearConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
     "closeDialog": "إغلاق نافذة التأكيد",
@@ -472,7 +484,7 @@
     "exploreSimilar": "استكشف منتجات مشابهة",
     "inStock": "{count} وحدة في المخزون",
     "outOfStock": "غير متوفر",
-    "ratings": "({count} تقييم)",
+    "ratings": "({count, plural, zero {لا توجد تقييمات} one {تقييم واحد} two {تقييمان} few {# تقييمات} many {# تقييمًا} other {# تقييم}})",
     "noImage": "لا توجد صورة",
     "error": "تعذر تحميل قائمة المفضلة.",
     "retry": "حاول مرة أخرى"
@@ -592,18 +604,8 @@
       }
     }
   },
-  "currency":{
+  "currency": {
     "EGP": "جنية مصري"
-  },
-  "homeHeader":{
-    "login": "تسجيل الدخول",
-    "home": "الصفحة الرئيسية",
-    "products": "المنتجات",
-    "categories": "فئات",
-    "occasions": "المناسبات",
-    "contact": "اتصل بنا",
-    "about": "عن",
-    "inputPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟"
   },
   "cart": {
     "couponPlaceholder": "أدخل رمز الكوبون",
@@ -617,8 +619,16 @@
     "subtotal": "المجموع الفرعي",
     "discount": "الخصم",
     "total": "الإجمالي",
-    "checkout": "المتابعة للدفع",
+    "checkout": "الدفع",
     "mayLike": "منتجات قد تعجبك",
-    "summary": "ملخص"
+    "summary": "ملخص",
+    "title": "سلة التسوق",
+    "products": "المنتجات",
+    "clearCart": "إفراغ السلة",
+    "continueShopping": "متابعة التسوق",
+    "empty": "سلة التسوق فارغة",
+    "startShopping": "ابدأ التسوق",
+    "remove": "إزالة",
+    "confirmClear": "هل أنت متأكد أنك تريد إفراغ سلة التسوق؟"
   }
 }

@@ -1,3 +1,7 @@
+import { useTranslations } from 'next-intl';
+
 export default function Favorite() {
-    return <h1>Favorite</h1>
+  const t = useTranslations('favorite');
+
+  return <h1>{t('title')}</h1>;
 }

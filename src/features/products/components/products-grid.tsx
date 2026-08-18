@@ -9,6 +9,7 @@ import { PRODUCTS_PAGE_SIZE } from '../lib/constants';
 import { IProduct } from '../lib/types';
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
 import { PaginationControl } from '@/shared/components/ui/pagination';
+import { useWishlist } from '@/shared/hooks/use-wishlist';
 
 export default function ProductsGrid() {
   // Translation
