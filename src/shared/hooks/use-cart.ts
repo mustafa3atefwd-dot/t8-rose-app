@@ -34,7 +34,11 @@ export function useCart() {
   );
 
   // 2. Fetch Server Cart for Authenticated Users
-  const { data: serverCart = [], isLoading: isCartLoading } = useQuery<CartItem[]>({
+  const {
+    data: serverCart = [],
+    isLoading: isCartLoading,
+    isPending: isServerCartPending,
+  } = useQuery<CartItem[]>({
     queryKey: ['cart'],
     queryFn: async () => {
       const res = await fetch('/api/cart');
@@ -47,6 +51,16 @@ export function useCart() {
   });
 
   const cartItems = isLoggedIn ? serverCart : guestCart;
+
+  // True only once `cartItems` actually reflects the user's cart. Until the
+  // session resolves and (for a logged-in user) the server cart arrives,
+  // `cartItems` is an empty placeholder — a caller that reads that as "the
+  // cart is empty" will act on a cart that simply has not loaded yet.
+  //
+  // This cannot be derived from `isLoading`: a disabled query reports
+  // `isLoading: false`, so during the pre-mount pass the hook would otherwise
+  // claim to be settled on an empty guest cart.
+  const isCartReady = mounted && status !== 'loading' && (!isLoggedIn || !isServerCartPending);
 
   // 3. Server Action Mutations
   const addToCartMutation = useMutation({
@@ -187,5 +201,6 @@ const clearCart = async () => {
     addToCart,
     uniqueItemsCount: cartItems.length,
     isLoading: isCartLoading || addToCartMutation.isPending || updateQuantityMutation.isPending,
+    isCartReady,
   };
 }

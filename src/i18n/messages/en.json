@@ -19,7 +19,16 @@
       "categories": "Categories",
       "occasions": "Occasions",
       "contact": "Contact Us",
-      "about": "About Us"
+      "about": "About Us",
+      "deliverTo": "Deliver to",
+      "userMenu": {
+        "welcome": "Welcome",
+        "account": "My account",
+        "addresses": "My addresses",
+        "order": "My orders",
+        "dashboard": "Dashboard",
+        "logout": "Log out"
+      }
     },
     "about": {
       "label": "About",
@@ -80,16 +89,14 @@
     },
     "Explore gifts": "Explore Gifts"
   },
-  "homeHeader": {
-    "deliverTo": "Deliver to",
-    "userMenu": {
-      "welcome": "Welcome",
-      "account": "My account",
-      "addresses": "My addresses",
-      "order": "My orders",
-      "dashboard": "Dashboard",
-      "logout": "Log out"
-    }
+  "about": {
+    "title": "About Us"
+  },
+  "contact": {
+    "title": "Contact Us"
+  },
+  "favorite": {
+    "title": "Favorites"
   },
   "notifications": {
     "title": "Notifications",
@@ -163,6 +170,8 @@
     "pinRequired": "Please place a pin on the map before submitting."
   },
   "checkout": {
+    "title": "Checkout",
+    "or": "OR",
     "shipping": {
       "title": "Shipping Address",
       "select": "Select a shipping address",
@@ -242,6 +251,7 @@
     "emailLabel": "Email",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
+    "createAccount": "Create Account",
     "registerOtp": {
       "title": "Create Account",
       "subtitle": "Enter the OTP Code",
@@ -523,22 +533,9 @@
       "toContact": "Contact us"
     }
   },
-
-  "homeHeader":{
-    "login": "Login",
-    "home": "Home",
-    "products": "Products",
-    "categories": "Categories",
-    "occasions": "Occasions",
-    "contact": "Contact",
-    "about": "About",
-    "inputPlaceholder": "What awesome gift are you looking for?"
-  },
-
-  "currency":{
+  "currency": {
     "EGP": "EGP"
   },
-  
   "hero": {
     "prevSlide": "Previous slide",
     "nextSlide": "Next slide",
@@ -612,7 +609,7 @@
     "subtotal": "Subtotal",
     "discount": "Discount",
     "total": "Total",
-    "checkout": "Proceed to Checkout",
+    "checkout": "Checkout",
     "mayLike": "Products you may like",
     "summary": "Summary",
     "title": "Cart",

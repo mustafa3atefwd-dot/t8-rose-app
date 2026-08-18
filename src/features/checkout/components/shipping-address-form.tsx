@@ -104,7 +104,7 @@ export default function ShippingAddressForm({
 
         {/* Add Address Divider */}
         <div className="before:bg-ds-bg-soft text-ds-text-soft relative flex items-center gap-4 py-4.5 text-center text-lg font-semibold before:absolute before:top-1/2 before:h-px before:w-full before:translate-x-0 before:-translate-y-1/2">
-          <span className="bg-ds-bg-plain z-5 mx-auto px-4">OR</span>
+          <span className="bg-ds-bg-plain z-5 mx-auto px-4">{t('or')}</span>
         </div>
 
         {/* Add Address Action */}
@@ -114,7 +114,7 @@ export default function ShippingAddressForm({
           className="text-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 text-sm font-medium transition-colors hover:bg-red-100 dark:text-zinc-800"
         >
           <Plus className="h-4 w-4" />
-          {t('actions.addAddress', { defaultValue: 'Add a new address' })}
+          {t('actions.addAddress')}
         </Button>
 
         {/* Next button */}

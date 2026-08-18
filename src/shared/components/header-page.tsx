@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import roseLogo from '../../assets/images/roseLogo.png';
 import {
-  Bell,
+
   ClipboardList,
   Gift,
   Headset,
@@ -10,7 +10,7 @@ import {
   PartyPopper,
   ShoppingCart,
 } from 'lucide-react';
-import { ClipboardList, Gift, Headset, Heart, House, Info, PartyPopper, ShoppingCart } from 'lucide-react';
+
 import { Link } from '@/i18n/navigation';
 import { LanguageToggle } from '@/features/auth/components/LanguageToggle';
 import { useTranslations } from 'next-intl';

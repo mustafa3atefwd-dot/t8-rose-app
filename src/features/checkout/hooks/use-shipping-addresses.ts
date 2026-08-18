@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
 import { useUserAddresses } from './use-user-addresses';
-import { useTranslations } from 'next-intl';
 import { Dispatch, SetStateAction } from 'react';
 import { CHECKOUT_STEPS } from '../lib/constants';
 import { CheckoutStep, ICheckoutFormSchema } from '../lib/types';
@@ -20,9 +19,6 @@ export function useShippingAddresses({ methods, setCurrentStep }: IUseShippingAd
 
   // Get form methods and state.
   const { getValues, setValue } = methods;
-
-  // Translations
-  const t = useTranslations('checkout');
 
   /**
    * When user load the page, we set the primary address as default value for the address field.
@@ -54,12 +50,6 @@ export function useShippingAddresses({ methods, setCurrentStep }: IUseShippingAd
   async function handleNextStep(): Promise<void> {
     // Validate address before moving to payment step.
     const valid = await methods.trigger(['addressId']);
-
-    console.log({
-      valid,
-      value: methods.getValues('addressId'),
-      error: methods.formState.errors,
-    });
 
     if (valid) setCurrentStep(CHECKOUT_STEPS.PAYMENT);
   }

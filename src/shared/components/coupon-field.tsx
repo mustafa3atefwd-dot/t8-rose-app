@@ -6,6 +6,7 @@ import { TicketPercent } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { IApiResponse } from '@/shared/lib/types/api';
 import { IPaginatedCoupons } from '@/features/coupons/lib/types/coupons';
+import { useAppliedCoupon } from '@/shared/hooks/use-applied-coupon';
 
 const fetchCoupon = async (code: string) => {
   const response = await fetch(`/api/coupons?search=${encodeURIComponent(code)}`);
@@ -19,10 +20,12 @@ const fetchCoupon = async (code: string) => {
 
 export default function CouponField() {
   const t = useTranslations('cart');
-  const [code, setCode] = useState('');
   // The code the user actually submitted, which is what keys the lookup — typing
-  // alone must not fire a request per keystroke.
-  const [submittedCode, setSubmittedCode] = useState('');
+  // alone must not fire a request per keystroke. It is shared rather than local
+  // so the code entered on /cart is still applied when the order is placed
+  // from /checkout.
+  const { couponCode: submittedCode, applyCoupon, clearCoupon } = useAppliedCoupon();
+  const [code, setCode] = useState(submittedCode);
 
   const { data, isFetching, isError } = useQuery({
     queryKey: ['coupon', submittedCode],
@@ -35,12 +38,12 @@ export default function CouponField() {
 
   const handleApply = () => {
     const trimmedCode = code.trim();
-    if (trimmedCode) setSubmittedCode(trimmedCode);
+    if (trimmedCode) applyCoupon(trimmedCode);
   };
 
   const handleRemove = () => {
     setCode('');
-    setSubmittedCode('');
+    clearCoupon();
   };
 
   const statusMessage = () => {

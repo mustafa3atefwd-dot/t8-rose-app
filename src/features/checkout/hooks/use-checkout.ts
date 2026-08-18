@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -11,7 +11,10 @@ import { CHECKOUT_STEPS, PAYMENT_METHOD } from '../lib/constants';
 import { useShippingAddresses } from './use-shipping-addresses';
 import { useCreateOrder } from './use-create-order';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
+import { useCart } from '@/shared/hooks/use-cart';
+import { useAppliedCoupon } from '@/shared/hooks/use-applied-coupon';
+import { getAppOrigin } from '@/shared/lib/constants';
 
 export function useCheckout() {
   // Router
@@ -24,14 +27,22 @@ export function useCheckout() {
   const t = useTranslations('checkout');
 
   // Cart
-  //   const { cartItems, isLoading: isCartLoading } = useCart();
+  const { cartItems, isCartReady } = useCart();
 
-  //   // Redirect if cart is empty
-  //   useEffect(() => {
-  //     if (!isCartLoading && cartItems.length === 0) {
-  //       router.replace('/cart');
-  //     }
-  //   }, [isCartLoading, cartItems.length, router]);
+  // Coupon applied from the order summary
+  const { couponCode: appliedCouponCode } = useAppliedCoupon();
+
+  // There is nothing to check out with an empty cart, and the order API would
+  // reject the submission anyway — send the user back to the cart instead.
+  //
+  // Gated on `isCartReady`, not on a loading flag: the cart starts out as an
+  // empty array before the session and server cart resolve, so redirecting on
+  // "empty" alone bounces every logged-in user straight back to /cart.
+  useEffect(() => {
+    if (isCartReady && cartItems.length === 0) {
+      router.replace('/cart');
+    }
+  }, [isCartReady, cartItems.length, router]);
 
   // Validation schema
   const schema = useMemo(() => createCheckoutSchema(t), [t]);
@@ -44,10 +55,18 @@ export function useCheckout() {
       paymentMethod: PAYMENT_METHOD.CASH,
       couponCode: '',
       notes: '',
-      successUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/orders`,
+      successUrl: `${getAppOrigin()}/orders`,
+      cancelUrl: `${getAppOrigin()}/checkout`,
     },
     mode: 'onChange',
   });
+
+  // The coupon is applied in the order summary, which sits outside this form,
+  // so mirror it onto the form before submit — otherwise the order goes out
+  // with an empty `couponCode` and the discount is never claimed.
+  useEffect(() => {
+    form.setValue('couponCode', appliedCouponCode);
+  }, [appliedCouponCode, form]);
 
   // Shipping addresses
   const {
@@ -79,7 +98,7 @@ export function useCheckout() {
     onSubmit,
     createOrderMutation,
 
-    // isCartLoading,
-    // cartItems,
+    isCartReady,
+    cartItems,
   };
 }

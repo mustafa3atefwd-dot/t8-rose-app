@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { DeliveryAddressSection } from '@/features/checkout/components';
 
 export default async function CheckoutView() {
-  const t = await getTranslations('checkoutPage');
+  const t = await getTranslations('checkout');
 
   return (
     <div className="container mx-auto flex flex-col gap-8 px-4 py-8">
