@@ -591,5 +591,34 @@
         "desc": "تواصل معنا في أي وقت على مدار الساعة"
       }
     }
+  },
+  "currency":{
+    "EGP": "جنية مصري"
+  },
+  "homeHeader":{
+    "login": "تسجيل الدخول",
+    "home": "الصفحة الرئيسية",
+    "products": "المنتجات",
+    "categories": "فئات",
+    "occasions": "المناسبات",
+    "contact": "اتصل بنا",
+    "about": "عن",
+    "inputPlaceholder": "ما هي الهدية الرائعة التي تبحث عنها؟"
+  },
+  "cart": {
+    "couponPlaceholder": "أدخل رمز الكوبون",
+    "applyCoupon": "استخدم القسيمة",
+    "invalidCoupon": "كوبون غير صالح أو منتهي الصلاحية",
+    "couponLookupFailed": "تعذر التحقق من الكوبون. حاول مرة أخرى.",
+    "checkingCoupon": "جارٍ التحقق من الكوبون…",
+    "noCouponApplied": "لم يتم تطبيق أي كوبون",
+    "removeCoupon": "إزالة",
+    "couponApplied": "تم استخدم القسيمة!",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "المتابعة للدفع",
+    "mayLike": "منتجات قد تعجبك",
+    "summary": "ملخص"
   }
 }

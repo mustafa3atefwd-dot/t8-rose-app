@@ -523,6 +523,22 @@
       "toContact": "Contact us"
     }
   },
+
+  "homeHeader":{
+    "login": "Login",
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "occasions": "Occasions",
+    "contact": "Contact",
+    "about": "About",
+    "inputPlaceholder": "What awesome gift are you looking for?"
+  },
+
+  "currency":{
+    "EGP": "EGP"
+  },
+  
   "hero": {
     "prevSlide": "Previous slide",
     "nextSlide": "Next slide",
@@ -585,6 +601,20 @@
     "noReviews": "No reviews yet."
   },
   "cart": {
+    "couponPlaceholder": "Enter coupon code",
+    "applyCoupon": "Apply Coupon",
+    "invalidCoupon": "Invalid coupon",
+    "couponLookupFailed": "Could not check this coupon. Please try again.",
+    "checkingCoupon": "Checking coupon…",
+    "noCouponApplied": "No coupons applied",
+    "removeCoupon": "Remove",
+    "couponApplied": "Coupon applied!",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "mayLike": "Products you may like",
+    "summary": "Summary",
     "title": "Cart",
     "products": "Products",
     "clearCart": "Clear Cart",
