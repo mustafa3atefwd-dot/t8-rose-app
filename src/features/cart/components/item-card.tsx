@@ -1,10 +1,13 @@
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/inputs";
-import { CartItem } from "@/shared/lib/types/product";
-import { cn } from "@/shared/lib/utils";
-import { Minus, Plus, Star, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Button } from '@/shared/components/ui/button';
+import { Input } from '@/shared/components/ui/inputs';
+import { CartItem } from '@/shared/lib/types/product';
+import { cn } from '@/shared/lib/utils';
+import { Minus, Plus, Star, Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 type Props = {
   itemCart: CartItem;
@@ -13,95 +16,117 @@ type Props = {
   isLast: boolean;
 };
 
-export default function ItemCard({
-  itemCart,
-  onRemove,
-  onUpdate,
-  isLast,
-}: Props) {
+export default function ItemCard({ itemCart, onRemove, onUpdate, isLast }: Props) {
   const { id, product, quantity } = itemCart;
   const { cover, title, price, rating, ratings } = product;
-  const t = useTranslations('cart')
+  // Translations
+  const t = useTranslations('cart');
+  // state
+  const [inputQuantity, setInputQuantity] = useState(String(quantity));
+
+  // Keep input synchronized with cart quantity
+  useEffect(() => {
+    setInputQuantity(String(quantity));
+  }, [quantity]);
+
   const handleDecrease = () => {
-    if (quantity === 1) return onRemove(id);
+    if (quantity === 1) {
+      return onRemove(id);
+    }
 
     onUpdate(id, quantity - 1);
   };
 
   const handleIncrease = () => {
+    if (quantity >= product.stock) return;
+
     onUpdate(id, quantity + 1);
   };
 
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputQuantity(e.target.value);
+  };
+
+  const handleQuantityBlur = () => {
+    const value = Number(inputQuantity);
+
+    // Invalid or empty value
+    if (!value || value < 1) {
+      setInputQuantity(String(quantity));
+      return;
+    }
+
+    // Prevent quantity from exceeding stock
+    const newQuantity = Math.min(value, product.stock);
+
+    setInputQuantity(String(newQuantity));
+
+    // Only update if the quantity actually changed
+    if (newQuantity !== quantity) {
+      onUpdate(id, newQuantity);
+    }
+  };
+
   return (
-    <div
-      className={cn(
-        "",
-        !isLast && "border-b border-b-ds-border-muted mb-4 pb-5"
-      )}
-    >
+    <div className={cn('', !isLast && 'border-b-ds-border-muted mb-4 border-b pb-5')}>
       <div className="flex gap-4">
         {/* Item Image */}
-        <div className="relative w-29.25 h-35">
-          <Image
-            src={cover!}
-            fill
-            alt={title}
-            className="rounded-ds-lg"
-          />
+        <div className="relative h-35 w-29.25">
+          <Image src={cover!} fill alt={title} className="rounded-ds-lg" />
         </div>
 
         {/* Item Details */}
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex flex-1 flex-col justify-between">
           {/* Header */}
           <div className="flex justify-between">
             <div>
-              <h3 className="font-semibold text-lg text-ds-text-primary">{title}</h3>
+              <h3 className="text-ds-text-primary text-lg font-semibold">{title}</h3>
 
               {/* Rating */}
               <div className="flex items-center gap-1.5">
-                <Star className="size-5 text-[#FFA508] fill-[#FFA508]" />
-                <span className="font-medium text-base">Rating: {rating}/5</span>
-                <span className="font-medium text-base text-ds-text-info">({ratings} ratings)</span>
+                <Star className="size-5 fill-[#FFA508] text-[#FFA508]" />
+
+                <span className="text-base font-medium">Rating: {rating.toFixed(1)}/5</span>
+
+                <span className="text-ds-text-info text-base font-medium">({ratings} ratings)</span>
               </div>
             </div>
 
             {/* Remove */}
-            <Button
-              onClick={() => onRemove(id)}
-              variant="destructive"
-            >
+            <Button onClick={() => onRemove(id)} variant="destructive">
               <Trash2 />
               {t('remove')}
             </Button>
           </div>
 
           {/* Footer */}
-          <div className="flex justify-between items-end">
+          <div className="flex items-end justify-between">
             {/* Price */}
-            <p className="font-medium text-sm">
-              <span className="text-maroon-600">(×{quantity})</span> <span className="font-bold text-2xl">{price}</span> EGP
+            <p className="text-sm font-medium">
+              <span className="text-maroon-600">(×{quantity})</span> <span className="text-2xl font-bold">{price}</span>{' '}
+              EGP
             </p>
 
             {/* Quantity */}
             <div className="flex items-center gap-2">
-              <Button
-                onClick={handleDecrease}
-                variant="secondary"
-              >
+              {/* Decrease */}
+              <Button onClick={handleDecrease} variant="secondary">
                 <Minus />
               </Button>
 
+              {/* Quantity Input */}
               <Input
-                value={quantity}
-                readOnly
                 type="number"
-                className="w-25.75 text-center appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                value={inputQuantity}
+                min={1}
+                max={product.stock}
+                onChange={handleQuantityChange}
+                onBlur={handleQuantityBlur}
+                className="w-25.75 appearance-none text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               />
 
-              <Button
-                onClick={handleIncrease}
-                variant="secondary"
-              >
+              {/* Increase */}
+              <Button disabled={quantity >= product.stock} onClick={handleIncrease} variant="secondary">
                 <Plus />
               </Button>
             </div>

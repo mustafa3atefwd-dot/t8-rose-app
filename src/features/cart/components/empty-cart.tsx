@@ -1,17 +1,15 @@
-import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 export default function EmptyCart() {
   const t = useTranslations('cart');
   return (
-    <div className="flex flex-col items-center justify-center py-10 p-4">
-      <Image
-        src="/no-cart.svg"
-        alt="Empty cart"
-        width={300}
-        height={300}
-      />
+    <div className="flex flex-col items-center justify-center p-4 py-10">
+      <Image src="/no-cart.svg" alt="Empty cart" width={300} height={300} />
 
-      <p className="text-lg text-ds-text-muted">{t('empty')}, {t('continueShopping')}</p>
+      <Link href={'/products'} className="text-ds-text-muted text-lg">
+        {t('empty')}, {t('continueShopping')}
+      </Link>
     </div>
   );
 }
