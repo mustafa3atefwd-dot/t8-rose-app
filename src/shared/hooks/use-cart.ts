@@ -56,7 +56,6 @@ export function useCart() {
     isLoading: isCartLoading,
     isError: isCartError,
     refetch: refetchCart,
- ,
     isPending: isServerCartPending,
   } = useQuery<CartItem[]>({
     queryKey: ["cart"],
