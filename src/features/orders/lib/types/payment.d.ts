@@ -21,3 +21,31 @@ export interface ICreatePaymentIntentPayload {
 }
 
 export type ICreatePaymentIntentResponse = IApiResponse<ICreatePaymentIntentPayload>;
+
+export interface ICreateCheckoutSessionRequest {
+  orderId: string;
+}
+
+export interface ICheckoutSessionPayload {
+  checkoutUrl: string;
+  sessionId: string;
+  expiresAt: string;
+  /** True when the backend handed back an existing, still-valid session. */
+  reused: boolean;
+}
+
+export type ICreateCheckoutSessionResponse = IApiResponse<ICheckoutSessionPayload>;
+
+export interface ICheckoutSessionStatusPayload {
+  sessionId: string;
+  paymentStatus: string;
+  sessionStatus: string;
+  amountTotal: number;
+  currency: string;
+  order: {
+    orderId: string;
+    paymentStatus: PaymentStatus;
+  };
+}
+
+export type ICheckoutSessionStatusResponse = IApiResponse<ICheckoutSessionStatusPayload>;

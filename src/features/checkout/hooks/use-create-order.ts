@@ -5,8 +5,39 @@ import { useTranslations } from 'next-intl';
 import type { ICheckoutFormSchema } from '../lib/types/schemas';
 import { PAYMENT_METHOD } from '../lib/constants';
 import { toast } from '@/shared/components/ui/toast';
-import { ICreateOrderResponse } from '@/features/orders/lib/types';
+import { ICreateOrderResponse, ICreateCheckoutSessionResponse } from '@/features/orders/lib/types';
 import { useAppliedCoupon } from '@/shared/hooks/use-applied-coupon';
+import { getAppOrigin } from '@/shared/lib/constants';
+
+/**
+ * Opens a Stripe Checkout session for an order and returns its URL, or null
+ * when one could not be started.
+ */
+async function startCheckoutSession(orderId: string | undefined): Promise<string | null> {
+  if (!orderId) return null;
+
+  try {
+    const origin = getAppOrigin();
+
+    const response = await fetch('/api/payments/checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        orderId,
+        successUrl: `${origin}/orders`,
+        cancelUrl: `${origin}/checkout`,
+      }),
+    });
+
+    const data: ICreateCheckoutSessionResponse = await response.json();
+
+    if (!response.ok || !data.status) return null;
+
+    return data.payload?.checkoutUrl ?? null;
+  } catch {
+    return null;
+  }
+}
 
 export function useCreateOrder() {
   // Navigation
@@ -45,7 +76,7 @@ export function useCreateOrder() {
       return data;
     },
 
-    onSuccess: (data, values) => {
+    onSuccess: async (data, values) => {
       // The server consumed the cart when it created the order, so drop the
       // cached copy — otherwise the cart badge and /cart keep showing the
       // items the user just bought.
@@ -64,7 +95,12 @@ export function useCreateOrder() {
 
       // Credit Card
       if (values.paymentMethod === PAYMENT_METHOD.CARD) {
-        const checkoutUrl = data?.payload?.checkout?.checkoutUrl;
+        // The order response only carries a session when the backend opened
+        // one eagerly. Otherwise the session has to be requested for the new
+        // order — treating a missing one as failure strands the buyer on a
+        // paid-for order they can never pay for.
+        const checkoutUrl =
+          data?.payload?.checkout?.checkoutUrl ?? (await startCheckoutSession(data?.payload?.order?.id));
 
         if (!checkoutUrl) {
           toast.error(t('messages.paymentInitializationFailed'));
@@ -84,14 +120,30 @@ export function useCreateOrder() {
         return;
       }
 
-      // Payment initialization error
-      toast.error(t('messages.orderFailed'));
+      // Anything else: show what the backend actually said. A generic message
+      // here makes a rejected payload and an expired session look identical.
+      toast.error(error.message || t('messages.orderFailed'));
     },
   });
 
   // Submit handler
   function onSubmit(values: ICheckoutFormSchema) {
-    mutation.mutate(values);
+    // `couponCode` and `notes` are optional, but react-hook-form initialises
+    // them to '' — sending an empty coupon code asks the backend to resolve a
+    // coupon that does not exist. Drop them unless the user filled them in.
+    const { couponCode, notes, successUrl, cancelUrl, ...rest } = values;
+
+    // The API documents successUrl/cancelUrl as CREDIT_CARD-only, so a cash
+    // order must not carry them.
+    const isCardPayment = values.paymentMethod === PAYMENT_METHOD.CARD;
+
+    mutation.mutate({
+      ...rest,
+      ...(couponCode?.trim() ? { couponCode: couponCode.trim() } : {}),
+      ...(notes?.trim() ? { notes: notes.trim() } : {}),
+      ...(isCardPayment && successUrl ? { successUrl } : {}),
+      ...(isCardPayment && cancelUrl ? { cancelUrl } : {}),
+    });
   }
 
   return {

@@ -14,6 +14,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useCart } from '@/shared/hooks/use-cart';
 import { useAppliedCoupon } from '@/shared/hooks/use-applied-coupon';
+import { getAppOrigin } from '@/shared/lib/constants';
 
 export function useCheckout() {
   // Router
@@ -54,7 +55,8 @@ export function useCheckout() {
       paymentMethod: PAYMENT_METHOD.CASH,
       couponCode: '',
       notes: '',
-      successUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/orders`,
+      successUrl: `${getAppOrigin()}/orders`,
+      cancelUrl: `${getAppOrigin()}/checkout`,
     },
     mode: 'onChange',
   });

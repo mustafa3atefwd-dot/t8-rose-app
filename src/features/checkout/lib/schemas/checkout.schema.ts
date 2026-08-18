@@ -17,5 +17,9 @@ export const createCheckoutSchema = (t: (key: string) => string) =>
 
     notes: z.string().max(500, t('validation.notesMaxLength')).optional(),
 
-    successUrl: z.string().min(1, t('validation.urlRequired')),
+    // Stripe redirect targets. The API accepts these for CREDIT_CARD orders
+    // only, so they are optional here and stripped for cash on delivery.
+    successUrl: z.string().optional(),
+
+    cancelUrl: z.string().optional(),
   });
