@@ -5,12 +5,7 @@ import { getNextAuthToken } from '@/shared/lib/utils/get-token.util';
 import { apiRequest } from '@/shared/lib/utils/request.util';
 import type { ISuccessResponse } from '@/shared/lib/types/api';
 import type { IUser } from '@/shared/lib/types/user';
-import type {
-  ChangePasswordPayload,
-  ConfirmEmailPayload,
-  UpdateProfilePayload,
-  UpdateProfileResult,
-} from '../types/account';
+import type { ConfirmEmailPayload, UpdateProfilePayload, UpdateProfileResult } from '../types/account';
 
 async function getAccountAccessToken() {
   const token = await getNextAuthToken();
@@ -67,16 +62,6 @@ export async function confirmEmailAction(payload: ConfirmEmailPayload): Promise<
     method: 'POST',
     headers: jsonHeaders(token),
     body: JSON.stringify({ email: payload.email.trim(), code: payload.code.trim() }),
-  });
-}
-
-export async function changePasswordAction(payload: ChangePasswordPayload): Promise<void> {
-  const token = await getAccountAccessToken();
-
-  await apiRequest(`${BACKEND_URL}/users/change-password`, {
-    method: 'PATCH',
-    headers: jsonHeaders(token),
-    body: JSON.stringify(payload),
   });
 }
 

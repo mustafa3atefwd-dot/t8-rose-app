@@ -6,9 +6,13 @@ import { Button } from '@/shared/components/ui/button';
 import { PasswordInput } from '@/shared/components/ui/inputs/password-input';
 import { useChangePassword } from '../hooks/use-change-password';
 
-export function ChangePasswordForm() {
+interface ChangePasswordFormProps {
+  token: string;
+}
+
+export function ChangePasswordForm({ token }: ChangePasswordFormProps) {
   const t = useTranslations('account');
-  const { form, mutation } = useChangePassword();
+  const { form, mutation } = useChangePassword(token);
   const {
     register,
     formState: { errors },
@@ -61,12 +65,14 @@ export function ChangePasswordForm() {
             type="submit"
             variant="destructive"
             loading={mutation.isPending}
+            disabled={!token}
             loadingText={t('actions.updating')}
             className="h-11 w-full px-8 text-base sm:w-auto sm:min-w-56"
           >
             {t('actions.updatePassword')}
           </Button>
         </div>
+        {!token && <p className="text-ds-text-danger text-sm">{t('password.validation.missingToken')}</p>}
       </form>
     </section>
   );

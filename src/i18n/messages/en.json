@@ -791,7 +791,9 @@
         "newPasswordRequired": "New password is required.",
         "passwordMin": "Password must be at least 8 characters.",
         "confirmPasswordRequired": "Please confirm your new password.",
-        "passwordMismatch": "New passwords do not match."
+        "passwordMismatch": "New passwords do not match.",
+        "missingToken": "This password reset link is missing its token. Request a new link from Forgot Password.",
+        "resetFailed": "Unable to reset your password. Please request a new reset link."
       }
     },
     "fields": {

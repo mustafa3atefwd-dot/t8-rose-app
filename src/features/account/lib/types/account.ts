@@ -32,6 +32,7 @@ export interface ConfirmEmailPayload {
 }
 
 export interface ChangePasswordPayload {
-  oldPassword: string;
+  token: string;
   newPassword: string;
+  confirmPassword: string;
 }
