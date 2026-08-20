@@ -3,7 +3,7 @@ import { Check, ChevronDownIcon } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/components/ui/collapsible';
 
 import type { IOrderDetails } from '@/features/orders/lib/types/order';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/utils';
 import { DELIVERY_CONFIG, ORDER_STATUS_CONFIG, PAYMENT_ICONS } from '@/features/orders/lib/constants/order-card.config';
 import { formatOrderDate, formatOrderPrice } from '@/features/orders/lib/utils/order-card.utils';
@@ -16,6 +16,9 @@ interface IOrderCardProps {
 function OrderCard({ order }: IOrderCardProps) {
   // Locale
   const locale = useLocale();
+
+  // Translations
+  const t = useTranslations('orders');
 
   // Order Status config
   const statusConfig = ORDER_STATUS_CONFIG[order.status];
@@ -41,12 +44,14 @@ function OrderCard({ order }: IOrderCardProps) {
         <CollapsibleTrigger className="w-full">
           <header className="bg-ds-bg-primary-saturated text-ds-text-inverse group flex min-h-14 w-full cursor-pointer flex-wrap items-center justify-between gap-4 p-4">
             {/* Order ID */}
-            <h2 className="text-start text-lg font-semibold lg:text-xl xl:text-2xl">Order #{order.id}</h2>
+            <h2 className="text-start text-lg font-semibold lg:text-xl xl:text-2xl">
+              {t('orderCard.orderNumber', { id: order.id })}
+            </h2>
 
             {/* Order Date */}
             <div className="flex items-center gap-3">
               <time dateTime={new Date(order.createdAt).toISOString()} className="text-sm md:text-base">
-                Created: <span className="font-semibold">{createdAt}</span>
+                {t('orderCard.created')} <span className="font-semibold">{createdAt}</span>
               </time>
 
               {/* Expand Icon */}
@@ -62,7 +67,7 @@ function OrderCard({ order }: IOrderCardProps) {
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 pb-3">
               {/* Price */}
               <div className="text-ds-text-plain flex flex-wrap items-center gap-2 text-base md:text-lg lg:text-xl xl:text-2xl">
-                <span>Total Price:</span>
+                <span>{t('orderCard.totalPrice')}</span>
 
                 <strong className="font-semibold">
                   {totalPrice.number} {totalPrice.currency}
@@ -71,17 +76,17 @@ function OrderCard({ order }: IOrderCardProps) {
                 {isPaid && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500 px-3 py-1 text-xs font-semibold text-white">
                     <Check className="size-3.5" />
-                    Paid
+                    {t('orderCard.paid')}
                   </span>
                 )}
               </div>
 
               {/* Status */}
               <div className="flex shrink-0 items-center gap-2">
-                <span className="text-sm font-semibold text-zinc-900">Status:</span>
+                <span className="text-sm font-semibold text-zinc-900">{t('orderCard.status')}</span>
 
                 <span className={cn('rounded-full px-3 py-1 text-xs font-semibold text-white', statusConfig.className)}>
-                  {statusConfig.label}
+                  {t(`orderCard.statuses.${statusConfig.labelKey}`)}
                 </span>
               </div>
             </div>
@@ -91,29 +96,31 @@ function OrderCard({ order }: IOrderCardProps) {
               <div className="space-y-2">
                 {/* Payment */}
                 <div className="flex items-center gap-1.5">
-                  <span className="text-ds-text-plain font-semibold">Payment Method:</span>
+                  <span className="text-ds-text-plain font-semibold">{t('orderCard.paymentMethod')}</span>
 
                   <span className="text-ds-text-soft inline-flex items-center gap-1">
                     <PaymentIcon className="size-4" />
 
-                    {order.paymentMethod === 'CASH_ON_DELIVERY' ? 'Cash' : 'Credit Card'}
+                    {order.paymentMethod === 'CASH_ON_DELIVERY'
+                      ? t('orderCard.paymentMethods.cash')
+                      : t('orderCard.paymentMethods.card')}
                   </span>
                 </div>
 
                 {/* Delivery */}
                 <div className="flex items-center gap-1.5">
-                  <span className="text-ds-text-plain font-semibold">Delivery Status:</span>
+                  <span className="text-ds-text-plain font-semibold">{t('orderCard.deliveryStatus')}</span>
 
                   <span className={cn('inline-flex items-center gap-1', deliveryConfig.className)}>
                     <DeliveryIcon className="size-4" />
 
-                    {deliveryConfig.label}
+                    {t(`orderCard.deliveryStatuses.${deliveryConfig.labelKey}`)}
                   </span>
                 </div>
               </div>
 
               {/* Items */}
-              <OrderItems orderItems={order.orderItems} totalPrice={totalPrice} />
+              <OrderItems orderItems={order.orderItems} totalPrice={totalPrice} locale={locale} />
             </div>
           </div>
         </CollapsibleContent>

@@ -3,81 +3,93 @@ import type { DeliveryStatus, OrderStatus, PaymentMethod } from '@/features/orde
 
 export const ORDER_STATUS_CONFIG = {
   PENDING: {
-    label: 'Pending',
+    labelKey: 'pending',
     className: 'bg-amber-500',
   },
 
   PROCESSING: {
-    label: 'In Progress',
+    labelKey: 'processing',
     className: 'bg-blue-500',
   },
 
   CONFIRMED: {
-    label: 'Confirmed',
+    labelKey: 'confirmed',
     className: 'bg-green-500',
   },
 
   SHIPPED: {
-    label: 'Shipped',
+    labelKey: 'shipped',
     className: 'bg-purple-500',
   },
 
   DELIVERED: {
-    label: 'Done',
+    labelKey: 'delivered',
     className: 'bg-emerald-500',
   },
 
   CANCELLED: {
-    label: 'Canceled',
+    labelKey: 'cancelled',
     className: 'bg-red-600',
   },
 
   REFUNDED: {
-    label: 'Refunded',
+    labelKey: 'refunded',
     className: 'bg-orange-600',
   },
 } satisfies Record<
   OrderStatus,
   {
-    label: string;
+    labelKey: string;
     className: string;
   }
 >;
 
 export const DELIVERY_CONFIG = {
   PENDING: {
-    label: 'Pending',
+    labelKey: 'pending',
     className: 'text-amber-500',
     icon: Truck,
   },
 
   PROCESSING: {
-    label: 'In Progress',
+    labelKey: 'processing',
+    className: 'text-blue-500',
+    icon: Truck,
+  },
+
+  CONFIRMED: {
+    labelKey: 'processing',
     className: 'text-blue-500',
     icon: Truck,
   },
 
   SHIPPED: {
-    label: 'Shipped',
+    labelKey: 'shipped',
     className: 'text-purple-500',
     icon: Truck,
   },
 
   DELIVERED: {
-    label: 'Delivered',
+    labelKey: 'delivered',
     className: 'text-emerald-600',
     icon: CheckCheck,
   },
 
   CANCELLED: {
-    label: 'Canceled',
+    labelKey: 'cancelled',
     className: 'text-maroon-500',
     icon: TriangleAlert,
   },
+
+  REFUNDED: {
+    labelKey: 'cancelled',
+    className: 'text-red-500',
+    icon: TriangleAlert,
+  },
 } satisfies Record<
-  DeliveryStatus,
+  OrderStatus,
   {
-    label: string;
+    labelKey: string;
     className: string;
     icon: LucideIcon;
   }

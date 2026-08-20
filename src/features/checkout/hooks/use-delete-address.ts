@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteAddress } from '../lib/actions';
+import { deleteAddress } from '../lib/actions/addresses.action';
 import { ADDRESSES_QUERY_KEY } from '../lib/constants';
 
 export function useDeleteAddress() {

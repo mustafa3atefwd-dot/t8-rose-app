@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/utils';
 import { ImageWithSkeleton } from '@/shared/components';
 import { ChevronDown, ChevronUp, Star } from 'lucide-react';
 import type { IOrderDetails } from '@/features/orders/lib/types/order';
+import { formatOrderNumber } from '../lib/utils/order-card.utils';
 
 interface IOrderItemsProps {
   orderItems: IOrderDetails['orderItems'];
@@ -13,17 +15,22 @@ interface IOrderItemsProps {
     number: string;
     currency: string;
   };
+
+  locale: string;
 }
 
-function OrderItems({ orderItems, totalPrice }: IOrderItemsProps) {
+function OrderItems({ orderItems, totalPrice, locale }: IOrderItemsProps) {
   // State
   const [showAllOrderItems, setShowAllOrderItems] = useState(false);
+
+  // Translations
+  const t = useTranslations('orders.items');
 
   return (
     <div className="pt-2">
       {/* Order Items Header */}
       <div className="text-ds-text-plain flex items-center justify-between py-2">
-        <span className="font-semibold">Order Items ({orderItems.length})</span>
+        <span className="font-semibold">{t('title', { count: orderItems.length })}</span>
       </div>
 
       {/* Order Items List */}
@@ -51,7 +58,7 @@ function OrderItems({ orderItems, totalPrice }: IOrderItemsProps) {
                   <div className="inline-flex items-center gap-1">
                     <Star className="size-4 text-[#ffa508]" />
 
-                    <span className="text-ds-text-plain">Rating: {item.product.rating}</span>
+                    <span className="text-ds-text-plain">{t('rating', { rating: item.product.rating })}</span>
 
                     <span className="text-ds-text-info">({item.product.ratings})</span>
                   </div>
@@ -59,7 +66,7 @@ function OrderItems({ orderItems, totalPrice }: IOrderItemsProps) {
 
                 {/* Item Price with Quantity */}
                 <p className="text-ds-text-primary/90 mb-2 flex items-center gap-1 text-sm">
-                  <span>(×{item.quantity})</span>
+                  <span>(×{formatOrderNumber(item.quantity, locale)})</span>
 
                   <span className="text-ds-text-plain text-base md:text-lg lg:text-xl xl:text-2xl">
                     <strong className="font-bold">{totalPrice.number}</strong>{' '}
@@ -85,7 +92,7 @@ function OrderItems({ orderItems, totalPrice }: IOrderItemsProps) {
               onClick={() => setShowAllOrderItems(true)}
               className="text-ds-text-primary hover:text-ds-text-primary/90 flex cursor-pointer flex-col items-center gap-0.5 font-medium transition-colors"
             >
-              Show All
+              {t('showAll')}
               <ChevronDown className="size-5" />
             </button>
           </div>
@@ -99,7 +106,7 @@ function OrderItems({ orderItems, totalPrice }: IOrderItemsProps) {
           onClick={() => setShowAllOrderItems(false)}
           className="text-ds-text-primary hover:text-ds-text-primary/90 mx-auto mt-2 flex cursor-pointer flex-col items-center gap-0.5 font-medium transition-colors"
         >
-          Show Less
+          {t('showLess')}
           <ChevronUp className="size-5" />
         </button>
       )}

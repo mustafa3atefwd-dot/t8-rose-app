@@ -1,5 +1,6 @@
 import { getAllOrders } from '@/features/orders/lib/apis/get-orders.api';
 import { OrderCard, OrdersPagination, OrdersEmpty } from '@/features/orders/components';
+import { getTranslations } from 'next-intl/server';
 
 const ORDERS_LIMIT = 12;
 
@@ -10,6 +11,9 @@ interface IOrdersPageProps {
 }
 
 export default async function OrdersPage({ searchParams }: IOrdersPageProps) {
+  // Translations
+  const t = await getTranslations('orders');
+
   // Resolve search params
   const params = await searchParams;
 
@@ -30,7 +34,7 @@ export default async function OrdersPage({ searchParams }: IOrdersPageProps) {
     <section className="py-6 sm:py-8 md:py-12 lg:py-15.5">
       <div className="container">
         {/* Page Title */}
-        <h1 className="text-ds-text-plain mb-6 text-2xl font-bold lg:text-3xl xl:text-5xl">Orders</h1>
+        <h1 className="text-ds-text-plain mb-6 text-2xl font-bold lg:text-3xl xl:text-5xl">{t('title')}</h1>
 
         {/* Orders Empty */}
         {data.length === 0 ? (

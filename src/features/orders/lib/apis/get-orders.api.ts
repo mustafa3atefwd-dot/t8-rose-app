@@ -27,6 +27,8 @@ export async function getAllOrders(params: IGetOrdersParams) {
     },
   });
 
+  console.log(result);
+
   if (!result.status) {
     throw new Error(result.message);
   }

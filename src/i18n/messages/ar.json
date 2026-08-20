@@ -119,6 +119,60 @@
     }
   },
 
+  "orders": {
+    "title": "الطلبات",
+
+    "orderCard": {
+      "orderNumber": "الطلب رقم #{id}",
+      "created": "تم الإنشاء:",
+      "totalPrice": "السعر الإجمالي:",
+      "paid": "مدفوع",
+      "status": "الحالة:",
+      "paymentMethod": "طريقة الدفع:",
+      "deliveryStatus": "حالة التوصيل:",
+      "paymentMethods": {
+        "cash": "الدفع عند الاستلام",
+        "card": "بطاقة ائتمانية"
+      },
+      "statuses": {
+        "pending": "قيد الانتظار",
+        "processing": "جاري التجهيز",
+        "confirmed": "تم التأكيد",
+        "shipped": "تم الشحن",
+        "delivered": "تم التوصيل",
+        "cancelled": "ملغي",
+        "refunded": "تم استرداد المبلغ"
+      },
+      "deliveryStatuses": {
+        "pending": "قيد الانتظار",
+        "processing": "جاري التجهيز",
+        "shipped": "تم الشحن",
+        "delivered": "تم التوصيل",
+        "cancelled": "ملغي"
+      }
+    },
+
+    "items": {
+      "title": "المنتجات ({count})",
+      "rating": "التقييم: {rating}",
+      "quantity": "{count}",
+      "showAll": "عرض الكل",
+      "showLess": "عرض أقل"
+    },
+
+    "empty": {
+      "title": "لم تقم بتقديم أي طلب بعد",
+      "description": "بمجرد تقديم طلب، ستتمكن من تتبعه وإدارته من هنا.",
+      "startShopping": "ابدأ التسوق"
+    },
+
+    "error": {
+      "title": "فشل تحميل الطلبات",
+      "description": "تعذر تحميل طلباتك في الوقت الحالي. يرجى المحاولة مرة أخرى.",
+      "retry": "حاول مرة أخرى"
+    }
+  },
+
   "homeHeader": {
     "deliverTo": "التوصيل إلى",
     "userMenu": {
