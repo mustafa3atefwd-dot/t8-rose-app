@@ -1,10 +1,28 @@
 export { default as CheckoutView } from './checkout-view';
 export { default as DeliveryAddressSection } from './delivery-address-section';
+
 export { default as AddressBookModal } from './address-book-modal';
 export { default as AddressList } from './address-list';
 export { default as AddressCard } from './address-card';
-export { default as CheckoutStepper } from './checkout-stepper';
+export { default as AddressOption } from './address-option';
+
 export { default as AddressWizardForm } from './address-wizard-form';
 export { default as AddressStep1Fields } from './address-step1-fields';
 export { default as AddressStep2Map } from './address-step2-map';
+
+export { default as CheckoutStepHeading } from './checkout-step-heading';
+export { default as CheckoutStepper } from './checkout-stepper';
+
+export { default as DeleteModal } from './delete-modal';
+export { default as EmptyAddressState } from './empty-address-state';
+
+
+export { default as GoogleMapPicker } from './google-map-picker';
 export { default as MapPicker } from './map-picker';
+
+export { default as PaymentMethodForm } from './payment-method-form';
+export { default as PaymentMethodOption } from './payment-method-option';
+
+export { default as ShippingAddressForm } from './shipping-address-form';
+
+export { default as MainCheckoutPage } from './main-checkout-page';

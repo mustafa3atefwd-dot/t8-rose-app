@@ -76,6 +76,53 @@
     },
     "Explore gifts": "استكشف الهدايا"
   },
+<<<<<<< HEAD
+=======
+
+  "checkout": {
+    "shipping": {
+      "title": "عنوان الشحن",
+      "error": "فشل تحميل العناوين.",
+      "empty": {
+        "title": "لا توجد عناوين شحن محفوظة.",
+        "action": "إضافة عنوان جديد"
+      }
+    },
+    "payment": {
+      "title": "طريقة الدفع",
+      "methods": {
+        "cash": {
+          "title": "الدفع عند الاستلام",
+          "description": "ادفع نقدًا عند استلام طلبك."
+        },
+        "card": {
+          "title": "بطاقة ائتمانية",
+          "description": "ادفع بأمان باستخدام بطاقتك الائتمانية."
+        }
+      }
+    },
+    "actions": {
+      "next": "التالي",
+      "placeOrder": "تأكيد الطلب",
+      "placingOrder": "جاري تأكيد الطلب...",
+      "addAddress": "إضافة عنوان جديد"
+    },
+    "messages": {
+      "orderCreated": "تم إنشاء طلبك بنجاح!",
+      "cartEmpty": "سلة التسوق فارغة.",
+      "paymentInitializationFailed": "تعذر تهيئة عملية الدفع.",
+      "orderFailed": "فشل إنشاء الطلب."
+    },
+    "validation": {
+      "addressRequired": "يرجى اختيار عنوان الشحن.",
+      "addressInvalid": "عنوان الشحن المحدد غير صالح.",
+      "paymentRequired": "يرجى اختيار طريقة الدفع.",
+      "notesMaxLength": "يجب ألا تتجاوز الملاحظات 500 حرف.",
+      "urlRequired": "رابط النجاح مطلوب."
+    }
+  },
+
+>>>>>>> feature/checkout-step-2
   "homeHeader": {
     "deliverTo": "التوصيل إلى",
     "userMenu": {
@@ -578,13 +625,5 @@
         "desc": "تواصل معنا في أي وقت على مدار الساعة"
       }
     }
-  },
-  "checkout": {
-    "step1Title": "عنوان الشحن",
-    "addAddress": "إضافة عنوان جديد",
-    "next": "التالي",
-    "noAddresses": "أضف عنوانك الأول للمتابعة",
-    "errorLoading": "فشل تحميل العناوين.",
-    "step": "الخطوة {current} من {total}"
   }
 }

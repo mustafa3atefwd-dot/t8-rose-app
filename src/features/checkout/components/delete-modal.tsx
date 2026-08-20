@@ -8,7 +8,7 @@ import {
 import { Button } from '@/shared/components/ui/button';
 import { Trash, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { IDeleteModalProps } from '../lib/types';
+import { IDeleteModalProps } from '@/features/checkout/lib/types';
 
 const DeleteModal = ({ deleteDialogOpen, setDeleteDialogOpen, isDeleting, onDelete, address }: IDeleteModalProps) => {
   const t = useTranslations('address');

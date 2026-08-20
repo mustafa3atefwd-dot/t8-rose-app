@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { MapPin, PenLine, Phone, Trash2 } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { IAddressCardProps } from '../lib/types';
-import DeleteModal from './delete-modal';
+import { DeleteModal } from '@/features/checkout/components';
 
 export default function AddressCard({
   address,
