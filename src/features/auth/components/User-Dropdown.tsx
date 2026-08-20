@@ -12,11 +12,13 @@ import {
 import { ChevronDown, LogOut, MapPinHouse, ScrollText, Settings, User } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { USER_ROLES } from '@/features/auth/lib/constants/user.constant';
 
 export default function UserDropdown({ compact = false }: { compact?: boolean }) {
   const t = useTranslations('home.header.userMenu');
   const { data: session } = useSession();
+  const isAdmin = session?.user.role === USER_ROLES.admin || session?.user.role === USER_ROLES.superAdmin;
   const handleLogout = async () => {
     await signOut({
       callbackUrl: '/login',
@@ -52,30 +54,34 @@ export default function UserDropdown({ compact = false }: { compact?: boolean })
         </DropdownMenuGroup>
         <DropdownMenuSeparator className={'my-0'} />
         <DropdownMenuItem>
-          <Link href={'/'} className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
+          <Link href="/profile" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
             <User className="size-4" />
             <span className="text-sm font-medium">{t('account')}</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href={'/'} className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
+          <Link href="/addresses" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
             <MapPinHouse className="size-4" />
             <span className="text-sm font-medium">{t('addresses')}</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href={'/'} className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
+          <Link href="/orders" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
             <ScrollText className="size-4" />
             <span className="text-sm font-medium">{t('order')}</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuSeparator className={'my-0'} />
-        <DropdownMenuItem>
-          <Link href={'/'} className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
-            <Settings className="size-4" />
-            <span className="text-sm font-medium">{t('dashboard')}</span>
-          </Link>
-        </DropdownMenuItem>
+        {isAdmin && (
+          <>
+            <DropdownMenuSeparator className="my-0" />
+            <DropdownMenuItem>
+              <Link href="/dashboard" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
+                <Settings className="size-4" />
+                <span className="text-sm font-medium">{t('dashboard')}</span>
+              </Link>
+            </DropdownMenuItem>
+          </>
+        )}
         <DropdownMenuSeparator className={'my-0'} />
         <DropdownMenuItem>
           <button onClick={handleLogout} className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
