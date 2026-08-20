@@ -148,10 +148,8 @@
       "urlRequired": "رابط النجاح مطلوب."
     }
   },
-
   "orders": {
     "title": "الطلبات",
-
     "orderCard": {
       "orderNumber": "الطلب رقم #{id}",
       "created": "تم الإنشاء:",
@@ -181,7 +179,6 @@
         "cancelled": "ملغي"
       }
     },
-
     "items": {
       "title": "المنتجات ({count})",
       "rating": "التقييم: {rating}",
@@ -189,20 +186,17 @@
       "showAll": "عرض الكل",
       "showLess": "عرض أقل"
     },
-
     "empty": {
       "title": "لم تقم بتقديم أي طلب بعد",
       "description": "بمجرد تقديم طلب، ستتمكن من تتبعه وإدارته من هنا.",
       "startShopping": "ابدأ التسوق"
     },
-
     "error": {
       "title": "فشل تحميل الطلبات",
       "description": "تعذر تحميل طلباتك في الوقت الحالي. يرجى المحاولة مرة أخرى.",
       "retry": "حاول مرة أخرى"
     }
   },
-
   "homeHeader": {
     "deliverTo": "التوصيل إلى",
     "userMenu": {
@@ -644,7 +638,7 @@
     "sidebar": {
       "navigation": "تنقل الحساب",
       "profile": "الملف الشخصي",
-      "password": "كلمة المرور",
+      "password": "تغيير كلمة المرور",
       "logout": "تسجيل الخروج"
     },
     "profile": {
@@ -654,13 +648,29 @@
       "changePhoto": "تغيير الصورة الشخصية",
       "uploading": "جاري الرفع..."
     },
+    "password": {
+      "title": "تغيير كلمة المرور",
+      "description": "استخدم 8 أحرف على الأقل لإنشاء كلمة مرور قوية.",
+      "showPassword": "إظهار كلمة المرور",
+      "hidePassword": "إخفاء كلمة المرور",
+      "validation": {
+        "oldPasswordRequired": "كلمة المرور القديمة مطلوبة.",
+        "newPasswordRequired": "كلمة المرور الجديدة مطلوبة.",
+        "passwordMin": "يجب ألا تقل كلمة المرور عن 8 أحرف.",
+        "confirmPasswordRequired": "يرجى تأكيد كلمة المرور الجديدة.",
+        "passwordMismatch": "كلمتا المرور الجديدتان غير متطابقتين."
+      }
+    },
     "fields": {
       "firstName": "الاسم الأول",
       "lastName": "اسم العائلة",
       "email": "البريد الإلكتروني",
       "phone": "رقم الهاتف",
       "country": "الدولة",
-      "gender": "النوع"
+      "gender": "النوع",
+      "currentPassword": "كلمة المرور القديمة",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة"
     },
     "gender": {
       "male": "ذكر",
@@ -675,7 +685,9 @@
     "actions": {
       "save": "حفظ التغييرات",
       "saving": "جاري الحفظ...",
-      "delete": "حذف الحساب"
+      "delete": "حذف الحساب",
+      "updatePassword": "تغيير كلمة المرور",
+      "updating": "جاري التغيير..."
     },
     "deleteDialog": {
       "close": "إغلاق النافذة",
@@ -689,6 +701,7 @@
       "savedVerifyEmail": "تم حفظ الملف الشخصي. تحقق من بريدك لتأكيد عنوانك الجديد.",
       "photoUploaded": "تم رفع الصورة.",
       "emailVerified": "تم تأكيد بريدك الإلكتروني.",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح.",
       "deleted": "تم حذف حسابك."
     },
     "errors": {
