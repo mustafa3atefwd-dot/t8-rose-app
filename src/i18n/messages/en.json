@@ -20,6 +20,7 @@
       "occasions": "Occasions",
       "contact": "Contact Us",
       "about": "About Us",
+<<<<<<< HEAD
       "deliverTo": "Deliver to",
       "userMenu": {
         "welcome": "Welcome",
@@ -29,6 +30,9 @@
         "dashboard": "Dashboard",
         "logout": "Log out"
       }
+=======
+      "register": "Register"
+>>>>>>> sprint/account-orders-responsive
     },
     "about": {
       "label": "About",
@@ -365,6 +369,7 @@
       "search": "Search…",
       "password": "Enter your password",
       "phone": "Phone number",
+      "country": "Select country",
       "passwordPlaceholder": "********",
       "firstName": "Zoe",
       "lastName": "Jonathan",
@@ -589,6 +594,77 @@
         "title": "24/7 Support",
         "desc": "Contact us at any time"
       }
+    }
+  },
+  "account": {
+    "loading": "Loading profile",
+    "layout": {
+      "title": "Account settings"
+    },
+    "sidebar": {
+      "title": "My account",
+      "navigation": "Account navigation",
+      "profile": "Profile",
+      "password": "Change password",
+      "logout": "Log out"
+    },
+    "profile": {
+      "title": "Profile information",
+      "description": "Update your photo and personal details.",
+      "photoAlt": "Profile photo",
+      "changePhoto": "Change photo",
+      "uploading": "Uploading...",
+      "photoHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "uploadPhoto": "Upload photo"
+    },
+    "password": { "title": "Change password", "description": "Use at least 8 characters for a strong password." },
+    "fields": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "country": "Select country",
+      "gender": "Gender",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password"
+    },
+    "gender": { "male": "Male", "female": "Female", "unspecified": "Not specified" },
+    "emailVerification": {
+      "title": "Verify your new email",
+      "placeholder": "Verification code",
+      "confirm": "Confirm email"
+    },
+    "actions": {
+      "delete": "Delete my account",
+      "save": "Save changes",
+      "saving": "Saving...",
+      "updatePassword": "Update password",
+      "updating": "Updating..."
+    },
+    "deleteDialog": {
+      "title": "Are you sure you want to delete your account?",
+      "warning": "This action is permanent and cannot be undone.",
+      "close": "Close delete account confirmation",
+      "cancel": "Nope, not doing it",
+      "confirm": "Yes, delete"
+    },
+    "messages": {
+      "photoUploaded": "Photo uploaded",
+      "saved": "Profile saved",
+      "savedVerifyEmail": "Profile saved. Check your email for the verification code.",
+      "emailVerified": "Email address verified",
+      "passwordChanged": "Password changed successfully",
+      "deleted": "Your account has been deleted"
+    },
+    "errors": {
+      "missingProfile": "Profile data is missing",
+      "imageType": "Please choose a JPG, PNG, GIF or WebP image",
+      "imageSize": "Image must be smaller than 5 MB",
+      "imageTooLargeTitle": "Image is too large",
+      "imageTooLargeDescription": "Choose a smaller or compressed image (maximum 5 MB) and try again.",
+      "uploadUrl": "The upload response did not include an image URL",
+      "passwordMismatch": "New passwords do not match"
     }
   },
   "productReview": {
