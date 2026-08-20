@@ -54,7 +54,6 @@ export default function NotificationsMenu() {
         <Bell  />
         {notificationsCount > 0 && <HeaderBadge count={notificationsCount} />}
       </button>
-
       {open && (
         <div
           ref={menuRef}
