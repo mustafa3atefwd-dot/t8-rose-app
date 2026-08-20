@@ -37,7 +37,7 @@ export default function UnAuthenticatedLogin({ compact = false }: { compact?: bo
 
   return (
     <div className={compact ? 'flex items-center' : 'mt-2'}>
-      <UserDropdown compact={compact} />
+      <UserDropdown  />
     </div>
   );
 }
