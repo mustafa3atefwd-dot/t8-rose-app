@@ -146,7 +146,7 @@ export default function Header() {
           <Link
             key={href}
             href={href}
-            className="hover:bg-ds-bg-primary-saturated flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors xl:text-base"
+            className="hover:text-ds-text-secondary after:bg-ds-bg-secondary relative flex items-center gap-2 self-stretch px-3 py-2 text-sm font-medium transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-center after:scale-x-0 after:transition-transform after:duration-200 hover:after:scale-x-100 xl:text-base"
           >
             <Icon className="size-5" />
             {t(label)}
