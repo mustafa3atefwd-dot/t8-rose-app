@@ -1,3 +1,5 @@
+import { MapPinHouse, ScrollText, Settings, User } from 'lucide-react';
+
 /**
  * Application user roles (RBAC)
  * Used for authorization and access control across the app
@@ -15,3 +17,10 @@ export const USER_GENDERS = {
   male: 'MALE',
   female: 'FEMALE',
 } as const;
+
+export const USER_MENU_LINKS = [
+  { key: 'account', href: '/account', icon: User, adminOnly: false, separated: false },
+  { key: 'addresses', href: '/checkout', icon: MapPinHouse, adminOnly: false, separated: false },
+  { key: 'order', href: '/orders', icon: ScrollText, adminOnly: false, separated: false },
+  { key: 'dashboard', href: '/dashboard', icon: Settings, adminOnly: true, separated: true },
+] as const;

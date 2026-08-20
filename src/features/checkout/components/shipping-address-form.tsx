@@ -103,8 +103,8 @@ export default function ShippingAddressForm({
         {errors.addressId && <FormError message={errors.addressId.message} />}
 
         {/* Add Address Divider */}
-        <div className="before:bg-ds-bg-soft text-ds-text-soft relative flex items-center gap-4 py-4.5 text-center text-lg font-semibold before:absolute before:top-1/2 before:h-px before:w-full before:translate-x-0 before:-translate-y-1/2">
-          <span className="bg-ds-bg-plain z-5 mx-auto px-4">{t('or')}</span>
+        <div className="my-6 flex items-center justify-center gap-4 text-lg font-semibold text-zinc-500 before:flex-1 before:border-t before:border-zinc-200 before:content-[''] after:flex-1 after:border-t after:border-zinc-200 after:content-[''] dark:text-zinc-400 dark:before:border-zinc-700 dark:after:border-zinc-700">
+          {t('or')}
         </div>
 
         {/* Add Address Action */}

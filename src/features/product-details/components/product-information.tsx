@@ -23,11 +23,11 @@ export async function ProductInformation({ product, locale }: ProductInformation
   });
 
   return (
-    <section aria-labelledby="product-title" className="flex flex-col lg:min-h-130.5">
+    <section aria-labelledby="product-title" className="flex min-w-0 flex-col lg:min-h-130.5">
       {/* Product title, price, and stock */}
       <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
         <div className="min-w-0 sm:flex-1">
-          <h1 id="product-title" className="text-ds-text-plain text-2xl font-bold sm:text-3xl">
+          <h1 id="product-title" className="text-ds-text-plain text-xl leading-tight font-bold sm:text-3xl">
             {product.title}
           </h1>
 
@@ -37,10 +37,12 @@ export async function ProductInformation({ product, locale }: ProductInformation
                 <span className="text-ds-text-soft text-lg line-through">
                   {priceFormatter.format(Number(product.price))}
                 </span>
-                <span className="text-ds-text-plain text-2xl font-bold">{priceFormatter.format(discountedPrice)}</span>
+                <span className="text-ds-text-plain text-xl font-bold sm:text-2xl">
+                  {priceFormatter.format(discountedPrice)}
+                </span>
               </>
             ) : (
-              <span className="text-ds-text-plain text-2xl font-bold">
+              <span className="text-ds-text-plain text-xl font-bold sm:text-2xl">
                 {priceFormatter.format(Number(product.price))}
               </span>
             )}
@@ -67,18 +69,18 @@ export async function ProductInformation({ product, locale }: ProductInformation
       {/* Scrollable product description */}
       <div>
         <h2 className="sr-only">{t('description')}</h2>
-        <div className="text-ds-text-default h-32 overflow-y-auto pe-2 text-sm leading-relaxed">
+        <div className="text-ds-text-default max-h-32 overflow-y-auto pe-2 text-sm leading-relaxed sm:h-32">
           {product.description || t('noDescription')}
         </div>
       </div>
 
       {/* Product actions */}
       <div className="mt-auto">
-        <ProductActions 
+        <ProductActions
           productId={product.id}
           product={product}
-          addToCartLabel={t('addToCart')} 
-          addToWishlistLabel={t('addToWishlist')} 
+          addToCartLabel={t('addToCart')}
+          addToWishlistLabel={t('addToWishlist')}
         />
       </div>
     </section>

@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { Star } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import FormatPrice from '../hooks/format-price';
 import { getDiscountedPrice } from '../lib/utils';
@@ -10,6 +12,7 @@ interface ProductSearchResultItemProps {
 }
 
 export function ProductSearchResultItem({ product, onSelect }: ProductSearchResultItemProps) {
+  const t = useTranslations('home.header');
   const discountedPrice = getDiscountedPrice(product);
 
   return (
@@ -32,6 +35,14 @@ export function ProductSearchResultItem({ product, onSelect }: ProductSearchResu
             <span className="text-ds-text-muted text-xs line-through">{FormatPrice(Number(product.price))}</span>
           )}
         </div>
+      </div>
+
+      <div className="text-ds-text-muted hidden shrink-0 items-center gap-1 text-xs sm:flex">
+        <Star className="size-4 fill-amber-500 text-amber-500" />
+        <span>
+          {t('searchRating')}: <strong className="text-ds-text-plain">{product.rating.toFixed(1)}/5</strong>
+        </span>
+        <span className="text-ds-text-primary">({t('searchRatings', { count: product.ratings })})</span>
       </div>
     </Link>
   );

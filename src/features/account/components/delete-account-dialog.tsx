@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 
 import {
   AlertDialog,
-  AlertDialogClose,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -23,23 +22,28 @@ export function DeleteAccountDialog() {
   const [open, setOpen] = useState(false);
   const mutation = useDeleteAccount();
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (!mutation.isPending) setOpen(nextOpen);
+  };
+
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger
         type="button"
-        className={cn(buttonVariants({ variant: 'ghost' }), 'text-ds-text-danger capitalize')}
+        className={cn(buttonVariants({ variant: 'ghost' }), 'text-ds-text-danger w-full capitalize sm:w-auto')}
       >
         {t('actions.delete')}
       </AlertDialogTrigger>
       <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[474px] gap-0 rounded-2xl border-0 px-6 pt-7 pb-6 sm:min-h-[373px]">
-        <AlertDialogClose
+        <button
           type="button"
           disabled={mutation.isPending}
           aria-label={t('deleteDialog.close')}
+          onClick={() => setOpen(false)}
           className="text-ds-text-soft hover:text-ds-text-plain absolute end-6 top-6 rounded-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
         >
           <X className="size-5" />
-        </AlertDialogClose>
+        </button>
 
         <div className="mx-auto mt-12 flex size-[105px] items-center justify-center rounded-full bg-neutral-100">
           <div className="flex size-[70px] items-center justify-center rounded-full bg-neutral-300 text-neutral-800">
@@ -54,14 +58,16 @@ export function DeleteAccountDialog() {
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        <AlertDialogFooter className="mt-auto flex-row gap-2.5 pt-8 sm:justify-stretch">
-          <AlertDialogClose
+        <AlertDialogFooter className="mt-auto gap-2.5 pt-8 sm:justify-stretch">
+          <Button
             type="button"
+            variant="outline"
             disabled={mutation.isPending}
-            className={cn(buttonVariants({ variant: 'outline' }), 'h-11 flex-1 text-base')}
+            onClick={() => setOpen(false)}
+            className="h-11 flex-1 text-base"
           >
             {t('deleteDialog.cancel')}
-          </AlertDialogClose>
+          </Button>
           <Button
             type="button"
             variant="destructive"

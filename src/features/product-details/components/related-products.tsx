@@ -28,8 +28,8 @@ const RelatedProductsContent = async ({ categoryId, subCategoryId, currentProduc
 };
 
 const RelatedProductsSkeleton = () => (
-  <div className="flex w-full gap-6 overflow-hidden">
-    <div className="w-75 shrink-0">
+  <div className="flex w-full gap-4 overflow-hidden sm:gap-6">
+    <div className="w-[88%] shrink-0 min-[440px]:w-[70%] sm:w-75">
       <ProductCardSkeleton />
     </div>
     <div className="hidden w-75 shrink-0 sm:block">
@@ -49,8 +49,8 @@ const RelatedProducts = async (props: IRelatedProductsProps) => {
 
   return (
     <section className="py-8 sm:py-12 md:py-15">
-      <div className="container">
-        <div className="mb-10">
+      <div className="container px-3 sm:px-4">
+        <div className="mb-6 sm:mb-10">
           <SectionTitle className="mx-0! w-fit!">{t('relatedProducts.title')}</SectionTitle>
         </div>
 

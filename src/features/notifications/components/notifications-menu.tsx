@@ -44,21 +44,22 @@ export default function NotificationsMenu() {
   }, [openSettings]);
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center">
       {/* Trigger */}
       <button
-        className="relative flex cursor-pointer items-center justify-center border-none bg-transparent p-0"
+        aria-label={t('title')}
+        className="hover:bg-ds-bg-muted relative flex size-9 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent transition-colors"
         type="button"
         onClick={() => setOpen((prev) => !prev)}
       >
-        <Bell  />
+        <Bell className="size-5" />
         {notificationsCount > 0 && <HeaderBadge count={notificationsCount} />}
       </button>
 
       {open && (
         <div
           ref={menuRef}
-          className="bg-ds-bg-plain absolute ltr:right-2 rtl:left-2 z-50 mt-2 w-84 overflow-visible rounded-xl shadow-[0_4px_9px_0_#00000026]"
+          className="bg-ds-bg-plain border-ds-border-soft absolute end-0 top-full z-50 mt-2 w-84 overflow-y-auto rounded-xl border shadow-[0_8px_30px_0_#00000026] max-sm:fixed max-sm:inset-x-3 max-sm:top-18 max-sm:mt-0 max-sm:max-h-[calc(100dvh-5.5rem)] max-sm:w-auto"
         >
           {/* Header */}
           <div className="bg-ds-bg-primary-saturated text-ds-text-inverse rounded-t-xl p-4 text-xl font-bold">
@@ -119,7 +120,9 @@ export default function NotificationsMenu() {
 
                     <div className="relative">
                       <button
-                        className="cursor-pointer"
+                        aria-label={t('settings')}
+                        aria-expanded={openSettings === notification.id}
+                        className="hover:bg-ds-bg-muted flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors"
                         type="button"
                         onClick={() => setOpenSettings((prev) => (prev === notification.id ? null : notification.id))}
                       >

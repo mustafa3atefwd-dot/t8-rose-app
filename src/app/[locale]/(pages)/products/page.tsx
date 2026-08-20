@@ -17,13 +17,13 @@ const ProductsPage = async () => {
   const occasions = occasionsResult?.status ? (occasionsResult.payload?.data ?? []) : [];
 
   return (
-    <div className="container mx-auto flex flex-1 flex-col gap-6 px-4 py-8 md:flex-row">
+    <div className="container mx-auto flex flex-1 flex-col gap-5 px-3 py-6 sm:px-4 sm:py-8 md:flex-row md:gap-6">
       <ProductFiltersSidebar categories={categories} occasions={occasions} />
 
       <main className="w-full min-w-0 flex-1">
         <Suspense
           fallback={
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
+            <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-8 md:grid-cols-3">
               {Array.from({ length: PRODUCTS_PAGE_SIZE }).map((_, index) => (
                 <ProductCardSkeleton key={index} />
               ))}

@@ -18,7 +18,7 @@ export function ProductGallery({ images, productTitle, galleryLabel, imageLabel 
 
   return (
     <section aria-label={galleryLabel} className="min-w-0">
-      <div className="bg-ds-bg-muted relative aspect-[3/2] overflow-hidden rounded-xl">
+      <div className="bg-ds-bg-muted relative aspect-square overflow-hidden rounded-xl sm:aspect-[3/2]">
         {selectedImage ? (
           <ImageWithSkeleton
             src={selectedImage}
@@ -36,7 +36,7 @@ export function ProductGallery({ images, productTitle, galleryLabel, imageLabel 
       </div>
 
       {images.length > 1 && (
-        <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
+        <div className="hide-scrollbar mt-2 flex snap-x gap-2 overflow-x-auto pb-1">
           {images.map((image, index) => {
             const isSelected = index === selectedIndex;
 
@@ -48,7 +48,7 @@ export function ProductGallery({ images, productTitle, galleryLabel, imageLabel 
                 aria-label={`${imageLabel} ${index + 1}`}
                 aria-pressed={isSelected}
                 className={cn(
-                  'bg-ds-bg-muted relative aspect-[4/5] w-[90px] shrink-0 overflow-hidden rounded-lg border-2 transition',
+                  'bg-ds-bg-muted relative aspect-square w-16 shrink-0 snap-start overflow-hidden rounded-lg border-2 transition sm:aspect-[4/5] sm:w-[90px]',
                   'hover:border-ds-border-primary-faint hover:opacity-90',
                   'focus-visible:ring-ds-ring focus-visible:ring-3 focus-visible:outline-none',
                   isSelected ? 'border-ds-border-primary' : 'border-transparent'
@@ -58,7 +58,7 @@ export function ProductGallery({ images, productTitle, galleryLabel, imageLabel 
                   src={image}
                   alt={`${productTitle} ${imageLabel} ${index + 1}`}
                   fill
-                  sizes="90px"
+                  sizes="(max-width: 640px) 64px, 90px"
                   className="object-cover"
                 />
               </button>

@@ -15,12 +15,17 @@ interface ProductSearchResultsProps {
 
 export function ProductSearchResults({ query, onSelect }: ProductSearchResultsProps) {
   const t = useTranslations('home.header');
+  const isSuggestionList = query.length === 0;
 
   const { data, isFetching } = useQuery({
-    queryKey: ['products-search', query],
-    queryFn: () => getProducts({ search: query, limit: MAX_RESULTS }),
-    enabled: query.length > 0,
-    placeholderData: keepPreviousData,
+    queryKey: isSuggestionList ? ['products-search-suggestions'] : ['products-search', query],
+    queryFn: () =>
+      getProducts(
+        isSuggestionList
+          ? { limit: MAX_RESULTS, sortBy: 'mostPopular', sortOrder: 'desc' }
+          : { search: query, limit: MAX_RESULTS }
+      ),
+    placeholderData: isSuggestionList ? undefined : keepPreviousData,
   });
 
   const products = data?.status ? (data.payload?.data ?? []) : [];
@@ -31,6 +36,12 @@ export function ProductSearchResults({ query, onSelect }: ProductSearchResultsPr
       role="listbox"
       className="bg-ds-bg-plain text-ds-text-plain ring-ds-border-plain/10 animate-in fade-in-0 zoom-in-95 absolute inset-x-0 top-full z-50 mt-2 max-h-96 overflow-y-auto rounded-lg p-2 shadow-md ring-1 duration-100"
     >
+      {isSuggestionList && !showSkeleton && products.length > 0 && (
+        <p className="text-ds-text-primary border-ds-border-soft border-b px-2 pt-1 pb-3 text-sm font-semibold">
+          {t('searchSuggestions')}
+        </p>
+      )}
+
       {showSkeleton ? (
         <div className="flex flex-col gap-1">
           {Array.from({ length: 3 }).map((_, index) => (

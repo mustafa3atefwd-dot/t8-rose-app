@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/inputs';
 import { CartItem } from '@/shared/lib/types/product';
@@ -23,11 +23,13 @@ export default function ItemCard({ itemCart, onRemove, onUpdate, isLast }: Props
   const t = useTranslations('cart');
   // state
   const [inputQuantity, setInputQuantity] = useState(String(quantity));
+  const [syncedQuantity, setSyncedQuantity] = useState(quantity);
 
   // Keep input synchronized with cart quantity
-  useEffect(() => {
+  if (quantity !== syncedQuantity) {
+    setSyncedQuantity(quantity);
     setInputQuantity(String(quantity));
-  }, [quantity]);
+  }
 
   const handleDecrease = () => {
     if (quantity === 1) {
@@ -68,49 +70,56 @@ export default function ItemCard({ itemCart, onRemove, onUpdate, isLast }: Props
   };
 
   return (
-    <div className={cn('', !isLast && 'border-b-ds-border-muted mb-4 border-b pb-5')}>
-      <div className="flex gap-4">
+    <article className={cn('', !isLast && 'border-b-ds-border-muted mb-4 border-b pb-4 sm:pb-5')}>
+      <div className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 sm:grid-cols-[7.3125rem_minmax(0,1fr)] sm:gap-4">
         {/* Item Image */}
-        <div className="relative h-35 w-29.25">
-          <Image src={cover!} fill alt={title} className="rounded-ds-lg" />
+        <div className="bg-ds-bg-muted relative aspect-[4/5] w-full overflow-hidden rounded-lg sm:h-35 sm:w-29.25">
+          {cover && <Image src={cover} fill alt={title} className="object-cover" />}
         </div>
 
         {/* Item Details */}
-        <div className="flex flex-1 flex-col justify-between">
+        <div className="flex min-w-0 flex-col justify-between gap-3">
           {/* Header */}
-          <div className="flex justify-between">
-            <div>
-              <h3 className="text-ds-text-primary text-lg font-semibold">{title}</h3>
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0">
+              <h3 className="text-ds-text-primary line-clamp-2 text-sm font-semibold sm:text-lg">{title}</h3>
 
               {/* Rating */}
-              <div className="flex items-center gap-1.5">
-                <Star className="size-5 fill-[#FFA508] text-[#FFA508]" />
+              <div className="mt-1 flex flex-wrap items-center gap-1 sm:gap-1.5">
+                <Star className="size-4 fill-[#FFA508] text-[#FFA508] sm:size-5" />
 
-                <span className="text-base font-medium">Rating: {rating.toFixed(1)}/5</span>
+                <span className="text-xs font-medium sm:text-base">{rating.toFixed(1)}/5</span>
 
-                <span className="text-ds-text-info text-base font-medium">({ratings} ratings)</span>
+                <span className="text-ds-text-info hidden text-xs font-medium sm:inline sm:text-base">
+                  ({ratings} ratings)
+                </span>
               </div>
             </div>
 
             {/* Remove */}
-            <Button onClick={() => onRemove(id)} variant="destructive">
+            <Button
+              onClick={() => onRemove(id)}
+              variant="ghost"
+              size="icon-sm"
+              className="text-ds-text-danger shrink-0 sm:h-9 sm:w-auto sm:px-3"
+            >
               <Trash2 />
-              {t('remove')}
+              <span className="sr-only sm:not-sr-only">{t('remove')}</span>
             </Button>
           </div>
 
           {/* Footer */}
-          <div className="flex items-end justify-between">
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between">
             {/* Price */}
-            <p className="text-sm font-medium">
-              <span className="text-maroon-600">(×{quantity})</span> <span className="text-2xl font-bold">{price}</span>{' '}
-              EGP
+            <p className="text-xs font-medium sm:text-sm">
+              <span className="text-maroon-600">(×{quantity})</span>{' '}
+              <span className="text-lg font-bold sm:text-2xl">{price}</span> EGP
             </p>
 
             {/* Quantity */}
-            <div className="flex items-center gap-2">
+            <div className="flex w-full items-center gap-1.5 sm:w-auto sm:gap-2">
               {/* Decrease */}
-              <Button onClick={handleDecrease} variant="secondary">
+              <Button onClick={handleDecrease} variant="secondary" size="icon-sm" className="size-8 sm:size-10">
                 <Minus />
               </Button>
 
@@ -122,17 +131,23 @@ export default function ItemCard({ itemCart, onRemove, onUpdate, isLast }: Props
                 max={product.stock}
                 onChange={handleQuantityChange}
                 onBlur={handleQuantityBlur}
-                className="w-25.75 appearance-none text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                className="h-8 min-w-0 flex-1 appearance-none text-center sm:h-10 sm:w-20 sm:flex-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               />
 
               {/* Increase */}
-              <Button disabled={quantity >= product.stock} onClick={handleIncrease} variant="secondary">
+              <Button
+                disabled={quantity >= product.stock}
+                onClick={handleIncrease}
+                variant="secondary"
+                size="icon-sm"
+                className="size-8 sm:size-10"
+              >
                 <Plus />
               </Button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
