@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { Skeleton } from '@/shared/components/ui/skeleton';
-import UserDropdown from './User-Dropdown';
+import UserDropdown from './user-dropdown';
 import { LoginPopover } from './login-popover';
 
 export default function UnAuthenticatedLogin({ compact = false }: { compact?: boolean }) {

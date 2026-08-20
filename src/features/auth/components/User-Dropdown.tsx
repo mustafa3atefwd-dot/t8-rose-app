@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuGroup,
 } from '@/shared/components/ui/dropdown-menu';
-import { ChevronDown, LogOut, MapPinHouse, ScrollText, Settings, User } from 'lucide-react';
+import { ChevronDown, LogOut, User } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
