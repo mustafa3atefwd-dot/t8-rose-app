@@ -13,7 +13,9 @@ type NotificationSettingsProps = {
   notificationId: string;
   notificationIsRead: boolean;
   openSettings: string | null;
-  setOpenSettings: React.Dispatch<React.SetStateAction<string | null>>;
+  setOpenSettings: React.Dispatch<
+    React.SetStateAction<string | null>
+  >;
   buttonRef: HTMLButtonElement | null;
 };
 
@@ -22,16 +24,19 @@ export default function NotificationSettingsMenu({
   notificationIsRead,
   openSettings,
   setOpenSettings,
-  setOpenSettings,
   buttonRef,
 }: NotificationSettingsProps) {
   const t = useTranslations('notifications');
 
-  const { mutate: updateNotification, isPending: isUpdatingNotification } =
-    useUpdateNotification();
+  const {
+    mutate: updateNotification,
+    isPending: isUpdatingNotification,
+  } = useUpdateNotification();
 
-  const { mutate: deleteNotification, isPending: isDeletingNotification } =
-    useDeleteNotification();
+  const {
+    mutate: deleteNotification,
+    isPending: isDeletingNotification,
+  } = useDeleteNotification();
 
   const [position, setPosition] = useState({
     top: 0,
@@ -46,43 +51,103 @@ export default function NotificationSettingsMenu({
     const updatePosition = () => {
       const rect = buttonRef.getBoundingClientRect();
 
-      const menuWidth = 208;
+      const menuWidth = window.innerWidth < 640 ? 192 : 208;
+
       const gap = 8;
+      const screenPadding = 8;
 
-      const isRTL = document.documentElement.dir === 'rtl';
+      const isRTL =
+        document.documentElement.dir === 'rtl';
 
-      let left;
+      /**
+       * Desktop:
+       *
+       * RTL:
+       * Settings menu → left of notification button
+       *
+       * LTR:
+       * Settings menu → right of notification button
+       */
+      let left = isRTL
+        ? rect.left - menuWidth - gap
+        : rect.right + gap;
 
-      if (isRTL) {
-        // RTL → menu تظهر ناحية الشمال
-        left = rect.left - menuWidth - gap;
-      } else {
-        // LTR → menu تظهر ناحية اليمين
-        left = rect.right + gap;
-      }
-
-      // منع خروج القائمة من الشاشة
+      /**
+       * If menu goes outside the screen,
+       * move it inside the viewport.
+       */
       left = Math.max(
-        8,
-        Math.min(left, window.innerWidth - menuWidth - 8)
+        screenPadding,
+        Math.min(
+          left,
+          window.innerWidth -
+            menuWidth -
+            screenPadding,
+        ),
       );
 
+      /**
+       * Put the menu aligned with the top
+       * of the Ellipsis button.
+       */
+      let top = rect.top;
+
+      /**
+       * Prevent the menu from going below viewport.
+       */
+      const estimatedMenuHeight = 100;
+
+      if (
+        top + estimatedMenuHeight >
+        window.innerHeight - screenPadding
+      ) {
+        top =
+          window.innerHeight -
+          estimatedMenuHeight -
+          screenPadding;
+      }
+
+      /**
+       * Prevent going above viewport.
+       */
+      top = Math.max(screenPadding, top);
+
       setPosition({
-        top: rect.top,
+        top,
         left,
       });
     };
 
     updatePosition();
 
-    window.addEventListener('resize', updatePosition);
-    window.addEventListener('scroll', updatePosition, true);
+    window.addEventListener(
+      'resize',
+      updatePosition,
+    );
+
+    window.addEventListener(
+      'scroll',
+      updatePosition,
+      true,
+    );
 
     return () => {
-      window.removeEventListener('resize', updatePosition);
-      window.removeEventListener('scroll', updatePosition, true);
+      window.removeEventListener(
+        'resize',
+        updatePosition,
+      );
+
+      window.removeEventListener(
+        'scroll',
+        updatePosition,
+        true,
+      );
     };
-  }, [openSettings, notificationId, buttonRef]);
+  }, [
+    openSettings,
+    notificationId,
+    buttonRef,
+  ]);
 
   if (openSettings !== notificationId) {
     return null;
@@ -90,31 +155,52 @@ export default function NotificationSettingsMenu({
 
   return (
     <div
-      ref={settingsRef}
       role="menu"
-      className="rounded-ds-xl border-ds-border-soft bg-ds-bg-plain text-ds-text-plain absolute end-0 top-full z-60 mt-1.5 w-48 overflow-hidden border text-sm font-medium shadow-[0_8px_30px_0_#00000026] sm:w-52"
+      style={{
+        position: 'fixed',
+        top: position.top,
+        left: position.left,
+      }}
+      className="
+        rounded-ds-xl
+        border-ds-border-soft
+        bg-ds-bg-plain
+        text-ds-text-plain
+        z-[60]
+        w-48
+        overflow-hidden
+        border
+        text-sm
+        font-medium
+        shadow-[0_8px_30px_0_#00000026]
+
+        sm:w-52
+      "
     >
       {/* Mark as read */}
       <button
         type="button"
-        disabled={isDeletingNotification || isUpdatingNotification}
+        disabled={
+          isDeletingNotification ||
+          isUpdatingNotification
+        }
         onClick={() => {
-          {
           updateNotification(notificationId);
-          setOpenSettings(null);
-        };
           setOpenSettings(null);
         }}
         role="menuitem"
         className={cn(
           'hover:bg-ds-bg-muted flex w-full cursor-pointer items-center gap-2.5 p-3 text-start transition-colors',
-          notificationIsRead && 'text-ds-text-muted'
+          notificationIsRead &&
+            'text-ds-text-muted',
+          'disabled:cursor-not-allowed disabled:opacity-50',
         )}
       >
         <Check
           className={cn(
             'size-4.5 text-zinc-500 dark:text-zinc-400',
-            notificationIsRead && 'text-ds-text-muted'
+            notificationIsRead &&
+              'text-ds-text-muted',
           )}
         />
 
@@ -124,13 +210,30 @@ export default function NotificationSettingsMenu({
       {/* Delete */}
       <button
         type="button"
-        disabled={isDeletingNotification || isUpdatingNotification}
+        disabled={
+          isDeletingNotification ||
+          isUpdatingNotification
+        }
         onClick={() => {
           deleteNotification(notificationId);
           setOpenSettings(null);
         }}
         role="menuitem"
-        className="hover:bg-ds-bg-muted border-ds-border-soft flex w-full cursor-pointer items-center gap-2.5 border-t p-3 text-start transition-colors"
+        className="
+          hover:bg-ds-bg-muted
+          border-ds-border-soft
+          flex
+          w-full
+          cursor-pointer
+          items-center
+          gap-2.5
+          border-t
+          p-3
+          text-start
+          transition-colors
+          disabled:cursor-not-allowed
+          disabled:opacity-50
+        "
       >
         <Trash2 className="text-ds-text-danger size-4.5" />
 
