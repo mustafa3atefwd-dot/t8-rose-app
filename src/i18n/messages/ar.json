@@ -19,7 +19,16 @@
       "categories": "الفئات",
       "occasions": "المناسبات",
       "contact": "تواصل معنا",
-      "about": "من نحن"
+      "about": "من نحن",
+      "deliverTo": "التوصيل إلى",
+      "userMenu": {
+        "welcome": "مرحبًا",
+        "account": "حسابي",
+        "addresses": "عناويني",
+        "order": "طلباتي",
+        "dashboard": "لوحة التحكم",
+        "logout": "تسجيل الخروج"
+      }
     },
     "about": {
       "label": "من نحن",
@@ -73,19 +82,81 @@
       "title": "اكتشف <accent>الهدايا الأكثر مبيعًا</accent> التي يفضلها عملاؤنا",
       "description": "تصفح أكثر صناديق الهدايا التي يفضلها عملاؤنا، والمختارة بعناية لتجمع بين الجودة والأناقة وتناسب كل مناسبة."
     },
+    "productCarousel": {
+      "error": "تعذر تحميل المنتجات.",
+      "empty": "لا توجد منتجات متاحة حاليًا.",
+      "retry": "حاول مرة أخرى"
+    },
     "Explore gifts": "استكشف الهدايا"
   },
 
-  "homeHeader": {
-    "deliverTo": "التوصيل إلى",
-    "userMenu": {
-      "welcome": "مرحبًا",
-      "account": "حسابي",
-      "addresses": "عناويني",
-      "order": "طلباتي",
-      "dashboard": "لوحة التحكم",
-      "logout": "تسجيل الخروج"
+  "checkout": {
+    "title": "إتمام الطلب",
+    "or": "أو",
+    "shipping": {
+      "title": "عنوان الشحن",
+      "select": "اختر عنوان الشحن",
+      "empty": {
+        "title": "ليس لديك أي عنوان محفوظ.",
+        "action": "إضافة عنوان"
+      },
+      "error": "فشل تحميل العناوين."
+    },
+
+    "payment": {
+      "title": "طريقة الدفع",
+
+      "methods": {
+        "cash": {
+          "title": "الدفع عند الاستلام",
+          "description": "ادفع عند استلام طلبك."
+        },
+        "card": {
+          "title": "بطاقة ائتمانية / بطاقة بنكية",
+          "description": "ادفع عبر الإنترنت بأمان."
+        }
+      }
+    },
+
+    "orderSummary": {
+      "title": "ملخص الطلب",
+      "empty": "سلة التسوق فارغة.",
+      "quantity": "الكمية {count}",
+      "total": "الإجمالي"
+    },
+
+    "actions": {
+      "next": "التالي",
+      "back": "السابق",
+      "placeOrder": "تأكيد الطلب",
+      "placingOrder": "جاري تأكيد الطلب...",
+      "addAddress": "إضافة عنوان جديد"
+    },
+
+    "messages": {
+      "orderCreated": "تم إنشاء طلبك بنجاح!",
+      "cartEmpty": "سلة التسوق فارغة.",
+      "paymentInitializationFailed": "تعذر تهيئة عملية الدفع.",
+      "orderFailed": "فشل إنشاء الطلب."
+    },
+
+    "validation": {
+      "addressRequired": "يرجى اختيار عنوان الشحن.",
+      "addressInvalid": "عنوان الشحن المحدد غير صالح.",
+      "paymentRequired": "يرجى اختيار طريقة الدفع.",
+      "notesMaxLength": "يجب ألا تتجاوز الملاحظات 500 حرف.",
+      "urlRequired": "رابط النجاح مطلوب."
     }
+  },
+
+  "about": {
+    "title": "من نحن"
+  },
+  "contact": {
+    "title": "تواصل معنا"
+  },
+  "favorite": {
+    "title": "المفضلة"
   },
 
   "notifications": {
@@ -99,7 +170,7 @@
   "productDetails": {
     "stock": "{count} وحدة في المخزون",
     "rating": "التقييم: {rating}/5",
-    "ratings": "({count} تقييم)",
+    "ratings": "({count, plural, zero {لا توجد تقييمات} one {تقييم واحد} two {تقييمان} few {# تقييمات} many {# تقييمًا} other {# تقييم}})",
     "description": "وصف المنتج",
     "noDescription": "لا يوجد وصف متاح.",
     "addToCart": "أضف إلى السلة",
@@ -118,17 +189,6 @@
     }
   },
 
-  "checkoutPage": {
-    "title": "إتمام الطلب",
-    "orderSummary": {
-      "title": "ملخص الطلب",
-      "empty": "سلتك فارغة.",
-      "quantity": "الكمية {count}",
-      "total": "الإجمالي",
-      "placeOrder": "إتمام الطلب",
-      "comingSoon": "الدفع وتقديم الطلب قريبًا"
-    }
-  },
   "address": {
     "modal": {
       "title": "عناويني"
@@ -197,6 +257,7 @@
     "emailLabel": "البريد الإلكتروني",
     "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
     "login": "تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
 
     "registerOtp": {
       "title": "إنشاء حساب",
@@ -224,8 +285,6 @@
     "phoneNumber": "رقم الهاتف",
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
-    "next": "التالي",
-    "creating": "جاري الإنشاء...",
     "loginForm": {
       "subtitle": "تسجيل الدخول إلى حسابك",
       "username": "اسم المستخدم",
@@ -238,7 +297,6 @@
       "loading": "جاري تسجيل الدخول...",
       "noAccount": "ليس لديك حساب؟",
       "createNow": "أنشئ حسابك الآن!",
-      "register": "إنشاء حساب",
       "showPassword": "إظهار كلمة المرور",
       "hidePassword": "إخفاء كلمة المرور",
       "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة",
@@ -400,6 +458,37 @@
     "alreadySubscribed": "مشترك بالفعل",
     "subscribeError": "فشل الاشتراك. يرجى المحاولة مرة أخرى."
   },
+  "wishlist": {
+    "title": "قائمة المفضلة",
+    "items": "{count, plural, zero {لا توجد منتجات} one {منتج واحد} two {منتجان} few {# منتجات} many {# منتجًا} other {# منتج}}",
+    "clear": "مسح قائمة المفضلة",
+    "clearConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
+    "closeDialog": "إغلاق نافذة التأكيد",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "empty": "قائمة المفضلة فارغة",
+    "emptyDescription": "احفظ المنتجات التي تحبها لتجدها هنا لاحقاً.",
+    "browse": "تصفح المنتجات",
+    "remove": "إزالة من المفضلة",
+    "add": "أضف إلى المفضلة",
+    "removed": "تمت إزالة المنتج من قائمة المفضلة.",
+    "addedToWishlist": "تمت إضافة المنتج إلى قائمة المفضلة.",
+    "wishlistError": "تعذر تحديث قائمة المفضلة.",
+    "removeError": "تعذرت إزالة المنتج من قائمة المفضلة.",
+    "cleared": "تم مسح قائمة المفضلة.",
+    "clearError": "تعذر مسح قائمة المفضلة.",
+    "addToCart": "أضف إلى السلة",
+    "addedToCart": "تمت إضافة المنتج إلى السلة.",
+    "addToCartError": "تعذر إضافة هذا المنتج إلى السلة.",
+    "continueShopping": "متابعة التسوق",
+    "exploreSimilar": "استكشف منتجات مشابهة",
+    "inStock": "{count} وحدة في المخزون",
+    "outOfStock": "غير متوفر",
+    "ratings": "({count, plural, zero {لا توجد تقييمات} one {تقييم واحد} two {تقييمان} few {# تقييمات} many {# تقييمًا} other {# تقييم}})",
+    "noImage": "لا توجد صورة",
+    "error": "تعذر تحميل قائمة المفضلة.",
+    "retry": "حاول مرة أخرى"
+  },
   "products": {
     "card": {
       "new": "جديد",
@@ -515,15 +604,37 @@
       }
     }
   },
-    "cart":{
+  "currency": {
+    "EGP": "جنية مصري"
+  },
+  "cart": {
+    "couponPlaceholder": "أدخل رمز الكوبون",
+    "applyCoupon": "استخدم القسيمة",
+    "invalidCoupon": "كوبون غير صالح أو منتهي الصلاحية",
+    "couponLookupFailed": "تعذر التحقق من الكوبون. حاول مرة أخرى.",
+    "checkingCoupon": "جارٍ التحقق من الكوبون…",
+    "noCouponApplied": "لم يتم تطبيق أي كوبون",
+    "removeCoupon": "إزالة",
+    "couponApplied": "تم استخدم القسيمة!",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "الدفع",
+    "mayLike": "منتجات قد تعجبك",
+    "summary": "ملخص",
     "title": "سلة التسوق",
-    "products": "منتجات",
+    "products": "المنتجات",
     "clearCart": "إفراغ السلة",
-    "continueShopping": "مواصلة التسوق",
-    "empty": "سلتك فارغة",
+    "continueShopping": "متابعة التسوق",
+    "empty": "سلة التسوق فارغة",
     "startShopping": "ابدأ التسوق",
     "remove": "إزالة",
-    "confirmClear": "هل أنت متأكد من إفراغ السلة؟"
+    "confirmClear": "هل أنت متأكد من إفراغ السلة؟",
+    "cancel": "إلغاء",
+    "accept": "تأكيد",
+    "error": "حدث خطأ ما",
+    "errorDescription": "تعذر تحميل سلة التسوق. يرجى المحاولة مرة أخرى.",
+    "retry": "حاول مرة أخرى"
 },
   
   "checkout": {
@@ -534,5 +645,4 @@
     "errorLoading": "فشل تحميل العناوين.",
     "step": "الخطوة {current} من {total}"
   }
-
 }

@@ -90,7 +90,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
   if (isError) {
     return (
       <div className="py-10 text-center text-red-500">
-        {t('errorLoading', { defaultValue: 'Failed to load addresses.' })}
+        {t('shipping.error')}
       </div>
     );
   }
@@ -99,8 +99,8 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
     return (
       <>
         <EmptyAddressState
-          message={t('noAddresses', { defaultValue: 'Add your first address to continue' })}
-          buttonLabel={t('addAddress', { defaultValue: 'Add a new address' })}
+          message={t('shipping.empty.title')}
+          buttonLabel={t('actions.addAddress')}
           onOpenModal={() => setIsOpen(true)}
         />
         <AddressBookModal
@@ -142,8 +142,8 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
 
       {/* Separator */}
       <div className="before:border-zinc-200 after:border-zinc-200 my-6 flex items-center justify-center gap-4 text-lg font-semibold text-zinc-500 before:flex-1 before:border-t before:content-[''] after:flex-1 after:border-t after:content-[''] dark:text-zinc-400 dark:before:border-zinc-700 dark:after:border-zinc-700">
-        OR
-      </div>
+        {t('or')}
+</div>
 
       {/* Add Address Action */}
       <div className="pt-2">
@@ -153,7 +153,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
           className="text-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-red-100 dark:text-zinc-800"
         >
           <Plus className="h-4 w-4" />
-          {t('addAddress', { defaultValue: 'Add a new address' })}
+          {t('actions.addAddress')}
         </Button>
       </div>
 
@@ -163,7 +163,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
           type="submit"
           className="bg-maroon-600 dark:bg-ds-bg-primary dark:hover:bg-ds-bg-primary-faint hover:bg-maroon-700 flex w-40 items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-medium text-white transition-colors dark:text-zinc-800"
         >
-          {t('next', { defaultValue: 'Next →' })}
+          {t('actions.next')}
           <MoveRight className="h-4 w-4" />
         </Button>
       </div>

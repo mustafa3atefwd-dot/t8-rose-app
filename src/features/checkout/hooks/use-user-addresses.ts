@@ -1,17 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { AddressesApiResponse } from '../lib/types/address.types';
+import { ApiError } from 'next/dist/server/api-utils';
+import { IAddressesResponse } from '@/features/checkout/lib/types';
+import { ADDRESSES_QUERY_KEY } from '@/features/checkout/lib/constants';
 
 export function useUserAddresses() {
   return useQuery({
-    queryKey: ['user-addresses'],
-    queryFn: async (): Promise<AddressesApiResponse> => {
+    queryKey: ADDRESSES_QUERY_KEY,
+    queryFn: async () => {
       const res = await fetch('/api/addresses');
 
-      if (!res.ok) {
-        throw new Error('Failed to load addresses.');
+      const data: IAddressesResponse = await res.json();
+
+      if (!res.ok || !data.status) {
+        throw new ApiError(res.status, String(data.message));
       }
 
-      return res.json();
+      return data;
     },
   });
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateAddress } from '../lib/actions';
+import { updateAddress } from '../lib/actions/addresses.action';
 import { UpdateAddressPayload } from '../lib/types';
 import { ADDRESSES_QUERY_KEY } from '../lib/constants';
 

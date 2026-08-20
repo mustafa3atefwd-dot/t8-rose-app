@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { Spinner } from '@/shared/components/ui/spinner';
-import { ICoordinates, IMapPickerProps } from '../lib/types';
+import { ICoordinates, IMapPickerProps } from '@/features/checkout/lib/types';
 
 const DEFAULT_CENTER: ICoordinates = { lat: 30.0444, lng: 31.2357 };
 const DEFAULT_ZOOM = 6;

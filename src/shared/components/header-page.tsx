@@ -1,6 +1,16 @@
 import Image from 'next/image';
 import roseLogo from '../../assets/images/roseLogo.png';
-import { ClipboardList, Gift, Headset, Heart, House, Info, PartyPopper, ShoppingCart } from 'lucide-react';
+import {
+
+  ClipboardList,
+  Gift,
+  Headset,
+  House,
+  Info,
+  PartyPopper,
+  ShoppingCart,
+} from 'lucide-react';
+
 import { Link } from '@/i18n/navigation';
 import { LanguageToggle } from '@/features/auth/components/LanguageToggle';
 import { useTranslations } from 'next-intl';
@@ -8,7 +18,10 @@ import SearchInput from './search-input';
 import UserAddress from './user-address';
 import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { ThemeToggle } from './ThemeToggle';
+import { WishlistHeaderLink } from '@/features/wishlist';
 import NotificationsMenu from '@/features/notifications/components/notifications-menu';
+import HeaderBadge from './header-badge';
+import CartBadge from '@/features/cart/components/cart-badge';
 import PushNotificationButton from '@/features/notifications/components/push-notification-button';
 
 export default function Header() {
@@ -37,11 +50,10 @@ export default function Header() {
 
             {/* icons */}
             <div className="border-ds-border-soft flex h-13 w-31 items-center gap-2.5 border-r pr-4 pl-4 rtl:mr-7">
-              <Link href={'/favorite'} aria-label={t('favorite')}>
-                <Heart />
-              </Link>
-              <Link href={'/cart'} aria-label={t('cart')}>
+              <WishlistHeaderLink />
+              <Link className='relative' href={'/cart'} aria-label={t('cart')}>
                 <ShoppingCart />
+                <CartBadge />
               </Link>
               <NotificationsMenu />
               <PushNotificationButton />

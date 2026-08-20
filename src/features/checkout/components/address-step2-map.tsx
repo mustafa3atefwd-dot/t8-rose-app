@@ -4,9 +4,9 @@ import { useTranslations } from 'next-intl';
 import { MapPinHouse } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { SubmitButton } from '@/shared/components';
-import { IAddressStep2MapProps } from '../lib/types';
-import { useGeolocation } from '../hooks';
-import MapPicker from './map-picker';
+import { IAddressStep2MapProps } from '@/features/checkout/lib/types';
+import { useGeolocation } from '@/features/checkout/hooks';
+import { MapPicker } from '@/features/checkout/components';
 
 export default function AddressStep2Map({
   form,
@@ -48,11 +48,9 @@ export default function AddressStep2Map({
       {denied && <p className="text-ds-text-danger text-sm">{error ?? t('locationDenied')}</p>}
       {pinError && <p className="text-ds-text-danger text-sm">{t('pinRequired')}</p>}
 
-
-        <SubmitButton isLoading={isPending} loadingText={submitLabel} className="my-0 w-full sm:w-auto">
-          {submitLabel}
-        </SubmitButton>
-    
+      <SubmitButton isLoading={isPending} loadingText={submitLabel} className="my-0 w-full sm:w-auto">
+        {submitLabel}
+      </SubmitButton>
     </div>
   );
 }

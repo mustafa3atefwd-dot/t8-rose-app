@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from '@/shared/components/ui/toast';
 import { addressSchema, AddressSchema } from '../lib/schemas';
-import { Address, CreateAddressPayload } from '../lib/types';
+import { IAddress, CreateAddressPayload } from '../lib/types';
 import { useCreateAddress } from './use-create-address';
 import { useUpdateAddress } from './use-update-address';
 
@@ -16,7 +16,7 @@ export const WIZARD_STEPS: WizardStep[] = ['details', 'location'];
 
 interface IUseAddressWizardFormProps {
   mode: 'create' | 'edit';
-  address?: Address;
+  address?: IAddress;
   onSuccess: () => void;
 }
 

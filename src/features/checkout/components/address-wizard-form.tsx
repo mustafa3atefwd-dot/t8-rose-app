@@ -1,12 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useAddressWizardForm, WIZARD_STEPS } from '../hooks';
-import { IAddressWizardFormProps } from '../lib/types';
-import AddressStep1Fields from './address-step1-fields';
-import AddressStep2Map from './address-step2-map';
-import CheckoutStepper from './checkout-stepper';
+import { useAddressWizardForm } from '@/features/checkout/hooks';
+import { IAddressWizardFormProps } from '@/features/checkout/lib/types';
+import { CheckoutStepper, AddressStep1Fields, AddressStep2Map } from '@/features/checkout/components';
 import { ArrowLeft } from 'lucide-react';
+import { WIZARD_STEPS } from '@/features/checkout/hooks/use-address-wizard-form';
 
 export default function AddressWizardForm({ mode, address, onSuccess, onCancel }: IAddressWizardFormProps) {
   const t = useTranslations('address');
@@ -26,7 +25,7 @@ export default function AddressWizardForm({ mode, address, onSuccess, onCancel }
         ) : (
           <div className="flex items-center gap-2">
             <button type="button" onClick={goBack} aria-label={t('back')} className="cursor-pointer">
-              <ArrowLeft className="text-white bg-ds-bg-primary rounded-full p-1" />
+              <ArrowLeft className="bg-ds-bg-primary rounded-full p-1 text-white" />
             </button>
             {t('add.step2Title')}
           </div>
