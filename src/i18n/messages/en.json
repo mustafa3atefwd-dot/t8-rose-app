@@ -277,6 +277,13 @@
     "phoneNumber": "Phone Number",
     "password": "Password",
     "confirmPassword": "Confirm Password",
+    "loginPopover": {
+      "openLogin": "Open login",
+      "title": "Welcome back",
+      "description": "Sign in to continue shopping and manage your orders.",
+      "loginTab": "Login",
+      "registerTab": "Create account"
+    },
     "loginForm": {
       "subtitle": "Sign in to your account",
       "username": "Username",
@@ -625,6 +632,5 @@
     "error": "Something went wrong",
     "errorDescription": "We couldn't load your cart. Please try again.",
     "retry": "Try Again"
-
-}
+  }
 }
