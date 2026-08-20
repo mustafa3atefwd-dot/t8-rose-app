@@ -113,31 +113,37 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
       </div>
 
       <div className="flex flex-col gap-1 py-2">
-        <h3 className="text-ds-bg-primary line-clamp-1 font-medium">{product.title}</h3>
+        <h3 className="text-ds-bg-primary line-clamp-1 text-sm font-medium sm:text-base">{product.title}</h3>
 
         <div className="flex items-center justify-between">
           <div className="flex flex-col items-baseline gap-1">
             <RatingStars rating={product.rating} label={t('rating', { rating: product.rating })} />
             <div>
-              <span className="text-body-lg text-ds-text-primary font-semibold">
+              <span className="text-ds-text-primary text-sm font-semibold sm:text-lg">
                 {formatPrice(discountedPrice ?? product.price)}
               </span>
               {discountedPrice !== null && (
-                <span className="text-caption text-ds-text-muted ml-2 line-through">{formatPrice(product.price)}</span>
+                <span className="text-ds-text-muted ms-1 text-[10px] line-through sm:ms-2 sm:text-xs">
+                  {formatPrice(product.price)}
+                </span>
               )}
             </div>
           </div>
 
           {/* Add to Cart Button */}
           <Button
-            className="bg-maroon-500 hover:bg-maroon-600 size-10 rounded-full text-white disabled:bg-gray-300"
+            className="bg-maroon-500 hover:bg-maroon-600 size-8 rounded-full text-white disabled:bg-gray-300 sm:size-10"
             size="icon-lg"
             variant="default"
             disabled={isOutOfStock || isCartLoading}
             aria-label={t('addToCart')}
             onClick={handleAddToCart}
           >
-            {isCartLoading ? <Loader2 className="size-5 animate-spin" /> : <ShoppingCart className="size-5" />}
+            {isCartLoading ? (
+              <Loader2 className="size-4 animate-spin sm:size-5" />
+            ) : (
+              <ShoppingCart className="size-4 sm:size-5" />
+            )}
           </Button>
         </div>
       </div>

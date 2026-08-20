@@ -76,9 +76,7 @@ export default function SearchInput({ className }: ClassNameProps) {
         className={className}
       />
 
-      {isOpen && trimmedValue.length > 0 && (
-        <ProductSearchResults query={trimmedValue} onSelect={() => setIsOpen(false)} />
-      )}
+      {isOpen && <ProductSearchResults query={trimmedValue} onSelect={() => setIsOpen(false)} />}
     </div>
   );
 }
