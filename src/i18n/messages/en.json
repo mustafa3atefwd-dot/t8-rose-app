@@ -314,6 +314,59 @@
       "urlRequired": "Success URL is required"
     }
   },
+  "orders": {
+    "title": "Orders",
+
+    "orderCard": {
+      "orderNumber": "Order #{id}",
+      "created": "Created:",
+      "totalPrice": "Total Price:",
+      "paid": "Paid",
+      "status": "Status:",
+      "paymentMethod": "Payment Method:",
+      "deliveryStatus": "Delivery Status:",
+      "paymentMethods": {
+        "cash": "Cash",
+        "card": "Credit Card"
+      },
+      "statuses": {
+        "pending": "Pending",
+        "processing": "In Progress",
+        "confirmed": "Confirmed",
+        "shipped": "Shipped",
+        "delivered": "Done",
+        "cancelled": "Canceled",
+        "refunded": "Refunded"
+      },
+      "deliveryStatuses": {
+        "pending": "Pending",
+        "processing": "In Progress",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Canceled"
+      }
+    },
+
+    "items": {
+      "title": "Order Items ({count})",
+      "rating": "Rating: {rating}",
+      "quantity": "{count}",
+      "showAll": "Show All",
+      "showLess": "Show Less"
+    },
+
+    "empty": {
+      "title": "You haven't placed any orders yet",
+      "description": "Once you place an order, you'll be able to track and manage it right here.",
+      "startShopping": "Start Shopping"
+    },
+
+    "error": {
+      "title": "Failed to load orders",
+      "description": "We couldn't load your orders right now. Please try again.",
+      "retry": "Retry"
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
