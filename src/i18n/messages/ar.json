@@ -10,14 +10,7 @@
       "logoAlt": "شعار روز",
       "inputPlaceholder": "عن أي هدية رائعة تبحث؟",
       "searchNoResults": "لم يتم العثور على منتجات",
-      "searchSuggestions": "منتجات قد تعجبك:",
-      "searchRating": "التقييم",
-      "searchRatings": "{count, plural, zero {لا توجد تقييمات} one {تقييم واحد} two {تقييمان} few {# تقييمات} many {# تقييمًا} other {# تقييم}}",
       "login": "تسجيل الدخول",
-      "register": "إنشاء حساب",
-      "menu": "فتح القائمة",
-      "navigation": "التنقل الرئيسي",
-      "menuDescription": "تصفح المتجر والوصول إلى خيارات حسابك.",
       "favorite": "المفضلة",
       "cart": "سلة التسوق",
       "notifications": "الإشعارات",
@@ -27,9 +20,7 @@
       "occasions": "المناسبات",
       "contact": "تواصل معنا",
       "about": "من نحن",
-<<<<<<< HEAD
       "deliverTo": "التوصيل إلى",
-      "cairo": "القاهرة",
       "userMenu": {
         "welcome": "مرحبًا",
         "account": "حسابي",
@@ -38,9 +29,6 @@
         "dashboard": "لوحة التحكم",
         "logout": "تسجيل الخروج"
       }
-=======
-      "register": "انشاء حساب"
->>>>>>> sprint/account-orders-responsive
     },
     "about": {
       "label": "من نحن",
@@ -101,8 +89,6 @@
     },
     "Explore gifts": "استكشف الهدايا"
   },
-<<<<<<< HEAD
-=======
 
   "checkout": {
     "title": "إتمام الطلب",
@@ -163,100 +149,22 @@
     }
   },
 
-<<<<<<< HEAD
   "about": {
-    "title": "من نحن",
-    "eyebrow": "قصتنا",
-    "heroTitle": "هدايا تحوّل <accent>اللحظات</accent> إلى ذكريات",
-    "heroDescription": "بدأت روز بإيمان بسيط: الهدية المختارة بعناية تستطيع أن تعبّر عمّا تعجز عنه الكلمات أحيانًا. ننسّق الزهور والتذكارات وصناديق الهدايا الجميلة لنساعدك على الاحتفال بكل شخص وكل مناسبة باهتمام.",
-    "explore": "استكشف هدايانا",
-    "yearsValue": "+8",
-    "yearsLabel": "سنوات من الإهداء بعناية",
-    "imageAlt": {
-      "main": "تنسيق هدايا أنيق من روز",
-      "detail": "صندوق هدايا فاخر مغلف بعناية"
-    },
-    "stats": {
-      "gifts": { "value": "+10 آلاف", "label": "هدية تم توصيلها" },
-      "customers": { "value": "+4.5 آلاف", "label": "عميل سعيد" },
-      "occasions": { "value": "+50", "label": "طريقة للاحتفال" }
-    },
-    "values": {
-      "eyebrow": "ما يلهمنا",
-      "title": "صُنعت بمعنى، ووُصلت بعناية",
-      "description": "كل تفصيلة، من الفكرة الأولى حتى الشريط الأخير، تصنعها القيم التي تقف في قلب روز.",
-      "items": {
-        "thoughtful": {
-          "title": "اختيار مدروس",
-          "description": "نختار هدايا شخصية ومعبرة وتناسب كل لحظة بشكل مثالي."
-        },
-        "quality": {
-          "title": "صناعة جميلة",
-          "description": "منتجات فاخرة وتقديم دقيق يجعلان كل تجربة فتح هدية مميزة."
-        },
-        "lasting": {
-          "title": "ذكريات تدوم",
-          "description": "نصنع تجارب إهداء تبقى في الذاكرة طويلًا بعد وصول الهدية."
-        }
-      }
-    },
-    "cta": {
-      "title": "لنصنع يومًا جميلًا لشخص ما",
-      "description": "أخبرنا بمن تحتفل، وسنساعدك في العثور على الهدية التي تناسبه تمامًا.",
-      "action": "تحدث مع فريقنا"
-    }
+    "title": "من نحن"
   },
   "contact": {
-    "title": "تواصل معنا",
-    "eyebrow": "نحن هنا لمساعدتك",
-    "description": "هل لديك سؤال عن هدية أو التوصيل أو طلبك؟ يسعد فريقنا دائمًا أن يسمع منك.",
-    "details": {
-      "title": "لنبدأ محادثة",
-      "description": "اختر وسيلة التواصل الأنسب لك. نرد عادةً خلال يوم عمل واحد.",
-      "items": {
-        "email": { "label": "البريد الإلكتروني", "value": "support@rose.com" },
-        "phone": { "label": "الهاتف", "value": "+20 100 000 0000" },
-        "location": { "label": "زرنا", "value": "القاهرة، مصر" },
-        "hours": { "label": "ساعات العمل", "value": "يوميًا، 9:00 صباحًا–9:00 مساءً" }
-      }
-    },
-    "form": {
-      "title": "أرسل لنا رسالة",
-      "description": "شاركنا بعض التفاصيل وسيتواصل معك فريق الدعم في أقرب وقت ممكن.",
-      "name": "اسمك",
-      "namePlaceholder": "أدخل اسمك الكامل",
-      "email": "البريد الإلكتروني",
-      "emailPlaceholder": "you@example.com",
-      "subject": "الموضوع",
-      "subjectPlaceholder": "كيف يمكننا مساعدتك؟",
-      "message": "الرسالة",
-      "messagePlaceholder": "أخبرنا بالمزيد عن سؤالك...",
-      "submit": "إرسال الرسالة"
-    }
+    "title": "تواصل معنا"
   },
   "favorite": {
     "title": "المفضلة"
-=======
->>>>>>> feature/checkout-step-2
-  "homeHeader": {
-    "deliverTo": "التوصيل إلى",
-    "userMenu": {
-      "welcome": "مرحبًا",
-      "account": "حسابي",
-      "addresses": "عناويني",
-      "order": "طلباتي",
-      "dashboard": "لوحة التحكم",
-      "logout": "تسجيل الخروج"
-    }
->>>>>>> sprint/account-orders-responsive
   },
+
   "notifications": {
     "title": "الإشعارات",
     "clearAll": "مسح الكل",
     "markAllRead": "تحديد الكل كمقروء",
     "empty": "لا توجد إشعارات بعد",
     "markRead": "تحديد كمقروء",
-    "settings": "إجراءات الإشعار",
     "delete": "حذف"
   },
   "productDetails": {
@@ -280,21 +188,7 @@
       "title": "منتجات ذات صلة"
     }
   },
-<<<<<<< HEAD
 
-=======
-  "checkoutPage": {
-    "title": "إتمام الطلب",
-    "orderSummary": {
-      "title": "ملخص الطلب",
-      "empty": "سلتك فارغة.",
-      "quantity": "الكمية {count}",
-      "total": "الإجمالي",
-      "placeOrder": "إتمام الطلب",
-      "comingSoon": "الدفع وتقديم الطلب قريبًا"
-    }
-  },
->>>>>>> sprint/account-orders-responsive
   "address": {
     "modal": {
       "title": "عناويني"
@@ -308,6 +202,7 @@
       "step1Title": "تفاصيل العنوان",
       "step2Title": "حدد موقعك على الخريطة"
     },
+
     "city": "المدينة",
     "cityPlaceholder": "مثال: القاهرة",
     "details": "العنوان",
@@ -337,6 +232,7 @@
     "mapLoadError": "فشل تحميل الخريطة. يرجى التحقق من اتصالك.",
     "pinRequired": "يرجى تحديد موقع على الخريطة قبل الإرسال."
   },
+
   "toast": {
     "success": "نجاح",
     "error": "خطأ",
@@ -361,11 +257,8 @@
     "emailLabel": "البريد الإلكتروني",
     "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
     "login": "تسجيل الدخول",
-<<<<<<< HEAD
     "createAccount": "إنشاء حساب",
 
-=======
->>>>>>> sprint/account-orders-responsive
     "registerOtp": {
       "title": "إنشاء حساب",
       "subtitle": "أدخل رمز التحقق",
@@ -381,6 +274,7 @@
       "otpInvalid": "رمز التحقق غير صحيح.",
       "otpExpired": "انتهت صلاحية رمز التحقق."
     },
+
     "createStrongPassword": "أنشئ كلمة مرور قوية",
     "tellUsMore": "أخبرنا المزيد عنك",
     "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
@@ -391,13 +285,6 @@
     "phoneNumber": "رقم الهاتف",
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
-    "loginPopover": {
-      "openLogin": "فتح تسجيل الدخول",
-      "title": "مرحبًا بعودتك",
-      "description": "سجّل الدخول لمتابعة التسوق وإدارة طلباتك.",
-      "loginTab": "تسجيل الدخول",
-      "registerTab": "إنشاء حساب"
-    },
     "loginForm": {
       "subtitle": "تسجيل الدخول إلى حسابك",
       "username": "اسم المستخدم",
@@ -441,6 +328,7 @@
     "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب",
     "passwordsDoNotMatch": "يجب أن تتطابق كلمة المرور مع تأكيد كلمة المرور",
     "passwordMatch": "كلمتا المرور غير متطابقتين",
+
     "review": {
       "productIdRequired": "معرّف المنتج مطلوب",
       "headlineRequired": "عنوان المراجعة مطلوب",
@@ -486,11 +374,11 @@
       "search": "بحث…",
       "password": "أدخل كلمة المرور",
       "phone": "رقم الهاتف",
-      "country": "اختر الدولة",
       "passwordPlaceholder": "********",
       "firstName": "محمد",
       "lastName": "محمود",
       "username": "mohamed123",
+
       "reviewHeadline": "أدخل عنوان المراجعة",
       "reviewContent": "ما رأيك بهذا المنتج؟"
     },
@@ -613,8 +501,6 @@
       "rating": "{rating} من 5"
     },
     "filters": {
-      "title": "الفلاتر",
-      "description": "صفِّ المنتجات حسب الفئة أو المناسبة أو التقييم أو السعر.",
       "category": "الفئة",
       "occasion": "المناسبة",
       "rating": "التقييم",
@@ -655,77 +541,6 @@
       "success": "تم إعادة تعيين كلمة المرور بنجاح",
       "contact": "هل تحتاج مساعدة؟",
       "toContact": "اتصل بنا"
-    }
-  },
-  "account": {
-    "loading": "جارٍ تحميل الملف الشخصي",
-    "layout": {
-      "title": "إعدادات الحساب"
-    },
-    "sidebar": {
-      "title": "حسابي",
-      "navigation": "التنقل في الحساب",
-      "profile": "الملف الشخصي",
-      "password": "تغيير كلمة المرور",
-      "logout": "تسجيل الخروج"
-    },
-    "profile": {
-      "title": "معلومات الملف الشخصي",
-      "description": "حدّث صورتك وبياناتك الشخصية.",
-      "photoAlt": "صورة الملف الشخصي",
-      "changePhoto": "تغيير الصورة",
-      "uploading": "جارٍ الرفع...",
-      "photoHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحجم أقصى 5 ميجابايت.",
-      "uploadPhoto": "رفع الصورة"
-    },
-    "password": { "title": "تغيير كلمة المرور", "description": "استخدم 8 أحرف على الأقل لإنشاء كلمة مرور قوية." },
-    "fields": {
-      "firstName": "الاسم الأول",
-      "lastName": "اسم العائلة",
-      "email": "البريد الإلكتروني",
-      "phone": "رقم الهاتف",
-      "country": "اختر الدولة",
-      "gender": "النوع",
-      "currentPassword": "كلمة المرور الحالية",
-      "newPassword": "كلمة المرور الجديدة",
-      "confirmPassword": "تأكيد كلمة المرور الجديدة"
-    },
-    "gender": { "male": "ذكر", "female": "أنثى", "unspecified": "غير محدد" },
-    "emailVerification": {
-      "title": "تحقق من بريدك الإلكتروني الجديد",
-      "placeholder": "رمز التحقق",
-      "confirm": "تأكيد البريد"
-    },
-    "actions": {
-      "delete": "حذف حسابي",
-      "save": "حفظ التغييرات",
-      "saving": "جارٍ الحفظ...",
-      "updatePassword": "تحديث كلمة المرور",
-      "updating": "جارٍ التحديث..."
-    },
-    "deleteDialog": {
-      "title": "هل أنت متأكد من رغبتك في حذف حسابك؟",
-      "warning": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
-      "close": "إغلاق تأكيد حذف الحساب",
-      "cancel": "لا، لن أفعل ذلك",
-      "confirm": "نعم، احذف"
-    },
-    "messages": {
-      "photoUploaded": "تم رفع الصورة",
-      "saved": "تم حفظ الملف الشخصي",
-      "savedVerifyEmail": "تم حفظ الملف الشخصي. تحقق من بريدك للحصول على رمز التحقق.",
-      "emailVerified": "تم التحقق من البريد الإلكتروني",
-      "passwordChanged": "تم تغيير كلمة المرور بنجاح",
-      "deleted": "تم حذف حسابك"
-    },
-    "errors": {
-      "missingProfile": "بيانات الملف الشخصي غير موجودة",
-      "imageType": "اختر صورة بصيغة JPG أو PNG أو GIF أو WebP",
-      "imageSize": "يجب أن يكون حجم الصورة أقل من 5 ميجابايت",
-      "imageTooLargeTitle": "حجم الصورة كبير جدًا",
-      "imageTooLargeDescription": "اختر صورة أصغر أو مضغوطة (بحد أقصى 5 ميجابايت) ثم حاول مرة أخرى.",
-      "uploadUrl": "لم تتضمن استجابة الرفع رابط الصورة",
-      "passwordMismatch": "كلمتا المرور الجديدتان غير متطابقتين"
     }
   },
   "productReview": {

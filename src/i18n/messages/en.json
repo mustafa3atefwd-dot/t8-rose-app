@@ -10,14 +10,7 @@
       "logoAlt": "Rose logo",
       "inputPlaceholder": "What awesome gift are you looking for?",
       "searchNoResults": "No products found",
-      "searchSuggestions": "Products you may like:",
-      "searchRating": "Rating",
-      "searchRatings": "{count, plural, one {# rating} other {# ratings}}",
       "login": "Login",
-      "register": "Create account",
-      "menu": "Open menu",
-      "navigation": "Main navigation",
-      "menuDescription": "Browse the store and access your account options.",
       "favorite": "Favorites",
       "cart": "Cart",
       "notifications": "Notifications",
@@ -27,9 +20,7 @@
       "occasions": "Occasions",
       "contact": "Contact Us",
       "about": "About Us",
-<<<<<<< HEAD
       "deliverTo": "Deliver to",
-      "cairo": "Cairo",
       "userMenu": {
         "welcome": "Welcome",
         "account": "My account",
@@ -38,9 +29,6 @@
         "dashboard": "Dashboard",
         "logout": "Log out"
       }
-=======
-      "register": "Register"
->>>>>>> sprint/account-orders-responsive
     },
     "about": {
       "label": "About",
@@ -102,74 +90,10 @@
     "Explore gifts": "Explore Gifts"
   },
   "about": {
-    "title": "About Us",
-    "eyebrow": "Our story",
-    "heroTitle": "Gifts that turn <accent>moments</accent> into memories",
-    "heroDescription": "Rose began with a simple belief: a thoughtful gift can say what words sometimes cannot. We curate beautiful flowers, keepsakes, and gift boxes to help you celebrate every person and every occasion with care.",
-    "explore": "Explore our gifts",
-    "yearsValue": "8+",
-    "yearsLabel": "years of thoughtful gifting",
-    "imageAlt": {
-      "main": "An elegant Rose gift arrangement",
-      "detail": "Carefully wrapped premium gift box"
-    },
-    "stats": {
-      "gifts": { "value": "10k+", "label": "Gifts delivered" },
-      "customers": { "value": "4.5k+", "label": "Happy customers" },
-      "occasions": { "value": "50+", "label": "Ways to celebrate" }
-    },
-    "values": {
-      "eyebrow": "What guides us",
-      "title": "Made with meaning, delivered with care",
-      "description": "Every detail—from the first idea to the final ribbon—is shaped by the values at the heart of Rose.",
-      "items": {
-        "thoughtful": {
-          "title": "Thoughtfully curated",
-          "description": "We select gifts that feel personal, expressive, and right for the moment."
-        },
-        "quality": {
-          "title": "Beautifully crafted",
-          "description": "Premium products and careful presentation make every unboxing feel special."
-        },
-        "lasting": {
-          "title": "Made to be remembered",
-          "description": "We create gifting experiences that stay with people long after delivery."
-        }
-      }
-    },
-    "cta": {
-      "title": "Let’s make someone’s day",
-      "description": "Tell us who you are celebrating, and we’ll help you find a gift that feels just right.",
-      "action": "Talk to our team"
-    }
+    "title": "About Us"
   },
   "contact": {
-    "title": "Contact Us",
-    "eyebrow": "We’re here to help",
-    "description": "Questions about a gift, delivery, or your order? Our team would love to hear from you.",
-    "details": {
-      "title": "Let’s start a conversation",
-      "description": "Choose the channel that works best for you. We usually reply within one business day.",
-      "items": {
-        "email": { "label": "Email", "value": "support@rose.com" },
-        "phone": { "label": "Phone", "value": "+20 100 000 0000" },
-        "location": { "label": "Visit us", "value": "Cairo, Egypt" },
-        "hours": { "label": "Working hours", "value": "Daily, 9:00 AM–9:00 PM" }
-      }
-    },
-    "form": {
-      "title": "Send us a message",
-      "description": "Share a few details and our support team will get back to you as soon as possible.",
-      "name": "Your name",
-      "namePlaceholder": "Enter your full name",
-      "email": "Email address",
-      "emailPlaceholder": "you@example.com",
-      "subject": "Subject",
-      "subjectPlaceholder": "How can we help?",
-      "message": "Message",
-      "messagePlaceholder": "Tell us more about your question...",
-      "submit": "Send message"
-    }
+    "title": "Contact Us"
   },
   "favorite": {
     "title": "Favorites"
@@ -180,7 +104,6 @@
     "markAllRead": "Mark all as read",
     "empty": "No notifications yet",
     "markRead": "Mark as read",
-    "settings": "Notification actions",
     "delete": "Delete"
   },
   "productDetails": {
@@ -354,13 +277,6 @@
     "phoneNumber": "Phone Number",
     "password": "Password",
     "confirmPassword": "Confirm Password",
-    "loginPopover": {
-      "openLogin": "Open login",
-      "title": "Welcome back",
-      "description": "Sign in to continue shopping and manage your orders.",
-      "loginTab": "Login",
-      "registerTab": "Create account"
-    },
     "loginForm": {
       "subtitle": "Sign in to your account",
       "username": "Username",
@@ -449,7 +365,6 @@
       "search": "Search…",
       "password": "Enter your password",
       "phone": "Phone number",
-      "country": "Select country",
       "passwordPlaceholder": "********",
       "firstName": "Zoe",
       "lastName": "Jonathan",
@@ -576,8 +491,6 @@
       "rating": "{rating} out of 5"
     },
     "filters": {
-      "title": "Filters",
-      "description": "Refine products by category, occasion, rating, or price.",
       "category": "Category",
       "occasion": "Occasion",
       "rating": "Rating",
@@ -676,77 +589,6 @@
         "title": "24/7 Support",
         "desc": "Contact us at any time"
       }
-    }
-  },
-  "account": {
-    "loading": "Loading profile",
-    "layout": {
-      "title": "Account settings"
-    },
-    "sidebar": {
-      "title": "My account",
-      "navigation": "Account navigation",
-      "profile": "Profile",
-      "password": "Change password",
-      "logout": "Log out"
-    },
-    "profile": {
-      "title": "Profile information",
-      "description": "Update your photo and personal details.",
-      "photoAlt": "Profile photo",
-      "changePhoto": "Change photo",
-      "uploading": "Uploading...",
-      "photoHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
-      "uploadPhoto": "Upload photo"
-    },
-    "password": { "title": "Change password", "description": "Use at least 8 characters for a strong password." },
-    "fields": {
-      "firstName": "First name",
-      "lastName": "Last name",
-      "email": "Email address",
-      "phone": "Phone number",
-      "country": "Select country",
-      "gender": "Gender",
-      "currentPassword": "Current password",
-      "newPassword": "New password",
-      "confirmPassword": "Confirm new password"
-    },
-    "gender": { "male": "Male", "female": "Female", "unspecified": "Not specified" },
-    "emailVerification": {
-      "title": "Verify your new email",
-      "placeholder": "Verification code",
-      "confirm": "Confirm email"
-    },
-    "actions": {
-      "delete": "Delete my account",
-      "save": "Save changes",
-      "saving": "Saving...",
-      "updatePassword": "Update password",
-      "updating": "Updating..."
-    },
-    "deleteDialog": {
-      "title": "Are you sure you want to delete your account?",
-      "warning": "This action is permanent and cannot be undone.",
-      "close": "Close delete account confirmation",
-      "cancel": "Nope, not doing it",
-      "confirm": "Yes, delete"
-    },
-    "messages": {
-      "photoUploaded": "Photo uploaded",
-      "saved": "Profile saved",
-      "savedVerifyEmail": "Profile saved. Check your email for the verification code.",
-      "emailVerified": "Email address verified",
-      "passwordChanged": "Password changed successfully",
-      "deleted": "Your account has been deleted"
-    },
-    "errors": {
-      "missingProfile": "Profile data is missing",
-      "imageType": "Please choose a JPG, PNG, GIF or WebP image",
-      "imageSize": "Image must be smaller than 5 MB",
-      "imageTooLargeTitle": "Image is too large",
-      "imageTooLargeDescription": "Choose a smaller or compressed image (maximum 5 MB) and try again.",
-      "uploadUrl": "The upload response did not include an image URL",
-      "passwordMismatch": "New passwords do not match"
     }
   },
   "productReview": {
