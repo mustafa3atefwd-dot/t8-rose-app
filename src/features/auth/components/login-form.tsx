@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import {  useTranslations } from 'next-intl';
 import { Controller } from 'react-hook-form';
 import { useLoginForm } from '@/features/auth/hooks';
 import { Button } from '@/shared/components/ui/button';
