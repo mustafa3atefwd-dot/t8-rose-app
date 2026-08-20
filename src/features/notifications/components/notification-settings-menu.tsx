@@ -2,54 +2,134 @@
 
 import { Check, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+
 import { useUpdateNotification } from '../hooks/use-update-notification';
-import { cn } from '@/shared/lib/utils';
 import { useDeleteNotification } from '../hooks/use-delete-notification';
 
+import { cn } from '@/shared/lib/utils';
+
 type NotificationSettingsProps = {
-  settingsRef: React.RefObject<HTMLDivElement | null>;
   notificationId: string;
   notificationIsRead: boolean;
   openSettings: string | null;
   setOpenSettings: React.Dispatch<React.SetStateAction<string | null>>;
+  buttonRef: HTMLButtonElement | null;
 };
 
 export default function NotificationSettingsMenu({
-  settingsRef,
   notificationId,
   notificationIsRead,
   openSettings,
+  setOpenSettings,
+  buttonRef,
 }: NotificationSettingsProps) {
   const t = useTranslations('notifications');
-  const { mutate: updateNotification, isPending: isUpdatingNotification } = useUpdateNotification();
-  const { mutate: deleteNotification, isPending: isDeletingNotification } = useDeleteNotification();
-  if (openSettings !== notificationId) return null;
+
+  const { mutate: updateNotification, isPending: isUpdatingNotification } =
+    useUpdateNotification();
+
+  const { mutate: deleteNotification, isPending: isDeletingNotification } =
+    useDeleteNotification();
+
+  const [position, setPosition] = useState({
+    top: 0,
+    left: 0,
+  });
+
+  useEffect(() => {
+    if (openSettings !== notificationId || !buttonRef) {
+      return;
+    }
+
+    const updatePosition = () => {
+      const rect = buttonRef.getBoundingClientRect();
+
+      const menuWidth = 208;
+      const gap = 8;
+
+      const isRTL = document.documentElement.dir === 'rtl';
+
+      let left;
+
+      if (isRTL) {
+        // RTL → menu تظهر ناحية الشمال
+        left = rect.left - menuWidth - gap;
+      } else {
+        // LTR → menu تظهر ناحية اليمين
+        left = rect.right + gap;
+      }
+
+      // منع خروج القائمة من الشاشة
+      left = Math.max(
+        8,
+        Math.min(left, window.innerWidth - menuWidth - 8)
+      );
+
+      setPosition({
+        top: rect.top,
+        left,
+      });
+    };
+
+    updatePosition();
+
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition, true);
+
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition, true);
+    };
+  }, [openSettings, notificationId, buttonRef]);
+
+  if (openSettings !== notificationId) {
+    return null;
+  }
 
   return (
     <div
-      ref={settingsRef}
-      className="rounded-ds-xl text-ds-text-plain absolute top-0 ltr:left-9 rtl:-left-60 z-50 ml-2 w-52 bg-white text-sm font-medium shadow-[0_4px_9px_0_#00000026] dark:bg-zinc-700"
+      className="text-ds-text-plain fixed z-[100] w-52 rounded-ds-xl bg-white text-sm font-medium shadow-[0_4px_9px_0_#00000026] dark:bg-zinc-700"
+      style={{
+        top: position.top,
+        left: position.left,
+      }}
     >
+      {/* Mark as read */}
       <button
+        type="button"
         disabled={isDeletingNotification || isUpdatingNotification}
-        onClick={() => updateNotification(notificationId)}
+        onClick={() => {
+          updateNotification(notificationId);
+          setOpenSettings(null);
+        }}
         className={cn(
-          'rounded-ds-xl flex w-full cursor-pointer items-center gap-2.5 p-3 hover:bg-gray-100 dark:hover:bg-zinc-900',
+          'flex w-full cursor-pointer items-center gap-2.5 rounded-ds-xl p-3 hover:bg-gray-100 dark:hover:bg-zinc-900',
           notificationIsRead && 'text-ds-text-muted'
         )}
       >
         <Check
-          className={cn('size-4.5 text-zinc-500 dark:text-zinc-400', notificationIsRead && 'text-ds-text-muted')}
+          className={cn(
+            'size-4.5 text-zinc-500 dark:text-zinc-400',
+            notificationIsRead && 'text-ds-text-muted'
+          )}
         />
+
         <span>{t('markRead')}</span>
       </button>
 
+      {/* Delete */}
       <button
+        type="button"
         disabled={isDeletingNotification || isUpdatingNotification}
-        onClick={() => deleteNotification(notificationId)}
-        className="rounded-ds-xl flex w-full cursor-pointer items-center gap-2.5 p-3 hover:bg-gray-100 dark:hover:bg-zinc-900"
+        onClick={() => {
+          deleteNotification(notificationId);
+          setOpenSettings(null);
+        }}
+        className="flex w-full cursor-pointer items-center gap-2.5 rounded-ds-xl p-3 hover:bg-gray-100 dark:hover:bg-zinc-900"
       >
         <Trash2 className="text-ds-text-danger size-4.5" />
+
         <span>{t('delete')}</span>
       </button>
     </div>

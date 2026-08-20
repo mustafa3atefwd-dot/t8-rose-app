@@ -19,20 +19,33 @@ self.addEventListener('push', (event) => {
   const link = data.link || '/';
 
   event.waitUntil(
-    self.registration.showNotification(title, {
-      body: message,
+    (async () => {
+      // Show browser notification
+      await self.registration.showNotification(title, {
+        body: message,
 
-      ...(data.id && {
-        tag: data.id,
-      }),
+        ...(data.id && {
+          tag: data.id,
+        }),
 
-      data: {
-        link,
-      },
+        data: {
+          link,
+        },
+      });
 
-      // icon: '/icons/icon-192x192.png',
-      // badge: '/icons/badge-72x72.png',
-    })
+      // Notify the React app
+      const clientsList = await self.clients.matchAll({
+        type: 'window',
+        includeUncontrolled: true,
+      });
+
+      clientsList.forEach((client) => {
+        client.postMessage({
+          type: 'NEW_NOTIFICATION',
+          notification: data,
+        });
+      });
+    })()
   );
 });
 

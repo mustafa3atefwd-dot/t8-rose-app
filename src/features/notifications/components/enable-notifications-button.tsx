@@ -14,7 +14,7 @@ export function EnablePushButton() {
    */
   if (isLoading) {
     return (
-      <Button type="button" disabled className="w-full">
+      <Button type="button" disabled className="w-full border-t border-zinc-300 p-4 dark:border-zinc-600">
         <Loader2 className="size-4 animate-spin" />
         Checking notifications...
       </Button>
@@ -44,7 +44,7 @@ export function EnablePushButton() {
    */
   if (pushStatus.subscriptionCount > 0) {
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 border-t border-zinc-300 p-4 dark:border-zinc-600">
         <BellRing className="size-4" />
 
         <span className="text-xs font-medium">Push notifications enabled</span>
@@ -56,7 +56,7 @@ export function EnablePushButton() {
    * Not subscribed yet
    */
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 border-t border-zinc-300 p-4 dark:border-zinc-600">
       <Button type="button" onClick={() => enablePush()} disabled={isEnabling} className="w-full">
         {isEnabling ? <Loader2 className="size-4 animate-spin" /> : <Bell className="size-4" />}
 

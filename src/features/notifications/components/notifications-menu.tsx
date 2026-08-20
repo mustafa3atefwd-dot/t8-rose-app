@@ -1,16 +1,13 @@
 'use client';
 
 import { Bell, BellOff, BrushCleaning, CheckCheck, EllipsisVertical } from 'lucide-react';
-
 import { useTranslations } from 'next-intl';
-
 import React, { useEffect, useRef, useState } from 'react';
-
+import { useNotificationSync } from '../hooks/use-notification-sync';
 import { useGetNotifications } from '../hooks/use-get-notifications';
 import { useMarkAllRead } from '../hooks/use-mark-all-read';
 import { useDeleteAll } from '../hooks/use-delete-all';
 import { useUnreadCount } from '../hooks/use-unread-count';
-
 import NotificationSettingsMenu from './notification-settings-menu';
 import { EnablePushButton } from './enable-notifications-button';
 
@@ -19,53 +16,40 @@ import { cn } from '@/shared/lib/utils';
 
 export default function NotificationsMenu() {
   const t = useTranslations('notifications');
-
+  useNotificationSync();
   const menuRef = useRef<HTMLDivElement>(null);
-  const settingsRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
   const [openSettings, setOpenSettings] = useState<string | null>(null);
 
-  /**
-   * Notifications
-   */
   const { data } = useGetNotifications();
 
   const hasNotifications = (data?.payload?.data?.length ?? 0) > 0;
 
-  /**
-   * Unread count
-   */
   const { data: unreadData } = useUnreadCount();
-
   const unreadCount = unreadData?.payload?.unreadCount ?? 0;
 
-  /**
-   * Mark all read
-   */
   const { mutate: updateNotifications, isPending: isUpdatingNotifications } = useMarkAllRead();
 
-  /**
-   * Delete all
-   */
   const { mutate: deleteNotifications, isPending: isDeletingNotifications } = useDeleteAll();
 
+  // Refs لكل زرار Ellipsis
+  const settingsButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
   /**
-   * Close menu when clicking outside
+   * Close menus when clicking outside
    */
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
 
-      if (openSettings && settingsRef.current && !settingsRef.current.contains(target)) {
-        setOpenSettings(null);
-
+      // لو الضغط داخل Notifications Menu
+      if (menuRef.current?.contains(target)) {
         return;
       }
 
-      if (menuRef.current && !menuRef.current.contains(target)) {
-        setOpen(false);
-      }
+      setOpen(false);
+      setOpenSettings(null);
     }
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -73,7 +57,7 @@ export default function NotificationsMenu() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [openSettings]);
+  }, []);
 
   return (
     <div className="relative">
@@ -81,7 +65,10 @@ export default function NotificationsMenu() {
       <button
         className="relative flex cursor-pointer items-center justify-center border-none bg-transparent p-0"
         type="button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {
+          setOpen((prev) => !prev);
+          setOpenSettings(null);
+        }}
         aria-label="Notifications"
         aria-expanded={open}
       >
@@ -93,7 +80,7 @@ export default function NotificationsMenu() {
       {open && (
         <div
           ref={menuRef}
-          className="bg-ds-bg-plain absolute z-50 mt-2 w-84 overflow-visible rounded-xl shadow-[0_4px_9px_0_#00000026] ltr:right-2 rtl:left-2"
+          className="bg-ds-bg-plain absolute z-50 mt-2 w-84 rounded-xl shadow-[0_4px_9px_0_#00000026] ltr:right-2 rtl:left-2 max-h-[500px] min-h-[500px] overflow-y-auto"
         >
           {/* Header */}
           <div className="bg-ds-bg-primary-saturated text-ds-text-inverse rounded-t-xl p-4 text-xl font-bold">
@@ -114,7 +101,9 @@ export default function NotificationsMenu() {
               <BrushCleaning
                 className={cn(
                   'size-4.5',
-                  hasNotifications ? 'text-zinc-500 dark:text-zinc-400' : 'text-zinc-400 dark:text-zinc-500'
+                  hasNotifications
+                    ? 'text-zinc-500 dark:text-zinc-400'
+                    : 'text-zinc-400 dark:text-zinc-500'
                 )}
               />
 
@@ -131,7 +120,9 @@ export default function NotificationsMenu() {
               <CheckCheck
                 className={cn(
                   'size-4',
-                  hasNotifications ? 'text-zinc-500 dark:text-zinc-400' : 'text-zinc-400 dark:text-zinc-500'
+                  hasNotifications
+                    ? 'text-zinc-500 dark:text-zinc-400'
+                    : 'text-zinc-400 dark:text-zinc-500'
                 )}
               />
 
@@ -140,9 +131,7 @@ export default function NotificationsMenu() {
           </div>
 
           {/* Push Notifications */}
-          <div className="border-t border-zinc-300 p-4 dark:border-zinc-600">
-            <EnablePushButton />
-          </div>
+          <EnablePushButton />
 
           {/* Notifications */}
           {!hasNotifications ? (
@@ -163,28 +152,39 @@ export default function NotificationsMenu() {
                   )}
                 >
                   <div className="flex w-full items-start justify-between">
-                    <h5 className="text-ds-text-plain text-base font-semibold">{notification.title}</h5>
+                    <h5 className="text-ds-text-plain text-base font-semibold">
+                      {notification.title}
+                    </h5>
 
-                    <div className="relative">
+                    <div>
                       <button
+                        ref={(element) => {
+                          settingsButtonRefs.current[notification.id] = element;
+                        }}
                         className="cursor-pointer"
                         type="button"
-                        onClick={() => setOpenSettings((prev) => (prev === notification.id ? null : notification.id))}
+                        onClick={() =>
+                          setOpenSettings((prev) =>
+                            prev === notification.id ? null : notification.id
+                          )
+                        }
                       >
                         <EllipsisVertical className="text-ds-text-muted size-5 hover:text-zinc-500" />
                       </button>
 
                       <NotificationSettingsMenu
-                        settingsRef={settingsRef}
                         notificationId={notification.id}
                         notificationIsRead={notification.isRead}
                         openSettings={openSettings}
                         setOpenSettings={setOpenSettings}
+                        buttonRef={settingsButtonRefs.current[notification.id]}
                       />
                     </div>
                   </div>
 
-                  <p className="line-clamp-3 text-xs text-zinc-500 dark:text-zinc-400">{notification.message}</p>
+                  <p className="line-clamp-3 text-xs text-zinc-500 dark:text-zinc-400">
+                    {notification.message}
+                  </p>
                 </div>
               </React.Fragment>
             ))
