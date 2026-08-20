@@ -30,3 +30,8 @@ export interface ConfirmEmailPayload {
   email: string;
   code: string;
 }
+
+export interface ChangePasswordPayload {
+  oldPassword: string;
+  newPassword: string;
+}

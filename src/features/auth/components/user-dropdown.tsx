@@ -1,5 +1,7 @@
 'use client';
 
+import { Fragment } from 'react';
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -9,10 +11,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuGroup,
 } from '@/shared/components/ui/dropdown-menu';
-import { ChevronDown, LogOut, MapPinHouse, ScrollText, Settings, User } from 'lucide-react';
+import { ChevronDown, LogOut } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { USER_MENU_LINKS, USER_ROLES } from '../lib/constants/user.constant';
 
 export default function UserDropdown() {
   // Translation
@@ -20,6 +23,8 @@ export default function UserDropdown() {
 
   // Context
   const { data: session } = useSession();
+  const isAdmin = session?.user.role === USER_ROLES.admin || session?.user.role === USER_ROLES.superAdmin;
+  const menuLinks = USER_MENU_LINKS.filter((item) => !item.adminOnly || isAdmin);
 
   // Functions
   const handleLogout = () => signOut({ callbackUrl: '/login' });
@@ -40,34 +45,20 @@ export default function UserDropdown() {
           </DropdownMenuLabel>
         </DropdownMenuGroup>
         <DropdownMenuSeparator className="my-0" />
-        <DropdownMenuItem>
-          <Link href="/account" className="flex items-center gap-2">
-            <User className="size-4" />
-            <span className="text-sm font-medium">{t('account')}</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/" className="flex items-center gap-2">
-            <MapPinHouse className="size-4" />
-            <span className="text-sm font-medium">{t('addresses')}</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/" className="flex items-center gap-2">
-            <ScrollText className="size-4" />
-            <span className="text-sm font-medium">{t('order')}</span>
-          </Link>
-        </DropdownMenuItem>
+        {menuLinks.map(({ key, href, icon: Icon, separated }) => (
+          <Fragment key={key}>
+            {separated && <DropdownMenuSeparator className="my-0" />}
+            <DropdownMenuItem>
+              <Link href={href} className="flex size-full items-center gap-2">
+                <Icon className="size-4" aria-hidden="true" />
+                <span className="text-sm font-medium">{t(key)}</span>
+              </Link>
+            </DropdownMenuItem>
+          </Fragment>
+        ))}
         <DropdownMenuSeparator className="my-0" />
         <DropdownMenuItem>
-          <Link href="/" className="flex items-center gap-2">
-            <Settings className="size-4" />
-            <span className="text-sm font-medium">{t('dashboard')}</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator className="my-0" />
-        <DropdownMenuItem>
-          <button type="button" onClick={handleLogout} className="flex items-center gap-2">
+          <button type="button" onClick={handleLogout} className="flex size-full items-center gap-2">
             <LogOut className="size-4" />
             <span className="text-sm font-medium">{t('logout')}</span>
           </button>
