@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/shared/components/ui/carousel';
 import { Button } from '@/shared/components/ui/button';
+import { Link } from '@/i18n/navigation';
 
 import sliderFlowers from '@/assets/images/slider-flowers.png';
 import sliderChocolates from '@/assets/images/slider-chocolates.png';
@@ -29,9 +29,9 @@ export function HeroCarousel() {
 
   // 4. Variables / Constants
   const SLIDES = [
-    { id: 'flowers', image: sliderFlowers, link: '/category/flowers' },
-    { id: 'chocolates', image: sliderChocolates, link: '/category/chocolates' },
-    { id: 'gifts', image: sliderGifts, link: '/category/gifts' },
+    { id: 'flowers', image: sliderFlowers, link: '/products?search=flowers' },
+    { id: 'chocolates', image: sliderChocolates, link: '/products?search=chocolates' },
+    { id: 'gifts', image: sliderGifts, link: '/products?search=gifts' },
   ];
 
   const activeSlide = SLIDES[current] || SLIDES[0];
@@ -55,15 +55,16 @@ export function HeroCarousel() {
   );
 
   return (
-    <div className="relative h-96 w-full overflow-hidden rounded-2xl lg:col-span-3">
+    <div className="relative  h-96 w-full overflow-hidden rounded-2xl lg:col-span-3">
       {/* Custom Header Dots */}
-      <div className="absolute top-6 z-30 flex gap-2 ltr:right-8 rtl:left-8">
+      <div className="absolute top-6 z-10 flex gap-2 ltr:right-8 rtl:left-8">
         {Array.from({ length: count || SLIDES.length }).map((_, i) => (
-          <button
+          <Button
+            size="icon"
             key={i}
             onClick={() => handleDotClick(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              current === i ? 'bg-maroon-700 w-9' : 'bg-maroon-50 hover:bg-maroon-100 w-3'
+              current === i ? 'bg-maroon-700 w-9 ' : 'bg-maroon-50 hover:bg-maroon-100 w-3'
             }`}
             aria-label={t('goToSlide', { number: i + 1 })}
           />
@@ -71,7 +72,7 @@ export function HeroCarousel() {
       </div>
 
       {/* Independent Floating Overlay Text Layer */}
-      <div className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-end p-6 text-white">
+      <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-end p-6 text-white">
         <div className="max-w-lg space-y-4">
           <h1 className="text-4xl font-semibold tracking-wide md:text-5xl ltr:text-left rtl:text-right">
             {t(`slides.${activeSlide.id}.title`)}
@@ -93,7 +94,7 @@ export function HeroCarousel() {
       <Carousel
         setApi={setApi}
         plugins={[autoplayPlugin.current]}
-        className="h-full w-full"
+        className="h-full  w-full"
         opts={{
           loop: true,
           direction: isRtl ? 'rtl' : 'ltr',
@@ -120,11 +121,11 @@ export function HeroCarousel() {
         </CarouselContent>
 
         {/* Manual Slider Navigation */}
-        <div className="bg-maroon-50 absolute bottom-6 z-30 flex items-center rounded-xl ltr:right-6 rtl:left-6">
+        <div className="bg-maroon-50 absolute bottom-6 z-30 flex items-center gap-1 rounded-full p-1 shadow-sm ltr:right-6 rtl:left-6">
           <Button
             size="icon"
-            variant="ghost"
-            className="bg-maroon-50 text-maroon-700 hover:bg-maroon-500 hover:text-maroon-400 h-7.5 w-7.5 backdrop-blur-md transition-all"
+            variant="secondary"
+            className="bg-maroon-50 text-maroon-700 focus-visible:ring-maroon-400 hover:text-ds-bg-primary-saturated size-6 rounded-full backdrop-blur-md transition-all active:scale-95"
             onClick={() => api?.scrollPrev()}
             aria-label={t('prevSlide')}
           >
@@ -132,8 +133,8 @@ export function HeroCarousel() {
           </Button>
           <Button
             size="icon"
-            variant="ghost"
-            className="bg-maroon-50 text-maroon-700 hover:bg-maroon-500 hover:text-maroon-700 h-7.5 w-7.5 backdrop-blur-md transition-all"
+            variant="secondary"
+            className="bg-maroon-50 text-maroon-700 focus-visible:ring-maroon-400 hover:text-ds-bg-primary-saturated size-6 rounded-full backdrop-blur-md transition-all active:scale-95"
             onClick={() => api?.scrollNext()}
             aria-label={t('nextSlide')}
           >

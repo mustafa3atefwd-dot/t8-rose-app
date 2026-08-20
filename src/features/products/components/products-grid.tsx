@@ -9,13 +9,11 @@ import { PRODUCTS_PAGE_SIZE } from '../lib/constants';
 import { IProduct } from '../lib/types';
 import { useProductFilters } from '@/features/products/hooks/use-product-filters';
 import { PaginationControl } from '@/shared/components/ui/pagination';
-import { useWishlist } from '@/shared/hooks/use-wishlist';
 
 export default function ProductsGrid() {
   // Translation
   const t = useTranslations('products.filters');
   const tError = useTranslations('error');
-  const tWishlist = useTranslations('wishlist');
 
   // Custom hooks
   const {
@@ -32,8 +30,6 @@ export default function ProductsGrid() {
     isPending,
     setFilter,
   } = useProductFilters();
-  const { toggleWishlist, isWishlisted, isLoading: isWishlistLoading } = useWishlist();
-
   // Variables
   // The sidebar is multi-select, so every checked category has to travel to the
   // backend — sending only `categoryIds[0]` silently dropped the rest.
@@ -69,7 +65,7 @@ export default function ProductsGrid() {
   return (
     <div className="w-full">
       {isLoading ? (
-        <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
+        <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-8 md:grid-cols-3">
           {Array.from({ length: PRODUCTS_PAGE_SIZE }).map((_, index) => (
             <ProductCardSkeleton key={`product-skeleton-${index}`} />
           ))}
@@ -81,7 +77,7 @@ export default function ProductsGrid() {
       ) : (
         <div
           data-pending={isRefreshing || undefined}
-          className="border-ds-border-soft pl-6 mt-2 grid grid-cols-1 gap-x-6 gap-y-8 border-l transition-opacity data-pending:opacity-60 sm:grid-cols-2 md:grid-cols-3"
+          className="border-ds-border-soft mt-2 grid grid-cols-2 gap-x-3 gap-y-6 transition-opacity data-pending:opacity-60 sm:gap-x-6 sm:gap-y-8 md:grid-cols-3 md:border-s md:ps-6"
         >
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

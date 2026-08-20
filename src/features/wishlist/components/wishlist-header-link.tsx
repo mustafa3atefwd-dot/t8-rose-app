@@ -14,9 +14,9 @@ export function WishlistHeaderLink() {
     <Link
       href="/wishlist"
       aria-label={t('favorite')}
-      className="relative inline-flex size-6 items-center justify-center"
+      className="hover:bg-ds-bg-muted relative inline-flex size-9 items-center justify-center rounded-lg transition-colors"
     >
-      <Heart aria-hidden="true" />
+      <Heart aria-hidden="true" className="size-5" />
       {count > 0 ? <HeaderBadge count={count} /> : null}
     </Link>
   );

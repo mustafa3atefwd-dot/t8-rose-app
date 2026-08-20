@@ -35,16 +35,22 @@ const ProductCarousel = ({ products }: ProductCarouselProps) => {
   }
 
   return (
-    <Carousel opts={{ align: 'start' }} className="w-full">
-      <CarouselContent className="-ml-6">
+    <Carousel opts={{ align: 'start', containScroll: 'trimSnaps' }} className="w-full">
+      <CarouselContent className="-ml-4 sm:-ml-6">
         {products.map((product) => (
-          <CarouselItem key={product.id} className="basis-full pl-6 sm:basis-85">
+          <CarouselItem key={product.id} className="basis-[88%] pl-4 min-[440px]:basis-[70%] sm:basis-85 sm:pl-6">
             <ProductCard product={product} />
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious variant="default" className="bg-maroon-500 hover:bg-maroon-600 left-4 p-4 text-white" />
-      <CarouselNext variant="default" className="bg-maroon-500 hover:bg-maroon-600 right-4 p-4 text-white" />
+      <CarouselPrevious
+        variant="default"
+        className="bg-maroon-500 hover:bg-maroon-600 left-4 hidden p-4 text-white sm:flex"
+      />
+      <CarouselNext
+        variant="default"
+        className="bg-maroon-500 hover:bg-maroon-600 right-4 hidden p-4 text-white sm:flex"
+      />
     </Carousel>
   );
 };

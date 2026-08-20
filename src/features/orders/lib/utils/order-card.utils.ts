@@ -32,3 +32,9 @@ export function formatOrderDate(date: string, locale: string) {
     minute: '2-digit',
   }).format(new Date(date));
 }
+
+export function formatOrderNumber(value: number | string, locale: string) {
+  const intlLocale = locale === 'ar' ? 'ar-EG' : 'en-EG';
+
+  return new Intl.NumberFormat(intlLocale).format(Number(value));
+}

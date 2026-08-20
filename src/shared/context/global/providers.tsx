@@ -21,7 +21,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
               </GuestSyncProvider>
             </WishlistProvider>
           </NextAuthProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </ThemeProvider>
       </NextIntlClientProvider>
     </ReactQueryProvider>

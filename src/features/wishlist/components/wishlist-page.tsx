@@ -38,9 +38,13 @@ export function WishlistPage() {
   if (isError) return <WishlistErrorState retry={retry} />;
 
   return (
-    <main className=" py-10 sm:py-16">
+    <main className="py-10 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border-ds-border-soft mb-0 flex flex-wrap items-center justify-between gap-4 border-b pb-5">
+        <div
+          className={`mb-0 flex flex-wrap items-center justify-between gap-4 pb-5 ${
+            count > 0 ? 'border-ds-border-soft border-b' : ''
+          }`}
+        >
           <div className="flex items-center gap-3">
             <FolderHeart className="text-ds-text-plain size-11 sm:size-14" strokeWidth={1.6} aria-hidden="true" />
             <h1 className="text-ds-text-plain text-3xl font-bold sm:text-5xl">

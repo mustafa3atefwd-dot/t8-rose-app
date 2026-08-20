@@ -70,7 +70,7 @@ function PasswordFormField<T extends FieldValues>({
             {/* ===== Forgot Password Link ===== */}
             {hasForgotPassword && (
               <Link
-                href="/reset-password"
+                href="/forgot-password"
                 className="text-ds-text-primary hover:text-ds-text-primary/90 ml-auto block max-w-fit text-sm font-medium transition-colors"
               >
                 {tAuth('forgotPassword')}

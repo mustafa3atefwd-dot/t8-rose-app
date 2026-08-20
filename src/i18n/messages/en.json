@@ -28,7 +28,14 @@
         "order": "My orders",
         "dashboard": "Dashboard",
         "logout": "Log out"
-      }
+      },
+      "register": "Create Account",
+      "menu": "Open menu",
+      "navigation": "Main navigation",
+      "menuDescription": "Browse pages, your account, and delivery settings.",
+      "searchSuggestions": "Suggestions",
+      "searchRating": "Rating",
+      "searchRatings": "{count, plural, one {# rating} other {# ratings}}"
     },
     "about": {
       "label": "About",
@@ -90,10 +97,95 @@
     "Explore gifts": "Explore Gifts"
   },
   "about": {
-    "title": "About Us"
+    "title": "About Us",
+    "eyebrow": "Our Story",
+    "heroTitle": "Crafting <accent>Moments</accent> Worth Remembering",
+    "heroDescription": "Rose began with a simple belief: the right gift, presented beautifully, says what words cannot. Every box we send is assembled by hand, checked twice, and delivered with the care we would want for our own family.",
+    "explore": "Explore Gifts",
+    "imageAlt": {
+      "main": "Our team arranging a gift box",
+      "detail": "Close-up of a finished gift box"
+    },
+    "yearsValue": "10+",
+    "yearsLabel": "Years of gifting",
+    "stats": {
+      "gifts": {
+        "value": "120k+",
+        "label": "Gifts delivered"
+      },
+      "customers": {
+        "value": "45k+",
+        "label": "Happy customers"
+      },
+      "occasions": {
+        "value": "60+",
+        "label": "Occasions covered"
+      }
+    },
+    "values": {
+      "eyebrow": "What We Stand For",
+      "title": "The Promises Behind Every Box",
+      "description": "We keep our standards simple and hold ourselves to them on every single order, whether it is your first or your fiftieth.",
+      "items": {
+        "thoughtful": {
+          "title": "Thoughtful by Design",
+          "description": "Each collection is curated around a real moment, so what arrives feels chosen rather than picked off a shelf."
+        },
+        "quality": {
+          "title": "Quality You Can Feel",
+          "description": "We work with makers we trust and inspect every item before it is wrapped, because a gift is only as good as its contents."
+        },
+        "lasting": {
+          "title": "Kind to the Planet",
+          "description": "Recyclable packaging, responsibly sourced materials, and no filler waste — thoughtful gifting should not cost the earth."
+        }
+      }
+    },
+    "cta": {
+      "title": "Have Something Special in Mind?",
+      "description": "Tell us about the occasion and we will help you put together a gift that fits it perfectly.",
+      "action": "Talk to Us"
+    }
   },
   "contact": {
-    "title": "Contact Us"
+    "title": "Contact Us",
+    "eyebrow": "We would love to hear from you",
+    "description": "Questions about an order, a bulk request, or just an idea you want help shaping? Reach out and a real person will get back to you.",
+    "details": {
+      "title": "Get in Touch",
+      "description": "Pick whichever way is easiest — we answer all of them.",
+      "items": {
+        "email": {
+          "label": "Email",
+          "value": "support@rose.com"
+        },
+        "phone": {
+          "label": "Phone",
+          "value": "+20 100 000 0000"
+        },
+        "location": {
+          "label": "Location",
+          "value": "Cairo, Egypt"
+        },
+        "hours": {
+          "label": "Working hours",
+          "value": "Sun–Thu, 9:00 – 18:00"
+        }
+      }
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "description": "Fill in the form below and we will reply within one business day.",
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this about?",
+      "message": "Message",
+      "messagePlaceholder": "Tell us how we can help…",
+      "submit": "Send Message"
+    }
   },
   "favorite": {
     "title": "Favorites"
@@ -104,7 +196,8 @@
     "markAllRead": "Mark all as read",
     "empty": "No notifications yet",
     "markRead": "Mark as read",
-    "delete": "Delete"
+    "delete": "Delete",
+    "settings": "Notification options"
   },
   "productDetails": {
     "stock": "{count} units in stock",
@@ -181,10 +274,8 @@
       },
       "error": "Unable to load your addresses."
     },
-
     "payment": {
       "title": "Payment Method",
-
       "methods": {
         "cash": {
           "title": "Cash on Delivery",
@@ -196,35 +287,80 @@
         }
       }
     },
-
     "orderSummary": {
       "title": "Order Summary",
       "empty": "Your cart is empty.",
       "quantity": "Qty {count}",
       "total": "Total"
     },
-
     "actions": {
-      "next": "Continue",
+      "next": "Next",
       "back": "Back",
       "placeOrder": "Place Order",
       "placingOrder": "Placing order...",
       "addAddress": "Add a New Address"
     },
-
     "messages": {
       "orderCreated": "Your order has been created successfully!",
       "cartEmpty": "Your cart is empty.",
       "paymentInitializationFailed": "Unable to initialize payment.",
       "orderFailed": "Order failed."
     },
-
     "validation": {
       "addressRequired": "Please select a shipping address.",
       "addressInvalid": "Invalid shipping address.",
       "paymentRequired": "Please select a payment method.",
       "notesMaxLength": "Notes cannot exceed 500 characters.",
       "urlRequired": "Success URL is required"
+    }
+  },
+  "orders": {
+    "title": "Orders",
+    "orderCard": {
+      "orderNumber": "Order #{id}",
+      "created": "Created:",
+      "totalPrice": "Total Price:",
+      "paid": "Paid",
+      "status": "Status:",
+      "paymentMethod": "Payment Method:",
+      "deliveryStatus": "Delivery Status:",
+      "paymentMethods": {
+        "cash": "Cash",
+        "card": "Credit Card"
+      },
+      "statuses": {
+        "pending": "Pending",
+        "processing": "In Progress",
+        "confirmed": "Confirmed",
+        "shipped": "Shipped",
+        "delivered": "Done",
+        "cancelled": "Canceled",
+        "refunded": "Refunded"
+      },
+      "deliveryStatuses": {
+        "pending": "Pending",
+        "processing": "In Progress",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Canceled"
+      }
+    },
+    "items": {
+      "title": "Order Items ({count})",
+      "rating": "Rating: {rating}",
+      "quantity": "{count}",
+      "showAll": "Show All",
+      "showLess": "Show Less"
+    },
+    "empty": {
+      "title": "You haven't placed any orders yet",
+      "description": "Once you place an order, you'll be able to track and manage it right here.",
+      "startShopping": "Start Shopping"
+    },
+    "error": {
+      "title": "Failed to load orders",
+      "description": "We couldn't load your orders right now. Please try again.",
+      "retry": "Retry"
     }
   },
   "toast": {
@@ -500,7 +636,9 @@
       "reset": "Reset",
       "resetAll": "Reset All",
       "noResults": "No products match the selected filters.",
-      "ratingLabel": "{rating} stars & up"
+      "ratingLabel": "{rating} stars & up",
+      "title": "Filters",
+      "description": "Narrow down products by category, occasion, rating, and price."
     }
   },
   "browse": {
@@ -625,14 +763,88 @@
     "error": "Something went wrong",
     "errorDescription": "We couldn't load your cart. Please try again.",
     "retry": "Try Again"
-
-},
-  "checkout": {
-    "step1Title": "Shipping Address",
-    "addAddress": "Add a new address",
-    "next": "Next",
-    "noAddresses": "Add a new address to proceed with checkout.",
-    "errorLoading": "Failed to load addresses.",
-    "step": "Step {current} of {total}"
+  },
+  "account": {
+    "layout": {
+      "title": "My Account"
+    },
+    "sidebar": {
+      "navigation": "Account navigation",
+      "profile": "Profile",
+      "password": "Change Password",
+      "logout": "Log out"
+    },
+    "profile": {
+      "photoAlt": "Profile photo",
+      "uploadPhoto": "Profile photo",
+      "photoHint": "PNG, JPG, GIF or WebP — up to 5MB.",
+      "changePhoto": "Change profile photo",
+      "uploading": "Uploading..."
+    },
+    "password": {
+      "title": "Change Password",
+      "description": "Use at least 8 characters to create a strong password.",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "validation": {
+        "oldPasswordRequired": "Old password is required.",
+        "newPasswordRequired": "New password is required.",
+        "passwordMin": "Password must be at least 8 characters.",
+        "confirmPasswordRequired": "Please confirm your new password.",
+        "passwordMismatch": "New passwords do not match.",
+        "missingToken": "This password reset link is missing its token. Request a new link from Forgot Password.",
+        "resetFailed": "Unable to reset your password. Please request a new reset link."
+      }
+    },
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "gender": "Gender",
+      "currentPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "unspecified": "Not specified"
+    },
+    "emailVerification": {
+      "title": "Verify your new email address",
+      "placeholder": "Enter the 6-digit code",
+      "confirm": "Confirm"
+    },
+    "actions": {
+      "save": "Save Changes",
+      "saving": "Saving...",
+      "delete": "Delete Account",
+      "updatePassword": "Change Password",
+      "updating": "Changing..."
+    },
+    "deleteDialog": {
+      "close": "Close dialog",
+      "title": "Delete your account?",
+      "warning": "This will permanently remove your account and all of its data. This cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Delete Account"
+    },
+    "messages": {
+      "saved": "Your profile has been updated.",
+      "savedVerifyEmail": "Profile saved. Check your inbox to verify your new email address.",
+      "photoUploaded": "Photo uploaded.",
+      "emailVerified": "Your email address has been verified.",
+      "passwordChanged": "Your password has been changed successfully.",
+      "deleted": "Your account has been deleted."
+    },
+    "errors": {
+      "imageType": "Only JPG, PNG, GIF, or WebP images are allowed.",
+      "imageSize": "Image is too large (max 5MB).",
+      "uploadUrl": "We could not upload your photo. Please try again.",
+      "imageTooLargeTitle": "Image is too large",
+      "imageTooLargeDescription": "Please choose an image smaller than 5MB."
+    }
   }
 }

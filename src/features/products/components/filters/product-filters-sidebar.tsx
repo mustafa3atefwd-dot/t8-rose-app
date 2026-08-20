@@ -1,6 +1,6 @@
 'use client';
 
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, SlidersHorizontal } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/components/ui/button';
 import { Separator } from '@/shared/components/ui/separator';
@@ -12,13 +12,21 @@ import FilterSection from './filter-section';
 import OccasionFilter from './occasion-filter';
 import PriceRangeFilter from './price-range-filter';
 import RatingFilter from './rating-filter';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/shared/components/ui/sheet';
 
 interface ProductFiltersSidebarProps {
   categories: ICategory[];
   occasions: IOccasion[];
 }
 
-const ProductFiltersSidebar = ({ categories, occasions }: ProductFiltersSidebarProps) => {
+const ProductFiltersContent = ({ categories, occasions }: ProductFiltersSidebarProps) => {
   // Translation
   const t = useTranslations('products.filters');
 
@@ -35,7 +43,7 @@ const ProductFiltersSidebar = ({ categories, occasions }: ProductFiltersSidebarP
   };
 
   return (
-    <aside className="flex w-full shrink-0 flex-col overflow-hidden md:w-75">
+    <div className="flex w-full flex-col overflow-hidden">
       {categories.length > 0 && (
         <>
           <FilterSection
@@ -113,7 +121,55 @@ const ProductFiltersSidebar = ({ categories, occasions }: ProductFiltersSidebarP
           {t('resetAll')}
         </Button>
       </div>
-    </aside>
+    </div>
+  );
+};
+
+const ProductFiltersSidebar = ({ categories, occasions }: ProductFiltersSidebarProps) => {
+  const t = useTranslations('products.filters');
+  const { categoryIds, occasionId, minRating, minPrice, maxPrice } = useProductFilters();
+  const activeFilterCount =
+    categoryIds.length +
+    Number(Boolean(occasionId)) +
+    Number(Boolean(minRating)) +
+    Number(minPrice != null || maxPrice != null);
+
+  return (
+    <>
+      <aside className="hidden w-75 shrink-0 md:block">
+        <ProductFiltersContent categories={categories} occasions={occasions} />
+      </aside>
+
+      <div className="w-full md:hidden">
+        <Sheet>
+          <SheetTrigger render={<Button variant="outline" className="h-11 w-full justify-between rounded-xl px-4" />}>
+            <span className="flex items-center gap-2">
+              <SlidersHorizontal className="size-4.5" />
+              {t('title')}
+            </span>
+            {activeFilterCount > 0 && (
+              <span className="bg-ds-bg-primary-saturated text-ds-text-inverse flex size-6 items-center justify-center rounded-full text-xs font-semibold">
+                {activeFilterCount}
+              </span>
+            )}
+          </SheetTrigger>
+
+          <SheetContent
+            side="bottom"
+            className="border-ds-border-soft bg-ds-bg-plain max-h-[88dvh] gap-0 overflow-y-auto rounded-t-3xl px-4 pb-6"
+          >
+            <SheetHeader className="bg-ds-bg-plain sticky top-0 z-10 px-0 py-4">
+              <SheetTitle className="text-ds-text-plain flex items-center gap-2 text-lg font-semibold">
+                <SlidersHorizontal className="text-ds-text-primary size-5" />
+                {t('title')}
+              </SheetTitle>
+              <SheetDescription>{t('description')}</SheetDescription>
+            </SheetHeader>
+            <ProductFiltersContent categories={categories} occasions={occasions} />
+          </SheetContent>
+        </Sheet>
+      </div>
+    </>
   );
 };
 

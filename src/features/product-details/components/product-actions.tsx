@@ -30,7 +30,7 @@ export function ProductActions({ productId, addToCartLabel, addToWishlistLabel, 
   };
 
   return (
-    <div className="flex gap-3 pt-6">
+    <div className="flex gap-2.5 pt-5 sm:gap-3 sm:pt-6">
       {/* Wishlist Button */}
       <Button
         type="button"
@@ -38,7 +38,7 @@ export function ProductActions({ productId, addToCartLabel, addToWishlistLabel, 
         size="icon-lg"
         aria-label={addToWishlistLabel}
         title={addToWishlistLabel}
-        className="h-12 w-12 shrink-0"
+        className="size-11 shrink-0 rounded-xl sm:size-12"
         onClick={handleToggleWishlist}
         disabled={isWishlistLoading}
       >
@@ -49,7 +49,12 @@ export function ProductActions({ productId, addToCartLabel, addToWishlistLabel, 
       </Button>
 
       {/* Add to Cart Button */}
-      <Button type="button" className="h-12 flex-1 text-base" onClick={handleAddToCart} disabled={isCartLoading}>
+      <Button
+        type="button"
+        className="h-11 flex-1 rounded-xl text-sm sm:h-12 sm:text-base"
+        onClick={handleAddToCart}
+        disabled={isCartLoading}
+      >
         {isCartLoading ? (
           <Loader2 className="size-5 animate-spin" />
         ) : (

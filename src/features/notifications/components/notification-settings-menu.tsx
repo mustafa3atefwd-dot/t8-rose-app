@@ -22,6 +22,7 @@ export default function NotificationSettingsMenu({
   notificationIsRead,
   openSettings,
   setOpenSettings,
+  setOpenSettings,
   buttonRef,
 }: NotificationSettingsProps) {
   const t = useTranslations('notifications');
@@ -89,22 +90,24 @@ export default function NotificationSettingsMenu({
 
   return (
     <div
-      className="text-ds-text-plain fixed z-[100] w-52 rounded-ds-xl bg-white text-sm font-medium shadow-[0_4px_9px_0_#00000026] dark:bg-zinc-700"
-      style={{
-        top: position.top,
-        left: position.left,
-      }}
+      ref={settingsRef}
+      role="menu"
+      className="rounded-ds-xl border-ds-border-soft bg-ds-bg-plain text-ds-text-plain absolute end-0 top-full z-60 mt-1.5 w-48 overflow-hidden border text-sm font-medium shadow-[0_8px_30px_0_#00000026] sm:w-52"
     >
       {/* Mark as read */}
       <button
         type="button"
         disabled={isDeletingNotification || isUpdatingNotification}
         onClick={() => {
+          {
           updateNotification(notificationId);
           setOpenSettings(null);
+        };
+          setOpenSettings(null);
         }}
+        role="menuitem"
         className={cn(
-          'flex w-full cursor-pointer items-center gap-2.5 rounded-ds-xl p-3 hover:bg-gray-100 dark:hover:bg-zinc-900',
+          'hover:bg-ds-bg-muted flex w-full cursor-pointer items-center gap-2.5 p-3 text-start transition-colors',
           notificationIsRead && 'text-ds-text-muted'
         )}
       >
@@ -126,7 +129,8 @@ export default function NotificationSettingsMenu({
           deleteNotification(notificationId);
           setOpenSettings(null);
         }}
-        className="flex w-full cursor-pointer items-center gap-2.5 rounded-ds-xl p-3 hover:bg-gray-100 dark:hover:bg-zinc-900"
+        role="menuitem"
+        className="hover:bg-ds-bg-muted border-ds-border-soft flex w-full cursor-pointer items-center gap-2.5 border-t p-3 text-start transition-colors"
       >
         <Trash2 className="text-ds-text-danger size-4.5" />
 

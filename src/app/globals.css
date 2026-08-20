@@ -27,7 +27,7 @@
 
   /* Primary */
   --ds-bg-primary: var(--color-maroon-800);
-  --ds-bg-primary-saturated: var(--color-maroon-700);
+  --ds-bg-primary-saturated: var(--color-maroon-600);
   --ds-bg-primary-faint: var(--color-maroon-100);
   --ds-bg-primary-fade: var(--color-maroon-50);
   --ds-bg-primary-overlay: color-mix(in srgb, var(--color-soft-pink-600) 50%, transparent);

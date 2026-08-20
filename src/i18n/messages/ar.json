@@ -28,7 +28,14 @@
         "order": "طلباتي",
         "dashboard": "لوحة التحكم",
         "logout": "تسجيل الخروج"
-      }
+      },
+      "register": "إنشاء حساب",
+      "menu": "فتح القائمة",
+      "navigation": "التنقل الرئيسي",
+      "menuDescription": "تصفح الصفحات وحسابك وإعدادات التوصيل.",
+      "searchSuggestions": "اقتراحات",
+      "searchRating": "التقييم",
+      "searchRatings": "{count, plural, zero {لا توجد تقييمات} one {تقييم واحد} two {تقييمان} few {# تقييمات} many {# تقييمًا} other {# تقييم}}"
     },
     "about": {
       "label": "من نحن",
@@ -89,7 +96,6 @@
     },
     "Explore gifts": "استكشف الهدايا"
   },
-
   "checkout": {
     "title": "إتمام الطلب",
     "or": "أو",
@@ -102,10 +108,8 @@
       },
       "error": "فشل تحميل العناوين."
     },
-
     "payment": {
       "title": "طريقة الدفع",
-
       "methods": {
         "cash": {
           "title": "الدفع عند الاستلام",
@@ -117,14 +121,12 @@
         }
       }
     },
-
     "orderSummary": {
       "title": "ملخص الطلب",
       "empty": "سلة التسوق فارغة.",
       "quantity": "الكمية {count}",
       "total": "الإجمالي"
     },
-
     "actions": {
       "next": "التالي",
       "back": "السابق",
@@ -132,14 +134,12 @@
       "placingOrder": "جاري تأكيد الطلب...",
       "addAddress": "إضافة عنوان جديد"
     },
-
     "messages": {
       "orderCreated": "تم إنشاء طلبك بنجاح!",
       "cartEmpty": "سلة التسوق فارغة.",
       "paymentInitializationFailed": "تعذر تهيئة عملية الدفع.",
       "orderFailed": "فشل إنشاء الطلب."
     },
-
     "validation": {
       "addressRequired": "يرجى اختيار عنوان الشحن.",
       "addressInvalid": "عنوان الشحن المحدد غير صالح.",
@@ -148,24 +148,117 @@
       "urlRequired": "رابط النجاح مطلوب."
     }
   },
-
-  "about": {
-    "title": "من نحن"
+  "orders": {
+    "title": "الطلبات",
+    "orderCard": {
+      "orderNumber": "الطلب رقم #{id}",
+      "created": "تم الإنشاء:",
+      "totalPrice": "السعر الإجمالي:",
+      "paid": "مدفوع",
+      "status": "الحالة:",
+      "paymentMethod": "طريقة الدفع:",
+      "deliveryStatus": "حالة التوصيل:",
+      "paymentMethods": {
+        "cash": "الدفع عند الاستلام",
+        "card": "بطاقة ائتمانية"
+      },
+      "statuses": {
+        "pending": "قيد الانتظار",
+        "processing": "جاري التجهيز",
+        "confirmed": "تم التأكيد",
+        "shipped": "تم الشحن",
+        "delivered": "تم التوصيل",
+        "cancelled": "ملغي",
+        "refunded": "تم استرداد المبلغ"
+      },
+      "deliveryStatuses": {
+        "pending": "قيد الانتظار",
+        "processing": "جاري التجهيز",
+        "shipped": "تم الشحن",
+        "delivered": "تم التوصيل",
+        "cancelled": "ملغي"
+      }
+    },
+    "items": {
+      "title": "المنتجات ({count})",
+      "rating": "التقييم: {rating}",
+      "quantity": "{count}",
+      "showAll": "عرض الكل",
+      "showLess": "عرض أقل"
+    },
+    "empty": {
+      "title": "لم تقم بتقديم أي طلب بعد",
+      "description": "بمجرد تقديم طلب، ستتمكن من تتبعه وإدارته من هنا.",
+      "startShopping": "ابدأ التسوق"
+    },
+    "error": {
+      "title": "فشل تحميل الطلبات",
+      "description": "تعذر تحميل طلباتك في الوقت الحالي. يرجى المحاولة مرة أخرى.",
+      "retry": "حاول مرة أخرى"
+    }
+  },
+  "homeHeader": {
+    "deliverTo": "التوصيل إلى",
+    "userMenu": {
+      "welcome": "مرحبًا",
+      "account": "حسابي",
+      "addresses": "عناويني",
+      "order": "طلباتي",
+      "dashboard": "لوحة التحكم",
+      "logout": "تسجيل الخروج"
+    }
   },
   "contact": {
-    "title": "تواصل معنا"
+    "title": "تواصل معنا",
+    "eyebrow": "يسعدنا تواصلك معنا",
+    "description": "لديك سؤال عن طلب، أو طلب بالجملة، أو مجرد فكرة تحتاج مساعدة في تنفيذها؟ تواصل معنا وسيرد عليك شخص حقيقي.",
+    "details": {
+      "title": "تواصل معنا",
+      "description": "اختر الطريقة الأسهل لك — نرد على جميعها.",
+      "items": {
+        "email": {
+          "label": "البريد الإلكتروني",
+          "value": "support@rose.com"
+        },
+        "phone": {
+          "label": "الهاتف",
+          "value": "⁦+20 100 000 0000⁩"
+        },
+        "location": {
+          "label": "الموقع",
+          "value": "القاهرة، مصر"
+        },
+        "hours": {
+          "label": "ساعات العمل",
+          "value": "الأحد – الخميس، ⁦9:00 – 18:00⁩"
+        }
+      }
+    },
+    "form": {
+      "title": "أرسل لنا رسالة",
+      "description": "املأ النموذج التالي وسنرد عليك خلال يوم عمل واحد.",
+      "name": "الاسم الكامل",
+      "namePlaceholder": "اسمك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "subject": "الموضوع",
+      "subjectPlaceholder": "عن ماذا تود التحدث؟",
+      "message": "الرسالة",
+      "messagePlaceholder": "أخبرنا كيف يمكننا مساعدتك…",
+      "submit": "إرسال الرسالة"
+    }
   },
   "favorite": {
     "title": "المفضلة"
   },
-
   "notifications": {
     "title": "الإشعارات",
     "clearAll": "مسح الكل",
     "markAllRead": "تحديد الكل كمقروء",
     "empty": "لا توجد إشعارات بعد",
     "markRead": "تحديد كمقروء",
-    "delete": "حذف"
+    "delete": "حذف",
+    "settings": "خيارات الإشعار"
   },
   "productDetails": {
     "stock": "{count} وحدة في المخزون",
@@ -188,7 +281,6 @@
       "title": "منتجات ذات صلة"
     }
   },
-
   "address": {
     "modal": {
       "title": "عناويني"
@@ -202,7 +294,6 @@
       "step1Title": "تفاصيل العنوان",
       "step2Title": "حدد موقعك على الخريطة"
     },
-
     "city": "المدينة",
     "cityPlaceholder": "مثال: القاهرة",
     "details": "العنوان",
@@ -232,7 +323,6 @@
     "mapLoadError": "فشل تحميل الخريطة. يرجى التحقق من اتصالك.",
     "pinRequired": "يرجى تحديد موقع على الخريطة قبل الإرسال."
   },
-
   "toast": {
     "success": "نجاح",
     "error": "خطأ",
@@ -258,7 +348,6 @@
     "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
     "login": "تسجيل الدخول",
     "createAccount": "إنشاء حساب",
-
     "registerOtp": {
       "title": "إنشاء حساب",
       "subtitle": "أدخل رمز التحقق",
@@ -274,7 +363,6 @@
       "otpInvalid": "رمز التحقق غير صحيح.",
       "otpExpired": "انتهت صلاحية رمز التحقق."
     },
-
     "createStrongPassword": "أنشئ كلمة مرور قوية",
     "tellUsMore": "أخبرنا المزيد عنك",
     "securePassword": "اختر كلمة مرور آمنة لحماية حسابك",
@@ -328,7 +416,6 @@
     "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب",
     "passwordsDoNotMatch": "يجب أن تتطابق كلمة المرور مع تأكيد كلمة المرور",
     "passwordMatch": "كلمتا المرور غير متطابقتين",
-
     "review": {
       "productIdRequired": "معرّف المنتج مطلوب",
       "headlineRequired": "عنوان المراجعة مطلوب",
@@ -378,7 +465,6 @@
       "firstName": "محمد",
       "lastName": "محمود",
       "username": "mohamed123",
-
       "reviewHeadline": "أدخل عنوان المراجعة",
       "reviewContent": "ما رأيك بهذا المنتج؟"
     },
@@ -510,7 +596,9 @@
       "reset": "إعادة تعيين",
       "resetAll": "إعادة تعيين الكل",
       "noResults": "لا توجد منتجات مطابقة للفلاتر المحددة.",
-      "ratingLabel": "{rating} نجوم فأكثر"
+      "ratingLabel": "{rating} نجوم فأكثر",
+      "title": "الفلاتر",
+      "description": "صفِّ المنتجات حسب الفئة والمناسبة والتقييم والسعر."
     }
   },
   "browse": {
@@ -541,6 +629,89 @@
       "success": "تم إعادة تعيين كلمة المرور بنجاح",
       "contact": "هل تحتاج مساعدة؟",
       "toContact": "اتصل بنا"
+    }
+  },
+  "account": {
+    "layout": {
+      "title": "حسابي"
+    },
+    "sidebar": {
+      "navigation": "تنقل الحساب",
+      "profile": "الملف الشخصي",
+      "password": "تغيير كلمة المرور",
+      "logout": "تسجيل الخروج"
+    },
+    "profile": {
+      "photoAlt": "الصورة الشخصية",
+      "uploadPhoto": "الصورة الشخصية",
+      "photoHint": "صيغ PNG أو JPG أو GIF أو WebP — بحد أقصى 5 ميجابايت.",
+      "changePhoto": "تغيير الصورة الشخصية",
+      "uploading": "جاري الرفع..."
+    },
+    "password": {
+      "title": "تغيير كلمة المرور",
+      "description": "استخدم 8 أحرف على الأقل لإنشاء كلمة مرور قوية.",
+      "showPassword": "إظهار كلمة المرور",
+      "hidePassword": "إخفاء كلمة المرور",
+      "validation": {
+        "oldPasswordRequired": "كلمة المرور القديمة مطلوبة.",
+        "newPasswordRequired": "كلمة المرور الجديدة مطلوبة.",
+        "passwordMin": "يجب ألا تقل كلمة المرور عن 8 أحرف.",
+        "confirmPasswordRequired": "يرجى تأكيد كلمة المرور الجديدة.",
+        "passwordMismatch": "كلمتا المرور الجديدتان غير متطابقتين.",
+        "missingToken": "رابط إعادة تعيين كلمة المرور لا يحتوي على الرمز. اطلب رابطًا جديدًا من صفحة نسيت كلمة المرور.",
+        "resetFailed": "تعذر إعادة تعيين كلمة المرور. يرجى طلب رابط إعادة تعيين جديد."
+      }
+    },
+    "fields": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "country": "الدولة",
+      "gender": "النوع",
+      "currentPassword": "كلمة المرور القديمة",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة"
+    },
+    "gender": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "unspecified": "غير محدد"
+    },
+    "emailVerification": {
+      "title": "تأكيد بريدك الإلكتروني الجديد",
+      "placeholder": "أدخل الرمز المكون من 6 أرقام",
+      "confirm": "تأكيد"
+    },
+    "actions": {
+      "save": "حفظ التغييرات",
+      "saving": "جاري الحفظ...",
+      "delete": "حذف الحساب",
+      "updatePassword": "تغيير كلمة المرور",
+      "updating": "جاري التغيير..."
+    },
+    "deleteDialog": {
+      "close": "إغلاق النافذة",
+      "title": "هل تريد حذف حسابك؟",
+      "warning": "سيؤدي هذا إلى حذف حسابك وجميع بياناته نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+      "cancel": "إلغاء",
+      "confirm": "حذف الحساب"
+    },
+    "messages": {
+      "saved": "تم تحديث ملفك الشخصي.",
+      "savedVerifyEmail": "تم حفظ الملف الشخصي. تحقق من بريدك لتأكيد عنوانك الجديد.",
+      "photoUploaded": "تم رفع الصورة.",
+      "emailVerified": "تم تأكيد بريدك الإلكتروني.",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح.",
+      "deleted": "تم حذف حسابك."
+    },
+    "errors": {
+      "imageType": "يُسمح فقط بصور JPG أو PNG أو GIF أو WebP.",
+      "imageSize": "حجم الصورة كبير جدًا (الحد الأقصى 5 ميجابايت).",
+      "uploadUrl": "تعذر رفع صورتك. يرجى المحاولة مرة أخرى.",
+      "imageTooLargeTitle": "حجم الصورة كبير جدًا",
+      "imageTooLargeDescription": "يرجى اختيار صورة أصغر من 5 ميجابايت."
     }
   },
   "productReview": {
@@ -635,14 +806,5 @@
     "error": "حدث خطأ ما",
     "errorDescription": "تعذر تحميل سلة التسوق. يرجى المحاولة مرة أخرى.",
     "retry": "حاول مرة أخرى"
-},
-  
-  "checkout": {
-    "step1Title": "عنوان الشحن",
-    "addAddress": "إضافة عنوان جديد",
-    "next": "التالي",
-    "noAddresses": "أضف عنوانك الأول للمتابعة",
-    "errorLoading": "فشل تحميل العناوين.",
-    "step": "الخطوة {current} من {total}"
   }
 }

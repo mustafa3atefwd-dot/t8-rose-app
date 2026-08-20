@@ -16,7 +16,7 @@ export function FeaturesBar() {
       {FEATURES.map((feat) => {
         const Icon = feat.icon;
         return (
-          <div key={feat.id} className="group flex items-center gap-4">
+          <div key={feat.id} className="group flex flex-col items-center gap-4 md:flex-row">
             <div className="bg-maroon-600 dark:bg-soft-pink-200 rounded-full p-3 text-white transition-transform duration-300 group-hover:scale-110 dark:text-zinc-800">
               <Icon className="h-10 w-10" />
             </div>

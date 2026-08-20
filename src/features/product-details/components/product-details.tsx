@@ -14,9 +14,9 @@ export async function ProductDetails({ product, locale }: ProductDetailsProps) {
   const images = getProductImages(product.cover, product.gallery);
 
   return (
-    <main className="bg-ds-bg-plain dark:bg-ds-bg-muted flex-1 py-6 sm:py-10">
-      <div className="container">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
+    <main className="bg-ds-bg-plain flex-1 py-5 sm:py-8 lg:py-10">
+      <div className="container px-3 sm:px-4">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <ProductGallery
             images={images}
             productTitle={product.title}

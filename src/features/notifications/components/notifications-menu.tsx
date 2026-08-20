@@ -60,10 +60,11 @@ export default function NotificationsMenu() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center">
       {/* Trigger */}
       <button
-        className="relative flex cursor-pointer items-center justify-center border-none bg-transparent p-0"
+        aria-label={t('title')}
+        className="hover:bg-ds-bg-muted relative flex size-9 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent transition-colors"
         type="button"
         onClick={() => {
           setOpen((prev) => !prev);
@@ -72,7 +73,7 @@ export default function NotificationsMenu() {
         aria-label="Notifications"
         aria-expanded={open}
       >
-        <Bell />
+        <Bell className="size-5"/>
 
         {unreadCount > 0 && <HeaderBadge count={unreadCount} />}
       </button>
@@ -80,7 +81,7 @@ export default function NotificationsMenu() {
       {open && (
         <div
           ref={menuRef}
-          className="bg-ds-bg-plain absolute z-50 mt-2 w-84 rounded-xl shadow-[0_4px_9px_0_#00000026] ltr:right-2 rtl:left-2 max-h-[500px] min-h-[500px] overflow-y-auto"
+          className="bg-ds-bg-plain border-ds-border-soft absolute end-0 top-full z-50 mt-2 w-84 overflow-y-auto rounded-xl border shadow-[0_8px_30px_0_#00000026] max-sm:fixed max-sm:inset-x-3 max-sm:top-18 max-sm:mt-0 max-sm:max-h-[calc(100dvh-5.5rem)] max-sm:w-auto"
         >
           {/* Header */}
           <div className="bg-ds-bg-primary-saturated text-ds-text-inverse rounded-t-xl p-4 text-xl font-bold">
@@ -158,10 +159,12 @@ export default function NotificationsMenu() {
 
                     <div>
                       <button
+                        aria-label={t('settings')}
+                        aria-expanded={openSettings === notification.id}
                         ref={(element) => {
                           settingsButtonRefs.current[notification.id] = element;
                         }}
-                        className="cursor-pointer"
+                        className="hover:bg-ds-bg-muted flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors"
                         type="button"
                         onClick={() =>
                           setOpenSettings((prev) =>

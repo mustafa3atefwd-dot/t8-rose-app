@@ -9,29 +9,29 @@ export default async function LeftSide() {
   //  translation
   const t = await getTranslations('cart');
   return (
-    <>
+    <section className="flex min-w-0 flex-col gap-5 sm:gap-6">
       {/* header */}
-      <header className="flex items-center justify-between">
+      <header className="flex flex-wrap items-center justify-between gap-3">
         {/* title */}
-        <div className="flex gap-2.5">
-          <h2 className="text-ds-text-plain text-5xl font-bold">{t('title')}</h2>
+        <div className="flex items-center gap-2">
+          <h1 className="text-ds-text-plain text-3xl font-bold sm:text-4xl lg:text-5xl">{t('title')}</h1>
           <ItemQuantity />
         </div>
         {/* clear all products button */}
         <ClearCartButton />
       </header>
       {/* items */}
-      <div className="border-ds-border-muted rounded-xl border px-5 pt-5 pb-7.5">
+      <div className="border-ds-border-muted rounded-xl border px-3 py-4 sm:px-5 sm:pt-5 sm:pb-7.5">
         {/* item card */}
         <Items />
       </div>
       {/* continue shopping button */}
-      <Button>
-        <Link href={'/products'} className="flex items-center justify-center gap-2.5">
+      <Button asChild className="h-11 w-full rounded-xl sm:w-fit sm:px-5">
+        <Link href="/products" className="flex items-center justify-center gap-2.5">
           <MoveLeft className="rtl:rotate-180" />
           {t('continueShopping')}
         </Link>
       </Button>
-    </>
+    </section>
   );
 }

@@ -10,8 +10,6 @@ import {
   PaymentMethodForm,
 } from '@/features/checkout/components';
 
-import OrderSummary from '@/shared/components/order-summary';
-
 import { CHECKOUT_STEPS, CHECKOUT_STEPS_LIST } from '@/features/checkout/lib/constants';
 import { useCheckout } from '@/features/checkout/hooks';
 import { IAddress } from '@/features/checkout/lib/types';
@@ -51,7 +49,7 @@ export default function CheckoutPage() {
           {/* Checkout page grid */}
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Checkout content */}
-            <div className="space-y-6 lg:col-span-2">
+            <div className="space-y-6 lg:col-span-full">
               {/* Checkout progress indicator */}
               <CheckoutStepper steps={CHECKOUT_STEPS_LIST} currentStep={currentStep} />
 
@@ -71,12 +69,6 @@ export default function CheckoutPage() {
                 <PaymentMethodForm isSubmitting={createOrderMutation.isPending} onBack={handleBackStep} />
               )}
             </div>
-
-            {/* Order summary — same breakdown and coupon field as the cart,
-                minus the checkout link, since this is the checkout page. */}
-            <aside className="h-fit lg:sticky lg:top-8">
-              <OrderSummary hideCheckoutButton />
-            </aside>
           </div>
         </div>
       </form>
