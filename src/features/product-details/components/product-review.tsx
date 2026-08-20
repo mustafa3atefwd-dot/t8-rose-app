@@ -2,33 +2,31 @@ import { Rating } from '@/shared/components';
 import { Review } from '../lib/types/product-reviews';
 import { formatDate } from '@/shared/lib/utils/format-date';
 
-export default function ProductReview({review}: {review: Review}) {
-  const {rating, content, createdAt, user, headline} = review;
+export default function ProductReview({ review }: { review: Review }) {
+  const { rating, content, createdAt, user, headline } = review;
   return (
-    <article className='mx-1.75 mt-2 pb-4 border-b border-ds-border-muted mb-2.5'>
+    <article className="border-ds-border-muted mx-1 mt-2 mb-2.5 border-b pb-4 sm:mx-1.75">
       <header>
-        <div className='flex items-center gap-2.5 ps-0.75'>
+        <div className="flex items-center gap-2.5 ps-0.75">
           {/* user avater */}
-          <div className="size-11.25 rounded-full bg-maroon-600 flex items-center justify-center text-white text-xl font-semibold">
+          <div className="bg-maroon-600 flex size-10 shrink-0 items-center justify-center rounded-full text-lg font-semibold text-white sm:size-11.25 sm:text-xl">
             {user.firstName[0]}
           </div>
-          <div className='-space-y-2.5'>
-            <h4 className='text-ds-text-plain text-base font-semibold'>{user.firstName}</h4>
-            <span className='text-ds-text-muted text-sm font-medium'>{formatDate(createdAt)}</span>
+          <div className="min-w-0">
+            <h4 className="text-ds-text-plain truncate text-sm font-semibold sm:text-base">{user.firstName}</h4>
+            <span className="text-ds-text-muted text-xs font-medium sm:text-sm">{formatDate(createdAt)}</span>
           </div>
         </div>
         {/* rating */}
-        <div className='flex items-center gap-1 my-2.5'>
-          <Rating variant='filled' rating={rating} />
-          <span className='text-ds-text-plain text-base font-semibold'>({rating.toFixed(1)})</span>
+        <div className="my-2.5 flex items-center gap-1">
+          <Rating variant="filled" rating={rating} />
+          <span className="text-ds-text-plain text-sm font-semibold sm:text-base">({rating.toFixed(1)})</span>
         </div>
       </header>
       {/* review content */}
-      <div className='pt-1'>
-        <h5 className='text-black text-base font-semibold dark:text-zinc-50'>{headline}</h5>
-        <p className='text-ds-text-default text-base font-normal mt-1.5'>
-          {content}
-        </p>
+      <div className="pt-1">
+        <h5 className="text-ds-text-plain text-sm font-semibold sm:text-base">{headline}</h5>
+        <p className="text-ds-text-default mt-1.5 text-sm leading-6 font-normal sm:text-base">{content}</p>
       </div>
     </article>
   );
