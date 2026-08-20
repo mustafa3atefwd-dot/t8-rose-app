@@ -11,8 +11,8 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <div className="container mt-15.5 mb-9 grid grid-cols-1 gap-12.5 lg:grid-cols-3">
-        <main className="lg:col-span-2">{children}</main>
+      <div className="container mt-6 mb-9 grid grid-cols-1 gap-8 px-3 sm:mt-10 sm:px-4 lg:mt-12 lg:grid-cols-3 lg:gap-8 xl:gap-10">
+        <main className="min-w-0 lg:col-span-2">{children}</main>
 
         <OrderSummarySidebar />
       </div>
