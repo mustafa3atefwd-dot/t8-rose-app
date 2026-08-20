@@ -30,7 +30,7 @@ export function DeleteAccountDialog() {
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger
         type="button"
-        className={cn(buttonVariants({ variant: 'ghost' }), 'text-ds-text-danger capitalize')}
+        className={cn(buttonVariants({ variant: 'ghost' }), 'text-ds-text-danger w-full capitalize sm:w-auto')}
       >
         {t('actions.delete')}
       </AlertDialogTrigger>

@@ -18,9 +18,11 @@ export default async function AccountLayout({ children, params }: AccountLayoutP
   const t = await getTranslations('account');
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-1 gap-8 px-4 py-8 sm:px-6 lg:flex-col lg:px-8 lg:py-12">
-      <h1 className="text-ds-text-plain text-5xl capitalize font-bold">{t('layout.title')}</h1>
-      <div className="flex items-stretch justify-start gap-6">
+    <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-6 px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
+      <h1 className="text-ds-text-plain text-3xl font-bold capitalize sm:text-4xl lg:text-5xl">
+        {t('layout.title')}
+      </h1>
+      <div className="flex min-w-0 flex-col items-stretch gap-6 lg:flex-row ">
         <AccountSidebar />
         <div className="min-w-0 flex-1">{children}</div>
       </div>

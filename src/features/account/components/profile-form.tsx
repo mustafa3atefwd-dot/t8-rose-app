@@ -45,9 +45,9 @@ export function ProfileForm({ profile }: ProfileFormProps) {
   const canRenderPhoto = displayPhoto && !displayPhoto.startsWith('/api/upload/temp/');
 
   return (
-    <section id="profile" className="scroll-mt-24 px-2">
+    <section id="profile" className="scroll-mt-24 sm:px-2">
       <form onSubmit={form.handleSubmit((values) => saveProfile(values, photoUpload.photo))}>
-        <div className="mb-8 flex items-center gap-5">
+        <div className="mb-6 flex flex-col items-start gap-4 sm:mb-8 sm:flex-row sm:items-center sm:gap-5">
           <div className="relative shrink-0">
             <div className="bg-ds-bg-primary-fade text-ds-text-primary flex size-24 items-center justify-center overflow-hidden rounded-full">
               {canRenderPhoto ? (
@@ -84,8 +84,12 @@ export function ProfileForm({ profile }: ProfileFormProps) {
             </Button>
           </div>
           <div>
-            <h2 className="text-ds-text-plain text-xl font-semibold capitalize">{t('profile.uploadPhoto')}</h2>
-            <p className="text-ds-text-soft mt-2 text-lg">{t('profile.photoHint')}</p>
+            <h2 className="text-ds-text-plain text-lg font-semibold capitalize sm:text-xl">
+              {t('profile.uploadPhoto')}
+            </h2>
+            <p className="text-ds-text-soft mt-1 text-sm leading-6 sm:mt-2 sm:text-base lg:text-lg">
+              {t('profile.photoHint')}
+            </p>
           </div>
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
@@ -162,9 +166,14 @@ export function ProfileForm({ profile }: ProfileFormProps) {
             </div>
           </div>
         )}
-        <div className="mt-8 flex flex-wrap justify-between gap-3">
+        <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:flex-wrap sm:justify-between">
           <DeleteAccountDialog />
-          <Button type="submit" loading={mutation.isPending} loadingText={t('actions.saving')}>
+          <Button
+            type="submit"
+            loading={mutation.isPending}
+            loadingText={t('actions.saving')}
+            className="w-full sm:w-auto"
+          >
             {t('actions.save')}
           </Button>
         </div>
