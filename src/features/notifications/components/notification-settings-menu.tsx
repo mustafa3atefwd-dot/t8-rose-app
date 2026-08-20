@@ -19,6 +19,7 @@ export default function NotificationSettingsMenu({
   notificationId,
   notificationIsRead,
   openSettings,
+  setOpenSettings,
 }: NotificationSettingsProps) {
   const t = useTranslations('notifications');
   const { mutate: updateNotification, isPending: isUpdatingNotification } = useUpdateNotification();
@@ -28,13 +29,18 @@ export default function NotificationSettingsMenu({
   return (
     <div
       ref={settingsRef}
-      className="rounded-ds-xl text-ds-text-plain absolute top-0 ltr:left-9 rtl:-left-60 z-50 ml-2 w-52 bg-white text-sm font-medium shadow-[0_4px_9px_0_#00000026] dark:bg-zinc-700"
+      role="menu"
+      className="rounded-ds-xl border-ds-border-soft bg-ds-bg-plain text-ds-text-plain absolute end-0 top-full z-60 mt-1.5 w-48 overflow-hidden border text-sm font-medium shadow-[0_8px_30px_0_#00000026] sm:w-52"
     >
       <button
         disabled={isDeletingNotification || isUpdatingNotification}
-        onClick={() => updateNotification(notificationId)}
+        onClick={() => {
+          updateNotification(notificationId);
+          setOpenSettings(null);
+        }}
+        role="menuitem"
         className={cn(
-          'rounded-ds-xl flex w-full cursor-pointer items-center gap-2.5 p-3 hover:bg-gray-100 dark:hover:bg-zinc-900',
+          'hover:bg-ds-bg-muted flex w-full cursor-pointer items-center gap-2.5 p-3 text-start transition-colors',
           notificationIsRead && 'text-ds-text-muted'
         )}
       >
@@ -46,8 +52,12 @@ export default function NotificationSettingsMenu({
 
       <button
         disabled={isDeletingNotification || isUpdatingNotification}
-        onClick={() => deleteNotification(notificationId)}
-        className="rounded-ds-xl flex w-full cursor-pointer items-center gap-2.5 p-3 hover:bg-gray-100 dark:hover:bg-zinc-900"
+        onClick={() => {
+          deleteNotification(notificationId);
+          setOpenSettings(null);
+        }}
+        role="menuitem"
+        className="hover:bg-ds-bg-muted border-ds-border-soft flex w-full cursor-pointer items-center gap-2.5 border-t p-3 text-start transition-colors"
       >
         <Trash2 className="text-ds-text-danger size-4.5" />
         <span>{t('delete')}</span>

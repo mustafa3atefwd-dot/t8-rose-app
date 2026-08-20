@@ -29,16 +29,22 @@ export default function Header() {
 
   return (
     <header className="border-ds-border-soft bg-ds-bg-plain text-ds-text-plain border-b shadow-sm">
-      <div className="container mx-auto flex min-h-18 items-center gap-3 px-4 py-3 lg:min-h-22 lg:gap-5 lg:px-6">
-        <Link
-          href="/"
-          className="focus-visible:ring-ds-ring shrink-0 rounded-xl focus-visible:ring-2 focus-visible:outline-none"
-        >
-          <Image className="size-14 object-contain lg:size-20" src={roseLogo} alt={t('logoAlt')} priority />
-        </Link>
-
-        <div className="hidden shrink-0 xl:block">
-          <UserAddress />
+      <div className="container mx-auto flex min-h-18 items-center gap-2 px-3 py-2.5 sm:px-4 lg:min-h-22 lg:gap-4 lg:px-6">
+        <div className="flex shrink-0 items-center gap-2 lg:gap-3">
+          <Link
+            href="/"
+            className="focus-visible:ring-ds-ring shrink-0 rounded-xl focus-visible:ring-2 focus-visible:outline-none"
+          >
+            <Image
+              className="size-12 object-contain sm:size-14 lg:size-20"
+              src={roseLogo}
+              alt={t('logoAlt')}
+              priority
+            />
+          </Link>
+          <div className="hidden xl:block">
+            <UserAddress />
+          </div>
         </div>
         <div className="hidden min-w-0 flex-1 md:block">
           <SearchInput className="h-12 lg:h-13" />
@@ -46,9 +52,13 @@ export default function Header() {
 
         <div className="ml-auto hidden shrink-0 items-center lg:flex rtl:mr-auto rtl:ml-0">
           <UnAuthenticatedLogin />
-          <div className="border-ds-border-soft flex h-12 items-center gap-3 border-x px-4">
+          <div className="border-ds-border-soft flex h-12 items-center gap-1 border-x px-2">
             <WishlistHeaderLink />
-            <Link className="relative rounded-md p-1" href="/cart" aria-label={t('cart')}>
+            <Link
+              className="hover:bg-ds-bg-muted relative flex size-9 items-center justify-center rounded-lg transition-colors"
+              href="/cart"
+              aria-label={t('cart')}
+            >
               <ShoppingCart className="size-5" />
               <CartBadge />
             </Link>
@@ -60,21 +70,23 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="ml-auto flex items-center gap-1 lg:hidden rtl:mr-auto rtl:ml-0">
+        <div className="ml-auto flex items-center gap-0 lg:hidden rtl:mr-auto rtl:ml-0">
+          <UnAuthenticatedLogin compact />
+          <WishlistHeaderLink />
           <Link
-            className="hover:bg-ds-bg-muted relative flex size-10 items-center justify-center rounded-xl transition-colors"
+            className="hover:bg-ds-bg-muted relative flex size-9 items-center justify-center rounded-lg transition-colors"
             href="/cart"
             aria-label={t('cart')}
           >
             <ShoppingCart className="size-5" />
             <CartBadge />
           </Link>
-          <ThemeToggle />
+          <NotificationsMenu />
 
           <Sheet>
             <SheetTrigger
               aria-label={t('menu')}
-              className="hover:bg-ds-bg-muted focus-visible:ring-ds-ring flex size-10 cursor-pointer items-center justify-center rounded-xl transition-colors outline-none focus-visible:ring-2"
+              className="hover:bg-ds-bg-muted focus-visible:ring-ds-ring flex size-9 cursor-pointer items-center justify-center rounded-lg transition-colors outline-none focus-visible:ring-2"
             >
               <Menu className="size-6" />
             </SheetTrigger>
@@ -82,11 +94,9 @@ export default function Header() {
               side={locale === 'ar' ? 'left' : 'right'}
               className="border-ds-border-soft bg-ds-bg-plain text-ds-text-plain w-[min(88vw,22rem)] gap-0"
             >
-              <SheetHeader className="border-ds-border-soft border-b px-5 py-5">
-                <div className="flex items-center gap-3">
-                  <Image className="size-12 object-contain" src={roseLogo} alt="" />
-                  <SheetTitle className="text-ds-text-primary text-lg font-bold">{t('navigation')}</SheetTitle>
-                </div>
+              <SheetHeader className="border-ds-border-soft border-b px-5 py-3">
+                <Image className="size-12 object-contain" src={roseLogo} alt="" />
+                <SheetTitle className="sr-only">{t('navigation')}</SheetTitle>
                 <SheetDescription className="sr-only">{t('menuDescription')}</SheetDescription>
               </SheetHeader>
 
@@ -113,14 +123,10 @@ export default function Header() {
                 ))}
               </nav>
 
-              <div className="border-ds-border-soft bg-ds-bg-muted/50 space-y-3 border-t p-4">
-                <UnAuthenticatedLogin />
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <WishlistHeaderLink />
-                    <NotificationsMenu />
-                  </div>
+              <div className="border-ds-border-soft bg-ds-bg-muted/50 border-t p-4">
+                <div className="flex items-center justify-end gap-2">
                   <LanguageToggle />
+                  <ThemeToggle />
                 </div>
               </div>
             </SheetContent>

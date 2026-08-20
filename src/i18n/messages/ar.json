@@ -25,6 +25,7 @@
       "contact": "تواصل معنا",
       "about": "من نحن",
       "deliverTo": "التوصيل إلى",
+      "cairo": "القاهرة",
       "userMenu": {
         "welcome": "مرحبًا",
         "account": "حسابي",
@@ -169,6 +170,7 @@
     "markAllRead": "تحديد الكل كمقروء",
     "empty": "لا توجد إشعارات بعد",
     "markRead": "تحديد كمقروء",
+    "settings": "إجراءات الإشعار",
     "delete": "حذف"
   },
   "productDetails": {

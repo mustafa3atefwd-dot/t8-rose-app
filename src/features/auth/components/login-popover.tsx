@@ -7,7 +7,7 @@ import { Popover } from '@base-ui/react/popover';
 import { LoginForm } from './login-form';
 import { Button } from '@/shared/components/ui/button';
 
-export function LoginPopover() {
+export function LoginPopover({ iconOnly = false }: { iconOnly?: boolean }) {
   const router = useRouter();
   const t = useTranslations('home.header');
 
@@ -19,10 +19,11 @@ export function LoginPopover() {
         delay={150}
         closeDelay={200}
         onClick={() => router.push('/login')}
-        className="hover:text-maroon-600 flex cursor-pointer items-center gap-1.5 p-2 text-sm font-medium text-zinc-700 transition-colors dark:text-zinc-200"
+        aria-label={iconOnly ? t('login') : undefined}
+        className={`hover:bg-ds-bg-muted hover:text-maroon-600 flex cursor-pointer items-center justify-center rounded-lg text-sm font-medium text-zinc-700 transition-colors dark:text-zinc-200 ${iconOnly ? 'size-9 p-0' : 'gap-1.5 p-2'}`}
       >
         <User className="h-5 w-5" />
-        <span>{t('login')}</span>
+        <span className={iconOnly ? 'sr-only' : undefined}>{t('login')}</span>
       </Popover.Trigger>
 
       <Popover.Portal>
