@@ -205,7 +205,7 @@
     },
 
     "actions": {
-      "next": "Continue",
+      "next": "Next",
       "back": "Back",
       "placeOrder": "Place Order",
       "placingOrder": "Placing order...",
@@ -626,13 +626,5 @@
     "errorDescription": "We couldn't load your cart. Please try again.",
     "retry": "Try Again"
 
-},
-  "checkout": {
-    "step1Title": "Shipping Address",
-    "addAddress": "Add a new address",
-    "next": "Next",
-    "noAddresses": "Add a new address to proceed with checkout.",
-    "errorLoading": "Failed to load addresses.",
-    "step": "Step {current} of {total}"
-  }
+}
 }

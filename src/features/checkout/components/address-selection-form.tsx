@@ -143,7 +143,7 @@ export function ShippingAddressForm({ onNext }: ShippingAddressFormProps) {
       {/* Separator */}
       <div className="before:border-zinc-200 after:border-zinc-200 my-6 flex items-center justify-center gap-4 text-lg font-semibold text-zinc-500 before:flex-1 before:border-t before:content-[''] after:flex-1 after:border-t after:content-[''] dark:text-zinc-400 dark:before:border-zinc-700 dark:after:border-zinc-700">
         {t('or')}
-</div>
+      </div>
 
       {/* Add Address Action */}
       <div className="pt-2">
