@@ -1,33 +1,65 @@
 'use client';
 
 import { Bell, BellOff, BrushCleaning, CheckCheck, EllipsisVertical } from 'lucide-react';
+
 import { useTranslations } from 'next-intl';
+
+import React, { useEffect, useRef, useState } from 'react';
+
 import { useGetNotifications } from '../hooks/use-get-notifications';
-import NotificationSettingsMenu from './notification-settings-menu';
-import HeaderBadge from '@/shared/components/header-badge';
-import { cn } from '@/shared/lib/utils';
 import { useMarkAllRead } from '../hooks/use-mark-all-read';
 import { useDeleteAll } from '../hooks/use-delete-all';
-import React, { useEffect, useRef, useState } from 'react';
+import { useUnreadCount } from '../hooks/use-unread-count';
+
+import NotificationSettingsMenu from './notification-settings-menu';
+import { EnablePushButton } from './enable-notifications-button';
+
+import HeaderBadge from '@/shared/components/header-badge';
+import { cn } from '@/shared/lib/utils';
 
 export default function NotificationsMenu() {
   const t = useTranslations('notifications');
+
   const menuRef = useRef<HTMLDivElement>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
+
   const [open, setOpen] = useState(false);
   const [openSettings, setOpenSettings] = useState<string | null>(null);
+
+  /**
+   * Notifications
+   */
   const { data } = useGetNotifications();
+
   const hasNotifications = (data?.payload?.data?.length ?? 0) > 0;
-  const notificationsCount = data?.payload.data.length ?? 0;
+
+  /**
+   * Unread count
+   */
+  const { data: unreadData } = useUnreadCount();
+
+  const unreadCount = unreadData?.payload?.unreadCount ?? 0;
+
+  /**
+   * Mark all read
+   */
   const { mutate: updateNotifications, isPending: isUpdatingNotifications } = useMarkAllRead();
+
+  /**
+   * Delete all
+   */
   const { mutate: deleteNotifications, isPending: isDeletingNotifications } = useDeleteAll();
 
+  /**
+   * Close menu when clicking outside
+   */
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
 
       if (openSettings && settingsRef.current && !settingsRef.current.contains(target)) {
         setOpenSettings(null);
+
         return;
       }
 
@@ -50,50 +82,66 @@ export default function NotificationsMenu() {
         className="relative flex cursor-pointer items-center justify-center border-none bg-transparent p-0"
         type="button"
         onClick={() => setOpen((prev) => !prev)}
+        aria-label="Notifications"
+        aria-expanded={open}
       >
-        <Bell  />
-        {notificationsCount > 0 && <HeaderBadge count={notificationsCount} />}
+        <Bell />
+
+        {unreadCount > 0 && <HeaderBadge count={unreadCount} />}
       </button>
+
       {open && (
         <div
           ref={menuRef}
-          className="bg-ds-bg-plain absolute ltr:right-2 rtl:left-2 z-50 mt-2 w-84 overflow-visible rounded-xl shadow-[0_4px_9px_0_#00000026]"
+          className="bg-ds-bg-plain absolute z-50 mt-2 w-84 overflow-visible rounded-xl shadow-[0_4px_9px_0_#00000026] ltr:right-2 rtl:left-2"
         >
           {/* Header */}
           <div className="bg-ds-bg-primary-saturated text-ds-text-inverse rounded-t-xl p-4 text-xl font-bold">
             {t('title')}
-            {hasNotifications && <span> {data?.payload.metadata.total}</span>}
+
+            {hasNotifications && <span> {data?.payload?.metadata?.total}</span>}
           </div>
 
           {/* Actions */}
           <div className="text-ds-text-plain flex items-center justify-between p-4 text-xs font-semibold">
+            {/* Clear all */}
             <button
               onClick={() => deleteNotifications()}
               disabled={!hasNotifications || isDeletingNotifications}
               type="button"
               className="flex cursor-pointer items-center justify-center gap-1.5 disabled:cursor-not-allowed disabled:text-zinc-400 disabled:dark:text-zinc-500"
             >
-              {hasNotifications ? (
-                <BrushCleaning className="size-4.5 text-zinc-500 dark:text-zinc-400" />
-              ) : (
-                <BrushCleaning className="size-4.5 text-zinc-400 dark:text-zinc-500" />
-              )}
+              <BrushCleaning
+                className={cn(
+                  'size-4.5',
+                  hasNotifications ? 'text-zinc-500 dark:text-zinc-400' : 'text-zinc-400 dark:text-zinc-500'
+                )}
+              />
+
               <span>{t('clearAll')}</span>
             </button>
 
+            {/* Mark all read */}
             <button
               onClick={() => updateNotifications()}
               disabled={!hasNotifications || isUpdatingNotifications}
               type="button"
               className="flex cursor-pointer items-center justify-center gap-1.5 disabled:cursor-not-allowed disabled:text-zinc-400 disabled:dark:text-zinc-500"
             >
-              {hasNotifications ? (
-                <CheckCheck className="size-3.75 text-zinc-500 dark:text-zinc-400" />
-              ) : (
-                <BrushCleaning className="size-4.5 text-zinc-400 dark:text-zinc-500" />
-              )}
+              <CheckCheck
+                className={cn(
+                  'size-4',
+                  hasNotifications ? 'text-zinc-500 dark:text-zinc-400' : 'text-zinc-400 dark:text-zinc-500'
+                )}
+              />
+
               <span>{t('markAllRead')}</span>
             </button>
+          </div>
+
+          {/* Push Notifications */}
+          <div className="border-t border-zinc-300 p-4 dark:border-zinc-600">
+            <EnablePushButton />
           </div>
 
           {/* Notifications */}
@@ -101,11 +149,12 @@ export default function NotificationsMenu() {
             <div className="flex h-56 items-center justify-center border-t border-zinc-300 dark:border-zinc-600">
               <div className="flex flex-col items-center gap-2.5 text-zinc-500 dark:text-zinc-400">
                 <BellOff className="size-12.5" />
+
                 <p className="text-sm font-medium">{t('empty')}</p>
               </div>
             </div>
           ) : (
-            data?.payload.data.map((notification) => (
+            data?.payload?.data.map((notification) => (
               <React.Fragment key={notification.id}>
                 <div
                   className={cn(

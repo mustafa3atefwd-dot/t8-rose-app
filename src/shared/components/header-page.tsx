@@ -22,7 +22,6 @@ import { WishlistHeaderLink } from '@/features/wishlist';
 import NotificationsMenu from '@/features/notifications/components/notifications-menu';
 import HeaderBadge from './header-badge';
 import CartBadge from '@/features/cart/components/cart-badge';
-import EnableNotificationsButton from '@/features/notifications/components/enable-notifications-button';
 
 export default function Header() {
   const t = useTranslations('home.header');
@@ -56,7 +55,6 @@ export default function Header() {
                 <CartBadge />
               </Link>
               <NotificationsMenu />
-              <EnableNotificationsButton/>
             </div>
 
             {/* language */}

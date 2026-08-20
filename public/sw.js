@@ -1,23 +1,49 @@
-self.addEventListener("push", (event) => {
-  const d = event.data.json();
+self.addEventListener('push', (event) => {
+  if (!event.data) {
+    return;
+  }
+
+  let data;
+
+  try {
+    data = event.data.json();
+  } catch {
+    data = {
+      title: 'Rose',
+      message: event.data.text(),
+    };
+  }
+
+  const title = data.title || 'Rose';
+  const message = data.message || '';
+  const link = data.link || '/';
 
   event.waitUntil(
-    self.registration.showNotification(d.title, {
-      body: d.message,
-      tag: d.id,
+    self.registration.showNotification(title, {
+      body: message,
+
+      ...(data.id && {
+        tag: data.id,
+      }),
+
       data: {
-        link: d.link,
+        link,
       },
+
+      // icon: '/icons/icon-192x192.png',
+      // badge: '/icons/badge-72x72.png',
     })
   );
 });
 
-self.addEventListener("notificationclick", (event) => {
+self.addEventListener('notificationclick', (event) => {
   event.notification.close();
 
-  if (event.notification.data?.link) {
-    event.waitUntil(
-      clients.openWindow(event.notification.data.link)
-    );
+  const link = event.notification.data?.link;
+
+  if (!link) {
+    return;
   }
+
+  event.waitUntil(clients.openWindow(link));
 });

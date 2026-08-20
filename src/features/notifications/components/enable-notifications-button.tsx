@@ -1,41 +1,73 @@
 'use client';
 
-import { usePushStatus } from '../hooks/use-push-status';
+import { Bell, BellRing, Loader2 } from 'lucide-react';
 
-export default function EnableNotificationsButton() {
-  const { data: pushStatusData, isLoading } = usePushStatus();
+import { Button } from '@/shared/components/ui/button';
 
-  const enablePush = async () => {
-    try {
-      const permission = await Notification.requestPermission();
+import { usePushNotifications } from '../hooks/use-push-notifications';
 
-      if (permission !== 'granted') {
-        return;
-      }
+export function EnablePushButton() {
+  const { pushStatus, isLoading, isError, error, enablePush, isEnabling, enableError } = usePushNotifications();
 
-      const registration = await navigator.serviceWorker.register('/sw.js');
-
-      console.log('Service Worker registered:', registration);
-    } catch (error) {
-      console.error('Failed to enable push notifications:', error);
-    }
-  };
-
+  /**
+   * Checking push status from backend
+   */
   if (isLoading) {
+    return (
+      <Button type="button" disabled className="w-full">
+        <Loader2 className="size-4 animate-spin" />
+        Checking notifications...
+      </Button>
+    );
+  }
+
+  /**
+   * Failed to get push status
+   */
+  if (isError) {
+    console.error('Failed to get push status:', error);
+
+    return <p className="text-destructive text-xs">Failed to check notification status.</p>;
+  }
+
+  /**
+   * Backend doesn't support Web Push
+   *
+   * pushConfigured === false
+   */
+  if (!pushStatus?.pushConfigured) {
     return null;
   }
 
-  if (pushStatusData?.payload.pushConfigured) {
-    return null;
+  /**
+   * Already subscribed
+   */
+  if (pushStatus.subscriptionCount > 0) {
+    return (
+      <div className="flex items-center gap-2">
+        <BellRing className="size-4" />
+
+        <span className="text-xs font-medium">Push notifications enabled</span>
+      </div>
+    );
   }
 
+  /**
+   * Not subscribed yet
+   */
   return (
-    <button
-      type="button"
-      onClick={enablePush}
-      className="bg-yellow-500 p-6"
-    >
-      Enable Notifications
-    </button>
+    <div className="space-y-2">
+      <Button type="button" onClick={() => enablePush()} disabled={isEnabling} className="w-full">
+        {isEnabling ? <Loader2 className="size-4 animate-spin" /> : <Bell className="size-4" />}
+
+        {isEnabling ? 'Enabling...' : 'Enable notifications'}
+      </Button>
+
+      {enableError && (
+        <p className="text-destructive text-xs">
+          {enableError instanceof Error ? enableError.message : 'Failed to enable notifications.'}
+        </p>
+      )}
+    </div>
   );
 }

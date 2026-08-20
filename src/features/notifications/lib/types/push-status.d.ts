@@ -1,4 +1,5 @@
 import { IApiResponse } from '@/shared/lib/types/api';
+import { IDocumentFields } from '@/shared/lib/types/base';
 
 /**
  * Push Status Types
@@ -23,33 +24,24 @@ export interface IVapidPublicKeyPayload {
 export type IVapidPublicKeyResponse = IApiResponse<IVapidPublicKeyPayload>;
 
 /**
- * Push Subscription Types
+ * Subscription Types
  * @description Types for push subscription
  */
-export interface IPushSubscriptionPayload {
-  endpoint: string;
-  expirationTime?: number | null;
-  keys: {
-    p256dh: string;
-    auth: string;
-  };
+interface Keys {
+  p256dh: string;
+  auth: string;
 }
 
-export type IPushSubscriptionResponse = IApiResponse<IPushSubscriptionPayload>;
+export interface IPushSubscribeRequest {
+  endpoint: string;
+  keys: Keys;
+}
 
-/**
- * Subscription Types
- * @description Types for subscription
- */
-export interface ISubscription {
+export interface ISubscription extends Keys, IDocumentFields {
   id: string;
   userId: string;
   endpoint: string;
   endpointHash: string;
-  p256dh: string;
-  auth: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface IPushSubscribePayload {
@@ -68,3 +60,13 @@ export interface ITestPushPayload {
 }
 
 export type ITestPushResponse = IApiResponse<ITestPushPayload>;
+
+/**
+ * Unread Count Types
+ * @description Types for unread count
+ */
+export interface IUnreadCountPayload {
+  unreadCount: number;
+}
+
+export type IUnreadCountResponse = IApiResponse<IUnreadCountPayload>;
