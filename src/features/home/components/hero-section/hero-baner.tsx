@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import giftBoxes from '@/assets/images/gift-boxes.png';
+import { Link } from '@/i18n/navigation';
 
 export default function HeroBanner() {
   const t = useTranslations('hero');
@@ -31,7 +31,7 @@ export default function HeroBanner() {
           asChild
           className="bg-maroon-50 text-maroon-700 hover:bg-maroon-100 flex items-center gap-1.5 rounded-xl px-4 py-2.5 font-medium transition-all"
         >
-          <Link href="/shop">
+          <Link href="/products">
             {t('shopNow')}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>

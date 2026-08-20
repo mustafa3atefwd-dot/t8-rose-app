@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import categoryAnn from '@/assets/images/category-anniversary.png';
 import categoryEngagement from '@/assets/images/category-engagement.png';
 import categoryWedding from '@/assets/images/category-wedding.png';
@@ -9,9 +9,9 @@ export function CategoryTrio() {
   const t = useTranslations('hero.categories');
 
   const CATEGORIES = [
-    { id: 'wedding', image: categoryWedding, link: '/category/wedding' },
-    { id: 'engagement', image: categoryEngagement, link: '/category/engagement' },
-    { id: 'anniversary', image: categoryAnn, link: '/category/anniversary' },
+    { id: 'wedding', image: categoryWedding, link: '/occasions' },
+    { id: 'engagement', image: categoryEngagement, link: '/occasions' },
+    { id: 'anniversary', image: categoryAnn, link: '/occasions' },
   ];
 
   return (
