@@ -13,12 +13,15 @@ import { ChevronDown, LogOut, MapPinHouse, ScrollText, Settings, User } from 'lu
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { USER_ROLES } from '@/features/auth/lib/constants/user.constant';
+import { USER_MENU_LINKS, USER_ROLES } from '@/features/auth/lib/constants/user.constant';
+import { Fragment } from 'react';
 
 export default function UserDropdown({ compact = false }: { compact?: boolean }) {
   const t = useTranslations('home.header.userMenu');
   const { data: session } = useSession();
   const isAdmin = session?.user.role === USER_ROLES.admin || session?.user.role === USER_ROLES.superAdmin;
+  const visibleMenuLinks = USER_MENU_LINKS.filter((item) => !item.adminOnly || isAdmin);
+
   const handleLogout = async () => {
     await signOut({
       callbackUrl: '/login',
@@ -53,35 +56,17 @@ export default function UserDropdown({ compact = false }: { compact?: boolean })
           </DropdownMenuLabel>
         </DropdownMenuGroup>
         <DropdownMenuSeparator className={'my-0'} />
-        <DropdownMenuItem>
-          <Link href="/profile" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
-            <User className="size-4" />
-            <span className="text-sm font-medium">{t('account')}</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/addresses" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
-            <MapPinHouse className="size-4" />
-            <span className="text-sm font-medium">{t('addresses')}</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/orders" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
-            <ScrollText className="size-4" />
-            <span className="text-sm font-medium">{t('order')}</span>
-          </Link>
-        </DropdownMenuItem>
-        {isAdmin && (
-          <>
-            <DropdownMenuSeparator className="my-0" />
+        {visibleMenuLinks.map(({ key, href, icon: Icon, separated }) => (
+          <Fragment key={key}>
+            {separated && <DropdownMenuSeparator className="my-0" />}
             <DropdownMenuItem>
-              <Link href="/dashboard" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
-                <Settings className="size-4" />
-                <span className="text-sm font-medium">{t('dashboard')}</span>
+              <Link href={href} className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
+                <Icon className="size-4" />
+                <span className="text-sm font-medium">{t(key)}</span>
               </Link>
             </DropdownMenuItem>
-          </>
-        )}
+          </Fragment>
+        ))}
         <DropdownMenuSeparator className={'my-0'} />
         <DropdownMenuItem>
           <button onClick={handleLogout} className="flex items-center gap-2 text-zinc-700 dark:text-zinc-100">
