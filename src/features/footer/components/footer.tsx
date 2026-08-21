@@ -13,7 +13,8 @@ export async function Footer() {
     <footer className="bg-ds-bg-inverse text-ds-text-inverse dark:bg-ds-bg-muted dark:text-ds-text-plain w-full px-6 py-10 sm:px-8 xl:px-0">
       <div className="mx-auto grid w-full max-w-7xl items-start gap-12 lg:grid-cols-3 lg:gap-8">
         <section className="flex flex-col items-center gap-1.5 lg:justify-self-start" aria-label={t('appName')}>
-          <Image
+          <Link href={'/'}>
+            <Image
             src={RoseLogo}
             alt={t('logoAlt')}
             width={240}
@@ -21,13 +22,14 @@ export async function Footer() {
             priority={false}
             className="h-auto w-full max-w-60 object-contain"
           />
+          </Link>
           <p className="text-ds-text-secondary dark:text-ds-text-primary text-center text-lg leading-tight font-semibold">
             {t('appName')}
           </p>
           <p className="text-ds-text-inverse dark:text-ds-text-plain flex flex-wrap items-center justify-center gap-1 text-center text-sm leading-normal">
             <bdi>{t('tagline')}</bdi>
             <span aria-hidden>|</span>
-            <bdi>{t('year')}</bdi>
+            <bdi>{new Date().getFullYear()}</bdi>
           </p>
         </section>
 

@@ -13,6 +13,7 @@ import SearchInput from './search-input';
 import UserAddress from './user-address';
 import { ThemeToggle } from './ThemeToggle';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
+import NotificationsBell from '@/features/notifications/components/notifications.bell';
 
 const navigationItems = [
   { href: '/', label: 'home', icon: House },
@@ -62,7 +63,7 @@ export default function Header() {
               <ShoppingCart className="size-5" />
               <CartBadge />
             </Link>
-            <NotificationsMenu />
+            <NotificationsBell/>
           </div>
           <div className="flex items-center gap-1 ps-3">
             <LanguageToggle />

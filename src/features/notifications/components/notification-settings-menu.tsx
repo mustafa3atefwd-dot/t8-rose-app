@@ -2,7 +2,7 @@
 
 import { Check, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useUpdateNotification } from '../hooks/use-update-notification';
 import { useDeleteNotification } from '../hooks/use-delete-notification';
@@ -38,20 +38,76 @@ export default function NotificationSettingsMenu({
     isPending: isDeletingNotification,
   } = useDeleteNotification();
 
+  const settingsMenuRef = useRef<HTMLDivElement>(null);
+
   const [position, setPosition] = useState({
     top: 0,
     left: 0,
   });
 
+  /**
+   * Close settings menu when clicking outside it.
+   *
+   * The Ellipsis button is excluded because
+   * clicking it should toggle the menu normally.
+   */
   useEffect(() => {
-    if (openSettings !== notificationId || !buttonRef) {
+    if (openSettings !== notificationId) {
+      return;
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      const clickedInsideSettings =
+        settingsMenuRef.current?.contains(target);
+
+      const clickedButton =
+        buttonRef?.contains(target);
+
+      if (clickedInsideSettings || clickedButton) {
+        return;
+      }
+
+      setOpenSettings(null);
+    };
+
+    document.addEventListener(
+      'mousedown',
+      handleClickOutside,
+    );
+
+    return () => {
+      document.removeEventListener(
+        'mousedown',
+        handleClickOutside,
+      );
+    };
+  }, [
+    openSettings,
+    notificationId,
+    buttonRef,
+    setOpenSettings,
+  ]);
+
+  /**
+   * Position the settings menu relative
+   * to the Ellipsis button.
+   */
+  useEffect(() => {
+    if (
+      openSettings !== notificationId ||
+      !buttonRef
+    ) {
       return;
     }
 
     const updatePosition = () => {
-      const rect = buttonRef.getBoundingClientRect();
+      const rect =
+        buttonRef.getBoundingClientRect();
 
-      const menuWidth = window.innerWidth < 640 ? 192 : 208;
+      const menuWidth =
+        window.innerWidth < 640 ? 192 : 208;
 
       const gap = 8;
       const screenPadding = 8;
@@ -73,8 +129,7 @@ export default function NotificationSettingsMenu({
         : rect.right + gap;
 
       /**
-       * If menu goes outside the screen,
-       * move it inside the viewport.
+       * Keep menu inside viewport horizontally.
        */
       left = Math.max(
         screenPadding,
@@ -87,16 +142,16 @@ export default function NotificationSettingsMenu({
       );
 
       /**
-       * Put the menu aligned with the top
+       * Align menu with the top
        * of the Ellipsis button.
        */
       let top = rect.top;
 
-      /**
-       * Prevent the menu from going below viewport.
-       */
       const estimatedMenuHeight = 100;
 
+      /**
+       * Prevent going below viewport.
+       */
       if (
         top + estimatedMenuHeight >
         window.innerHeight - screenPadding
@@ -155,6 +210,7 @@ export default function NotificationSettingsMenu({
 
   return (
     <div
+      ref={settingsMenuRef}
       role="menu"
       style={{
         position: 'fixed',

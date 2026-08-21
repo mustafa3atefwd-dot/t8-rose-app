@@ -50,19 +50,18 @@ export default function NotificationsMenu() {
     isPending: isDeletingNotifications,
   } = useDeleteAll();
 
-  // Refs لكل زرار Ellipsis
   const settingsButtonRefs = useRef<
     Record<string, HTMLButtonElement | null>
   >({});
 
   /**
-   * Close menus when clicking outside
+   * Close the main notifications menu
+   * when clicking outside it.
    */
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
 
-      // لو الضغط داخل Notifications Menu
       if (menuRef.current?.contains(target)) {
         return;
       }
@@ -74,12 +73,16 @@ export default function NotificationsMenu() {
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener(
+        'mousedown',
+        handleClickOutside,
+      );
     };
   }, []);
 
   /**
-   * Close settings menu when notifications menu closes
+   * Close settings menu when
+   * the main notifications menu closes.
    */
   useEffect(() => {
     if (!open) {
@@ -88,7 +91,10 @@ export default function NotificationsMenu() {
   }, [open]);
 
   return (
-    <div className="relative flex items-center">
+    <div
+      ref={menuRef}
+      className="relative flex items-center"
+    >
       {/* Trigger */}
       <button
         aria-label={t('title')}
@@ -102,12 +108,13 @@ export default function NotificationsMenu() {
       >
         <Bell className="size-5" />
 
-        {unreadCount > 0 && <HeaderBadge count={unreadCount} />}
+        {unreadCount > 0 && (
+          <HeaderBadge count={unreadCount} />
+        )}
       </button>
 
       {open && (
         <div
-          ref={menuRef}
           className="
             bg-ds-bg-plain
             border-ds-border-soft
@@ -135,7 +142,10 @@ export default function NotificationsMenu() {
             {t('title')}
 
             {hasNotifications && (
-              <span> {data?.payload?.metadata?.total}</span>
+              <span>
+                {' '}
+                {data?.payload?.metadata?.total}
+              </span>
             )}
           </div>
 
@@ -144,7 +154,10 @@ export default function NotificationsMenu() {
             {/* Clear all */}
             <button
               onClick={() => deleteNotifications()}
-              disabled={!hasNotifications || isDeletingNotifications}
+              disabled={
+                !hasNotifications ||
+                isDeletingNotifications
+              }
               type="button"
               className="flex cursor-pointer items-center justify-center gap-1.5 disabled:cursor-not-allowed disabled:text-zinc-400 disabled:dark:text-zinc-500"
             >
@@ -163,7 +176,10 @@ export default function NotificationsMenu() {
             {/* Mark all read */}
             <button
               onClick={() => updateNotifications()}
-              disabled={!hasNotifications || isUpdatingNotifications}
+              disabled={
+                !hasNotifications ||
+                isUpdatingNotifications
+              }
               type="button"
               className="flex cursor-pointer items-center justify-center gap-1.5 disabled:cursor-not-allowed disabled:text-zinc-400 disabled:dark:text-zinc-500"
             >
@@ -235,7 +251,9 @@ export default function NotificationsMenu() {
 
                       <NotificationSettingsMenu
                         notificationId={notification.id}
-                        notificationIsRead={notification.isRead}
+                        notificationIsRead={
+                          notification.isRead
+                        }
                         openSettings={openSettings}
                         setOpenSettings={setOpenSettings}
                         buttonRef={
