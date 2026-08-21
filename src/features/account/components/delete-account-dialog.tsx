@@ -34,19 +34,19 @@ export function DeleteAccountDialog() {
       >
         {t('actions.delete')}
       </AlertDialogTrigger>
-      <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[474px] gap-0 rounded-2xl border-0 px-6 pt-7 pb-6 sm:min-h-[373px]">
+      <AlertDialogContent className="w-[calc(100%-2rem)] max-w-474px gap-0 rounded-2xl border-0 px-6 pt-7 pb-6 sm:min-h-373px">
         <button
           type="button"
           disabled={mutation.isPending}
           aria-label={t('deleteDialog.close')}
           onClick={() => setOpen(false)}
-          className="text-ds-text-soft hover:text-ds-text-plain absolute end-6 top-6 rounded-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
+          className="text-ds-text-soft hover:text-ds-text-plain absolute inset-e-6 top-6 rounded-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
         >
           <X className="size-5" />
         </button>
 
-        <div className="mx-auto mt-12 flex size-[105px] items-center justify-center rounded-full bg-neutral-100">
-          <div className="flex size-[70px] items-center justify-center rounded-full bg-neutral-300 text-neutral-800">
+        <div className="mx-auto mt-12 flex size-105px items-center justify-center rounded-full bg-neutral-100">
+          <div className="flex size-70px items-center justify-center rounded-full bg-neutral-300 text-neutral-800">
             <Trash2 className="size-7 stroke-[1.75]" aria-hidden="true" />
           </div>
         </div>
