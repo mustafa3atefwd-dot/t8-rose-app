@@ -1,7 +1,7 @@
-import { hasLocale } from "next-intl";
-import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
-import ForgotPasswordForm from "@/features/auth/components/forgot-password-form";
+import { hasLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import ForgotPasswordForm from '@/features/auth/components/forgot-password-form';
 
 interface ForgotPasswordPageProps {
   params: Promise<{ locale: string }>;
@@ -10,11 +10,11 @@ interface ForgotPasswordPageProps {
 
 export default async function ForgotPasswordPage({ params, searchParams }: ForgotPasswordPageProps) {
   const { locale } = await params;
-  const {token} = await searchParams;
+  const { token } = await searchParams;
 
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
-  return <ForgotPasswordForm token={token ?? ''}/>;
+  return <ForgotPasswordForm token={token ?? ''} />;
 }
