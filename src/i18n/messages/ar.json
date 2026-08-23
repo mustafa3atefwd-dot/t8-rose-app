@@ -197,6 +197,33 @@
       "retry": "حاول مرة أخرى"
     }
   },
+  "dashboard": {
+    "sidebar": {
+      "previewWebsite": "عرض الموقع",
+      "overview": "نظرة عامة",
+      "categories": "التصنيفات",
+      "occasions": "المناسبات",
+      "products": "المنتجات"
+    },
+    "userMenu": {
+      "account": "الحساب",
+      "logout": "تسجيل الخروج"
+    },
+    "breadcrumb": {
+      "dashboard": "لوحة التحكم",
+      "categories": "التصنيفات",
+      "occasions": "المناسبات",
+      "products": "المنتجات",
+      "account": "الحساب",
+      "addCategory": "إضافة تصنيف",
+      "updateCategory": "تعديل: {name}",
+      "addOccasion": "إضافة مناسبة",
+      "updateOccasion": "تعديل: {name}",
+      "addProduct": "إضافة منتج",
+      "updateProduct": "تعديل: {name}",
+      "changePassword": "تغيير كلمة المرور"
+    }
+  },
   "homeHeader": {
     "deliverTo": "التوصيل إلى",
     "userMenu": {

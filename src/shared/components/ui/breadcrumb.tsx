@@ -1,44 +1,28 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { useRender } from "@base-ui/react/use-render"
+import * as React from 'react';
+import { useRender } from '@base-ui/react/use-render';
 
-import { cn } from "@/shared/lib/utils"
-import Link from "next/link"
-import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
+import { cn } from '@/shared/lib/utils';
+import Link from 'next/link';
+import { ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react';
 
-function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
-  return (
-    <nav
-      aria-label="breadcrumb"
-      data-slot="breadcrumb"
-      className={cn(className)}
-      {...props}
-    />
-  )
+function Breadcrumb({ className, ...props }: React.ComponentProps<'nav'>) {
+  return <nav aria-label="breadcrumb" data-slot="breadcrumb" className={cn(className)} {...props} />;
 }
 
-function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
+function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
   return (
     <ol
       data-slot="breadcrumb-list"
-      className={cn(
-        "flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-ds-text-muted",
-        className
-      )}
+      className={cn('text-ds-text-muted flex flex-wrap items-center gap-1.5 text-sm wrap-break-word', className)}
       {...props}
     />
-  )
+  );
 }
 
-function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
-  return (
-    <li
-      data-slot="breadcrumb-item"
-      className={cn("inline-flex items-center gap-1", className)}
-      {...props}
-    />
-  )
+function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
+  return <li data-slot="breadcrumb-item" className={cn('inline-flex items-center gap-1', className)} {...props} />;
 }
 
 function BreadcrumbLink({
@@ -46,90 +30,74 @@ function BreadcrumbLink({
   className,
   children,
   ...props
-}: React.ComponentProps<"a"> & {
-  asChild?: boolean
+}: React.ComponentProps<'a'> & {
+  asChild?: boolean;
 }) {
   // `useRender` is Base UI's headless replacement for Radix's `Slot`.
   return useRender({
     render: asChild ? (children as React.ReactElement) : <a>{children}</a>,
     props: {
-      "data-slot": "breadcrumb-link",
-      className: cn("transition-colors hover:text-ds-text-plain", className),
+      'data-slot': 'breadcrumb-link',
+      className: cn('transition-colors hover:text-ds-text-plain', className),
       ...props,
     },
-  })
+  });
 }
 
-function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
+function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
       data-slot="breadcrumb-page"
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn(
-        "font-medium text-ds-text-primary",
-        className
-      )}
+      className={cn('text-ds-text-primary font-medium', className)}
       {...props}
     />
-  )
+  );
 }
 
-function BreadcrumbSeparator({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"li">) {
+function BreadcrumbSeparator({ children, className, ...props }: React.ComponentProps<'li'>) {
   return (
     <li
       data-slot="breadcrumb-separator"
       role="presentation"
       aria-hidden="true"
-      className={cn("[&>svg]:size-3.5 [&>svg]:rtl:rotate-180", className)}
+      className={cn('[&>svg]:size-3.5 [&>svg]:rtl:rotate-180', className)}
       {...props}
     >
-      {children ?? (
-        <ChevronRightIcon />
-      )}
+      {children ?? <ChevronRightIcon className="ms-1.5 mt-0.5" />}
     </li>
-  )
+  );
 }
 
-function BreadcrumbEllipsis({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
+function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
       data-slot="breadcrumb-ellipsis"
       role="presentation"
       aria-hidden="true"
-      className={cn(
-        "flex size-5 items-center justify-center [&>svg]:size-4",
-        className
-      )}
+      className={cn('flex size-5 items-center justify-center [&>svg]:size-4', className)}
       {...props}
     >
-      <MoreHorizontalIcon
-      />
+      <MoreHorizontalIcon />
       <span className="sr-only">More</span>
     </span>
-  )
+  );
 }
 
 export type BreadcrumbItemData = {
-  label: string
+  label: string;
   /** When omitted the item renders as the current page (non-interactive). */
-  href?: string
-}
+  href?: string;
+};
 
 type BreadcrumbsProps = {
-  items: BreadcrumbItemData[]
-  className?: string
+  items: BreadcrumbItemData[];
+  className?: string;
   /** Accessible label for the <nav>. */
-  ariaLabel?: string
-}
+  ariaLabel?: string;
+};
 
 /**
  * Composite breadcrumb trail. The last item is always rendered as a
@@ -138,20 +106,20 @@ type BreadcrumbsProps = {
  * path from the `md` breakpoint up.
  */
 function Breadcrumbs({ items, className, ariaLabel }: BreadcrumbsProps) {
-  if (items.length === 0) return null
+  if (items.length === 0) return null;
 
-  const lastIndex = items.length - 1
-  const hasCollapsible = items.length > 2
+  const lastIndex = items.length - 1;
+  const hasCollapsible = items.length > 2;
 
   return (
     <Breadcrumb aria-label={ariaLabel} className={className}>
       <BreadcrumbList>
         {items.map((item, index) => {
-          const isLast = index === lastIndex
-          const isFirst = index === 0
+          const isLast = index === lastIndex;
+          const isFirst = index === 0;
           // Middle items are hidden on mobile; the first and last always show.
-          const isMiddle = !isFirst && !isLast
-          const itemHiddenOnMobile = hasCollapsible && isMiddle
+          const isMiddle = !isFirst && !isLast;
+          const itemHiddenOnMobile = hasCollapsible && isMiddle;
 
           return (
             <React.Fragment key={`${item.label}-${index}`}>
@@ -165,9 +133,7 @@ function Breadcrumbs({ items, className, ariaLabel }: BreadcrumbsProps) {
                 </>
               )}
 
-              <BreadcrumbItem
-                className={cn(itemHiddenOnMobile && "hidden md:inline-flex")}
-              >
+              <BreadcrumbItem className={cn(itemHiddenOnMobile && 'hidden md:inline-flex')}>
                 {isLast || !item.href ? (
                   <BreadcrumbPage>{item.label}</BreadcrumbPage>
                 ) : (
@@ -177,17 +143,13 @@ function Breadcrumbs({ items, className, ariaLabel }: BreadcrumbsProps) {
                 )}
               </BreadcrumbItem>
 
-              {!isLast && (
-                <BreadcrumbSeparator
-                  className={cn(itemHiddenOnMobile && "hidden md:inline-flex")}
-                />
-              )}
+              {!isLast && <BreadcrumbSeparator className={cn(itemHiddenOnMobile && 'hidden md:inline-flex')} />}
             </React.Fragment>
-          )
+          );
         })}
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }
 
 export {
@@ -199,4 +161,4 @@ export {
   BreadcrumbPage,
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
-}
+};

@@ -363,6 +363,33 @@
       "retry": "Retry"
     }
   },
+  "dashboard": {
+    "sidebar": {
+      "previewWebsite": "Preview Website",
+      "overview": "Overview",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "products": "Products"
+    },
+    "userMenu": {
+      "account": "Account",
+      "logout": "Logout"
+    },
+    "breadcrumb": {
+      "dashboard": "Dashboard",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "products": "Products",
+      "account": "Account",
+      "addCategory": "Add Category",
+      "updateCategory": "Update: {name}",
+      "addOccasion": "Add Occasion",
+      "updateOccasion": "Update: {name}",
+      "addProduct": "Add Product",
+      "updateProduct": "Update: {name}",
+      "changePassword": "Change Password"
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",
