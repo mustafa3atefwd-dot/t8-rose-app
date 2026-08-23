@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { UseFormReturn } from 'react-hook-form';
 
 export const productFormSchema = z.object({
   title: z.string().trim().min(1, 'validation.titleRequired').max(120, 'validation.titleLong'),
@@ -12,3 +13,4 @@ export const productFormSchema = z.object({
 
 export type ProductFormValues = z.infer<typeof productFormSchema>;
 export type ProductFormInput = z.input<typeof productFormSchema>;
+export type ProductAdminForm = UseFormReturn<ProductFormInput, unknown, ProductFormValues>;

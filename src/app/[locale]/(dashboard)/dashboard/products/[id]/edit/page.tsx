@@ -7,11 +7,18 @@ import { getTranslations } from 'next-intl/server';
 type PageProps = { params: Promise<{ locale: string; id: string }> };
 
 export default async function EditProductPage({ params }: PageProps) {
-  const { locale, id } = await params;
+  // Translation
   const t = await getTranslations('productsAdmin');
+
+  // Navigation
+  const { locale, id } = await params;
+
+  // Query
   const [productResult, categoriesResult, occasionsResult] = await Promise.all([
     getProductByIdAction(id), getCategoriesAction({ limit: 100 }), getOccasionsAction({ limit: 100 }),
   ]).catch(() => notFound());
+
+  // Variables
   const product = productResult.status ? productResult.payload?.product : undefined;
   if (!product) notFound();
   const categories = categoriesResult.status ? (categoriesResult.payload?.data ?? []) : [];

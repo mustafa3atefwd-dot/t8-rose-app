@@ -25,6 +25,7 @@ import {
 import { PaginationControl } from '@/shared/components/ui/pagination';
 import type { IProduct } from '@/features/products/lib/types';
 import { deleteProduct, getAdminProducts } from '../lib/products-admin.api';
+import { ProductsTableSkeleton } from './products-table-skeleton';
 
 const PAGE_SIZE = 12;
 
@@ -37,9 +38,14 @@ function ProductActions({
   onDelete: () => void;
   deleting: boolean;
 }) {
+  // Translation
   const t = useTranslations('productsAdmin');
+
+  // Navigation
   const { locale } = useParams<{ locale: string }>();
   const router = useRouter();
+
+  // Variables
   const editHref = `/${locale}/dashboard/products/${product.id}/edit`;
 
   return (
@@ -81,22 +87,22 @@ function ProductActions({
 }
 
 export default function ProductsAdminTable() {
+  // Translation
   const t = useTranslations('productsAdmin');
+
+  // Navigation
   const { locale } = useParams<{ locale: string }>();
-  const queryClient = useQueryClient();
+
+  // State
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [deleteTarget, setDeleteTarget] = useState<IProduct | null>(null);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setDebouncedSearch(search.trim());
-      setPage(1);
-    }, 350);
-    return () => window.clearTimeout(timer);
-  }, [search]);
+  // Context
+  const queryClient = useQueryClient();
 
+  // Query
   const query = useQuery({
     queryKey: ['admin-products', page, debouncedSearch],
     queryFn: () => getAdminProducts({
@@ -109,6 +115,7 @@ export default function ProductsAdminTable() {
     placeholderData: keepPreviousData,
   });
 
+  // Mutation
   const remove = useMutation({
     mutationFn: deleteProduct,
     onSuccess: async () => {
@@ -119,8 +126,19 @@ export default function ProductsAdminTable() {
     onError: (error) => toast.error(error.message || t('messages.deleteError')),
   });
 
+  // Variables
   const products = query.data?.status ? (query.data.payload?.data ?? []) : [];
   const metadata = query.data?.status ? query.data.payload?.metadata : undefined;
+
+  // Effects
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setDebouncedSearch(search.trim());
+      setPage(1);
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [search]);
+
   return (
     <section className="bg-ds-bg-plain rounded-2xl px-4 py-5 md:px-6 md:py-6">
       <div className="mb-5 flex items-center justify-between">
@@ -159,12 +177,7 @@ export default function ProductsAdminTable() {
             </tr>
           </thead>
           <tbody className={query.isFetching ? 'opacity-60' : undefined}>
-            {query.isLoading &&
-              Array.from({ length: 6 }).map((_, index) => (
-                <tr key={index} className="border-ds-border-muted border-b">
-                  <td colSpan={6} className="bg-ds-bg-subtle/40 h-15 animate-pulse" />
-                </tr>
-              ))}
+            {query.isLoading && <ProductsTableSkeleton />}
             {query.isError && (
               <tr>
                 <td colSpan={6} className="text-ds-text-danger h-40 text-center">

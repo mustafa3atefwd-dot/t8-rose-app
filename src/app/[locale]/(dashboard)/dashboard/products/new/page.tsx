@@ -6,11 +6,18 @@ import { getTranslations } from 'next-intl/server';
 type PageProps = { params: Promise<{ locale: string }> };
 
 export default async function NewProductPage({ params }: PageProps) {
-  const { locale } = await params;
+  // Translation
   const t = await getTranslations('productsAdmin');
+
+  // Navigation
+  const { locale } = await params;
+
+  // Query
   const [categoriesResult, occasionsResult] = await Promise.all([
     getCategoriesAction({ limit: 100 }), getOccasionsAction({ limit: 100 }),
   ]);
+
+  // Variables
   const categories = categoriesResult.status ? (categoriesResult.payload?.data ?? []) : [];
   const occasions = occasionsResult.status ? (occasionsResult.payload?.data ?? []) : [];
 
