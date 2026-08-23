@@ -4,15 +4,8 @@ import { DashboardUserMenu } from '@/features/dashboard/components/dashboard-use
 import { SidebarProvider, SidebarTrigger } from '@/shared/components/ui/sidebar';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  // Loocale
-  const locale = useLocale();
-
-  // Check if locale is rtl
-  const isRtl = locale === 'ar';
-
   return (
     <SidebarProvider>
       {/* Dashboard sidebar */}
