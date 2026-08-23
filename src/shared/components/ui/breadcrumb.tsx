@@ -66,7 +66,7 @@ function BreadcrumbSeparator({ children, className, ...props }: React.ComponentP
       className={cn('[&>svg]:size-3.5 [&>svg]:rtl:rotate-180', className)}
       {...props}
     >
-      {children ?? <ChevronRightIcon className="ms-1.5 mt-0.5" />}
+      {children ?? <ChevronRightIcon className="ms-1.5 ltr:mt-0.5" />}
     </li>
   );
 }
