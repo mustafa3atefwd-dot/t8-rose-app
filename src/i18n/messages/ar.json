@@ -833,5 +833,45 @@
     "error": "حدث خطأ ما",
     "errorDescription": "تعذر تحميل سلة التسوق. يرجى المحاولة مرة أخرى.",
     "retry": "حاول مرة أخرى"
+  },
+  "productsAdmin": {
+    "breadcrumbs": { "dashboard": "لوحة التحكم", "products": "المنتجات", "add": "إضافة منتج" },
+    "form": { "addTitle": "إضافة منتج جديد", "updateTitle": "تحديث المنتج: {title}" },
+    "fields": {
+      "title": "العنوان", "description": "الوصف", "price": "السعر", "discount": "الخصم",
+      "discountedPrice": "السعر بعد الخصم", "quantity": "الكمية", "cover": "صورة غلاف المنتج",
+      "gallery": "معرض صور المنتج", "category": "الفئة", "occasion": "المناسبة"
+    },
+    "placeholders": {
+      "title": "أدخل عنوان المنتج", "description": "أدخل وصف المنتج", "price": "مثال: 5000",
+      "discount": "مثال: 5", "quantity": "مثال: 200", "category": "اختر فئة", "occasion": "اختر مناسبة"
+    },
+    "actions": {
+      "upload": "رفع ملف", "viewCover": "عرض غلاف المنتج", "viewGallery": "عرض معرض المنتج",
+      "add": "إضافة المنتج", "update": "تحديث المنتج", "saving": "جارٍ الحفظ...", "addNew": "إضافة منتج جديد",
+      "edit": "تعديل", "delete": "حذف", "deleting": "جارٍ الحذف...", "cancel": "إلغاء"
+    },
+    "validation": {
+      "titleRequired": "عنوان المنتج مطلوب", "titleLong": "عنوان المنتج طويل جدًا",
+      "descriptionRequired": "وصف المنتج مطلوب", "descriptionLong": "الوصف طويل جدًا",
+      "priceInvalid": "يرجى إدخال سعر صالح", "discountInvalid": "لا يمكن أن يكون الخصم سالبًا",
+      "quantityInteger": "يجب أن تكون الكمية عددًا صحيحًا", "quantityInvalid": "يرجى إدخال كمية صالحة",
+      "categoryRequired": "يرجى اختيار فئة للمنتج", "occasionRequired": "يرجى اختيار مناسبة للمنتج",
+      "imagesOnly": "يُسمح بالصور فقط", "imageSize": "يجب ألا يتجاوز حجم كل صورة 5 ميجابايت",
+      "coverRequired": "صورة غلاف المنتج مطلوبة", "galleryRequired": "صور معرض المنتج مطلوبة"
+    },
+    "messages": {
+      "created": "تمت إضافة المنتج بنجاح", "updated": "تم تحديث المنتج بنجاح", "deleted": "تم حذف المنتج بنجاح",
+      "saveError": "تعذر حفظ المنتج", "uploadError": "تعذر رفع {name}", "imageTooLarge": "حجم الصورة كبير جدًا. يرجى اختيار صورة أصغر.", "deleteError": "تعذر حذف هذا المنتج",
+      "deleteTitle": "حذف المنتج؟", "deleteConfirm": "هل تريد حذف «{title}»؟ يمكنك استعادته لاحقًا."
+    },
+    "list": {
+      "title": "جميع المنتجات", "searchLabel": "البحث في المنتجات", "searchPlaceholder": "بحث...",
+      "loadError": "تعذر تحميل المنتجات. يرجى المحاولة مرة أخرى.", "empty": "لم يتم العثور على منتجات."
+    },
+    "table": {
+      "name": "الاسم", "price": "السعر", "stock": "المخزون", "sales": "المبيعات", "ratings": "التقييمات",
+      "actions": "الإجراءات", "actionsFor": "إجراءات المنتج {title}", "priceValue": "{price, number} ج.م"
+    }
   }
 }
