@@ -20,11 +20,11 @@ export async function GET() {
 }
 
 export async function PATCH(_request: NextRequest) {
-    const data = await markAllRead();
-    return NextResponse.json(data);
+  const data = await markAllRead();
+  return NextResponse.json(data);
 }
 
 export async function DELETE(_request: NextRequest) {
-    const data = await deleteAllNotifications();
-    return NextResponse.json(data);
+  const data = await deleteAllNotifications();
+  return NextResponse.json(data);
 }
