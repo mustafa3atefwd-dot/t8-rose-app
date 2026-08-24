@@ -388,6 +388,37 @@
       "addProduct": "Add Product",
       "updateProduct": "Update: {name}",
       "changePassword": "Change Password"
+    },
+    "overview": {
+      "title": "Dashboard overview",
+      "summary": {
+        "label": "Store summary",
+        "products": "Total products",
+        "orders": "Total orders",
+        "categories": "Total categories",
+        "revenue": "Total revenue"
+      },
+      "categories": {
+        "title": "All Categories",
+        "productCount": "{count} Products",
+        "empty": "No categories found"
+      },
+      "topSelling": {
+        "title": "Top Selling Products",
+        "sales": "{count} Sales",
+        "empty": "No sales data available"
+      },
+      "lowStock": {
+        "title": "Low Stock Products",
+        "productCount": "{count} Products",
+        "empty": "No low-stock products"
+      },
+      "error": {
+        "title": "Failed to load dashboard",
+        "description": "We couldn't load the dashboard statistics right now. Please try again.",
+        "retry": "Try again",
+        "retrying": "Trying again..."
+      }
     }
   },
   "toast": {

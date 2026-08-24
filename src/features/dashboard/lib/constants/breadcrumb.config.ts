@@ -172,7 +172,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/account\/change-password$/,
+    pattern: /^\/dashboard\/account\/password$/,
     getItems: () => [
       dashboardItem,
       accountItem,
