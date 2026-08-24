@@ -382,11 +382,15 @@
       "products": "Products",
       "account": "Account",
       "addCategory": "Add Category",
-      "updateCategory": "Update: {name}",
+      "updateCategory": "Update Category",
       "addOccasion": "Add Occasion",
-      "updateOccasion": "Update: {name}",
+      "updateOccasion": "Update Occasion",
       "addProduct": "Add Product",
-      "updateProduct": "Update: {name}",
+      "updateProduct": "Update Product",
+      "routeName": "{name}",
+      "category": "Category",
+      "occasion": "Occasion",
+      "profile": "Profile",
       "changePassword": "Change Password"
     }
   },

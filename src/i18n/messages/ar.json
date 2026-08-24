@@ -216,11 +216,15 @@
       "products": "المنتجات",
       "account": "الحساب",
       "addCategory": "إضافة تصنيف",
-      "updateCategory": "تعديل: {name}",
+      "updateCategory": "تعديل التصنيف",
       "addOccasion": "إضافة مناسبة",
-      "updateOccasion": "تعديل: {name}",
+      "updateOccasion": "تعديل المناسبة",
       "addProduct": "إضافة منتج",
-      "updateProduct": "تعديل: {name}",
+      "updateProduct": "تعديل المنتج",
+      "routeName": "{name}",
+      "category": "التصنيف",
+      "occasion": "المناسبة",
+      "profile": "الملف الشخصي",
       "changePassword": "تغيير كلمة المرور"
     }
   },
