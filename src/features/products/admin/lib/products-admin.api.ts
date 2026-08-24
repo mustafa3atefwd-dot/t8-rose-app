@@ -20,22 +20,6 @@ export function getDeletedProducts(params: { page?: number; limit?: number } = {
   return apiRequest<AdminProductsResponse>(`/api/products/deleted?${query.toString()}`);
 }
 
-export function createProduct(input: ProductMutationInput) {
-  return apiRequest<ProductMutationResponse>('/api/products', {
-    method: 'POST',
-    headers: jsonHeaders,
-    body: JSON.stringify(input),
-  });
-}
-
-export function updateProduct(id: string, input: Partial<ProductMutationInput>) {
-  return apiRequest<ProductMutationResponse>(`/api/products/${id}`, {
-    method: 'PATCH',
-    headers: jsonHeaders,
-    body: JSON.stringify(input),
-  });
-}
-
 export function deleteProduct(id: string) {
   return apiRequest<IApiMutationResponse>(`/api/products/${id}`, { method: 'DELETE' });
 }

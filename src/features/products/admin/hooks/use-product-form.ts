@@ -9,8 +9,9 @@ import { toast } from 'sonner';
 import type { IProductDetail } from '@/features/products/lib/types';
 import { productFormSchema, type ProductFormInput, type ProductFormValues } from '../lib/product-form.schema';
 import { buildProductPayload, getProductFormDefaults, parseProductGallery } from '../lib/product-form.utils';
-import { createProduct, updateProduct } from '../lib/products-admin.api';
+
 import { uploadProductImage } from '../lib/upload-product-image';
+import { createProduct, updateProduct } from '../api/create-update-products.api';
 
 export type ProductFormMode = 'create' | 'edit';
 
