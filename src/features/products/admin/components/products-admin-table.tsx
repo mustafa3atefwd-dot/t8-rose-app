@@ -24,10 +24,20 @@ import {
 } from '@/shared/components/ui/dropdown-menu';
 import { PaginationControl } from '@/shared/components/ui/pagination';
 import type { IProduct } from '@/features/products/lib/types';
-import { deleteProduct, getAdminProducts } from '../lib/products-admin.api';
+import type { AdminProductsResponse } from '../lib/types';
+import { deleteProductAction } from '../lib/products-admin.action';
+import { getAdminProducts } from '../lib/products-admin.api';
+import {
+  ADMIN_PRODUCTS_PAGE_SIZE,
+  ADMIN_PRODUCTS_SORT,
+  adminProductsQueryKey,
+} from '../lib/products-admin.query';
 import { ProductsTableSkeleton } from './products-table-skeleton';
 
-const PAGE_SIZE = 12;
+type ProductsAdminTableProps = {
+  /** First page rendered on the server; seeds the query so the table skips its skeleton. */
+  initialProducts?: AdminProductsResponse;
+};
 
 function ProductActions({
   product,
@@ -86,7 +96,7 @@ function ProductActions({
   );
 }
 
-export default function ProductsAdminTable() {
+export default function ProductsAdminTable({ initialProducts }: ProductsAdminTableProps) {
   // Translation
   const t = useTranslations('productsAdmin');
 
@@ -104,20 +114,24 @@ export default function ProductsAdminTable() {
 
   // Query
   const query = useQuery({
-    queryKey: ['admin-products', page, debouncedSearch],
+    queryKey: adminProductsQueryKey(page, debouncedSearch),
     queryFn: () => getAdminProducts({
       page,
-      limit: PAGE_SIZE,
+      limit: ADMIN_PRODUCTS_PAGE_SIZE,
       search: debouncedSearch || undefined,
-      sortBy: 'createdAt',
-      sortOrder: 'desc',
+      ...ADMIN_PRODUCTS_SORT,
     }),
     placeholderData: keepPreviousData,
+    // The server only prefetched the unfiltered first page, so any other key starts empty.
+    initialData: page === 1 && !debouncedSearch ? initialProducts : undefined,
   });
 
   // Mutation
   const remove = useMutation({
-    mutationFn: deleteProduct,
+    mutationFn: async (id: string) => {
+      const result = await deleteProductAction(id);
+      if (!result.status) throw new Error(result.message);
+    },
     onSuccess: async () => {
       toast.success(t('messages.deleted'));
       setDeleteTarget(null);
@@ -209,7 +223,7 @@ export default function ProductsAdminTable() {
                   {product.stock.toLocaleString()}
                 </td>
                 <td className="text-ds-text-default hidden px-5 py-3.5 md:table-cell">
-                  {product._count.cartItems.toLocaleString()}
+                  {product._count.orderItems.toLocaleString()}
                 </td>
                 <td className="text-ds-text-plain hidden px-5 py-3.5 md:table-cell">
                   <strong>{product.rating.toFixed(1)}/5</strong> <span className="text-xs">({product.ratings})</span>

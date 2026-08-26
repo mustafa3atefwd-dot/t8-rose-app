@@ -17,6 +17,8 @@ export interface ICategorySummary {
 export interface IProductCount {
   reviews: number;
   cartItems: number;
+  /** Units actually ordered — this is the number the admin table reports as sales. */
+  orderItems: number;
   wishlistItems: number;
 }
 

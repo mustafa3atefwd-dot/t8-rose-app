@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import type { IProductDetail } from '@/features/products/lib/types';
 import { productFormSchema, type ProductFormInput, type ProductFormValues } from '../lib/product-form.schema';
 import { buildProductPayload, getProductFormDefaults, parseProductGallery } from '../lib/product-form.utils';
-import { createProduct, updateProduct } from '../lib/products-admin.api';
+import { createProductAction, updateProductAction } from '../lib/products-admin.action';
 import { uploadProductImage } from '../lib/upload-product-image';
 
 export type ProductFormMode = 'create' | 'edit';
@@ -58,8 +58,14 @@ export function useProductForm({ mode, product }: UseProductFormOptions) {
       const [cover, gallery] = await uploadSelectedImages();
       const payload = buildProductPayload(values, cover, gallery);
 
-      if (mode === 'edit' && product) await updateProduct(product.id, payload);
-      else await createProduct(payload);
+      const result = mode === 'edit' && product
+        ? await updateProductAction(product.id, payload)
+        : await createProductAction(payload);
+
+      if (!result.status) {
+        toast.error(result.message || t('messages.saveError'));
+        return;
+      }
 
       toast.success(mode === 'edit' ? t('messages.updated') : t('messages.created'));
       router.push(`/${locale}/dashboard/products`);
