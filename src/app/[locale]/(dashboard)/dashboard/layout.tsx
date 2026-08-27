@@ -4,15 +4,19 @@ import { DashboardUserMenu } from '@/features/dashboard/components/dashboard-use
 import { SidebarProvider, SidebarTrigger } from '@/shared/components/ui/sidebar';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { unauthorized } from 'next/navigation';
+import DashboardMobileBottomNav from '@/features/dashboard/layout/dashboard-mobile-bottom-nav';
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const user = null;
+  // if (!user) return unauthorized();
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       {/* Dashboard sidebar */}
       <DashboardSidebar />
 
       <div className="bg-ds-bg-subtle flex min-h-svh w-full flex-1 flex-col">
-        {/* Header */}
+        {/* Mobile Header */}
         <header className="border-ds-border-muted bg-ds-bg-plain mb-4 flex h-17.5 shrink-0 items-center justify-between border-b px-4 md:hidden">
           {/* Logo & Breadcrumb Wrapper */}
           <div className="flex items-center gap-3">
@@ -35,15 +39,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </header>
 
-        <main className="bg-ds-bg-subtle flex-1">
-          {/* Breadcrumb */}
+        <main className="bg-ds-bg-subtle flex flex-1 flex-col">
+          {/* Desktop Breadcrumb */}
           <DashboardContainer className="border-ds-border-muted bg-ds-bg-plain mb-5 hidden border-b py-6 md:block">
             <DashboardBreadcrumb />
           </DashboardContainer>
 
-          <DashboardContainer>{children}</DashboardContainer>
+          <DashboardContainer className="flex-1">{children}</DashboardContainer>
         </main>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <DashboardMobileBottomNav />
     </SidebarProvider>
   );
 }

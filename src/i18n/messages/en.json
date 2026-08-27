@@ -873,5 +873,43 @@
       "imageTooLargeTitle": "Image is too large",
       "imageTooLargeDescription": "Please choose an image smaller than 5MB."
     }
+  },
+  "statusPages": {
+    "global": {
+      "notFound": {
+        "title": "Page Not Found",
+        "description": "The page you are looking for doesn't exist or may have been moved.",
+        "goHome": "Go to Homepage"
+      },
+      "unauthorized": {
+        "title": "You are not authorized to access this page.",
+        "description": "If you think this is wrong, please contact the support.",
+        "goHome": "Go to Homepage"
+      },
+      "error": {
+        "title": "Something went wrong",
+        "description": "An unexpected error occurred. Please try again.",
+        "retry": "Try Again",
+        "goHome": "Go to Homepage"
+      }
+    },
+    "dashboard": {
+      "notFound": {
+        "title": "This page does not exist.",
+        "description": "We couldn’t find the page your are looking for, please make sure you are in the right path.",
+        "goHome": "Back to Dashboard"
+      },
+      "unauthorized": {
+        "title": "You are not authorized to access this page.",
+        "description": "If you think this is wrong, please contact the support.",
+        "goHome": "Back to Home"
+      },
+      "error": {
+        "title": "Oops, something went wrong!",
+        "description": "Something unexpected happened, please refresh the page or try again shortly.",
+        "retry": "Try Again",
+        "goHome": "Back to Dashboard"
+      }
+    }
   }
 }
