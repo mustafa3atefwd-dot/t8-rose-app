@@ -6,9 +6,16 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { unauthorized } from 'next/navigation';
 import DashboardMobileBottomNav from '@/features/dashboard/layout/dashboard-mobile-bottom-nav';
+import { getUserRole } from '@/shared/lib/utils/get-user-role';
+import { USER_ROLES } from '@/features/auth/lib/constants';
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const user = null;
-  // if (!user) return unauthorized();
+  // Get user role
+  const role = await getUserRole();
+
+  // Redirect user if role is user or null
+  if (!role || role === USER_ROLES.user) {
+    return unauthorized();
+  }
 
   return (
     <SidebarProvider>
