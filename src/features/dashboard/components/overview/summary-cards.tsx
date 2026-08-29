@@ -5,14 +5,17 @@ import type { IDashboardSummary } from '@/features/dashboard/lib/types/statistic
 import { formatDashboardCurrency, formatStatistic } from '@/features/dashboard/lib/utils/format-statistic.util';
 import { StatisticCard } from '@/features/dashboard/components/overview/statistic-card';
 
+// Component props
 interface SummaryCardsProps {
   locale: string;
   summary: IDashboardSummary;
 }
 
 export function SummaryCards({ locale, summary }: SummaryCardsProps) {
+  // Translations
   const t = useTranslations('dashboard.overview.summary');
 
+  // Summary card configuration
   const cards = [
     {
       key: 'products',
@@ -46,6 +49,7 @@ export function SummaryCards({ locale, summary }: SummaryCardsProps) {
 
   return (
     <section aria-label={t('label')} className="bg-ds-bg-plain rounded-2xl p-4 sm:p-6">
+      {/* ===== Statistics Grid ===== */}
       <div className="grid grid-cols-1 gap-4 min-[430px]:grid-cols-2">
         {cards.map(({ key, ...card }) => (
           <StatisticCard key={key} {...card} />

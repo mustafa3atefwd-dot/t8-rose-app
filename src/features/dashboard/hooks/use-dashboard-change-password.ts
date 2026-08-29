@@ -11,11 +11,13 @@ import {
   changePasswordSchema,
   type ChangePasswordFormValues,
 } from '@/features/account/lib/schemas/change-password.schema';
-import { accountApi } from '@/features/account/lib/utils/account-api';
+import { changePasswordAction } from '@/features/account/lib/actions/account.action';
 
 export function useDashboardChangePassword() {
+  // Translations
   const t = useTranslations('account');
 
+  // Validation schema
   const schema = useMemo(
     () =>
       changePasswordSchema({
@@ -28,22 +30,15 @@ export function useDashboardChangePassword() {
     [t]
   );
 
+  // Form state
   const form = useForm<ChangePasswordFormValues>({
     resolver: zodResolver(schema),
     defaultValues: { oldPassword: '', newPassword: '', confirmPassword: '' },
   });
 
+  // Change password mutation
   const mutation = useMutation({
-    mutationFn: ({ oldPassword, newPassword, confirmPassword }: ChangePasswordFormValues) =>
-      accountApi('/api/users/change-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          currentPassword: oldPassword,
-          newPassword,
-          confirmPassword,
-        }),
-      }),
+    mutationFn: changePasswordAction,
     onSuccess: () => {
       form.reset();
       toast.success(t('messages.passwordChanged'));

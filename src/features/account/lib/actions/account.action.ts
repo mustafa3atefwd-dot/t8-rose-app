@@ -6,6 +6,7 @@ import { apiRequest } from '@/shared/lib/utils/request.util';
 import type { ISuccessResponse } from '@/shared/lib/types/api';
 import type { IUser } from '@/shared/lib/types/user';
 import type { ConfirmEmailPayload, UpdateProfilePayload, UpdateProfileResult } from '../types/account';
+import type { ChangePasswordFormValues } from '../schemas/change-password.schema';
 
 async function getAccountAccessToken() {
   const token = await getNextAuthToken();
@@ -62,6 +63,20 @@ export async function confirmEmailAction(payload: ConfirmEmailPayload): Promise<
     method: 'POST',
     headers: jsonHeaders(token),
     body: JSON.stringify({ email: payload.email.trim(), code: payload.code.trim() }),
+  });
+}
+
+export async function changePasswordAction(values: ChangePasswordFormValues): Promise<void> {
+  const token = await getAccountAccessToken();
+
+  await apiRequest(`${BACKEND_URL}/users/change-password`, {
+    method: 'POST',
+    headers: jsonHeaders(token),
+    body: JSON.stringify({
+      currentPassword: values.oldPassword,
+      newPassword: values.newPassword,
+      confirmPassword: values.confirmPassword,
+    }),
   });
 }
 

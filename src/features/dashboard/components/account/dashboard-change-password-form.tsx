@@ -7,13 +7,17 @@ import { Button } from '@/shared/components/ui/button';
 import { PasswordInput } from '@/shared/components/ui/inputs/password-input';
 
 export function DashboardChangePasswordForm() {
+  // Translations
   const t = useTranslations('account');
+
+  // Form state and mutation
   const { form, mutation } = useDashboardChangePassword();
   const {
     register,
     formState: { errors },
   } = form;
 
+  // Password field configuration
   const fields = [
     { name: 'oldPassword' as const, label: t('fields.currentPassword'), autoComplete: 'current-password' },
     { name: 'newPassword' as const, label: t('fields.newPassword'), autoComplete: 'new-password' },
@@ -26,6 +30,7 @@ export function DashboardChangePasswordForm() {
       className="bg-ds-bg-plain flex min-h-96 flex-col rounded-2xl p-4 sm:p-6 lg:min-h-112 lg:p-8"
       noValidate
     >
+      {/* ===== Password Fields ===== */}
       <div className="space-y-5">
         {fields.map(({ name, label, autoComplete }) => {
           const error = errors[name];
@@ -57,6 +62,7 @@ export function DashboardChangePasswordForm() {
         })}
       </div>
 
+      {/* ===== Submit Action ===== */}
       <div className="mt-8 flex sm:justify-end lg:mt-auto">
         <Button
           type="submit"

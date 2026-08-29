@@ -4,23 +4,28 @@ import type { ITopSellingProduct } from '@/features/dashboard/lib/types/statisti
 import { formatDashboardCurrency, formatStatistic } from '@/features/dashboard/lib/utils/format-statistic.util';
 import { cn } from '@/shared/lib/utils';
 
+// Component props
 interface TopSellingProductsProps {
   products: ITopSellingProduct[];
   currency: string;
   locale: string;
 }
 
+// Repeating row colours from the dashboard design
 const rowTones = ['bg-ds-bg-warning-fade', 'bg-ds-bg-muted', 'bg-ds-bg-secondary-fade'];
 
 export function TopSellingProducts({ products, currency, locale }: TopSellingProductsProps) {
+  // Translations
   const t = useTranslations('dashboard.overview.topSelling');
 
   return (
     <section className="bg-ds-bg-plain min-h-0 rounded-2xl p-4 sm:p-6" aria-labelledby="top-selling-title">
+      {/* ===== Section Header ===== */}
       <h2 id="top-selling-title" className="text-ds-text-plain text-xl font-semibold sm:text-2xl">
         {t('title')}
       </h2>
 
+      {/* ===== Top-selling List ===== */}
       {products.length === 0 ? (
         <p className="text-ds-text-soft flex min-h-48 items-center justify-center text-center">{t('empty')}</p>
       ) : (

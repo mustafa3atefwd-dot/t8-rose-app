@@ -1,5 +1,6 @@
 import { Skeleton } from '@/shared/components/ui/skeleton';
 
+// Shared skeleton for dashboard list sections
 function ListSkeleton() {
   return (
     <div className="bg-ds-bg-plain rounded-2xl p-4 sm:p-6">
@@ -16,6 +17,7 @@ function ListSkeleton() {
 export function DashboardOverviewSkeleton() {
   return (
     <div className="space-y-6 pb-6" aria-busy="true" aria-label="Loading dashboard overview">
+      {/* ===== Summary And Categories Skeleton ===== */}
       <div className="grid gap-6 xl:grid-cols-[minmax(20rem,0.85fr)_minmax(24rem,1fr)]">
         <div className="bg-ds-bg-plain grid grid-cols-1 gap-4 rounded-2xl p-4 min-[430px]:grid-cols-2 sm:p-6">
           {Array.from({ length: 4 }).map((_, index) => (
@@ -24,6 +26,8 @@ export function DashboardOverviewSkeleton() {
         </div>
         <ListSkeleton />
       </div>
+
+      {/* ===== Product Lists Skeleton ===== */}
       <div className="grid gap-6 lg:grid-cols-2">
         <ListSkeleton />
         <ListSkeleton />

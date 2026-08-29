@@ -5,6 +5,7 @@ import type { ISuccessResponse } from '@/shared/lib/types/api';
 import { apiRequest } from '@/shared/lib/utils/request.util';
 import type { IDashboardStatistics } from '@/features/dashboard/lib/types/statistics';
 
+// Dashboard statistics query configuration
 const STATISTICS_PARAMS = new URLSearchParams({
   revenuePeriod: 'monthly',
   lowStockThreshold: '20',
@@ -12,9 +13,11 @@ const STATISTICS_PARAMS = new URLSearchParams({
   lowStockLimit: '20',
 });
 
+// Fetch the authenticated admin dashboard statistics
 export async function getDashboardStatistics(accessToken: string): Promise<IDashboardStatistics> {
   if (!BACKEND_URL) throw new Error('Backend URL is not configured');
 
+  // Backend request
   const response = await apiRequest<ISuccessResponse<IDashboardStatistics>>(
     `${BACKEND_URL}/admin/statistics?${STATISTICS_PARAMS}`,
     {
