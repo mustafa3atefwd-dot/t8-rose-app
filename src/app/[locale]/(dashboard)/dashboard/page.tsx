@@ -16,8 +16,8 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
   if (!accessToken) return redirect({ href: '/login', locale });
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <Suspense fallback={<DashboardOverviewSkeleton />}>
+      <DashboardOverview accessToken={accessToken} locale={locale} />
+    </Suspense>
   );
 }

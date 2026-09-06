@@ -1,85 +1,35 @@
 "use client";
 
-import { TrendingUp } from "lucide-react"
-import { Pie, PieChart } from "recharts"
+import { Pie, PieChart } from "recharts";
 
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card"
+} from "@/shared/components/ui/card";
 
 import {
   ChartContainer,
   type ChartConfig,
-} from "@/shared/components/ui/chart"
+} from "@/shared/components/ui/chart";
 
-export const description = "A donut chart"
+import { IDashboardOrderStatus } from "@/features/dashboard/lib/types/statistics";
 
-const chartData = [
-  {
-    browser: "chrome",
-    visitors: 275,
-    fill: "rgb(0,255,200)",
-  },
-  {
-    browser: "safari",
-    visitors: 200,
-    fill: "rgb(0,255,0)",
-  },
-  {
-    browser: "firefox",
-    visitors: 187,
-    fill: "rgb(255,0,0)",
-  },
-  {
-    browser: "edge",
-    visitors: 173,
-    fill: "rgb(0,0,255)",
-  },
-  {
-    browser: "other",
-    visitors: 90,
-    fill: "rgb(100,70,10)",
-  },
-]
+export const description = "Orders status donut chart";
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
-    color: "var(--chart-2)",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "var(--chart-3)",
-  },
-  edge: {
-    label: "Edge",
-    color: "var(--chart-4)",
-  },
-  other: {
-    label: "Other",
-    color: "var(--chart-5)",
-  },
-} satisfies ChartConfig
+interface IChartPieDonutProps {
+  ordersStatus: IDashboardOrderStatus;
+}
 
 type CustomLabelProps = {
-  cx?: number
-  cy?: number
-  midAngle?: number
-  outerRadius?: number
-  value?: number
-}
+  cx?: number;
+  cy?: number;
+  midAngle?: number;
+  outerRadius?: number;
+  value?: number;
+};
 
 const renderCustomLabel = ({
   cx = 0,
@@ -88,13 +38,13 @@ const renderCustomLabel = ({
   outerRadius = 0,
   value = 0,
 }: CustomLabelProps) => {
-  const RADIAN = Math.PI / 180
+  const RADIAN = Math.PI / 180;
 
   // المسافة بين الدونات والدائرة
-  const radius = outerRadius + 5
+  const radius = outerRadius + 5;
 
-  const x = cx + radius * Math.cos(-midAngle * RADIAN)
-  const y = cy + radius * Math.sin(-midAngle * RADIAN)
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
   return (
     <g>
@@ -108,7 +58,7 @@ const renderCustomLabel = ({
         strokeWidth={1}
       />
 
-      {/* الرقم داخل الدائرة */}
+      {/* النسبة داخل الدائرة */}
       <text
         x={x}
         y={y}
@@ -121,14 +71,60 @@ const renderCustomLabel = ({
         {value}%
       </text>
     </g>
-  )
-}
+  );
+};
 
-export function ChartPieDonut() {
+const chartConfig = {
+  completed: {
+    label: "Completed",
+    color: "var(--ds-bg-success)",
+  },
+  inProgress: {
+    label: "In Progress",
+    color: "var(--ds-bg-info)",
+  },
+  canceled: {
+    label: "Canceled",
+    color: "var(--ds-bg-danger)",
+  },
+} satisfies ChartConfig;
+
+export function ChartPieDonut({
+  ordersStatus,
+}: IChartPieDonutProps) {
+  const {
+    canceled,
+    completed,
+    inProgress,
+  } = ordersStatus;
+
+  const chartData = [
+  {
+    status: "completed",
+    count: completed.count,
+    percent: completed.percent,
+    fill: "var(--ds-bg-success)",
+  },
+  {
+    status: "inProgress",
+    count: inProgress.count,
+    percent: inProgress.percent,
+    fill: "var(--ds-bg-info)",
+  },
+  {
+    status: "canceled",
+    count: canceled.count,
+    percent: canceled.percent,
+    fill: "var(--ds-bg-danger)",
+  },
+];
+
   return (
-    <Card className="flex flex-col ">
+    <Card className="flex flex-col">
       <CardHeader className="items-center pb-0 text-center">
-        <CardTitle className="text-2xl font-semibold text-ds-text-plain font-inter">Orders Status</CardTitle>
+        <CardTitle className="text-2xl font-semibold text-ds-text-plain font-inter">
+          Orders Status
+        </CardTitle>
       </CardHeader>
 
       <CardContent className="flex-1 pb-0">
@@ -139,11 +135,19 @@ export function ChartPieDonut() {
           <PieChart>
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              dataKey="count"
+              nameKey="status"
               innerRadius={40}
               outerRadius={90}
-              label={renderCustomLabel}
+              label={({ cx, cy, midAngle, outerRadius, index }) =>
+                renderCustomLabel({
+                  cx,
+                  cy,
+                  midAngle,
+                  outerRadius,
+                  value: chartData[index]?.percent ?? 0,
+                })
+              }
               labelLine={false}
             />
           </PieChart>
@@ -151,37 +155,50 @@ export function ChartPieDonut() {
       </CardContent>
 
       <CardFooter className="flex-col">
-
-        <ul className="leading-none text-ds-text-plain font-inter text-xs space-y-3.5">
+        <ul className="leading-none text-ds-text-plain font-inter text-xs space-y-3.5 w-full">
+          {/* Completed */}
           <li className="flex justify-between items-center">
             <div className="flex gap-1.25 items-center">
-              <span className="size-2.5 rounded-full bg-ds-bg-success"></span>
-              <span className="font-semibold">completed</span>
+              <span className="size-2.5 rounded-full bg-ds-bg-success" />
+              <span className="font-semibold">
+                Completed
+              </span>
             </div>
+
             <span className="font-bold">
-              216 (33%)
+              {completed.count} ({completed.percent}%)
             </span>
           </li>
-                    <li className="flex justify-between items-center">
+
+          {/* In Progress */}
+          <li className="flex justify-between items-center">
             <div className="flex gap-1.25 items-center">
-              <span className="size-2.5 rounded-full bg-ds-bg-info"></span>
-              <span className="font-semibold">In progress</span>
+              <span className="size-2.5 rounded-full bg-ds-bg-info" />
+              <span className="font-semibold">
+                In Progress
+              </span>
             </div>
+
             <span className="font-bold">
-              216 (33%)
+              {inProgress.count} ({inProgress.percent}%)
             </span>
           </li>
-                    <li className="flex justify-between items-center">
+
+          {/* Canceled */}
+          <li className="flex justify-between items-center">
             <div className="flex gap-1.25 items-center">
-              <span className="size-2.5 rounded-full bg-ds-bg-danger"></span>
-              <span className="font-semibold">Canceled</span>
+              <span className="size-2.5 rounded-full bg-ds-bg-danger" />
+              <span className="font-semibold">
+                Canceled
+              </span>
             </div>
+
             <span className="font-bold">
-              216 (33%)
+              {canceled.count} ({canceled.percent}%)
             </span>
           </li>
         </ul>
       </CardFooter>
     </Card>
-  )
+  );
 }

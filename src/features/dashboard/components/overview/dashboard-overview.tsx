@@ -7,6 +7,7 @@ import { SummaryCards } from '@/features/dashboard/components/overview/summary-c
 import { TopSellingProducts } from '@/features/dashboard/components/overview/top-selling-products';
 import { getDashboardStatistics } from '@/features/dashboard/lib/apis/get-dashboard-statistics.api';
 import type { IDashboardStatistics } from '@/features/dashboard/lib/types/statistics';
+import Charts from '@/features/overview/components/charts';
 
 // Component props
 interface DashboardOverviewProps {
@@ -39,6 +40,9 @@ export async function DashboardOverview({ accessToken, locale }: DashboardOvervi
         <SummaryCards locale={locale} summary={statistics.summary} />
         <CategoriesSummary locale={locale} categories={statistics.categories} />
       </div>
+
+      {/* charts */}
+      <Charts ordersStatus={statistics.orderStatus}/>
 
       {/* ===== Product Lists ===== */}
       <div className="grid gap-6 lg:grid-cols-2">

@@ -1,4 +1,3 @@
-// Dashboard summary
 export interface IDashboardSummary {
   totalProducts: number;
   totalOrders: number;
@@ -7,14 +6,35 @@ export interface IDashboardSummary {
   currency: string;
 }
 
-// Category statistics
 export interface IDashboardCategory {
   id: string;
   title: string;
   productCount: number;
 }
 
-// Top-selling product statistics
+export interface IOrderStatusItem {
+  count: number;
+  percent: number;
+}
+
+export interface IDashboardOrderStatus {
+  completed: IOrderStatusItem;
+  inProgress: IOrderStatusItem;
+  canceled: IOrderStatusItem;
+  totalOrders: number;
+}
+
+export interface IRevenuePoint {
+  period: string;
+  label: string;
+  revenue: number;
+}
+
+export interface IDashboardRevenue {
+  period: string;
+  points: IRevenuePoint[];
+}
+
 export interface ITopSellingProduct {
   productId: string;
   title: string;
@@ -22,17 +42,23 @@ export interface ITopSellingProduct {
   totalSales: number;
 }
 
-// Low-stock product statistics
 export interface ILowStockProduct {
   id: string;
   title: string;
   stock: number;
 }
 
-// Complete dashboard statistics payload
 export interface IDashboardStatistics {
   summary: IDashboardSummary;
   categories: IDashboardCategory[];
+  orderStatus: IDashboardOrderStatus;
+  revenue: IDashboardRevenue;
   topSellingProducts: ITopSellingProduct[];
   lowStockProducts: ILowStockProduct[];
+}
+
+export interface IDashboardStatisticsResponse {
+  status: boolean;
+  code: number;
+  payload: IDashboardStatistics;
 }
