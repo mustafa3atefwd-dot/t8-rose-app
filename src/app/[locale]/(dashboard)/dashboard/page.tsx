@@ -1,3 +1,4 @@
+import Charts from '@/features/overview/components/charts';
 import { unauthorized } from 'next/navigation';
 
 export default function DashboardPage() {
@@ -7,6 +8,7 @@ export default function DashboardPage() {
   return (
     <div>
       <h1>Dashboard</h1>
+      <Charts/>
     </div>
   );
 }
