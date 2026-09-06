@@ -1,11 +1,13 @@
-import { IDashboardOrderStatus } from "@/features/dashboard/lib/types/statistics";
+import { IDashboardOrderStatus, IDashboardRevenue } from "@/features/dashboard/lib/types/statistics";
 import { ChartPieDonut } from "./chart-pie-donut";
+import { ChartAreaAxes } from "./area-chart";
 
 // Component props
 interface IChartsOverviewProps {
   ordersStatus: IDashboardOrderStatus;
+  revenue: IDashboardRevenue;
 }
-export default function Charts({ordersStatus}: IChartsOverviewProps) {  
+export default function Charts({ordersStatus, revenue}: IChartsOverviewProps) {  
   return (
     <div className='flex gap-6'>
         {/* order status */}
@@ -13,7 +15,9 @@ export default function Charts({ordersStatus}: IChartsOverviewProps) {
             <ChartPieDonut ordersStatus={ordersStatus}/>
         </div>
         {/* revenue */}
-        <div className="bg-red-700 flex-3"></div>
+        <div className="bg-ds-bg-plain flex-3 rounded-2xl">
+          <ChartAreaAxes revenue={revenue}/>
+        </div>
     </div>
   )
 }

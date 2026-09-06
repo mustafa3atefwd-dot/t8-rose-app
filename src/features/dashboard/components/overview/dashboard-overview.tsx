@@ -42,7 +42,7 @@ export async function DashboardOverview({ accessToken, locale }: DashboardOvervi
       </div>
 
       {/* charts */}
-      <Charts ordersStatus={statistics.orderStatus}/>
+      <Charts ordersStatus={statistics.orderStatus} revenue={statistics.revenue}/>
 
       {/* ===== Product Lists ===== */}
       <div className="grid gap-6 lg:grid-cols-2">
