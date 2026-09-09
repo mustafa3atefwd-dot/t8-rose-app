@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Great_Vibes, Nunito_Sans, Sarabun, Tajawal } from 'next/font/google';
+import { Great_Vibes, Inter, Mulish, Nunito_Sans, Sarabun, Tajawal } from 'next/font/google';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -22,6 +22,18 @@ const tajawal = Tajawal({
 export const nunitoSans = Nunito_Sans({
   subsets: ['latin'],
   variable: '--font-nunito-sans',
+});
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const mulish = Mulish({
+  variable: '--font-mulish',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 });
 
 // Decorative script for Latin auth headings. Great Vibes is a self-hosted,
@@ -67,7 +79,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <html
       lang={locale}
       dir={direction}
-      className={`${sarabun.variable} ${tajawal.variable} ${nunitoSans.variable} ${greatVibes.variable} h-full antialiased`}
+      className={`${sarabun.variable} ${tajawal.variable} ${nunitoSans.variable} ${inter.variable} ${mulish.variable} ${greatVibes.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">

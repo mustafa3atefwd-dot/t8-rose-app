@@ -504,6 +504,8 @@ html[data-theme='dark'] {
   --font-arabic: var(--font-tajawal);
   --font-script: var(--font-great-vibes);
   --font-nunito: var(--font-nunito-sans);
+  --font-inter: var(--font-inter);
+  --font-mulish: var(--font-mulish);
 }
 
 html[lang='ar'] body {

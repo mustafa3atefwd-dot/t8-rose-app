@@ -30,9 +30,9 @@ export function DeleteAccountDialog() {
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger
         type="button"
-        className={cn(buttonVariants({ variant: 'ghost' }), 'text-ds-text-danger w-full capitalize sm:w-auto')}
+        className={cn(buttonVariants({ variant: 'ghost' }), 'font-inter font-medium text-base text-ds-text-danger')}
       >
-        {t('actions.delete')}
+        Delete My Account
       </AlertDialogTrigger>
       <AlertDialogContent className="w-[calc(100%-2rem)] max-w-474px gap-0 rounded-2xl border-0 px-6 pt-7 pb-6 sm:min-h-373px">
         <button

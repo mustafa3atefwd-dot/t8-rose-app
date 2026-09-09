@@ -1,3 +1,5 @@
+import { UserGender, UserRole } from "./user";
+
 export interface IUser {
   id: string; 
   username: string;
@@ -5,11 +7,11 @@ export interface IUser {
   phone: string | null;
   firstName: string;
   lastName: string;
-  gender: "MALE" | "FEMALE" | null;
+  gender: UserGender | null;
   photo: string | null;
   emailVerified: boolean;
   phoneVerified: boolean;
-  role: "USER" | "ADMIN" | "SUPER_ADMIN";
+  role: UserRole;
   createdAt: string;
   updatedAt: string;
 }

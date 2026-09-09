@@ -388,6 +388,71 @@
       "addProduct": "Add Product",
       "updateProduct": "Update: {name}",
       "changePassword": "Change Password"
+    },
+    "overview": {
+      "title": "Dashboard overview",
+      "summary": {
+        "label": "Store summary",
+        "products": "Total products",
+        "orders": "Total orders",
+        "categories": "Total categories",
+        "revenue": "Total revenue"
+      },
+      "ordersStatus": {
+        "title": "Orders Status",
+        "completed": "Completed",
+        "inProgress": "In progress",
+        "canceled": "Canceled"
+      },
+      "revenue": {
+        "title": "Revenue",
+        "monthly": "Monthly",
+        "lastWeek": "Last Week",
+        "months": {
+          "january": "January",
+          "february": "February",
+          "march": "March",
+          "april": "April",
+          "may": "May",
+          "june": "June",
+          "july": "July",
+          "august": "August",
+          "september": "September",
+          "october": "October",
+          "november": "November",
+          "december": "December"
+        },
+        "days": {
+          "sunday": "Sun",
+          "monday": "Mon",
+          "tuesday": "Tue",
+          "wednesday": "Wed",
+          "thursday": "Thu",
+          "friday": "Fri",
+          "saturday": "Sat"
+        }
+      },
+      "categories": {
+        "title": "All Categories",
+        "productCount": "{count} Products",
+        "empty": "No categories found"
+      },
+      "topSelling": {
+        "title": "Top Selling Products",
+        "sales": "{count} Sales",
+        "empty": "No sales data available"
+      },
+      "lowStock": {
+        "title": "Low Stock Products",
+        "inStock": "{count} in stock",
+        "empty": "No low-stock products"
+      },
+      "error": {
+        "title": "Failed to load dashboard",
+        "description": "We couldn't load the dashboard statistics right now. Please try again.",
+        "retry": "Try again",
+        "retrying": "Trying again..."
+      }
     }
   },
   "toast": {
@@ -795,6 +860,18 @@
     "layout": {
       "title": "My Account"
     },
+    "dashboard": {
+      "title": "Account Settings",
+      "uploadPhoto": "Upload Photo",
+      "photoHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "deleteAccount": "Delete My Account"
+    },
+    "deleteDialogDashboard": {
+      "title": "Are you sure you want to delete your account?",
+      "warning": "This action is permanent and cannot be undone.",
+      "cancel": "Nope, not doing it",
+      "accept": "Yes, delete"
+    },
     "sidebar": {
       "navigation": "Account navigation",
       "profile": "Profile",
@@ -872,6 +949,44 @@
       "uploadUrl": "We could not upload your photo. Please try again.",
       "imageTooLargeTitle": "Image is too large",
       "imageTooLargeDescription": "Please choose an image smaller than 5MB."
+    }
+  },
+  "statusPages": {
+    "global": {
+      "notFound": {
+        "title": "Page Not Found",
+        "description": "The page you are looking for doesn't exist or may have been moved.",
+        "goHome": "Go to Homepage"
+      },
+      "unauthorized": {
+        "title": "You are not authorized to access this page.",
+        "description": "If you think this is wrong, please contact the support.",
+        "goHome": "Go to Homepage"
+      },
+      "error": {
+        "title": "Something went wrong",
+        "description": "An unexpected error occurred. Please try again.",
+        "retry": "Try Again",
+        "goHome": "Go to Homepage"
+      }
+    },
+    "dashboard": {
+      "notFound": {
+        "title": "This page does not exist.",
+        "description": "We couldn’t find the page your are looking for, please make sure you are in the right path.",
+        "goHome": "Back to Dashboard"
+      },
+      "unauthorized": {
+        "title": "You are not authorized to access this page.",
+        "description": "If you think this is wrong, please contact the support.",
+        "goHome": "Back to Home"
+      },
+      "error": {
+        "title": "Oops, something went wrong!",
+        "description": "Something unexpected happened, please refresh the page or try again shortly.",
+        "retry": "Try Again",
+        "goHome": "Back to Dashboard"
+      }
     }
   }
 }
