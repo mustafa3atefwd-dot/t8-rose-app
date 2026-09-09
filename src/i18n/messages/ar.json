@@ -232,6 +232,40 @@
         "categories": "إجمالي التصنيفات",
         "revenue": "إجمالي الإيرادات"
       },
+      "ordersStatus": {
+        "title": "حالة الطلبات",
+        "completed": "مكتملة",
+        "inProgress": "قيد التنفيذ",
+        "canceled": "ملغاة"
+      },
+      "revenue": {
+        "title": "الإيرادات",
+        "monthly": "شهريًا",
+        "lastWeek": "الأسبوع الماضي",
+        "months": {
+          "january": "يناير",
+          "february": "فبراير",
+          "march": "مارس",
+          "april": "أبريل",
+          "may": "مايو",
+          "june": "يونيو",
+          "july": "يوليو",
+          "august": "أغسطس",
+          "september": "سبتمبر",
+          "october": "أكتوبر",
+          "november": "نوفمبر",
+          "december": "ديسمبر"
+        },
+        "days": {
+          "sunday": "الأحد",
+          "monday": "الإثنين",
+          "tuesday": "الثلاثاء",
+          "wednesday": "الأربعاء",
+          "thursday": "الخميس",
+          "friday": "الجمعة",
+          "saturday": "السبت"
+        }
+      },
       "categories": {
         "title": "جميع التصنيفات",
         "productCount": "{count} منتجات",
@@ -692,6 +726,18 @@
   "account": {
     "layout": {
       "title": "حسابي"
+    },
+    "dashboard": {
+      "title": "إعدادات الحساب",
+      "uploadPhoto": "رفع صورة",
+      "photoHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif، بحجم أقصى 5 ميجابايت.",
+      "deleteAccount": "حذف حسابي"
+    },
+    "deleteDialogDashboard": {
+      "title": "هل أنت متأكد أنك تريد حذف حسابك؟",
+      "warning": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+      "cancel": "لا، لن أحذف حسابي",
+      "accept": "نعم، احذف الحساب"
     },
     "sidebar": {
       "navigation": "تنقل الحساب",

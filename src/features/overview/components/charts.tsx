@@ -9,7 +9,7 @@ interface IChartsOverviewProps {
 }
 export default function Charts({ordersStatus, revenue}: IChartsOverviewProps) {  
   return (
-    <div className='flex gap-6'>
+    <div className='flex flex-col xl:flex-row gap-6'>
         {/* order status */}
         <div className="flex-1 bg-ds-bg-plain rounded-2xl">
             <ChartPieDonut ordersStatus={ordersStatus}/>

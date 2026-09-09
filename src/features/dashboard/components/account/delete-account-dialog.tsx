@@ -15,7 +15,7 @@ import {
 } from '@/shared/components/ui/alert-dialog';
 import { Button, buttonVariants } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
-import { useDeleteAccount } from '../hooks/use-delete-account';
+import { useDeleteAccount } from '@/features/account/hooks/use-delete-account';
 
 export function DeleteAccountDialog() {
   const t = useTranslations('account');
@@ -32,7 +32,7 @@ export function DeleteAccountDialog() {
         type="button"
         className={cn(buttonVariants({ variant: 'ghost' }), 'font-inter font-medium text-base text-ds-text-danger')}
       >
-        Delete My Account
+        {t('dashboard.deleteAccount')}
       </AlertDialogTrigger>
       <AlertDialogContent className="w-[calc(100%-2rem)] max-w-474px gap-0 rounded-2xl border-0 px-6 pt-7 pb-6 sm:min-h-373px">
         <button
@@ -45,16 +45,16 @@ export function DeleteAccountDialog() {
           <X className="size-5" />
         </button>
 
-        <div className="mx-auto mt-12 flex size-105px items-center justify-center rounded-full bg-neutral-100">
-          <div className="flex size-70px items-center justify-center rounded-full bg-neutral-300 text-neutral-800">
+        <div className="mx-auto mt-12 flex size-[105] items-center justify-center rounded-full bg-neutral-100">
+          <div className="flex size-[70] items-center justify-center rounded-full bg-neutral-300 text-neutral-800">
             <Trash2 className="size-7 stroke-[1.75]" aria-hidden="true" />
           </div>
         </div>
 
-        <AlertDialogHeader className="mt-7 gap-1 text-center">
-          <AlertDialogTitle className="text-xl leading-7">{t('deleteDialog.title')}</AlertDialogTitle>
-          <AlertDialogDescription className="text-ds-text-danger text-base leading-6">
-            {t('deleteDialog.warning')}
+        <AlertDialogHeader className="mt-7 gap-1">
+          <AlertDialogTitle className="text-xl leading-7 text-center">{t('deleteDialogDashboard.title')}</AlertDialogTitle>
+          <AlertDialogDescription className="text-ds-text-danger text-center text-base leading-6">
+            {t('deleteDialogDashboard.warning')}
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -66,7 +66,7 @@ export function DeleteAccountDialog() {
             onClick={() => setOpen(false)}
             className="h-11 flex-1 text-base"
           >
-            {t('deleteDialog.cancel')}
+            {t('deleteDialogDashboard.cancel')}
           </Button>
           <Button
             type="button"
@@ -75,7 +75,7 @@ export function DeleteAccountDialog() {
             onClick={() => mutation.mutate()}
             className="h-11 flex-1 text-base"
           >
-            {t('deleteDialog.confirm')}
+            {t('deleteDialogDashboard.accept')}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

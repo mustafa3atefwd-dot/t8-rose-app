@@ -1,7 +1,16 @@
-export default function AccountPage() {
-  return (
-    <div>
-      <h1>Account</h1>
-    </div>
-  );
+import { redirect } from '@/i18n/navigation';
+import { getAccountProfile } from '@/features/account/lib/api/account.api';
+import { AccountSettings } from '@/features/dashboard/components/account/account-settings';
+
+interface AccountPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Account({ params }: AccountPageProps) {
+  const { locale } = await params;
+  const profile = await getAccountProfile();
+
+  if (!profile) return redirect({ href: '/login', locale });
+
+  return <AccountSettings profile={profile} />;
 }

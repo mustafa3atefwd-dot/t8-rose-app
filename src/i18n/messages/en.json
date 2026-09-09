@@ -398,6 +398,40 @@
         "categories": "Total categories",
         "revenue": "Total revenue"
       },
+      "ordersStatus": {
+        "title": "Orders Status",
+        "completed": "Completed",
+        "inProgress": "In progress",
+        "canceled": "Canceled"
+      },
+      "revenue": {
+        "title": "Revenue",
+        "monthly": "Monthly",
+        "lastWeek": "Last Week",
+        "months": {
+          "january": "January",
+          "february": "February",
+          "march": "March",
+          "april": "April",
+          "may": "May",
+          "june": "June",
+          "july": "July",
+          "august": "August",
+          "september": "September",
+          "october": "October",
+          "november": "November",
+          "december": "December"
+        },
+        "days": {
+          "sunday": "Sun",
+          "monday": "Mon",
+          "tuesday": "Tue",
+          "wednesday": "Wed",
+          "thursday": "Thu",
+          "friday": "Fri",
+          "saturday": "Sat"
+        }
+      },
       "categories": {
         "title": "All Categories",
         "productCount": "{count} Products",
@@ -825,6 +859,18 @@
   "account": {
     "layout": {
       "title": "My Account"
+    },
+    "dashboard": {
+      "title": "Account Settings",
+      "uploadPhoto": "Upload Photo",
+      "photoHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "deleteAccount": "Delete My Account"
+    },
+    "deleteDialogDashboard": {
+      "title": "Are you sure you want to delete your account?",
+      "warning": "This action is permanent and cannot be undone.",
+      "cancel": "Nope, not doing it",
+      "accept": "Yes, delete"
     },
     "sidebar": {
       "navigation": "Account navigation",

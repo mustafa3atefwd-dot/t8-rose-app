@@ -3,11 +3,22 @@
 import { useState } from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card';
 
-import { ChartContainer, ChartTooltip, type ChartConfig } from '@/shared/components/ui/chart';
+import {
+  ChartContainer,
+  ChartTooltip,
+  type ChartConfig,
+} from '@/shared/components/ui/chart';
 
 import { IDashboardRevenue } from '@/features/dashboard/lib/types/statistics';
+import { useTranslations } from 'next-intl';
 
 export const description = 'Revenue area chart';
 
@@ -25,57 +36,104 @@ interface IChartAreaAxesProps {
 const weekData = [
   {
     period: '2026-09-01',
-    label: 'Sat',
+    label: 'saturday',
     revenue: 1200,
   },
   {
     period: '2026-09-02',
-    label: 'Sun',
+    label: 'sunday',
     revenue: 2800,
   },
   {
     period: '2026-09-03',
-    label: 'Mon',
+    label: 'monday',
     revenue: 1800,
   },
   {
     period: '2026-09-04',
-    label: 'Tue',
+    label: 'tuesday',
     revenue: 4200,
   },
   {
     period: '2026-09-05',
-    label: 'Wed',
+    label: 'wednesday',
     revenue: 3500,
   },
   {
     period: '2026-09-06',
-    label: 'Thu',
+    label: 'thursday',
     revenue: 5100,
   },
   {
     period: '2026-09-07',
-    label: 'Fri',
+    label: 'friday',
     revenue: 3900,
   },
 ];
 
+const monthKeys = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
+] as const;
+
 export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
+  const t = useTranslations('dashboard.overview.revenue');
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [view, setView] = useState<'monthly' | 'weekly'>('monthly');
 
-  const chartData = view === 'monthly' ? revenue.points : weekData;
+  const chartData =
+    view === 'monthly'
+      ? revenue.points.map((point) => {
+          const monthIndex = Number(point.period.slice(5, 7));
+          const monthKey = monthKeys[monthIndex - 1];
 
-  const maxRevenue = Math.max(...chartData.map((point) => point.revenue), 0);
+          return {
+            ...point,
+            label: monthKey ? t(`months.${monthKey}`) : '',
+          };
+        })
+      : weekData.map((point) => ({
+          ...point,
+          label: t(`days.${point.label}`),
+        }));
 
-  const yAxisMax = maxRevenue > 0 ? Math.ceil((maxRevenue * 1.1) / 1000) * 1000 : 1000;
+  const maxRevenue = Math.max(
+    ...chartData.map((point) => point.revenue),
+    0,
+  );
 
-  const yAxisTicks = Array.from({ length: yAxisMax / 1000 + 1 }, (_, index) => index * 1000);
+  const yAxisMax =
+    maxRevenue > 0
+      ? Math.ceil((maxRevenue * 1.1) / 1000) * 1000
+      : 1000;
 
-  const activeSegmentIndex = activeIndex === null ? null : activeIndex === 0 ? 0 : activeIndex - 1;
+  const yAxisTicks = Array.from(
+    { length: yAxisMax / 1000 + 1 },
+    (_, index) => index * 1000,
+  );
+
+  const activeSegmentIndex =
+    activeIndex === null
+      ? null
+      : activeIndex === 0
+        ? 0
+        : activeIndex - 1;
 
   const segmentStart =
-    activeSegmentIndex === null || chartData.length <= 1 ? 0 : (activeSegmentIndex / (chartData.length - 1)) * 100;
+    activeSegmentIndex === null || chartData.length <= 1
+      ? 0
+      : (activeSegmentIndex / (chartData.length - 1)) * 100;
 
   const segmentEnd =
     activeSegmentIndex === null || chartData.length <= 1
@@ -90,27 +148,33 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
   return (
     <Card>
       <CardHeader className="font-inter flex items-center justify-between">
-        <CardTitle className="text-ds-text-plain text-2xl font-semibold">Revenue</CardTitle>
+        <CardTitle className="text-ds-text-plain text-2xl font-semibold">
+          {t('title')}
+        </CardTitle>
 
         <CardDescription className="flex items-center gap-2 text-sm">
           <button
             type="button"
             onClick={() => handleViewChange('monthly')}
             className={`cursor-pointer ${
-              view === 'monthly' ? 'text-maroon-600 font-semibold' : 'text-ds-text-muted font-normal'
+              view === 'monthly'
+                ? 'text-maroon-600 font-semibold'
+                : 'text-ds-text-muted font-normal'
             }`}
           >
-            Monthly
+            {t('monthly')}
           </button>
 
           <button
             type="button"
             onClick={() => handleViewChange('weekly')}
             className={`cursor-pointer ${
-              view === 'weekly' ? 'text-maroon-600 font-semibold' : 'text-ds-text-muted font-normal'
+              view === 'weekly'
+                ? 'text-maroon-600 font-semibold'
+                : 'text-ds-text-muted font-normal'
             }`}
           >
-            Last Week
+            {t('lastWeek')}
           </button>
         </CardDescription>
       </CardHeader>
@@ -137,36 +201,85 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
             }}
           >
             <defs>
-              <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="rgba(166, 37, 42, 0.5)" />
-
-                <stop offset="100%" stopColor="rgba(248, 177, 239, 0)" />
+              <linearGradient
+                id="revenueGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  offset="0%"
+                  stopColor="rgba(166, 37, 42, 0.5)"
+                />
+                <stop
+                  offset="100%"
+                  stopColor="rgba(248, 177, 239, 0)"
+                />
               </linearGradient>
 
               {activeSegmentIndex !== null && (
-                <linearGradient id="activeRevenueGradient" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="rgba(255, 255, 255, 0)" />
+                <linearGradient
+                  id="activeRevenueGradient"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="0"
+                >
+                  <stop
+                    offset="0%"
+                    stopColor="rgba(255, 255, 255, 0)"
+                  />
 
-                  <stop offset={`${segmentStart}%`} stopColor="rgba(255, 255, 255, 0)" />
+                  <stop
+                    offset={`${segmentStart}%`}
+                    stopColor="rgba(255, 255, 255, 0)"
+                  />
 
-                  <stop offset={`${segmentStart}%`} stopColor="rgba(255, 255, 255, 1)" />
+                  <stop
+                    offset={`${segmentStart}%`}
+                    stopColor="rgba(255, 255, 255, 1)"
+                  />
 
-                  <stop offset={`${segmentEnd}%`} stopColor="rgba(255, 255, 255, 1)" />
+                  <stop
+                    offset={`${segmentEnd}%`}
+                    stopColor="rgba(255, 255, 255, 1)"
+                  />
 
-                  <stop offset={`${segmentEnd}%`} stopColor="rgba(255, 255, 255, 0)" />
+                  <stop
+                    offset={`${segmentEnd}%`}
+                    stopColor="rgba(255, 255, 255, 0)"
+                  />
 
-                  <stop offset="100%" stopColor="rgba(255, 255, 255, 0)" />
+                  <stop
+                    offset="100%"
+                    stopColor="rgba(255, 255, 255, 0)"
+                  />
                 </linearGradient>
               )}
             </defs>
 
             <CartesianGrid horizontal={false} />
 
-            <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} />
+            <XAxis
+              dataKey="label"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+            />
 
-            <YAxis tickLine={false} axisLine={false} tickMargin={8} domain={[0, yAxisMax]} ticks={yAxisTicks} />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              domain={[0, yAxisMax]}
+              ticks={yAxisTicks}
+            />
 
-            <ChartTooltip cursor={false} content={() => null} />
+            <ChartTooltip
+              cursor={false}
+              content={() => null}
+            />
 
             <Area
               dataKey="revenue"
@@ -203,7 +316,14 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
 
                 return (
                   <g>
-                    <circle cx={cx} cy={cy} r={6} fill="#A6252A" stroke="white" strokeWidth={2} />
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r={6}
+                      fill="#A6252A"
+                      stroke="white"
+                      strokeWidth={2}
+                    />
 
                     <text
                       x={cx}
