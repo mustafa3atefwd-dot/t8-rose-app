@@ -1,17 +1,18 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
+
+import { useRouter } from '@/i18n/navigation';
 import type { IProductDetail } from '@/features/products/lib/types';
 import { productFormSchema, type ProductFormInput, type ProductFormValues } from '../lib/product-form.schema';
 import { buildProductPayload, getProductFormDefaults, parseProductGallery } from '../lib/product-form.utils';
-
 import { uploadProductImage } from '../lib/upload-product-image';
-import { createProduct, updateProduct } from '../api/create-update-products.api';
+import { useCreateProduct } from './use-create-product';
+import { useUpdateProduct } from './use-update-product';
 
 export type ProductFormMode = 'create' | 'edit';
 
@@ -21,34 +22,35 @@ type UseProductFormOptions = {
 };
 
 export function useProductForm({ mode, product }: UseProductFormOptions) {
-  // Translation
   const t = useTranslations('productsAdmin');
-
-  // Navigation
   const router = useRouter();
-  const { locale } = useParams<{ locale: string }>();
 
-  // State
   const [coverFiles, setCoverFiles] = useState<File[]>([]);
   const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
   const [coverError, setCoverError] = useState('');
   const [galleryError, setGalleryError] = useState('');
 
-  // Form
+  const createMutation = useCreateProduct();
+  const updateMutation = useUpdateProduct();
+
   const form = useForm<ProductFormInput, unknown, ProductFormValues>({
     resolver: zodResolver(productFormSchema),
     defaultValues: getProductFormDefaults(product),
   });
 
-  // Variables
   const existingGallery = useMemo(() => parseProductGallery(product?.gallery), [product?.gallery]);
   const [priceValue, discountValue] = useWatch({ control: form.control, name: ['price', 'discountValue'] });
   const discountedPrice = Math.max(0, (Number(priceValue) || 0) - (Number(discountValue) || 0));
 
-  // Functions
   const translateError = (message?: string) => (message ? t(message as never) : undefined);
-  const handleCoverChange = (files: File[]) => { setCoverFiles(files); setCoverError(''); };
-  const handleGalleryChange = (files: File[]) => { setGalleryFiles(files); setGalleryError(''); };
+  const handleCoverChange = (files: File[]) => {
+    setCoverFiles(files);
+    setCoverError('');
+  };
+  const handleGalleryChange = (files: File[]) => {
+    setGalleryFiles(files);
+    setGalleryError('');
+  };
   const handleCoverError = (reason: 'type' | 'size') => setCoverError(getFileError(reason));
   const handleGalleryError = (reason: 'type' | 'size') => setGalleryError(getFileError(reason));
 
@@ -59,11 +61,15 @@ export function useProductForm({ mode, product }: UseProductFormOptions) {
       const [cover, gallery] = await uploadSelectedImages();
       const payload = buildProductPayload(values, cover, gallery);
 
-      if (mode === 'edit' && product) await updateProduct(product.id, payload);
-      else await createProduct(payload);
+      if (mode === 'edit' && product) {
+        await updateMutation.mutateAsync({ id: product.id, input: payload });
+        toast.success(t('messages.updated'));
+      } else {
+        await createMutation.mutateAsync(payload);
+        toast.success(t('messages.created'));
+      }
 
-      toast.success(mode === 'edit' ? t('messages.updated') : t('messages.created'));
-      router.push(`/${locale}/dashboard/products`);
+      router.push('/dashboard/products');
       router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t('messages.saveError'));
@@ -82,12 +88,8 @@ export function useProductForm({ mode, product }: UseProductFormOptions) {
   }
 
   async function uploadSelectedImages() {
-    const cover = coverFiles[0]
-      ? await uploadFile(coverFiles[0])
-      : (product?.cover ?? null);
-    const gallery = galleryFiles.length
-      ? await Promise.all(galleryFiles.map(uploadFile))
-      : existingGallery;
+    const cover = coverFiles[0] ? await uploadFile(coverFiles[0]) : (product?.cover ?? null);
+    const gallery = galleryFiles.length ? await Promise.all(galleryFiles.map(uploadFile)) : existingGallery;
     return [cover, gallery] as const;
   }
 
@@ -99,9 +101,12 @@ export function useProductForm({ mode, product }: UseProductFormOptions) {
     });
   }
 
+  const isSubmitting = createMutation.isPending || updateMutation.isPending || form.formState.isSubmitting;
+
   return {
     t,
     form,
+    isSubmitting,
     discountedPrice,
     existingGallery,
     coverError,

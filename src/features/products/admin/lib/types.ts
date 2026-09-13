@@ -11,6 +11,7 @@ export interface ProductMutationInput {
   discountType: 'PERCENT' | 'FIXED' | null;
   discountValue: number | null;
   categoryId: string;
+  occasionId?: string;
   cover: string | null;
   gallery: string[];
 }

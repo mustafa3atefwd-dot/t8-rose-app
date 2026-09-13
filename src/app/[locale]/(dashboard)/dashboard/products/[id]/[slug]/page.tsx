@@ -26,7 +26,6 @@ export default async function EditProductPage({ params }: PageProps) {
   const pageTitle = t('form.updateTitle', { title: product.title });
 
   return <div className="min-h-screen bg-ds-bg-subtle">
-    <header className="border-b border-ds-border-muted bg-ds-bg-plain px-4 py-6 md:px-6"><Breadcrumbs items={[{ label: t('breadcrumbs.dashboard'), href: `/${locale}/dashboard` }, { label: t('breadcrumbs.products'), href: `/${locale}/dashboard/products` }, { label: pageTitle }]} /></header>
     <main className="min-w-0 w-full p-4 md:p-6"><h1 title={pageTitle} className="mb-6 max-w-full truncate text-2xl font-semibold text-ds-text-plain">{pageTitle}</h1><ProductForm mode="edit" product={product} categories={categories} occasions={occasions} /></main>
   </div>;
 }
