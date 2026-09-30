@@ -44,7 +44,6 @@ export default async function ProductDetailsContent({ params }: ProductDetailsPa
       <Suspense
         fallback={
           <>
-            {' '}
             <ProductDetailsSkeleton />
             <ProductReviewSkeleton />
           </>

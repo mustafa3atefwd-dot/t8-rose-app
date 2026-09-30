@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { TooltipProvider } from '@/shared/components/ui/tooltip';
 import { NextIntlClientProvider } from 'next-intl';
 import { WishlistProvider } from '@/features/wishlist/context/wishlist-provider';
 import { Toaster } from '@/shared/components/ui/sonner';
@@ -13,14 +14,16 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <ReactQueryProvider>
       <NextIntlClientProvider>
         <ThemeProvider>
-          <NextAuthProvider>
-            <WishlistProvider>
-              <GuestSyncProvider>
-                {children}
-                <Toaster />
-              </GuestSyncProvider>
-            </WishlistProvider>
-          </NextAuthProvider>
+          <TooltipProvider>
+            <NextAuthProvider>
+              <WishlistProvider>
+                <GuestSyncProvider>
+                  {children}
+                  <Toaster />
+                </GuestSyncProvider>
+              </WishlistProvider>
+            </NextAuthProvider>
+          </TooltipProvider>
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </ThemeProvider>
       </NextIntlClientProvider>
