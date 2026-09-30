@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog';
+
 import { IAddress, IAddressBookModalProps, ModalView } from '@/features/checkout/lib/types';
 import { AddressList, AddressWizardForm } from '@/features/checkout/components';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog';
 
 export default function AddressBookModal({ open, onOpenChange, onSelectAddress }: IAddressBookModalProps) {
   // Translation
@@ -29,7 +30,7 @@ export default function AddressBookModal({ open, onOpenChange, onSelectAddress }
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent showCloseButton={false}>
+      <DialogContent >
         <DialogHeader className="border-b-ds-border-soft flex-row items-center justify-between gap-3 border-b pb-4 text-start">
           <DialogTitle>
             {modalView.view === 'list'
