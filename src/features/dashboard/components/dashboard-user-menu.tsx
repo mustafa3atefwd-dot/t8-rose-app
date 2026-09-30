@@ -11,10 +11,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import { LanguageToggle } from '@/features/auth/components/LanguageToggle';
 
 interface IDashboardUserMenuProps {
   showUserInfo?: boolean;
@@ -67,6 +70,14 @@ export function DashboardUserMenu({ showUserInfo = false }: IDashboardUserMenuPr
         >
           {userName}
         </DropdownMenuItem>
+
+        {/* Theme & language toggles */}
+        <div className="flex items-center justify-between gap-2 px-2 py-1.5">
+          <ThemeToggle />
+          <LanguageToggle />
+        </div>
+
+        <DropdownMenuSeparator />
 
         {dropdownItems.map((item, index) => {
           // Get icon from item
