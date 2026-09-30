@@ -67,7 +67,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/categories\/add$/,
+    pattern: /^\/dashboard\/categories\/new$/,
     getItems: () => [
       dashboardItem,
       categoriesItem,
@@ -95,6 +95,35 @@ const routes: IBreadcrumbRoute[] = [
     },
   },
 
+  {
+    pattern: /^\/dashboard\/categories\/([^/]+)$/,
+    getItems: () => [
+      dashboardItem,
+      categoriesItem,
+      {
+        labelKey: 'categoryDetails',
+      },
+    ],
+  },
+
+  {
+    pattern: /^\/dashboard\/categories\/([^/]+)\/([^/]+)$/,
+    getItems: ({ matches }) => {
+      const [, , name] = matches;
+
+      return [
+        dashboardItem,
+        categoriesItem,
+        {
+          labelKey: 'entityName',
+          values: {
+            name: slugToLabel(name),
+          },
+        },
+      ];
+    },
+  },
+
   // Occasions
   {
     pattern: /^\/dashboard\/occasions$/,
@@ -102,7 +131,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/occasions\/add$/,
+    pattern: /^\/dashboard\/occasions\/new$/,
     getItems: () => [
       dashboardItem,
       occasionsItem,
@@ -130,6 +159,35 @@ const routes: IBreadcrumbRoute[] = [
     },
   },
 
+  {
+    pattern: /^\/dashboard\/occasions\/([^/]+)$/,
+    getItems: () => [
+      dashboardItem,
+      occasionsItem,
+      {
+        labelKey: 'occasionDetails',
+      },
+    ],
+  },
+
+  {
+    pattern: /^\/dashboard\/occasions\/([^/]+)\/([^/]+)$/,
+    getItems: ({ matches }) => {
+      const [, , name] = matches;
+
+      return [
+        dashboardItem,
+        occasionsItem,
+        {
+          labelKey: 'entityName',
+          values: {
+            name: slugToLabel(name),
+          },
+        },
+      ];
+    },
+  },
+
   // Products
   {
     pattern: /^\/dashboard\/products$/,
@@ -137,7 +195,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/products\/add$/,
+    pattern: /^\/dashboard\/products\/new$/,
     getItems: () => [
       dashboardItem,
       productsItem,
@@ -165,6 +223,35 @@ const routes: IBreadcrumbRoute[] = [
     },
   },
 
+  {
+    pattern: /^\/dashboard\/products\/([^/]+)$/,
+    getItems: () => [
+      dashboardItem,
+      productsItem,
+      {
+        labelKey: 'productDetails',
+      },
+    ],
+  },
+
+  {
+    pattern: /^\/dashboard\/products\/([^/]+)\/([^/]+)$/,
+    getItems: ({ matches }) => {
+      const [, , name] = matches;
+
+      return [
+        dashboardItem,
+        productsItem,
+        {
+          labelKey: 'entityName',
+          values: {
+            name: slugToLabel(name),
+          },
+        },
+      ];
+    },
+  },
+
   // Account
   {
     pattern: /^\/dashboard\/account$/,
@@ -172,7 +259,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/account\/change-password$/,
+    pattern: /^\/dashboard\/account\/password$/,
     getItems: () => [
       dashboardItem,
       accountItem,

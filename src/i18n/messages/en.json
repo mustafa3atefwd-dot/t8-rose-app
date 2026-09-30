@@ -387,7 +387,11 @@
       "updateOccasion": "Update: {name}",
       "addProduct": "Add Product",
       "updateProduct": "Update: {name}",
-      "changePassword": "Change Password"
+      "changePassword": "Change Password",
+      "categoryDetails": "Category Details",
+      "occasionDetails": "Occasion Details",
+      "productDetails": "Product Details",
+      "entityName": "{name}"
     }
   },
   "toast": {
@@ -902,6 +906,11 @@
       "unauthorized": {
         "title": "You are not authorized to access this page.",
         "description": "If you think this is wrong, please contact the support.",
+        "goHome": "Back to Home"
+      },
+      "forbidden": {
+        "title": "You don't have permission to access this page.",
+        "description": "Your account doesn't have access to the dashboard. If you think this is wrong, please contact the support.",
         "goHome": "Back to Home"
       },
       "error": {
