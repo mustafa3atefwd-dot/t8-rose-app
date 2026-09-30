@@ -1,3 +1,3 @@
-export default function OccasionsPage() {
-  return <div>OccasionsPage</div>;
+export default function NewOccasionsPage() {
+  return <div>NewOccasionsPage</div>;
 }
