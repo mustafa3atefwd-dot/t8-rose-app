@@ -7,7 +7,6 @@ import { Link } from '@/i18n/navigation';
 import { LanguageToggle } from '@/features/auth/components/LanguageToggle';
 import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { WishlistHeaderLink } from '@/features/wishlist';
-import NotificationsMenu from '@/features/notifications/components/notifications-menu';
 import CartBadge from '@/features/cart/components/cart-badge';
 import SearchInput from './search-input';
 import UserAddress from './user-address';
@@ -63,7 +62,7 @@ export default function Header() {
               <ShoppingCart className="size-5" />
               <CartBadge />
             </Link>
-            <NotificationsBell/>
+            <NotificationsBell />
           </div>
           <div className="flex items-center gap-1 ps-3">
             <LanguageToggle />
@@ -82,7 +81,7 @@ export default function Header() {
             <ShoppingCart className="size-5" />
             <CartBadge />
           </Link>
-          <NotificationsMenu />
+          <NotificationsBell />
 
           <Sheet>
             <SheetTrigger

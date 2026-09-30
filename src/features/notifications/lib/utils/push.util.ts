@@ -1,4 +1,6 @@
-import type { IPushSubscribeRequest } from '../types/push-status';
+import type { IPushSubscribeRequest } from '../types/notifications';
+
+const SERVICE_WORKER_PATH = '/sw.js';
 
 export function isPushSupported() {
   return (
@@ -11,38 +13,37 @@ export async function registerPushServiceWorker() {
     throw new Error('Push notifications are not supported by this browser.');
   }
 
-  const registration = await navigator.serviceWorker.register('/sw.js');
+  await navigator.serviceWorker.register(SERVICE_WORKER_PATH);
 
-  await navigator.serviceWorker.ready;
+  return navigator.serviceWorker.ready;
+}
 
-  return registration;
+// The browser's current subscription, without registering a worker or prompting for permission
+export async function getBrowserPushSubscription() {
+  if (!isPushSupported()) return null;
+
+  const registration = await navigator.serviceWorker.getRegistration(SERVICE_WORKER_PATH);
+
+  return (await registration?.pushManager.getSubscription()) ?? null;
 }
 
 export async function subscribeToPush(publicKey: string): Promise<IPushSubscribeRequest> {
   const registration = await registerPushServiceWorker();
 
-  let subscription = await registration.pushManager.getSubscription();
-
-  if (!subscription) {
-    subscription = await registration.pushManager.subscribe({
+  const subscription =
+    (await registration.pushManager.getSubscription()) ??
+    (await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToArrayBuffer(publicKey),
-    });
-  }
+    }));
 
-  const json = subscription.toJSON();
+  const { endpoint, keys } = subscription.toJSON();
 
-  if (!json.endpoint || !json.keys) {
+  if (!endpoint || !keys?.p256dh || !keys.auth) {
     throw new Error('Invalid push subscription.');
   }
 
-  return {
-    endpoint: json.endpoint,
-    keys: {
-      p256dh: json.keys.p256dh,
-      auth: json.keys.auth,
-    },
-  };
+  return { endpoint, keys: { p256dh: keys.p256dh, auth: keys.auth } };
 }
 
 function urlBase64ToArrayBuffer(value: string): ArrayBuffer {

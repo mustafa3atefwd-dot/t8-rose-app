@@ -1,73 +1,86 @@
 'use client';
 
-import { Bell, BellRing, Loader2 } from 'lucide-react';
+import { Bell, BellOff, BellRing, Loader2, Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/shared/components/ui/button';
 
 import { usePushNotifications } from '../hooks/use-push-notifications';
 
 export function EnablePushButton() {
-  const { pushStatus, isLoading, isError, error, enablePush, isEnabling, enableError } = usePushNotifications();
+  const t = useTranslations('notifications.push');
 
-  /**
-   * Checking push status from backend
-   */
-  if (isLoading) {
-    return (
-      <Button type="button" disabled className="w-full border-t border-zinc-300 p-4 dark:border-zinc-600">
-        <Loader2 className="size-4 animate-spin" />
-        Checking notifications...
-      </Button>
-    );
-  }
+  const {
+    pushSupported,
+    pushConfigured,
+    isSubscribed,
+    isLoading,
+    isError,
+    enablePush,
+    isEnabling,
+    disablePush,
+    isDisabling,
+    testPush,
+    isTesting,
+  } = usePushNotifications();
 
-  /**
-   * Failed to get push status
-   */
-  if (isError) {
-    console.error('Failed to get push status:', error);
-
-    return <p className="text-destructive text-xs">Failed to check notification status.</p>;
-  }
-
-  /**
-   * Backend doesn't support Web Push
-   *
-   * pushConfigured === false
-   */
-  if (!pushStatus?.pushConfigured) {
+  // Nothing to offer when the browser or backend can't do Web Push
+  if (!pushSupported || isError || (!isLoading && !pushConfigured)) {
     return null;
   }
 
-  /**
-   * Already subscribed
-   */
-  if (pushStatus.subscriptionCount > 0) {
+  if (isLoading) {
     return (
-      <div className="flex items-center gap-2 border-t border-zinc-300 p-4 dark:border-zinc-600">
-        <BellRing className="size-4" />
-
-        <span className="text-xs font-medium">Push notifications enabled</span>
+      <div className="text-ds-text-muted flex items-center gap-2 border-t border-zinc-300 p-4 text-xs dark:border-zinc-600">
+        <Loader2 className="size-4 animate-spin" />
+        {t('checking')}
       </div>
     );
   }
 
-  /**
-   * Not subscribed yet
-   */
+  if (!isSubscribed) {
+    return (
+      <div className="border-t border-zinc-300 p-4 dark:border-zinc-600">
+        <Button type="button" onClick={() => enablePush()} disabled={isEnabling} className="w-full">
+          {isEnabling ? <Loader2 className="size-4 animate-spin" /> : <Bell className="size-4" />}
+          {isEnabling ? t('enabling') : t('enable')}
+        </Button>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-2 border-t border-zinc-300 p-4 dark:border-zinc-600">
-      <Button type="button" onClick={() => enablePush()} disabled={isEnabling} className="w-full">
-        {isEnabling ? <Loader2 className="size-4 animate-spin" /> : <Bell className="size-4" />}
+    <div className="flex items-center justify-between gap-2 border-t border-zinc-300 p-4 dark:border-zinc-600">
+      <span className="flex items-center gap-2 text-xs font-medium">
+        <BellRing className="size-4" />
+        {t('enabled')}
+      </span>
 
-        {isEnabling ? 'Enabling...' : 'Enable notifications'}
-      </Button>
+      <div className="flex items-center gap-1">
+        <Button
+          type="button"
+          size="icon-sm"
+          variant="ghost"
+          aria-label={t('test')}
+          title={t('test')}
+          onClick={() => testPush()}
+          disabled={isTesting}
+        >
+          {isTesting ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
+        </Button>
 
-      {enableError && (
-        <p className="text-destructive text-xs">
-          {enableError instanceof Error ? enableError.message : 'Failed to enable notifications.'}
-        </p>
-      )}
+        <Button
+          type="button"
+          size="icon-sm"
+          variant="ghost"
+          aria-label={t('disable')}
+          title={t('disable')}
+          onClick={() => disablePush()}
+          disabled={isDisabling}
+        >
+          {isDisabling ? <Loader2 className="size-4 animate-spin" /> : <BellOff className="size-4" />}
+        </Button>
+      </div>
     </div>
   );
 }

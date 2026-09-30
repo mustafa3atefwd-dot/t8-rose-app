@@ -1,19 +1,16 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { NotificationsResponse } from '../lib/types/notifications';
 
-export function useGetNotifications() {
-  return useQuery<NotificationsResponse>({
-    queryKey: ['notifications'],
-    queryFn: async () => {
-      const response = await fetch('/api/notifications');
+import { NOTIFICATIONS_PAGE_SIZE, NOTIFICATIONS_QUERY_KEYS } from '../lib/constants/notifications.constants';
+import { fetchNotifications } from '../lib/services/notifications.service';
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch notifications');
-      }
+export function useGetNotifications(page = 1) {
+  const params = { page, limit: NOTIFICATIONS_PAGE_SIZE };
 
-      return response.json();
-    },
+  return useQuery({
+    queryKey: NOTIFICATIONS_QUERY_KEYS.list(params),
+    queryFn: () => fetchNotifications(params),
+    select: (response) => (response.status ? response.payload : undefined),
   });
 }

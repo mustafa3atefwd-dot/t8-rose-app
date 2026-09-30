@@ -2,30 +2,15 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-interface UnreadCountResponse {
-  status: boolean;
-  code: number;
-  payload: {
-    unreadCount: number;
-  };
-}
+import { NOTIFICATIONS_QUERY_KEYS } from '../lib/constants/notifications.constants';
+import { fetchUnreadCount } from '../lib/services/notifications.service';
 
 export function useUnreadCount() {
-  return useQuery<UnreadCountResponse>({
-    queryKey: ['notifications', 'unread-count'],
-
-    queryFn: async () => {
-      const response = await fetch('/api/notifications/unread-count');
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch unread count');
-      }
-
-      return response.json();
-    },
-
+  return useQuery({
+    queryKey: NOTIFICATIONS_QUERY_KEYS.unreadCount(),
+    queryFn: fetchUnreadCount,
+    select: (response) => (response.status ? (response.payload?.unreadCount ?? 0) : 0),
     refetchInterval: 30_000,
-
     staleTime: 10_000,
   });
 }

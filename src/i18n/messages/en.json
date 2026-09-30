@@ -197,7 +197,20 @@
     "empty": "No notifications yet",
     "markRead": "Mark as read",
     "delete": "Delete",
-    "settings": "Notification options"
+    "settings": "Notification options",
+    "push": {
+      "checking": "Checking notifications...",
+      "enable": "Enable push notifications",
+      "enabling": "Enabling...",
+      "enabled": "Push notifications enabled",
+      "disable": "Turn off push notifications",
+      "test": "Send test notification",
+      "enabledToast": "Push notifications enabled",
+      "disabledToast": "Push notifications turned off",
+      "testSent": "Test notification sent",
+      "permissionDenied": "Notifications are blocked. Allow them in your browser settings and try again.",
+      "unavailable": "Push notifications are unavailable right now."
+    }
   },
   "productDetails": {
     "stock": "{count} units in stock",

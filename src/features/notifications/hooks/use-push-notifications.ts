@@ -1,160 +1,110 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
+import { NOTIFICATIONS_QUERY_KEYS } from '../lib/constants/notifications.constants';
 import {
-  createPushSubscription,
-  getPushStatus,
-  getVapidPublicKey,
-  sendTestPush,
-} from '@/features/notifications/lib/apis/push-status.api';
-
-import { isPushSupported, subscribeToPush } from '@/features/notifications/lib/utils/push.util';
-
-const PUSH_STATUS_QUERY_KEY = ['notifications', 'push-status'];
+  fetchPushStatus,
+  fetchVapidPublicKey,
+  postPushSubscription,
+  postTestPush,
+  removePushSubscription,
+} from '../lib/services/notifications.service';
+import { getBrowserPushSubscription, isPushSupported, subscribeToPush } from '../lib/utils/push.util';
 
 export function usePushNotifications() {
+  const t = useTranslations('notifications.push');
   const queryClient = useQueryClient();
 
-  /**
-   * Check browser support
-   */
   const pushSupported = isPushSupported();
 
-  /**
-   * Get push status from backend
-   */
+  const refreshPushState = () =>
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: NOTIFICATIONS_QUERY_KEYS.pushStatus() }),
+      queryClient.invalidateQueries({ queryKey: NOTIFICATIONS_QUERY_KEYS.browserSubscription() }),
+    ]);
+
   const pushStatusQuery = useQuery({
-    queryKey: PUSH_STATUS_QUERY_KEY,
-
-    queryFn: async () => {
-      console.log('Fetching push status...');
-
-      const result = await getPushStatus();
-
-      console.log('Push status response:', result);
-
-      return result;
-    },
-
+    queryKey: NOTIFICATIONS_QUERY_KEYS.pushStatus(),
+    queryFn: fetchPushStatus,
+    select: (response) => (response.status ? response.payload : undefined),
     enabled: pushSupported,
-
     staleTime: 30_000,
   });
 
-  /**
-   * Enable push
-   */
+  // Backend `subscriptionCount` includes the user's other browsers, so check this one directly
+  const browserSubscriptionQuery = useQuery({
+    queryKey: NOTIFICATIONS_QUERY_KEYS.browserSubscription(),
+    queryFn: async () => (await getBrowserPushSubscription()) !== null,
+    enabled: pushSupported,
+  });
+
   const enablePushMutation = useMutation({
     mutationFn: async () => {
-      console.log('Starting push subscription...');
-
-      /**
-       * 1. Request browser permission
-       */
       const permission = await Notification.requestPermission();
 
-      console.log('Notification permission:', permission);
-
       if (permission !== 'granted') {
-        throw new Error(`Notification permission: ${permission}`);
+        throw new Error(t('permissionDenied'));
       }
 
-      /**
-       * 2. Get VAPID public key
-       */
-      console.log('Getting VAPID public key...');
-
-      const vapidResponse = await getVapidPublicKey();
-
-      console.log('VAPID response:', vapidResponse);
-
-      const publicKey = vapidResponse.payload?.publicKey;
+      const vapidResponse = await fetchVapidPublicKey();
+      const publicKey = vapidResponse.status ? vapidResponse.payload?.publicKey : undefined;
 
       if (!publicKey) {
-        throw new Error('VAPID public key is not available.');
+        throw new Error(t('unavailable'));
       }
-
-      /**
-       * 3. Create browser subscription
-       */
-      console.log('Creating browser push subscription...');
 
       const subscription = await subscribeToPush(publicKey);
 
-      console.log('Browser subscription:', subscription);
-
-      /**
-       * 4. Save subscription in backend
-       */
-      console.log('Saving subscription to backend...');
-
-      const result = await createPushSubscription(subscription);
-
-      console.log('Subscription saved:', result);
-
-      return result;
+      return postPushSubscription(subscription);
     },
-
     onSuccess: async () => {
-      console.log('Push subscription completed successfully.');
-
-      await queryClient.invalidateQueries({
-        queryKey: PUSH_STATUS_QUERY_KEY,
-      });
+      toast.success(t('enabledToast'));
+      await refreshPushState();
     },
+    onError: (error: Error) => toast.error(error.message),
   });
 
-  /**
-   * Test push
-   */
-  const testPushMutation = useMutation({
+  const disablePushMutation = useMutation({
     mutationFn: async () => {
-      console.log('Sending test push...');
+      const subscription = await getBrowserPushSubscription();
 
-      const result = await sendTestPush();
+      if (!subscription) return;
 
-      console.log('Test push response:', result);
-
-      return result;
+      await removePushSubscription({ endpoint: subscription.endpoint });
+      await subscription.unsubscribe();
     },
+    onSuccess: async () => {
+      toast.success(t('disabledToast'));
+      await refreshPushState();
+    },
+    onError: (error: Error) => toast.error(error.message),
   });
+
+  const testPushMutation = useMutation({
+    mutationFn: postTestPush,
+    onSuccess: () => toast.success(t('testSent')),
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const pushStatus = pushStatusQuery.data;
 
   return {
-    /**
-     * Browser
-     */
     pushSupported,
-
-    /**
-     * Backend status
-     */
-    pushStatus: pushStatusQuery.data?.payload,
-
-    isLoading: pushStatusQuery.isLoading,
-
+    pushConfigured: pushStatus?.pushConfigured ?? false,
+    isSubscribed: Boolean(browserSubscriptionQuery.data) && (pushStatus?.subscriptionCount ?? 0) > 0,
+    isLoading: pushStatusQuery.isLoading || browserSubscriptionQuery.isLoading,
     isError: pushStatusQuery.isError,
 
-    error: pushStatusQuery.error,
-
-    refetchPushStatus: pushStatusQuery.refetch,
-
-    /**
-     * Enable push
-     */
-    enablePush: enablePushMutation.mutateAsync,
-
+    enablePush: enablePushMutation.mutate,
     isEnabling: enablePushMutation.isPending,
 
-    enableError: enablePushMutation.error,
+    disablePush: disablePushMutation.mutate,
+    isDisabling: disablePushMutation.isPending,
 
-    /**
-     * Test push
-     */
-    testPush: testPushMutation.mutateAsync,
-
+    testPush: testPushMutation.mutate,
     isTesting: testPushMutation.isPending,
-
-    testPushError: testPushMutation.error,
   };
 }

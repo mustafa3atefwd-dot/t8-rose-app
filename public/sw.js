@@ -15,7 +15,7 @@ self.addEventListener('push', (event) => {
   }
 
   const title = data.title || 'Rose';
-  const message = data.message || '';
+  const message = data.message || data.body || '';
   const link = data.link || '/';
 
   event.waitUntil(
@@ -58,5 +58,17 @@ self.addEventListener('notificationclick', (event) => {
     return;
   }
 
-  event.waitUntil(clients.openWindow(link));
+  event.waitUntil(
+    (async () => {
+      const url = new URL(link, self.location.origin).href;
+      const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      const existing = windows.find((client) => client.url === url);
+
+      if (existing) {
+        return existing.focus();
+      }
+
+      return self.clients.openWindow(url);
+    })()
+  );
 });

@@ -3,6 +3,9 @@
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
+import { NOTIFICATIONS_QUERY_KEYS } from '../lib/constants/notifications.constants';
+
+// Refetch the list and badge whenever the service worker relays an incoming push
 export function useNotificationSync() {
   const queryClient = useQueryClient();
 
@@ -16,32 +19,13 @@ export function useNotificationSync() {
         return;
       }
 
-      console.log(
-        'New notification received:',
-        event.data.notification
-      );
-
-      // Refresh notifications list
-      queryClient.invalidateQueries({
-        queryKey: ['notifications'],
-      });
-
-      // Refresh unread count
-      queryClient.invalidateQueries({
-        queryKey: ['notifications', 'unread-count'],
-      });
+      queryClient.invalidateQueries({ queryKey: NOTIFICATIONS_QUERY_KEYS.all });
     };
 
-    navigator.serviceWorker.addEventListener(
-      'message',
-      handleMessage
-    );
+    navigator.serviceWorker.addEventListener('message', handleMessage);
 
     return () => {
-      navigator.serviceWorker.removeEventListener(
-        'message',
-        handleMessage
-      );
+      navigator.serviceWorker.removeEventListener('message', handleMessage);
     };
   }, [queryClient]);
 }

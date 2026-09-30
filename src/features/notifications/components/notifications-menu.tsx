@@ -31,14 +31,14 @@ export default function NotificationsMenu() {
 
   const [open, setOpen] = useState(false);
   const [openSettings, setOpenSettings] = useState<string | null>(null);
+  const [settingsAnchor, setSettingsAnchor] = useState<HTMLButtonElement | null>(null);
 
   const { data } = useGetNotifications();
 
-  const hasNotifications = (data?.payload?.data?.length ?? 0) > 0;
+  const notifications = data?.data ?? [];
+  const hasNotifications = notifications.length > 0;
 
-  const { data: unreadData } = useUnreadCount();
-
-  const unreadCount = unreadData?.payload?.unreadCount ?? 0;
+  const { data: unreadCount = 0 } = useUnreadCount();
 
   const {
     mutate: updateNotifications,
@@ -49,10 +49,6 @@ export default function NotificationsMenu() {
     mutate: deleteNotifications,
     isPending: isDeletingNotifications,
   } = useDeleteAll();
-
-  const settingsButtonRefs = useRef<
-    Record<string, HTMLButtonElement | null>
-  >({});
 
   /**
    * Close the main notifications menu
@@ -79,16 +75,6 @@ export default function NotificationsMenu() {
       );
     };
   }, []);
-
-  /**
-   * Close settings menu when
-   * the main notifications menu closes.
-   */
-  useEffect(() => {
-    if (!open) {
-      setOpenSettings(null);
-    }
-  }, [open]);
 
   return (
     <div
@@ -144,7 +130,7 @@ export default function NotificationsMenu() {
             {hasNotifications && (
               <span>
                 {' '}
-                {data?.payload?.metadata?.total}
+                {data?.metadata.total}
               </span>
             )}
           </div>
@@ -211,7 +197,7 @@ export default function NotificationsMenu() {
               </div>
             </div>
           ) : (
-            data?.payload?.data.map((notification) => (
+            notifications.map((notification) => (
               <React.Fragment key={notification.id}>
                 <div
                   className={cn(
@@ -231,20 +217,16 @@ export default function NotificationsMenu() {
                         aria-expanded={
                           openSettings === notification.id
                         }
-                        ref={(element) => {
-                          settingsButtonRefs.current[
-                            notification.id
-                          ] = element;
-                        }}
                         className="hover:bg-ds-bg-muted flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors"
                         type="button"
-                        onClick={() =>
+                        onClick={(event) => {
+                          setSettingsAnchor(event.currentTarget);
                           setOpenSettings((prev) =>
                             prev === notification.id
                               ? null
                               : notification.id,
-                          )
-                        }
+                          );
+                        }}
                       >
                         <EllipsisVertical className="text-ds-text-muted size-5 hover:text-zinc-500" />
                       </button>
@@ -256,11 +238,7 @@ export default function NotificationsMenu() {
                         }
                         openSettings={openSettings}
                         setOpenSettings={setOpenSettings}
-                        buttonRef={
-                          settingsButtonRefs.current[
-                            notification.id
-                          ]
-                        }
+                        buttonRef={settingsAnchor}
                       />
                     </div>
                   </div>
