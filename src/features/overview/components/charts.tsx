@@ -6,8 +6,9 @@ import { ChartAreaAxes } from "./area-chart";
 interface IChartsOverviewProps {
   ordersStatus: IDashboardOrderStatus;
   revenue: IDashboardRevenue;
+  weeklyRevenue: IDashboardRevenue | null;
 }
-export default function Charts({ordersStatus, revenue}: IChartsOverviewProps) {  
+export default function Charts({ordersStatus, revenue, weeklyRevenue}: IChartsOverviewProps) {  
   return (
     <div className='flex flex-col xl:flex-row gap-6'>
         {/* order status */}
@@ -16,7 +17,7 @@ export default function Charts({ordersStatus, revenue}: IChartsOverviewProps) {
         </div>
         {/* revenue */}
         <div className="bg-ds-bg-plain flex-3 rounded-2xl">
-          <ChartAreaAxes revenue={revenue}/>
+          <ChartAreaAxes revenue={revenue} weeklyRevenue={weeklyRevenue}/>
         </div>
     </div>
   )

@@ -35,9 +35,9 @@ const renderCustomLabel = ({ cx = 0, cy = 0, midAngle = 0, outerRadius = 0, valu
 
   return (
     <g>
-      <circle cx={x} cy={y} r={16} fill="#FAFAFA" stroke="#e5e7eb" strokeWidth={1} />
+      <circle cx={x} cy={y} r={16} fill="var(--ds-bg-subtle)" stroke="var(--ds-border-muted)" strokeWidth={1} />
 
-      <text x={x} y={y} textAnchor="middle" dominantBaseline="middle" fontSize={11} fontWeight={600} fill="#000">
+      <text x={x} y={y} textAnchor="middle" dominantBaseline="middle" fontSize={11} fontWeight={600} fill="var(--ds-text-plain)">
         {value}%
       </text>
     </g>

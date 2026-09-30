@@ -246,6 +246,8 @@
         "title": "الإيرادات",
         "monthly": "شهريًا",
         "lastWeek": "الأسبوع الماضي",
+        "value": "{value, number} ج.م",
+        "peak": "الذروة: {value, number} ج.م",
         "months": {
           "january": "يناير",
           "february": "فبراير",

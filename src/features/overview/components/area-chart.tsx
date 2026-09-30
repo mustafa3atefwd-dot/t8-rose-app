@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, ReferenceDot, XAxis, YAxis } from 'recharts';
 
 import {
   Card,
@@ -17,59 +17,27 @@ import {
   type ChartConfig,
 } from '@/shared/components/ui/chart';
 
-import { IDashboardRevenue } from '@/features/dashboard/lib/types/statistics';
+import { IDashboardRevenue, IRevenuePoint } from '@/features/dashboard/lib/types/statistics';
 import { useTranslations } from 'next-intl';
 
 export const description = 'Revenue area chart';
 
+// ChartContainer exposes this as --color-revenue, so it follows the active theme
 const chartConfig = {
   revenue: {
     label: 'Revenue',
-    color: '#A6252A',
+    color: 'var(--ds-bg-primary-saturated)',
   },
 } satisfies ChartConfig;
 
+const REVENUE_COLOR = 'var(--color-revenue)';
+// Card surface color — used for the hover "cut-out" highlight and dot outlines
+const SURFACE_COLOR = 'var(--ds-bg-plain)';
+
 interface IChartAreaAxesProps {
   revenue: IDashboardRevenue;
+  weeklyRevenue: IDashboardRevenue | null;
 }
-
-const weekData = [
-  {
-    period: '2026-09-01',
-    label: 'saturday',
-    revenue: 1200,
-  },
-  {
-    period: '2026-09-02',
-    label: 'sunday',
-    revenue: 2800,
-  },
-  {
-    period: '2026-09-03',
-    label: 'monday',
-    revenue: 1800,
-  },
-  {
-    period: '2026-09-04',
-    label: 'tuesday',
-    revenue: 4200,
-  },
-  {
-    period: '2026-09-05',
-    label: 'wednesday',
-    revenue: 3500,
-  },
-  {
-    period: '2026-09-06',
-    label: 'thursday',
-    revenue: 5100,
-  },
-  {
-    period: '2026-09-07',
-    label: 'friday',
-    revenue: 3900,
-  },
-];
 
 const monthKeys = [
   'january',
@@ -86,7 +54,30 @@ const monthKeys = [
   'december',
 ] as const;
 
-export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
+// Indexed by Date#getUTCDay()
+const dayKeys = [
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+] as const;
+
+type TDayKey = (typeof dayKeys)[number];
+
+function getDayKey(point: IRevenuePoint): TDayKey | null {
+  const date = new Date(point.period);
+
+  if (!Number.isNaN(date.getTime())) return dayKeys[date.getUTCDay()];
+
+  const label = point.label?.toLowerCase();
+
+  return dayKeys.find((day) => day === label) ?? null;
+}
+
+export function ChartAreaAxes({ revenue, weeklyRevenue }: IChartAreaAxesProps) {
   const t = useTranslations('dashboard.overview.revenue');
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -103,15 +94,23 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
             label: monthKey ? t(`months.${monthKey}`) : '',
           };
         })
-      : weekData.map((point) => ({
-          ...point,
-          label: t(`days.${point.label}`),
-        }));
+      : (weeklyRevenue?.points ?? []).map((point) => {
+          const dayKey = getDayKey(point);
+
+          return {
+            ...point,
+            label: dayKey ? t(`days.${dayKey}`) : point.label,
+          };
+        });
 
   const maxRevenue = Math.max(
     ...chartData.map((point) => point.revenue),
     0,
   );
+
+  // Peak marker — only meaningful when there is any revenue at all
+  const peakIndex = maxRevenue > 0 ? chartData.findIndex((point) => point.revenue === maxRevenue) : -1;
+  const peakPoint = peakIndex >= 0 ? chartData[peakIndex] : null;
 
   const yAxisMax =
     maxRevenue > 0
@@ -156,26 +155,31 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
           <button
             type="button"
             onClick={() => handleViewChange('monthly')}
+            aria-pressed={view === 'monthly'}
             className={`cursor-pointer ${
               view === 'monthly'
-                ? 'text-maroon-600 font-semibold'
+                ? 'text-ds-text-primary font-semibold'
                 : 'text-ds-text-muted font-normal'
             }`}
           >
             {t('monthly')}
           </button>
 
-          <button
-            type="button"
-            onClick={() => handleViewChange('weekly')}
-            className={`cursor-pointer ${
-              view === 'weekly'
-                ? 'text-maroon-600 font-semibold'
-                : 'text-ds-text-muted font-normal'
-            }`}
-          >
-            {t('lastWeek')}
-          </button>
+          {/* Hidden when the weekly series failed to load */}
+          {weeklyRevenue && (
+            <button
+              type="button"
+              onClick={() => handleViewChange('weekly')}
+              aria-pressed={view === 'weekly'}
+              className={`cursor-pointer ${
+                view === 'weekly'
+                  ? 'text-ds-text-primary font-semibold'
+                  : 'text-ds-text-muted font-normal'
+              }`}
+            >
+              {t('lastWeek')}
+            </button>
+          )}
         </CardDescription>
       </CardHeader>
 
@@ -208,14 +212,8 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
                 x2="0"
                 y2="1"
               >
-                <stop
-                  offset="0%"
-                  stopColor="rgba(166, 37, 42, 0.5)"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="rgba(248, 177, 239, 0)"
-                />
+                <stop offset="0%" stopColor={REVENUE_COLOR} stopOpacity={0.5} />
+                <stop offset="100%" stopColor={REVENUE_COLOR} stopOpacity={0} />
               </linearGradient>
 
               {activeSegmentIndex !== null && (
@@ -226,35 +224,12 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
                   x2="1"
                   y2="0"
                 >
-                  <stop
-                    offset="0%"
-                    stopColor="rgba(255, 255, 255, 0)"
-                  />
-
-                  <stop
-                    offset={`${segmentStart}%`}
-                    stopColor="rgba(255, 255, 255, 0)"
-                  />
-
-                  <stop
-                    offset={`${segmentStart}%`}
-                    stopColor="rgba(255, 255, 255, 1)"
-                  />
-
-                  <stop
-                    offset={`${segmentEnd}%`}
-                    stopColor="rgba(255, 255, 255, 1)"
-                  />
-
-                  <stop
-                    offset={`${segmentEnd}%`}
-                    stopColor="rgba(255, 255, 255, 0)"
-                  />
-
-                  <stop
-                    offset="100%"
-                    stopColor="rgba(255, 255, 255, 0)"
-                  />
+                  <stop offset="0%" stopColor={SURFACE_COLOR} stopOpacity={0} />
+                  <stop offset={`${segmentStart}%`} stopColor={SURFACE_COLOR} stopOpacity={0} />
+                  <stop offset={`${segmentStart}%`} stopColor={SURFACE_COLOR} stopOpacity={1} />
+                  <stop offset={`${segmentEnd}%`} stopColor={SURFACE_COLOR} stopOpacity={1} />
+                  <stop offset={`${segmentEnd}%`} stopColor={SURFACE_COLOR} stopOpacity={0} />
+                  <stop offset="100%" stopColor={SURFACE_COLOR} stopOpacity={0} />
                 </linearGradient>
               )}
             </defs>
@@ -305,7 +280,7 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
               dataKey="revenue"
               type="natural"
               fill="none"
-              stroke="#A6252A"
+              stroke={REVENUE_COLOR}
               strokeWidth={2}
               dot={false}
               isAnimationActive={false}
@@ -320,8 +295,8 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
                       cx={cx}
                       cy={cy}
                       r={6}
-                      fill="#A6252A"
-                      stroke="white"
+                      fill={REVENUE_COLOR}
+                      stroke={SURFACE_COLOR}
                       strokeWidth={2}
                     />
 
@@ -329,17 +304,42 @@ export function ChartAreaAxes({ revenue }: IChartAreaAxesProps) {
                       x={cx}
                       y={cy! - 18}
                       textAnchor="middle"
-                      fill="#A6252A"
+                      fill={REVENUE_COLOR}
                       fontSize={12}
                       fontWeight={700}
                       fontFamily="Inter"
                     >
-                      {revenueValue} EGP
+                      {t('value', { value: revenueValue })}
                     </text>
                   </g>
                 );
               }}
             />
+
+            {/* Peak marker — its label steps aside while the hover label is shown on the same point */}
+            {peakPoint && (
+              <ReferenceDot
+                x={peakPoint.label}
+                y={peakPoint.revenue}
+                r={5}
+                fill={REVENUE_COLOR}
+                stroke={SURFACE_COLOR}
+                strokeWidth={2}
+                ifOverflow="extendDomain"
+                label={
+                  activeIndex === peakIndex
+                    ? undefined
+                    : {
+                        value: t('peak', { value: peakPoint.revenue }),
+                        position: 'top',
+                        offset: 12,
+                        fill: REVENUE_COLOR,
+                        fontSize: 12,
+                        fontWeight: 700,
+                      }
+                }
+              />
+            )}
           </AreaChart>
         </ChartContainer>
       </CardContent>

@@ -17,7 +17,19 @@ import { Button, buttonVariants } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
 import { useDeleteAccount } from '../hooks/use-delete-account';
 
-export function DeleteAccountDialog() {
+export interface IDeleteAccountDialogCopy {
+  trigger: string;
+  title: string;
+  warning: string;
+  cancel: string;
+  confirm: string;
+}
+
+interface DeleteAccountDialogProps {
+  copy: IDeleteAccountDialogCopy;
+}
+
+export function DeleteAccountDialog({ copy }: DeleteAccountDialogProps) {
   const t = useTranslations('account');
   const [open, setOpen] = useState(false);
   const mutation = useDeleteAccount();
@@ -30,11 +42,11 @@ export function DeleteAccountDialog() {
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger
         type="button"
-        className={cn(buttonVariants({ variant: 'ghost' }), 'font-inter font-medium text-base text-ds-text-danger')}
+        className={cn(buttonVariants({ variant: 'ghost' }), 'font-inter text-ds-text-danger text-base font-medium')}
       >
-        Delete My Account
+        {copy.trigger}
       </AlertDialogTrigger>
-      <AlertDialogContent className="w-[calc(100%-2rem)] max-w-474px gap-0 rounded-2xl border-0 px-6 pt-7 pb-6 sm:min-h-373px">
+      <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[474px] gap-0 rounded-2xl border-0 px-6 pt-7 pb-6 sm:min-h-[373px]">
         <button
           type="button"
           disabled={mutation.isPending}
@@ -45,16 +57,16 @@ export function DeleteAccountDialog() {
           <X className="size-5" />
         </button>
 
-        <div className="mx-auto mt-12 flex size-105px items-center justify-center rounded-full bg-neutral-100">
-          <div className="flex size-70px items-center justify-center rounded-full bg-neutral-300 text-neutral-800">
+        <div className="bg-ds-bg-muted mx-auto mt-12 flex size-[105px] items-center justify-center rounded-full">
+          <div className="bg-ds-bg-soft text-ds-text-plain flex size-[70px] items-center justify-center rounded-full">
             <Trash2 className="size-7 stroke-[1.75]" aria-hidden="true" />
           </div>
         </div>
 
         <AlertDialogHeader className="mt-7 gap-1 text-center">
-          <AlertDialogTitle className="text-xl leading-7">{t('deleteDialog.title')}</AlertDialogTitle>
-          <AlertDialogDescription className="text-ds-text-danger text-base leading-6">
-            {t('deleteDialog.warning')}
+          <AlertDialogTitle className="text-center text-xl leading-7">{copy.title}</AlertDialogTitle>
+          <AlertDialogDescription className="text-ds-text-danger text-center text-base leading-6">
+            {copy.warning}
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -66,7 +78,7 @@ export function DeleteAccountDialog() {
             onClick={() => setOpen(false)}
             className="h-11 flex-1 text-base"
           >
-            {t('deleteDialog.cancel')}
+            {copy.cancel}
           </Button>
           <Button
             type="button"
@@ -75,7 +87,7 @@ export function DeleteAccountDialog() {
             onClick={() => mutation.mutate()}
             className="h-11 flex-1 text-base"
           >
-            {t('deleteDialog.confirm')}
+            {copy.confirm}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -412,6 +412,8 @@
         "title": "Revenue",
         "monthly": "Monthly",
         "lastWeek": "Last Week",
+        "value": "{value, number} EGP",
+        "peak": "Peak: {value, number} EGP",
         "months": {
           "january": "January",
           "february": "February",

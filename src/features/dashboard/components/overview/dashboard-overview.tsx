@@ -6,7 +6,7 @@ import { OverviewErrorState } from '@/features/dashboard/components/overview/ove
 import { SummaryCards } from '@/features/dashboard/components/overview/summary-cards';
 import { TopSellingProducts } from '@/features/dashboard/components/overview/top-selling-products';
 import { getDashboardStatistics } from '@/features/dashboard/lib/apis/get-dashboard-statistics.api';
-import type { IDashboardStatistics } from '@/features/dashboard/lib/types/statistics';
+import type { IDashboardRevenue, IDashboardStatistics } from '@/features/dashboard/lib/types/statistics';
 import Charts from '@/features/overview/components/charts';
 
 // Component props
@@ -19,11 +19,17 @@ export async function DashboardOverview({ accessToken, locale }: DashboardOvervi
   // Translations
   const t = await getTranslations('dashboard.overview');
 
-  // Dashboard statistics
+  // Dashboard statistics (monthly) + last-7-days revenue for the chart's "Last Week" view
   let statistics: IDashboardStatistics;
+  let weeklyRevenue: IDashboardRevenue | null;
 
   try {
-    statistics = await getDashboardStatistics(accessToken);
+    [statistics, weeklyRevenue] = await Promise.all([
+      getDashboardStatistics(accessToken),
+      getDashboardStatistics(accessToken, 'week')
+        .then((weekly) => weekly.revenue)
+        .catch(() => null),
+    ]);
   } catch {
     return <OverviewErrorState />;
   }
@@ -42,7 +48,7 @@ export async function DashboardOverview({ accessToken, locale }: DashboardOvervi
       </div>
 
       {/* charts */}
-      <Charts ordersStatus={statistics.orderStatus} revenue={statistics.revenue}/>
+      <Charts ordersStatus={statistics.orderStatus} revenue={statistics.revenue} weeklyRevenue={weeklyRevenue} />
 
       {/* ===== Product Lists ===== */}
       <div className="grid gap-6 lg:grid-cols-2">

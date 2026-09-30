@@ -30,6 +30,8 @@ export interface IRevenuePoint {
   revenue: number;
 }
 
+export type TRevenuePeriod = 'monthly' | 'week';
+
 export interface IDashboardRevenue {
   period: string;
   points: IRevenuePoint[];
