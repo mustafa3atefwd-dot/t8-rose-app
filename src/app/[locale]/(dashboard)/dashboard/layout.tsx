@@ -4,7 +4,7 @@ import { DashboardUserMenu } from '@/features/dashboard/components/dashboard-use
 import { SidebarProvider, SidebarTrigger } from '@/shared/components/ui/sidebar';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { unauthorized } from 'next/navigation';
+import { forbidden, unauthorized } from 'next/navigation';
 import DashboardMobileBottomNav from '@/features/dashboard/layout/dashboard-mobile-bottom-nav';
 import { getUserRole } from '@/shared/lib/utils/get-user-role';
 import { USER_ROLES } from '@/features/auth/lib/constants';
@@ -12,10 +12,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
   // Get user role
   const role = await getUserRole();
 
-  // Redirect user if role is user or null
-  if (!role || role === USER_ROLES.user) {
-    return unauthorized();
-  }
+  // Unauthenticated → 401
+  if (!role) unauthorized();
+
+  // Authenticated but not an admin → 403
+  if (role === USER_ROLES.user) forbidden();
 
   return (
     <SidebarProvider>

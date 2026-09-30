@@ -1,0 +1,39 @@
+import { notFound } from 'next/navigation';
+import { ProductForm } from '@/features/products/admin';
+import { getCategoriesAction, getOccasionsAction, getProductByIdAction } from '@/features/products/lib/actions';
+import { getTranslations } from 'next-intl/server';
+
+type PageProps = { params: Promise<{ locale: string; id: string }> };
+
+export default async function EditProductPage({ params }: PageProps) {
+  // Translation
+  const t = await getTranslations('productsAdmin');
+
+  // Navigation
+  const { id } = await params;
+
+  // Query
+  const [productResult, categoriesResult, occasionsResult] = await Promise.all([
+    getProductByIdAction(id),
+    getCategoriesAction({ limit: 100 }),
+    getOccasionsAction({ limit: 100 }),
+  ]).catch(() => notFound());
+
+  // Variables
+  const product = productResult.status ? productResult.payload?.product : undefined;
+  if (!product) notFound();
+  const categories = categoriesResult.status ? (categoriesResult.payload?.data ?? []) : [];
+  const occasions = occasionsResult.status ? (occasionsResult.payload?.data ?? []) : [];
+  const pageTitle = t('form.updateTitle', { title: product.title });
+
+  return (
+    <div className="bg-ds-bg-subtle min-h-screen">
+      <main className="min-w-0 p-4 md:p-6">
+        <h1 title={pageTitle} className="text-ds-text-plain mb-6 max-w-full truncate text-2xl font-semibold">
+          {pageTitle}
+        </h1>
+        <ProductForm mode="edit" product={product} categories={categories} occasions={occasions} />
+      </main>
+    </div>
+  );
+}

@@ -1,12 +1,15 @@
-export default function ProductsPage() {
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Products</h1>
-        <p className="text-muted-foreground mt-1">Manage your products.</p>
-      </div>
+import { ProductsAdminTable } from '@/features/products/admin';
+import { getInitialAdminProducts } from '@/features/products/admin/lib/products-admin.server';
 
-      <div className="rounded-lg border bg-white p-6">Products list</div>
+export default async function DashboardProductsPage() {
+  // Query
+  const initialProducts = await getInitialAdminProducts();
+
+  return (
+    <div className="bg-ds-bg-subtle min-h-screen">
+      <main className="p-0 md:p-6">
+        <ProductsAdminTable initialProducts={initialProducts} />
+      </main>
     </div>
   );
 }
