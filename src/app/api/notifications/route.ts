@@ -1,30 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getNotifications } from '@/features/notifications/lib/services/notifications.service';
-import { deleteAllNotifications, markAllRead } from '@/features/notifications/lib/actions/update-notification.action';
+import { NextRequest } from 'next/server';
 
-export async function GET() {
-  try {
-    const data = await getNotifications();
+import { createNotification, getNotifications } from '@/features/notifications/lib/apis/notifications.api';
+import { toRouteResponse } from '@/features/notifications/lib/utils/route-response.util';
 
-    return NextResponse.json(data);
-  } catch (error) {
-    return NextResponse.json(
-      {
-        message: error instanceof Error ? error.message : 'Something went wrong',
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl;
+  const page = Number(searchParams.get('page')) || undefined;
+  const limit = Number(searchParams.get('limit')) || undefined;
+
+  return toRouteResponse(() => getNotifications({ page, limit }));
 }
 
-export async function PATCH(_request: NextRequest) {
-    const data = await markAllRead();
-    return NextResponse.json(data);
-}
-
-export async function DELETE(_request: NextRequest) {
-    const data = await deleteAllNotifications();
-    return NextResponse.json(data);
+export async function POST(request: NextRequest) {
+  return toRouteResponse(async () => createNotification(await request.json()));
 }

@@ -7,12 +7,12 @@ import { Link } from '@/i18n/navigation';
 import { LanguageToggle } from '@/features/auth/components/LanguageToggle';
 import UnAuthenticatedLogin from '@/features/auth/components/unauth-login';
 import { WishlistHeaderLink } from '@/features/wishlist';
-import NotificationsMenu from '@/features/notifications/components/notifications-menu';
 import CartBadge from '@/features/cart/components/cart-badge';
 import SearchInput from './search-input';
 import UserAddress from './user-address';
 import { ThemeToggle } from './ThemeToggle';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
+import NotificationsBell from '@/features/notifications/components/notifications.bell';
 
 const navigationItems = [
   { href: '/', label: 'home', icon: House },
@@ -62,7 +62,7 @@ export default function Header() {
               <ShoppingCart className="size-5" />
               <CartBadge />
             </Link>
-            <NotificationsMenu />
+            <NotificationsBell />
           </div>
           <div className="flex items-center gap-1 ps-3">
             <LanguageToggle />
@@ -81,7 +81,7 @@ export default function Header() {
             <ShoppingCart className="size-5" />
             <CartBadge />
           </Link>
-          <NotificationsMenu />
+          <NotificationsBell />
 
           <Sheet>
             <SheetTrigger
