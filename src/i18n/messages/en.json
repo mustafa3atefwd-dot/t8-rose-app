@@ -382,11 +382,15 @@
       "products": "Products",
       "account": "Account",
       "addCategory": "Add Category",
-      "updateCategory": "Update: {name}",
+      "updateCategory": "Update Category",
       "addOccasion": "Add Occasion",
-      "updateOccasion": "Update: {name}",
+      "updateOccasion": "Update Occasion",
       "addProduct": "Add Product",
-      "updateProduct": "Update: {name}",
+      "updateProduct": "Update Product",
+      "routeName": "{name}",
+      "category": "Category",
+      "occasion": "Occasion",
+      "profile": "Profile",
       "changePassword": "Change Password"
     }
   },
@@ -872,6 +876,46 @@
       "uploadUrl": "We could not upload your photo. Please try again.",
       "imageTooLargeTitle": "Image is too large",
       "imageTooLargeDescription": "Please choose an image smaller than 5MB."
+    }
+  },
+  "productsAdmin": {
+    "breadcrumbs": { "dashboard": "Dashboard", "products": "Products", "add": "Add Product" },
+    "form": { "addTitle": "Add a New Product", "updateTitle": "Update Product: {title}" },
+    "fields": {
+      "title": "Title", "description": "Description", "price": "Price", "discount": "Discount",
+      "discountedPrice": "Price after discount", "quantity": "Quantity", "cover": "Product cover image",
+      "gallery": "Product gallery", "category": "Category", "occasion": "Occasion"
+    },
+    "placeholders": {
+      "title": "Enter product title", "description": "Enter product description", "price": "Example: 5000",
+      "discount": "Example: 5", "quantity": "Example: 200", "category": "Select a category", "occasion": "Select an occasion"
+    },
+    "actions": {
+      "upload": "Upload file", "viewCover": "View product cover", "viewGallery": "View product gallery",
+      "add": "Add Product", "update": "Update Product", "saving": "Saving...", "addNew": "Add a new product",
+      "edit": "Edit", "delete": "Delete", "deleting": "Deleting...", "cancel": "Cancel"
+    },
+    "validation": {
+      "titleRequired": "Product title is required", "titleLong": "Product title is too long",
+      "descriptionRequired": "Product description is required", "descriptionLong": "Description is too long",
+      "priceInvalid": "Please enter a valid price", "discountInvalid": "Discount cannot be negative",
+      "quantityInteger": "Quantity must be a whole number", "quantityInvalid": "Please enter a valid quantity",
+      "categoryRequired": "Please select a category for the product", "occasionRequired": "Please select an occasion for the product",
+      "imagesOnly": "Only images are allowed", "imageSize": "Each image must be 5 MB or smaller",
+      "coverRequired": "Product cover is required", "galleryRequired": "Product gallery images are required"
+    },
+    "messages": {
+      "created": "Product added successfully", "updated": "Product updated successfully", "deleted": "Product deleted successfully",
+      "saveError": "Could not save the product", "uploadError": "Could not upload {name}", "imageTooLarge": "The image is too large. Please choose a smaller image.", "deleteError": "Could not delete this product",
+      "deleteTitle": "Delete product?", "deleteConfirm": "Delete “{title}”? You can restore it later."
+    },
+    "list": {
+      "title": "All Products", "searchLabel": "Search products", "searchPlaceholder": "Search...",
+      "loadError": "Could not load products. Please try again.", "empty": "No products found."
+    },
+    "table": {
+      "name": "Name", "price": "Price", "stock": "Stock", "sales": "Sales", "ratings": "Ratings",
+      "actions": "Actions", "actionsFor": "Actions for {title}", "priceValue": "{price, number} EGP"
     }
   }
 }

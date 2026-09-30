@@ -9,7 +9,10 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
+  BreadcrumbEllipsis,
 } from '@/shared/components/ui/breadcrumb';
+import { Fragment } from 'react';
+import { cn } from '@/shared/lib/utils';
 
 import { useTranslations } from 'next-intl';
 import { IBreadcrumbItem } from '@/features/dashboard/lib/types/breadcrumb';
@@ -37,10 +40,22 @@ export default function AppBreadcrumb({ items }: IAppBreadcrumbProps) {
 
           // Translate label
           const label = t(item.labelKey, item.values);
+          const isFirst = index === 0;
+          const isMiddle = !isFirst && !isLast;
+          const isHiddenOnMobile = items.length > 2 && isMiddle;
+
           return (
-            <div key={`${item.labelKey}-${index}`} className="flex items-center">
+            <Fragment key={`${item.labelKey}-${index}`}>
+              {items.length > 2 && index === 1 && (
+                <>
+                  <BreadcrumbItem className="md:hidden">
+                    <BreadcrumbEllipsis />
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator className="text-ds-text-soft md:hidden" />
+                </>
+              )}
               {/* Current item  */}
-              <BreadcrumbItem>
+              <BreadcrumbItem className={cn(isHiddenOnMobile && 'hidden md:inline-flex')}>
                 {/* Check if current item is the last item or does not have a href */}
                 {isLast || !item.href ? (
                   // Last item or does not have a href
@@ -56,8 +71,10 @@ export default function AppBreadcrumb({ items }: IAppBreadcrumbProps) {
               </BreadcrumbItem>
 
               {/* Separator */}
-              {!isLast && <BreadcrumbSeparator className="text-ds-text-soft" />}
-            </div>
+              {!isLast && (
+                <BreadcrumbSeparator className={cn('text-ds-text-soft', isHiddenOnMobile && 'hidden md:inline-flex')} />
+              )}
+            </Fragment>
           );
         })}
       </BreadcrumbList>

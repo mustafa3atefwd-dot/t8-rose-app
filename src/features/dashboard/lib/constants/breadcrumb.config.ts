@@ -26,6 +26,14 @@ const accountItem: IBreadcrumbItem = {
   href: '/dashboard/account',
 };
 
+function namedItem(name: string, href?: string): IBreadcrumbItem {
+  return {
+    labelKey: 'routeName',
+    href,
+    values: { name: slugToLabel(decodeURIComponent(name)) },
+  };
+}
+
 /**
  * Remove locale from pathname.
  *
@@ -67,7 +75,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/categories\/add$/,
+    pattern: /^\/dashboard\/categories\/new$/,
     getItems: () => [
       dashboardItem,
       categoriesItem,
@@ -78,19 +86,25 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
+    pattern: /^\/dashboard\/categories\/([^/]+)$/,
+    getItems: () => [dashboardItem, categoriesItem, { labelKey: 'category' }],
+  },
+
+  {
+    pattern: /^\/dashboard\/categories\/([^/]+)\/([^/]+)$/,
+    getItems: ({ matches }) => [dashboardItem, categoriesItem, namedItem(matches[2])],
+  },
+
+  {
     pattern: /^\/dashboard\/categories\/([^/]+)\/([^/]+)\/edit$/,
     getItems: ({ matches }) => {
-      const [, , name] = matches;
+      const [, id, name] = matches;
 
       return [
         dashboardItem,
         categoriesItem,
-        {
-          labelKey: 'updateCategory',
-          values: {
-            name: slugToLabel(name),
-          },
-        },
+        namedItem(name, `/dashboard/categories/${id}/${name}`),
+        { labelKey: 'updateCategory' },
       ];
     },
   },
@@ -102,7 +116,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/occasions\/add$/,
+    pattern: /^\/dashboard\/occasions\/new$/,
     getItems: () => [
       dashboardItem,
       occasionsItem,
@@ -113,19 +127,25 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
+    pattern: /^\/dashboard\/occasions\/([^/]+)$/,
+    getItems: () => [dashboardItem, occasionsItem, { labelKey: 'occasion' }],
+  },
+
+  {
+    pattern: /^\/dashboard\/occasions\/([^/]+)\/([^/]+)$/,
+    getItems: ({ matches }) => [dashboardItem, occasionsItem, namedItem(matches[2])],
+  },
+
+  {
     pattern: /^\/dashboard\/occasions\/([^/]+)\/([^/]+)\/edit$/,
     getItems: ({ matches }) => {
-      const [, , name] = matches;
+      const [, id, name] = matches;
 
       return [
         dashboardItem,
         occasionsItem,
-        {
-          labelKey: 'updateOccasion',
-          values: {
-            name: slugToLabel(name),
-          },
-        },
+        namedItem(name, `/dashboard/occasions/${id}/${name}`),
+        { labelKey: 'updateOccasion' },
       ];
     },
   },
@@ -137,7 +157,7 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/products\/add$/,
+    pattern: /^\/dashboard\/products\/new$/,
     getItems: () => [
       dashboardItem,
       productsItem,
@@ -148,21 +168,8 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/products\/([^/]+)\/([^/]+)\/edit$/,
-    getItems: ({ matches }) => {
-      const [, , name] = matches;
-
-      return [
-        dashboardItem,
-        productsItem,
-        {
-          labelKey: 'updateProduct',
-          values: {
-            name: slugToLabel(name),
-          },
-        },
-      ];
-    },
+    pattern: /^\/dashboard\/products\/([^/]+)\/edit$/,
+    getItems: () => [dashboardItem, productsItem, { labelKey: 'updateProduct' }],
   },
 
   // Account
@@ -172,7 +179,12 @@ const routes: IBreadcrumbRoute[] = [
   },
 
   {
-    pattern: /^\/dashboard\/account\/change-password$/,
+    pattern: /^\/dashboard\/account\/profile$/,
+    getItems: () => [dashboardItem, accountItem, { labelKey: 'profile' }],
+  },
+
+  {
+    pattern: /^\/dashboard\/account\/password$/,
     getItems: () => [
       dashboardItem,
       accountItem,
