@@ -10,19 +10,44 @@ import type { IUser } from '@/shared/lib/types/user';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/inputs/input';
 import { PhoneInput } from '@/shared/components/ui/inputs/phone-input';
+import { Link } from '@/i18n/navigation';
+import { cn } from '@/shared/lib/utils';
 import { AccountField } from './account-field';
-import { DeleteAccountDialog } from './delete-account-dialog';
+import { DeleteAccountDialog, type IDeleteAccountDialogCopy } from './delete-account-dialog';
 import { useConfirmEmail } from '../hooks/use-confirm-email';
 import { usePhotoUpload } from '../hooks/use-photo-upload';
 import { useProfileForm } from '../hooks/use-profile-form';
 
 interface ProfileFormProps {
   profile: IUser;
+  // Storefront account page vs. admin dashboard account settings
+  variant?: 'storefront' | 'dashboard';
 }
 
-export function ProfileForm({ profile }: ProfileFormProps) {
+export function ProfileForm({ profile, variant = 'storefront' }: ProfileFormProps) {
   // Translation
   const t = useTranslations('account');
+
+  // Variables
+  const isDashboard = variant === 'dashboard';
+  const photoCopy = isDashboard
+    ? { title: t('dashboard.uploadPhoto'), hint: t('dashboard.photoHint') }
+    : { title: t('profile.uploadPhoto'), hint: t('profile.photoHint') };
+  const deleteDialogCopy: IDeleteAccountDialogCopy = isDashboard
+    ? {
+        trigger: t('dashboard.deleteAccount'),
+        title: t('deleteDialogDashboard.title'),
+        warning: t('deleteDialogDashboard.warning'),
+        cancel: t('deleteDialogDashboard.cancel'),
+        confirm: t('deleteDialogDashboard.accept'),
+      }
+    : {
+        trigger: t('actions.delete'),
+        title: t('deleteDialog.title'),
+        warning: t('deleteDialog.warning'),
+        cancel: t('deleteDialog.cancel'),
+        confirm: t('deleteDialog.confirm'),
+      };
 
   // Ref
   const fileRef = useRef<HTMLInputElement>(null);
@@ -85,10 +110,10 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           </div>
           <div>
             <h2 className="text-ds-text-plain text-lg font-semibold capitalize sm:text-xl">
-              {t('profile.uploadPhoto')}
+              {photoCopy.title}
             </h2>
             <p className="text-ds-text-soft mt-1 text-sm leading-6 sm:mt-2 sm:text-base lg:text-lg">
-              {t('profile.photoHint')}
+              {photoCopy.hint}
             </p>
           </div>
         </div>
@@ -166,13 +191,30 @@ export function ProfileForm({ profile }: ProfileFormProps) {
             </div>
           </div>
         )}
-        <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:flex-wrap sm:justify-between">
-          <DeleteAccountDialog />
+        <div
+          className={cn(
+            'mt-8 flex gap-3 sm:flex-row sm:flex-wrap sm:justify-between',
+            isDashboard ? 'flex-col' : 'flex-col-reverse'
+          )}
+        >
+          {isDashboard ? (
+            <div className="flex items-center justify-between sm:gap-4">
+              <DeleteAccountDialog copy={deleteDialogCopy} />
+              <Link
+                href="/dashboard/account/change-password"
+                className="font-inter text-ds-text-plain text-base font-medium"
+              >
+                {t('sidebar.password')}
+              </Link>
+            </div>
+          ) : (
+            <DeleteAccountDialog copy={deleteDialogCopy} />
+          )}
           <Button
             type="submit"
             loading={mutation.isPending}
             loadingText={t('actions.saving')}
-            className="w-full sm:w-auto"
+            className={cn('w-full sm:w-auto', isDashboard && 'font-inter text-ds-text-inverse text-base lg:w-57')}
           >
             {t('actions.save')}
           </Button>

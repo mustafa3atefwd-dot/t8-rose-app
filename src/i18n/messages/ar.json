@@ -226,6 +226,73 @@
       "occasion": "المناسبة",
       "profile": "الملف الشخصي",
       "changePassword": "تغيير كلمة المرور"
+    },
+    "overview": {
+      "title": "نظرة عامة على لوحة التحكم",
+      "summary": {
+        "label": "ملخص المتجر",
+        "products": "إجمالي المنتجات",
+        "orders": "إجمالي الطلبات",
+        "categories": "إجمالي التصنيفات",
+        "revenue": "إجمالي الإيرادات"
+      },
+      "ordersStatus": {
+        "title": "حالة الطلبات",
+        "completed": "مكتملة",
+        "inProgress": "قيد التنفيذ",
+        "canceled": "ملغاة"
+      },
+      "revenue": {
+        "title": "الإيرادات",
+        "monthly": "شهريًا",
+        "lastWeek": "الأسبوع الماضي",
+        "value": "{value, number} ج.م",
+        "peak": "الذروة: {value, number} ج.م",
+        "months": {
+          "january": "يناير",
+          "february": "فبراير",
+          "march": "مارس",
+          "april": "أبريل",
+          "may": "مايو",
+          "june": "يونيو",
+          "july": "يوليو",
+          "august": "أغسطس",
+          "september": "سبتمبر",
+          "october": "أكتوبر",
+          "november": "نوفمبر",
+          "december": "ديسمبر"
+        },
+        "days": {
+          "sunday": "الأحد",
+          "monday": "الإثنين",
+          "tuesday": "الثلاثاء",
+          "wednesday": "الأربعاء",
+          "thursday": "الخميس",
+          "friday": "الجمعة",
+          "saturday": "السبت"
+        }
+      },
+      "categories": {
+        "title": "جميع التصنيفات",
+        "productCount": "{count} منتجات",
+        "empty": "لا توجد تصنيفات"
+      },
+      "topSelling": {
+        "title": "المنتجات الأكثر مبيعًا",
+        "sales": "{count} مبيعات",
+        "empty": "لا توجد بيانات مبيعات"
+      },
+      "lowStock": {
+        "title": "المنتجات منخفضة المخزون",
+        "inStock": "متوفر {count} في المخزون",
+        "empty": "لا توجد منتجات منخفضة المخزون"
+      },
+      "error": {
+        "title": "تعذر تحميل لوحة التحكم",
+        "description": "تعذر تحميل إحصائيات لوحة التحكم الآن. يرجى المحاولة مرة أخرى.",
+        "retry": "حاول مرة أخرى",
+        "retrying": "جارٍ المحاولة..."
+      }
     }
   },
   "homeHeader": {
@@ -665,6 +732,18 @@
   "account": {
     "layout": {
       "title": "حسابي"
+    },
+    "dashboard": {
+      "title": "إعدادات الحساب",
+      "uploadPhoto": "رفع صورة",
+      "photoHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif، بحجم أقصى 5 ميجابايت.",
+      "deleteAccount": "حذف حسابي"
+    },
+    "deleteDialogDashboard": {
+      "title": "هل أنت متأكد أنك تريد حذف حسابك؟",
+      "warning": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+      "cancel": "لا، لن أحذف حسابي",
+      "accept": "نعم، احذف الحساب"
     },
     "sidebar": {
       "navigation": "تنقل الحساب",

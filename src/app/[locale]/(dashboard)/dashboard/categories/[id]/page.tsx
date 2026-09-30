@@ -1,3 +1,5 @@
+import Charts from "@/features/overview/components/charts";
+
 export default function DashboardPage() {
   return (
     <div>
